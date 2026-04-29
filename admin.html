@@ -20,44 +20,46 @@
         </aside>
 
         <main class="main-content">
+            
             <section id="stats" class="tab-content active">
                 <div class="stats-header">
-                    <h1>Aperçu de l'activité</h1>
+                    <h1 style="margin-top: 0;">Aperçu de l'activité</h1>
                     <div class="stats-grid">
-                        <div class="card"><h3>Revenue</h3><p id="rev">0 DH</p></div>
-                        <div class="card profit"><h3>Profit</h3><p id="prof">0 DH</p></div>
-                        <div class="card alert"><h3>Stock Bas</h3><p id="low">0</p></div>
+                        <div class="card">
+                            <h3>Valeur de Vente</h3>
+                            <p id="rev">0 DH</p>
+                        </div>
+                        <div class="card profit">
+                            <h3>Profit Potentiel</h3>
+                            <p id="prof">0 DH</p>
+                        </div>
+                        <div class="card alert">
+                            <h3>Stock Bas</h3>
+                            <p id="low">0</p>
+                        </div>
                     </div>
                 </div>
-            </section>
-
-            <section id="cats" class="tab-content">
-                <div class="header-action">
-                    <h2>Gérer les Catégories</h2>
-                    <div class="inline-form">
-                        <input type="text" id="newCatName" placeholder="Nom de la catégorie">
-                        <button class="btn-primary" onclick="addCategory()">+ Créer</button>
-                    </div>
-                </div>
-                <div class="cat-list" id="catListDisplay"></div>
             </section>
 
             <section id="inventory" class="tab-content">
-                <div class="form-container card">
-                    <h3>Ajouter / Modifier Produit</h3>
+                <h1 style="margin-top: 0;">Inventaire</h1>
+                
+                <div class="form-card">
+                    <h3>Ajouter / Modifier un Produit</h3>
                     <div class="form-grid">
-                        <input type="text" id="pName" placeholder="Nom du produit">
+                        <input type="text" id="pName" placeholder="Nom du produit (ex: Sac à dos)">
                         <select id="pCatSelect"><option value="">Chargement des catégories...</option></select>
                         <input type="number" id="pCost" placeholder="Prix d'Achat (DH)" oninput="calc()">
                         <input type="number" id="pSell" placeholder="Prix de Vente (DH)" oninput="calc()">
                         <input type="number" id="pStock" placeholder="Quantité Stock">
-                        <input type="text" id="pVariants" placeholder="Couleurs/Tailles (ex: Bleu, Rouge, XL)">
+                        <input type="text" id="pVariants" placeholder="Variantes (ex: Bleu, Rouge)">
+                        <input type="text" id="pImg" placeholder="URL de l'image (PNG/JPG)" style="grid-column: span 2;">
                     </div>
                     <div class="profit-box" id="profitInfo">Profit: 0 DH | Marge: 0%</div>
                     <button class="btn-save" onclick="saveProduct()">Enregistrer le produit</button>
                 </div>
 
-                <div class="table-container card">
+                <div class="table-container">
                     <table class="admin-table">
                         <thead>
                             <tr>
@@ -73,6 +75,23 @@
                     </table>
                 </div>
             </section>
+
+            <section id="cats" class="tab-content">
+                <h1 style="margin-top: 0;">Gérer les Catégories</h1>
+                
+                <div class="form-card">
+                    <h3>Nouvelle Catégorie</h3>
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <input type="text" id="newCatName" placeholder="Nom de la catégorie (ex: Géométrie)" style="flex: 1; margin: 0;">
+                        <button class="btn-save" onclick="addCategory()" style="margin: 0; width: auto; padding: 0 30px;">+ Créer</button>
+                    </div>
+                    
+                    <div class="table-container" style="box-shadow: none; padding: 0;">
+                        <div id="catListDisplay" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                    </div>
+                </div>
+            </section>
+
         </main>
     </div>
 
