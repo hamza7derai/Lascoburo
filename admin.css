@@ -1,86 +1,44 @@
 :root {
     --primary: #1E3A8A;
-    --success: #22C55E;
+    --accent: #22C55E;
+    --warning: #F59E0B;
     --danger: #EF4444;
-    --bg: #F1F5F9;
-    --card: #FFFFFF;
+    --glass: rgba(255, 255, 255, 0.8);
 }
 
-body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--bg);
-    margin: 0;
-    display: flex;
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: #F1F5F9; margin: 0; }
+.admin-container { display: flex; height: 100vh; }
+
+.sidebar { width: 250px; background: var(--primary); color: white; padding: 2rem; }
+.logo { font-size: 1.5rem; font-weight: 800; margin-bottom: 2rem; }
+.logo span { color: var(--accent); }
+
+.nav-btn { 
+    display: block; width: 100%; padding: 12px; background: none; border: none; 
+    color: white; text-align: left; cursor: pointer; border-radius: 8px; margin-bottom: 10px;
+}
+.nav-btn.active { background: rgba(255,255,255,0.1); font-weight: 700; }
+
+.content { flex: 1; padding: 2rem; overflow-y: auto; }
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1rem; }
+.stat-card { background: white; padding: 1.5rem; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+.stat-card.profit h3 { color: var(--accent); }
+.stat-card.warning p { color: var(--danger); }
+.stat-card p { font-size: 2rem; font-weight: 800; margin: 10px 0 0; }
+
+.form-card { background: white; padding: 2rem; border-radius: 16px; max-width: 600px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+input, select { padding: 12px; border-radius: 8px; border: 1px solid #E2E8F0; width: 100%; }
+
+.margin-preview { 
+    background: #ECFDF5; color: #065F46; padding: 1rem; 
+    border-radius: 8px; margin: 1rem 0; font-weight: 700; 
 }
 
-/* Sidebar Styling */
-.sidebar {
-    width: 260px;
-    height: 100vh;
-    background: var(--primary);
-    color: white;
-    padding: 24px;
-    position: sticky;
-    top: 0;
-    display: flex;
-    flex-direction: column;
+.save-btn { 
+    background: var(--accent); color: white; width: 100%; padding: 1rem; 
+    border: none; border-radius: 8px; font-weight: 700; cursor: pointer;
 }
 
-.logo span { color: var(--success); }
-
-.nav-item {
-    background: none; border: none; color: rgba(255,255,255,0.7);
-    padding: 12px; width: 100%; text-align: left; font-size: 16px;
-    cursor: pointer; border-radius: 8px; transition: 0.3s;
-}
-
-.nav-item.active { background: rgba(255,255,255,0.1); color: white; }
-
-/* Dashboard Cards */
-.main-content { flex: 1; padding: 40px; }
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 24px;
-    margin-bottom: 40px;
-}
-
-.stat-card {
-    background: white; padding: 24px; border-radius: 16px;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-}
-
-.stat-card h2 { font-size: 32px; margin: 8px 0; color: var(--primary); }
-
-.stat-card.profit h2 { color: var(--success); }
-.stat-card.alert h2 { color: var(--danger); }
-
-/* Table Styling */
-.card { background: white; border-radius: 16px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-.admin-table { width: 100%; border-collapse: collapse; text-align: left; }
-.admin-table th { padding: 12px; border-bottom: 2px solid #eee; color: #64748B; }
-.admin-table td { padding: 16px 12px; border-bottom: 1px solid #f1f1f1; }
-
-/* Modal & Form */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; }
-.modal.active { display: flex; }
-.modal-content { background: white; padding: 30px; border-radius: 20px; width: 400px; }
-.form-row { display: flex; gap: 10px; margin: 15px 0; }
-input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 10px; }
-
-.profit-preview { background: #F0FDF4; padding: 10px; border-radius: 8px; color: var(--success); font-weight: bold; margin-bottom: 15px; }
-
-/* Responsive Mobile */
-.mobile-nav { display: none; }
-
-@media (max-width: 768px) {
-    .sidebar { display: none; }
-    .main-content { padding: 20px; padding-bottom: 80px; }
-    .mobile-nav { 
-        display: flex; position: fixed; bottom: 0; width: 100%; 
-        background: white; border-top: 1px solid #ddd; justify-content: space-around; padding: 15px;
-    }
-    .admin-table thead { display: none; }
-}
-
+.stock-badge { padding: 4px 8px; border-radius: 6px; background: #DEF7EC; color: #03543F; font-weight: 700; }
+.stock-badge.danger { background: #FDE8E8; color: #9B1C1C; }
