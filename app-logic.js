@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// YOUR EXACT FIREBASE CONFIGURATION
+// ⚠️ YOUR EXACT FIREBASE CONFIGURATION ⚠️
 const firebaseConfig = {
     apiKey: "AIzaSyCKY59mqLqD4GqQpkDEFqNybKIkwLvgId0",
     authDomain: "lascoburo.firebaseapp.com",
@@ -21,19 +21,30 @@ let currentCategory = 'Tous';
 let searchQuery = '';
 let cart = [];
 
-// --- 1. LOAD CATEGORIES FROM DASHBOARD ---
-onSnapshot(collection(db, "categories"), (snap) => {
-    allCategories = snap.docs.map(d => d.data().name).sort();
+// --- 1. SMART LOAD: PRODUCTS & CATEGORIES ---
+// This listens to your products and automatically creates the Category Tabs!
+onSnapshot(collection(db, "products"), (snap) => {
+    allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    
+    // Extract unique categories directly from your products
+    const rawCategories = [...new Set(allProducts.map(p => p.category))];
+    
+    // Clean up empty ones and sort them alphabetically
+    allCategories = rawCategories.filter(cat => cat && cat.trim() !== '').sort();
+    
     renderCategories();
+    filterAndRenderProducts();
 });
 
+
+// --- 2. RENDER CATEGORY TABS ---
 function renderCategories() {
     const catBar = document.getElementById('catBar');
     
     // Always start with "Tous" (All)
     let html = `<button class="cat-pill ${currentCategory === 'Tous' ? 'active' : ''}" onclick="window.setCategory('Tous')">Tous</button>`;
     
-    // Add dynamic categories from Firebase
+    // Build tabs for every category that currently has a product
     allCategories.forEach(cat => {
         html += `<button class="cat-pill ${currentCategory === cat ? 'active' : ''}" onclick="window.setCategory('${cat}')">${cat}</button>`;
     });
@@ -41,18 +52,12 @@ function renderCategories() {
     catBar.innerHTML = html;
 }
 
+// Function called when a customer clicks a category tab
 window.setCategory = (catName) => {
     currentCategory = catName;
-    renderCategories(); // Re-render to update the blue 'active' color
+    renderCategories(); // Re-render to move the blue color to the active tab
     filterAndRenderProducts();
 };
-
-
-// --- 2. LOAD PRODUCTS FROM DASHBOARD ---
-onSnapshot(collection(db, "products"), (snap) => {
-    allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    filterAndRenderProducts();
-});
 
 
 // --- 3. SEARCH & FILTER LOGIC ---
@@ -64,7 +69,7 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
 function filterAndRenderProducts() {
     let filtered = allProducts;
 
-    // Filter by Category
+    // Filter by Tab
     if (currentCategory !== 'Tous') {
         filtered = filtered.filter(p => p.category === currentCategory);
     }
@@ -78,22 +83,23 @@ function filterAndRenderProducts() {
 }
 
 
-// --- 4. RENDER UI ---
+// --- 4. RENDER PRODUCT UI ---
 function renderProductsUI(products) {
     const grid = document.getElementById('customerGrid');
     
     if (products.length === 0) {
-        grid.innerHTML = `<div class="empty-state">Aucun produit trouvé.</div>`;
+        grid.innerHTML = `<div class="empty-state" style="grid-column: span 2; text-align: center; padding: 40px; color: #64748B;">Aucun produit trouvé.</div>`;
         return;
     }
 
     grid.innerHTML = products.map(p => {
-        // If no image is provided, show a nice text fallback like your screenshot
+        // High-end image fallback logic
         let imageContent = '';
         if (p.imageUrl && p.imageUrl.trim() !== '') {
             imageContent = `<img src="${p.imageUrl}" alt="${p.name}">`;
         } else {
-            imageContent = `<span class="placeholder-text">${p.name.substring(0, 5)}...</span>`;
+            // Extracts the first word to create a nice text graphic if no image is uploaded
+            imageContent = `<span class="placeholder-text">${p.name.split(' ')[0]}</span>`;
         }
 
         return `
@@ -114,7 +120,7 @@ function renderProductsUI(products) {
 }
 
 
-// --- 5. CART & WHATSAPP LOGIC ---
+// --- 5. CART & WHATSAPP CHECKOUT ---
 window.addToCart = (id) => {
     const item = allProducts.find(p => p.id === id);
     cart.push(item);
@@ -136,10 +142,9 @@ function updateCartUI() {
 }
 
 window.openWhatsApp = () => {
-    const phone = "212600000000"; // ⚠️ REPLACE WITH YOUR SHOP'S WHATSAPP NUMBER
+    const phone = "212600000000"; // ⚠️ REPLACE WITH YOUR REAL WHATSAPP NUMBER
     let message = "📦 *Nouvelle commande Lascoburo*\n\n";
     
-    // Group identical items together
     const summary = cart.reduce((acc, item) => {
         acc[item.name] = (acc[item.name] || 0) + 1;
         return acc;
