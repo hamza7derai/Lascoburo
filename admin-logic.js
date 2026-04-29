@@ -12,75 +12,89 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const productsRef = collection(db, "products");
 
-// --- 1. Live Margin Calculator ---
-window.updateMargin = () => {
+// --- CATEGORY MANAGEMENT ---
+window.addCategory = async () => {
+    const name = document.getElementById('newCatName').value;
+    if(!name) return;
+    await addDoc(collection(db, "categories"), { name });
+    document.getElementById('newCatName').value = '';
+};
+
+onSnapshot(collection(db, "categories"), (snap) => {
+    const cats = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    
+    // Update Dropdown in Product Form
+    const select = document.getElementById('pCatSelect');
+    select.innerHTML = cats.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+    
+    // Update List in Category Tab
+    const list = document.getElementById('catListDisplay');
+    list.innerHTML = cats.map(c => `
+        <div class="cat-item">
+            <span>${c.name}</span>
+            <button onclick="deleteCat('${c.id}')">🗑️</button>
+        </div>
+    `).join('');
+});
+
+window.deleteCat = async (id) => { if(confirm("Supprimer?")) await deleteDoc(doc(db, "categories", id)); };
+
+// --- PRODUCT MANAGEMENT ---
+window.calc = () => {
     const cost = parseFloat(document.getElementById('pCost').value) || 0;
     const sell = parseFloat(document.getElementById('pSell').value) || 0;
     const profit = sell - cost;
-    const margin = sell > 0 ? ((profit / sell) * 100).toFixed(1) : 0;
-    
-    document.getElementById('marginPreview').innerText = `Profit: ${profit.toFixed(2)} DH | Marge: ${margin}%`;
+    const margin = sell > 0 ? ((profit/sell)*100).toFixed(1) : 0;
+    document.getElementById('profitInfo').innerText = `Profit: ${profit.toFixed(2)} DH | Marge: ${margin}%`;
 };
 
-// --- 2. Save Product ---
 window.saveProduct = async () => {
     const data = {
         name: document.getElementById('pName').value,
-        category: document.getElementById('pCat').value,
+        category: document.getElementById('pCatSelect').value,
         costPrice: parseFloat(document.getElementById('pCost').value),
         sellPrice: parseFloat(document.getElementById('pSell').value),
         stock: parseInt(document.getElementById('pStock').value),
-        imageUrl: document.getElementById('pImg').value,
+        variants: document.getElementById('pVariants').value.split(',').map(v => v.trim()),
         timestamp: new Date()
     };
-
-    try {
-        await addDoc(productsRef, data);
-        alert("Produit ajouté avec succès !");
-        document.querySelectorAll('input').forEach(i => i.value = '');
-    } catch (e) { console.error(e); }
+    await addDoc(collection(db, "products"), data);
+    alert("Produit Ajouté!");
 };
 
-// --- 3. Sync & Render Dashboard ---
-onSnapshot(productsRef, (snapshot) => {
-    const products = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    let totalRev = 0; let totalProf = 0; let lowStock = 0;
+// --- SYNC INVENTORY & STATS ---
+onSnapshot(collection(db, "products"), (snap) => {
+    const prods = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    let r = 0; let p = 0; let l = 0;
+    
+    const table = document.getElementById('inventoryTable');
+    table.innerHTML = prods.map(item => {
+        const up = item.sellPrice - item.costPrice;
+        r += (item.sellPrice * item.stock);
+        p += (up * item.stock);
+        if(item.stock < 10) l++;
 
-    const tableBody = document.getElementById('inventoryBody');
-    tableBody.innerHTML = products.map(p => {
-        const unitProfit = p.sellPrice - p.costPrice;
-        totalRev += (p.sellPrice * p.stock);
-        totalProf += (unitProfit * p.stock);
-        if(p.stock < 5) lowStock++;
-
-        return `
-            <tr>
-                <td><b>${p.name}</b></td>
-                <td><span class="stock-badge ${p.stock < 5 ? 'danger' : ''}">${p.stock}</span></td>
-                <td>${p.sellPrice} DH</td>
-                <td class="profit-text">+${unitProfit.toFixed(2)} DH</td>
-                <td>
-                    <button class="del-btn" onclick="deleteItem('${p.id}')">🗑️</button>
-                </td>
-            </tr>
-        `;
+        return `<tr>
+            <td>${item.name}</td>
+            <td>${item.category}</td>
+            <td class="${item.stock < 10 ? 'text-danger' : ''}">${item.stock}</td>
+            <td>${item.sellPrice} DH</td>
+            <td>+${up.toFixed(2)} DH</td>
+            <td><button onclick="delProd('${item.id}')">🗑️</button></td>
+        </tr>`;
     }).join('');
 
-    document.getElementById('totalRevenue').innerText = `${totalRev.toLocaleString()} DH`;
-    document.getElementById('totalProfit').innerText = `${totalProf.toLocaleString()} DH`;
-    document.getElementById('lowStockCount').innerText = lowStock;
+    document.getElementById('rev').innerText = `${r.toLocaleString()} DH`;
+    document.getElementById('prof').innerText = `${p.toLocaleString()} DH`;
+    document.getElementById('low').innerText = l;
 });
 
-window.deleteItem = async (id) => {
-    if(confirm("Supprimer ce produit ?")) await deleteDoc(doc(db, "products", id));
-};
+window.delProd = async (id) => { if(confirm("Supprimer?")) await deleteDoc(doc(db, "products", id)); };
 
-// Tab Switching Logic
-window.switchTab = (tab) => {
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(tab).classList.add('active');
+window.switchTab = (id) => {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     event.currentTarget.classList.add('active');
 };
