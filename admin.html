@@ -3,84 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lascoburo Admin | Gestion Stock & Profit</title>
+    <title>Lascoburo | Admin Dashboard</title>
     <link rel="stylesheet" href="admin-style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="admin-container">
+    <div class="admin-wrapper">
         <aside class="sidebar">
             <div class="logo">Lasco<span>Admin</span></div>
             <nav>
-                <button class="nav-btn active" onclick="switchTab('dashboard')">📊 Dashboard</button>
-                <button class="nav-btn" onclick="switchTab('inventory')">📦 Inventaire</button>
-                <button class="nav-btn" onclick="switchTab('add')">➕ Ajouter Produit</button>
+                <button class="nav-item active" onclick="switchTab('stats')">📊 Dashboard</button>
+                <button class="nav-item" onclick="switchTab('inventory')">📦 Inventaire</button>
+                <button class="nav-item" onclick="switchTab('cats')">📁 Catégories</button>
             </nav>
         </aside>
 
-        <main class="content">
-            <section id="dashboard" class="tab-content active">
-                <header>
-                    <h1>Tableau de bord</h1>
-                    <p>Résumé financier de votre stock à Marrakech.</p>
-                </header>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <h3>Valeur de Vente</h3>
-                        <p id="totalRevenue">0.00 DH</p>
-                    </div>
-                    <div class="stat-card profit">
-                        <h3>Profit Potentiel</h3>
-                        <p id="totalProfit">0.00 DH</p>
-                    </div>
-                    <div class="stat-card warning">
-                        <h3>Stock Faible</h3>
-                        <p id="lowStockCount">0</p>
+        <main class="main-content">
+            <section id="stats" class="tab-content active">
+                <div class="stats-header">
+                    <h1>Aperçu de l'activité</h1>
+                    <div class="stats-grid">
+                        <div class="card"><h3>Revenue</h3><p id="rev">0 DH</p></div>
+                        <div class="card profit"><h3>Profit</h3><p id="prof">0 DH</p></div>
+                        <div class="card alert"><h3>Stock Bas</h3><p id="low">0</p></div>
                     </div>
                 </div>
             </section>
 
-            <section id="add" class="tab-content">
-                <div class="form-card">
-                    <h2>Nouveau Produit</h2>
-                    <div class="form-grid">
-                        <input type="text" id="pName" placeholder="Nom du produit (ex: Cahier 96p)">
-                        <select id="pCat">
-                            <option value="Papeterie">Papeterie</option>
-                            <option value="Cahiers">Cahiers</option>
-                            <option value="Sacs">Sacs</option>
-                            <option value="Bureau">Bureau</option>
-                        </select>
-                        <input type="number" id="pCost" placeholder="Prix d'Achat (Coût)" oninput="updateMargin()">
-                        <input type="number" id="pSell" placeholder="Prix de Vente" oninput="updateMargin()">
-                        <input type="number" id="pStock" placeholder="Quantité en Stock">
-                        <input type="text" id="pImg" placeholder="URL de l'image">
+            <section id="cats" class="tab-content">
+                <div class="header-action">
+                    <h2>Gérer les Catégories</h2>
+                    <div class="inline-form">
+                        <input type="text" id="newCatName" placeholder="Nom de la catégorie">
+                        <button class="btn-primary" onclick="addCategory()">+ Créer</button>
                     </div>
-                    
-                    <div class="margin-preview" id="marginPreview">
-                        Profit: 0 DH | Marge: 0%
-                    </div>
-
-                    <button class="save-btn" onclick="saveProduct()">Enregistrer dans l'Inventaire</button>
                 </div>
+                <div class="cat-list" id="catListDisplay"></div>
             </section>
 
             <section id="inventory" class="tab-content">
-                <div class="table-container">
-                    <table id="productTable">
+                <div class="form-container card">
+                    <h3>Ajouter / Modifier Produit</h3>
+                    <div class="form-grid">
+                        <input type="text" id="pName" placeholder="Nom du produit">
+                        <select id="pCatSelect"><option value="">Chargement des catégories...</option></select>
+                        <input type="number" id="pCost" placeholder="Prix d'Achat (DH)" oninput="calc()">
+                        <input type="number" id="pSell" placeholder="Prix de Vente (DH)" oninput="calc()">
+                        <input type="number" id="pStock" placeholder="Quantité Stock">
+                        <input type="text" id="pVariants" placeholder="Couleurs/Tailles (ex: Bleu, Rouge, XL)">
+                    </div>
+                    <div class="profit-box" id="profitInfo">Profit: 0 DH | Marge: 0%</div>
+                    <button class="btn-save" onclick="saveProduct()">Enregistrer le produit</button>
+                </div>
+
+                <div class="table-container card">
+                    <table class="admin-table">
                         <thead>
                             <tr>
                                 <th>Produit</th>
+                                <th>Catégorie</th>
                                 <th>Stock</th>
                                 <th>Vente</th>
                                 <th>Profit/U</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="inventoryBody">
-                            </tbody>
+                        <tbody id="inventoryTable"></tbody>
                     </table>
                 </div>
             </section>
@@ -90,4 +79,3 @@
     <script type="module" src="admin-logic.js"></script>
 </body>
 </html>
-
