@@ -5,60 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Lascoburo | Fournitures Scolaires Marrakech</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header class="header">
+    <header class="app-header">
         <div class="container">
             <h1 class="logo">Lasco<span>buro</span></h1>
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Rechercher un article...">
-                <span class="search-icon">🔍</span>
+            <p class="tagline">Tout pour apprendre, créer, réussir.</p>
+            
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Rechercher un produit...">
+                <span class="icon">🔍</span>
             </div>
-            <div class="categories" id="categoryList">
-                <button class="cat-pill active" data-cat="all">Tout</button>
-                </div>
         </div>
     </header>
 
+    <section class="categories-wrapper">
+        <div class="categories-scroll" id="catBar">
+            <button class="cat-pill active" onclick="filterCat('Tous')">Tous</button>
+            <button class="cat-pill" onclick="filterCat('Papeterie')">Papeterie</button>
+            <button class="cat-pill" onclick="filterCat('Cahiers')">Cahiers</button>
+            <button class="cat-pill" onclick="filterCat('Sacs')">Sacs</button>
+        </div>
+    </section>
+
     <main class="container">
-        <div class="grid" id="productGrid">
-            </div>
+        <div class="product-grid" id="customerGrid">
+            <div class="loader">Chargement des produits...</div>
+        </div>
     </main>
 
-    <div id="stickyCart" class="sticky-cart-bar" onclick="toggleCart(true)">
-        <div class="cart-info">
-            <span id="cartCountBadge">0</span> Articles
-        </div>
-        <div class="cart-total" id="cartTotalSticky">0.00 DH</div>
-        <div class="cart-label">Voir le panier 🛒</div>
-    </div>
-
-    <div id="productModal" class="modal-overlay" onclick="closeModal()">
-        <div class="bottom-sheet" onclick="event.stopPropagation()">
-            <div class="handle"></div>
-            <div id="modalContent"></div>
-        </div>
-    </div>
-
-    <div id="cartDrawer" class="cart-drawer">
-        <div class="cart-header">
-            <h2>Mon Panier</h2>
-            <button class="close-cart" onclick="toggleCart(false)">✕</button>
-        </div>
-        <div id="cartItemsList" class="cart-items"></div>
-        <div class="cart-footer">
-            <div class="summary-line">
-                <span>Total</span>
-                <span id="cartFinalTotal">0.00 DH</span>
+    <div id="orderBar" class="order-bar hidden">
+        <div class="bar-content">
+            <div class="cart-summary">
+                <span id="cartCount">0</span> articles
+                <strong id="cartPrice">0 DH</strong>
             </div>
-            <button class="btn-primary whatsapp-btn" onclick="sendWhatsApp()">
-                Commander via WhatsApp
+            <button class="whatsapp-btn" onclick="openWhatsApp()">
+                Commander en 1 clic 💬
             </button>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script type="module" src="app-logic.js"></script>
 </body>
 </html>
