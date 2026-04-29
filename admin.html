@@ -16,8 +16,6 @@
                 <nav class="side-nav">
                     <button class="nav-btn active">📊 Dashboard</button>
                     <button class="nav-btn">📦 Inventaire</button>
-                    <button class="nav-btn">🛒 Ventes</button>
-                    <button class="nav-btn">⚙️ Paramètres</button>
                 </nav>
             </div>
             <div class="sidebar-bottom">
@@ -36,10 +34,6 @@
                 <div class="header-titles">
                     <h1>Bonjour, Lascoburo 👋</h1>
                     <p>Voici un aperçu de votre activité aujourd'hui.</p>
-                </div>
-                <div class="header-actions">
-                    <input type="text" class="search-bar" placeholder="Rechercher un produit...">
-                    <button class="icon-btn">🔔</button>
                 </div>
             </header>
 
@@ -82,7 +76,7 @@
                         <div class="image-preview" id="previewContainer">
                             <img id="previewImg" src="https://placehold.co/400x400/f8fafc/94a3b8?text=Aperçu" alt="Image">
                         </div>
-                        <input type="text" id="pImg" class="input-field" placeholder="Coller le lien de l'image ici..." oninput="updatePreview()">
+                        <input type="text" id="pImg" class="input-field" placeholder="Coller le lien de l'image ici...">
                     </div>
 
                     <div class="form-fields">
@@ -93,22 +87,29 @@
 
                         <div class="input-group">
                             <label>Catégorie</label>
-                            <div class="category-wrapper">
+                            
+                            <div class="category-wrapper" id="catSelectWrapper">
                                 <select id="pCatSelect" class="input-field">
                                     <option value="">Choisir une catégorie...</option>
                                 </select>
-                                <button class="btn-add-cat" onclick="promptNewCategory()" title="Ajouter une nouvelle catégorie">+</button>
+                                <button type="button" id="btnShowAddCat" class="btn-action primary" title="Ajouter une catégorie">+</button>
+                            </div>
+
+                            <div class="category-wrapper" id="catInputWrapper" style="display: none;">
+                                <input type="text" id="newCatInput" class="input-field" placeholder="Nom de la nouvelle catégorie...">
+                                <button type="button" id="btnSaveNewCat" class="btn-action success">✓</button>
+                                <button type="button" id="btnCancelNewCat" class="btn-action danger">✕</button>
                             </div>
                         </div>
 
                         <div class="input-row">
                             <div class="input-group">
-                                <label>Prix d'achat (DH)</label>
-                                <input type="number" id="pCost" class="input-field" placeholder="Ex: 120" oninput="calc()">
+                                <label>Prix d'achat (Coût - DH)</label>
+                                <input type="number" id="pCost" class="input-field" placeholder="Ex: 120">
                             </div>
                             <div class="input-group">
                                 <label>Prix de vente (DH)</label>
-                                <input type="number" id="pSell" class="input-field" placeholder="Ex: 199" oninput="calc()">
+                                <input type="number" id="pSell" class="input-field" placeholder="Ex: 199">
                             </div>
                         </div>
 
@@ -125,7 +126,7 @@
 
                         <div class="form-footer">
                             <div class="profit-indicator" id="profitInfo">Profit: 0 DH | Marge: 0%</div>
-                            <button class="btn-primary" onclick="saveProduct()">💾 Enregistrer le produit</button>
+                            <button type="button" id="btnSaveProduct" class="btn-primary">💾 Enregistrer le produit</button>
                         </div>
                     </div>
                 </div>
