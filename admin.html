@@ -3,111 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lascoburo Admin | Dashboard</title>
-    <link rel="stylesheet" href="admin.css">
+    <title>Lascoburo Admin | Gestion Stock & Profit</title>
+    <link rel="stylesheet" href="admin-style.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <aside class="sidebar">
-        <h2 class="logo">Lasco<span>Admin</span></h2>
-        <nav>
-            <button class="nav-item active" onclick="showSection('stats')">📊 Statistiques</button>
-            <button class="nav-item" onclick="showSection('inventory')">📦 Inventaire</button>
-            <button class="nav-item" onclick="showSection('orders')">📝 Commandes</button>
-        </nav>
-        <div class="user-profile">
-            <p>Admin Marrakech</p>
-        </div>
-    </aside>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="logo">Lasco<span>Admin</span></div>
+            <nav>
+                <button class="nav-btn active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+                <button class="nav-btn" onclick="switchTab('inventory')">📦 Inventaire</button>
+                <button class="nav-btn" onclick="switchTab('add')">➕ Ajouter Produit</button>
+            </nav>
+        </aside>
 
-    <main class="main-content">
-        
-        <section id="stats-section" class="admin-section active">
-            <header class="section-header">
-                <h1>Bonjour, Yassin 👋</h1>
-                <p>Voici l'état de votre business aujourd'hui.</p>
-            </header>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span>Ventes Totales</span>
-                    <h2 id="totalSales">0 DH</h2>
-                </div>
-                <div class="stat-card profit">
-                    <span>Profit Estimé</span>
-                    <h2 id="totalProfit">0 DH</h2>
-                    <small>Marge: <b id="profitMargin">0%</b></small>
-                </div>
-                <div class="stat-card alert">
-                    <span>Stock Faible</span>
-                    <h2 id="lowStockCount">0</h2>
-                    <small>Articles à commander</small>
-                </div>
-            </div>
-
-            <div class="recent-activity card">
-                <h3>Commandes Récentes</h3>
-                <div id="recentOrdersList">
+        <main class="content">
+            <section id="dashboard" class="tab-content active">
+                <header>
+                    <h1>Tableau de bord</h1>
+                    <p>Résumé financier de votre stock à Marrakech.</p>
+                </header>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Valeur de Vente</h3>
+                        <p id="totalRevenue">0.00 DH</p>
                     </div>
-            </div>
-        </section>
-
-        <section id="inventory-section" class="admin-section">
-            <header class="section-header">
-                <h1>Inventaire</h1>
-                <button class="btn-primary" onclick="openAddModal()">+ Ajouter Produit</button>
-            </header>
-
-            <div class="card">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Produit</th>
-                            <th>Prix (Vente)</th>
-                            <th>Coût (Achat)</th>
-                            <th>Stock</th>
-                            <th>Profit/U</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="inventoryTableBody">
-                        </tbody>
-                </table>
-            </div>
-        </section>
-
-    </main>
-
-    <div id="productModal" class="modal">
-        <div class="modal-content">
-            <h3>Détails du Produit</h3>
-            <form id="productForm">
-                <input type="text" id="pName" placeholder="Nom du produit" required>
-                <div class="form-row">
-                    <input type="number" id="pPrice" placeholder="Prix de vente (DH)" oninput="calcProfit()" required>
-                    <input type="number" id="pCost" placeholder="Prix d'achat (DH)" oninput="calcProfit()" required>
+                    <div class="stat-card profit">
+                        <h3>Profit Potentiel</h3>
+                        <p id="totalProfit">0.00 DH</p>
+                    </div>
+                    <div class="stat-card warning">
+                        <h3>Stock Faible</h3>
+                        <p id="lowStockCount">0</p>
+                    </div>
                 </div>
-                <div class="profit-preview">
-                    Profit par unité: <span id="pProfit">0</span> DH (<span id="pPercent">0</span>%)
+            </section>
+
+            <section id="add" class="tab-content">
+                <div class="form-card">
+                    <h2>Nouveau Produit</h2>
+                    <div class="form-grid">
+                        <input type="text" id="pName" placeholder="Nom du produit (ex: Cahier 96p)">
+                        <select id="pCat">
+                            <option value="Papeterie">Papeterie</option>
+                            <option value="Cahiers">Cahiers</option>
+                            <option value="Sacs">Sacs</option>
+                            <option value="Bureau">Bureau</option>
+                        </select>
+                        <input type="number" id="pCost" placeholder="Prix d'Achat (Coût)" oninput="updateMargin()">
+                        <input type="number" id="pSell" placeholder="Prix de Vente" oninput="updateMargin()">
+                        <input type="number" id="pStock" placeholder="Quantité en Stock">
+                        <input type="text" id="pImg" placeholder="URL de l'image">
+                    </div>
+                    
+                    <div class="margin-preview" id="marginPreview">
+                        Profit: 0 DH | Marge: 0%
+                    </div>
+
+                    <button class="save-btn" onclick="saveProduct()">Enregistrer dans l'Inventaire</button>
                 </div>
-                <input type="number" id="pStock" placeholder="Quantité en stock" required>
-                <input type="text" id="pImg" placeholder="URL de l'image">
-                <div class="modal-actions">
-                    <button type="button" class="btn-secondary" onclick="closeModal()">Annuler</button>
-                    <button type="submit" class="btn-primary">Enregistrer</button>
+            </section>
+
+            <section id="inventory" class="tab-content">
+                <div class="table-container">
+                    <table id="productTable">
+                        <thead>
+                            <tr>
+                                <th>Produit</th>
+                                <th>Stock</th>
+                                <th>Vente</th>
+                                <th>Profit/U</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryBody">
+                            </tbody>
+                    </table>
                 </div>
-            </form>
-        </div>
+            </section>
+        </main>
     </div>
 
-    <nav class="mobile-nav">
-        <button onclick="showSection('stats')">📊</button>
-        <button onclick="showSection('inventory')">📦</button>
-        <button onclick="showSection('orders')">📝</button>
-    </nav>
-
-    <script src="admin.js"></script>
+    <script type="module" src="admin-logic.js"></script>
 </body>
 </html>
 
