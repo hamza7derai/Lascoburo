@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// FIREBASE CONFIG
+// YOUR FIREBASE CONFIG
 const firebaseConfig = {
   apiKey: "AIzaSyCKY59mqLqD4GqQpkDEFqNybKIkwLvgId0",
   authDomain: "lascoburo.firebaseapp.com",
@@ -14,13 +14,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// --- 1. UI LISTENERS (Attached properly for mobile) ---
+// --- 1. IMAGE PREVIEW ---
 document.getElementById('pImg').addEventListener('input', () => {
     const imgUrl = document.getElementById('pImg').value;
     const preview = document.getElementById('previewImg');
-    preview.src = imgUrl ? imgUrl : 'https://placehold.co/400x400/f8fafc/94a3b8?text=Aperçu';
+    preview.src = imgUrl ? imgUrl : 'https://placehold.co/400x400/f8fafc/94a3b8?text=Aper%C3%A7u';
 });
 
+// --- 2. PROFIT CALCULATOR ---
 const calculateProfit = () => {
     const cost = parseFloat(document.getElementById('pCost').value) || 0;
     const sell = parseFloat(document.getElementById('pSell').value) || 0;
@@ -32,53 +33,29 @@ const calculateProfit = () => {
 document.getElementById('pCost').addEventListener('input', calculateProfit);
 document.getElementById('pSell').addEventListener('input', calculateProfit);
 
-// --- 2. INLINE CATEGORY BUILDER LOGIC ---
-const catSelectWrapper = document.getElementById('catSelectWrapper');
-const catInputWrapper = document.getElementById('catInputWrapper');
-const newCatInput = document.getElementById('newCatInput');
-
-// Show Input
-document.getElementById('btnShowAddCat').addEventListener('click', () => {
-    catSelectWrapper.style.display = 'none';
-    catInputWrapper.style.display = 'flex';
-    newCatInput.focus();
-});
-
-// Hide Input (Cancel)
-document.getElementById('btnCancelNewCat').addEventListener('click', () => {
-    catInputWrapper.style.display = 'none';
-    catSelectWrapper.style.display = 'flex';
-    newCatInput.value = '';
-});
-
-// Save New Category
-document.getElementById('btnSaveNewCat').addEventListener('click', async () => {
-    const catName = newCatInput.value.trim();
-    if (catName !== "") {
+// --- 3. BROWSER PROMPT CATEGORY MAKER (LascoTaco Style) ---
+document.getElementById('btnShowAddCat').addEventListener('click', async () => {
+    // This calls the native browser popup just like in your screenshot
+    const catName = window.prompt("Entrez le nom de la nouvelle catégorie :");
+    
+    if (catName && catName.trim() !== "") {
         try {
-            document.getElementById('btnSaveNewCat').innerText = "...";
-            await addDoc(collection(db, "categories"), { name: catName });
+            // Save to Firebase
+            await addDoc(collection(db, "categories"), { name: catName.trim() });
             
-            // Firebase onSnapshot will update the dropdown automatically!
-            catInputWrapper.style.display = 'none';
-            catSelectWrapper.style.display = 'flex';
-            newCatInput.value = '';
-            document.getElementById('btnSaveNewCat').innerText = "✓";
-            
-            // Set the select box to the newly created category
+            // Wait a moment for Firebase to sync, then auto-select it
             setTimeout(() => {
-                document.getElementById('pCatSelect').value = catName;
-            }, 500);
-
+                document.getElementById('pCatSelect').value = catName.trim();
+            }, 800);
+            
         } catch(e) {
             console.error(e);
             alert("Erreur lors de l'ajout de la catégorie.");
-            document.getElementById('btnSaveNewCat').innerText = "✓";
         }
     }
 });
 
-// Load Categories
+// Auto-Load Categories from Firebase
 onSnapshot(collection(db, "categories"), (snap) => {
     const cats = snap.docs.map(d => d.data().name).sort();
     const select = document.getElementById('pCatSelect');
@@ -87,11 +64,12 @@ onSnapshot(collection(db, "categories"), (snap) => {
     select.innerHTML = '<option value="">Choisir une catégorie...</option>' + 
                        cats.map(c => `<option value="${c}">${c}</option>`).join('');
                        
+    // Keep it selected if it was just added
     if(cats.includes(currentVal)) select.value = currentVal;
 });
 
 
-// --- 3. PRODUCT MANAGEMENT ---
+// --- 4. PRODUCT MANAGEMENT ---
 document.getElementById('btnSaveProduct').addEventListener('click', async () => {
     const name = document.getElementById('pName').value;
     const category = document.getElementById('pCatSelect').value;
@@ -128,19 +106,17 @@ document.getElementById('btnSaveProduct').addEventListener('click', async () => 
         document.getElementById('pImg').value = '';
         document.getElementById('pCatSelect').value = '';
         
-        document.getElementById('previewImg').src = 'https://placehold.co/400x400/f8fafc/94a3b8?text=Aperçu';
+        document.getElementById('previewImg').src = 'https://placehold.co/400x400/f8fafc/94a3b8?text=Aper%C3%A7u';
         calculateProfit(); 
         
         btn.innerText = "💾 Enregistrer le produit";
-        alert("Produit ajouté !");
     } catch(e) {
         console.error(e);
         alert("Erreur lors de l'ajout.");
     }
 });
 
-// --- 4. INVENTORY TABLE & STATS ---
-// Make delete global so inline HTML onClick works
+// --- 5. INVENTORY TABLE & STATS ---
 window.deleteProd = async (id) => { 
     if(confirm("Supprimer ce produit définitivement ?")) {
         await deleteDoc(doc(db, "products", id)); 
