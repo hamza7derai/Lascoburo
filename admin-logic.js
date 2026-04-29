@@ -14,15 +14,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// --- 1. IMAGE PREVIEW ---
-window.updatePreview = () => {
+// --- 1. UI LISTENERS (Attached properly for mobile) ---
+document.getElementById('pImg').addEventListener('input', () => {
     const imgUrl = document.getElementById('pImg').value;
     const preview = document.getElementById('previewImg');
     preview.src = imgUrl ? imgUrl : 'https://placehold.co/400x400/f8fafc/94a3b8?text=Aperçu';
-};
+});
 
-// --- 2. PROFIT CALCULATOR ---
-window.calc = () => {
+const calculateProfit = () => {
     const cost = parseFloat(document.getElementById('pCost').value) || 0;
     const sell = parseFloat(document.getElementById('pSell').value) || 0;
     const profit = sell - cost;
@@ -30,28 +29,59 @@ window.calc = () => {
     document.getElementById('profitInfo').innerText = `Profit: ${profit.toFixed(2)} DH | Marge: ${margin}%`;
 };
 
-// --- 3. INLINE CATEGORY BUILDER ---
-// This allows you to add categories directly from the form dropdown area
-window.promptNewCategory = async () => {
-    const catName = prompt("Entrez le nom de la nouvelle catégorie (ex: Géométrie) :");
-    
-    if (catName && catName.trim() !== "") {
+document.getElementById('pCost').addEventListener('input', calculateProfit);
+document.getElementById('pSell').addEventListener('input', calculateProfit);
+
+// --- 2. INLINE CATEGORY BUILDER LOGIC ---
+const catSelectWrapper = document.getElementById('catSelectWrapper');
+const catInputWrapper = document.getElementById('catInputWrapper');
+const newCatInput = document.getElementById('newCatInput');
+
+// Show Input
+document.getElementById('btnShowAddCat').addEventListener('click', () => {
+    catSelectWrapper.style.display = 'none';
+    catInputWrapper.style.display = 'flex';
+    newCatInput.focus();
+});
+
+// Hide Input (Cancel)
+document.getElementById('btnCancelNewCat').addEventListener('click', () => {
+    catInputWrapper.style.display = 'none';
+    catSelectWrapper.style.display = 'flex';
+    newCatInput.value = '';
+});
+
+// Save New Category
+document.getElementById('btnSaveNewCat').addEventListener('click', async () => {
+    const catName = newCatInput.value.trim();
+    if (catName !== "") {
         try {
-            await addDoc(collection(db, "categories"), { name: catName.trim() });
-            alert(`Catégorie "${catName}" ajoutée avec succès !`);
+            document.getElementById('btnSaveNewCat').innerText = "...";
+            await addDoc(collection(db, "categories"), { name: catName });
+            
+            // Firebase onSnapshot will update the dropdown automatically!
+            catInputWrapper.style.display = 'none';
+            catSelectWrapper.style.display = 'flex';
+            newCatInput.value = '';
+            document.getElementById('btnSaveNewCat').innerText = "✓";
+            
+            // Set the select box to the newly created category
+            setTimeout(() => {
+                document.getElementById('pCatSelect').value = catName;
+            }, 500);
+
         } catch(e) {
             console.error(e);
             alert("Erreur lors de l'ajout de la catégorie.");
+            document.getElementById('btnSaveNewCat').innerText = "✓";
         }
     }
-};
+});
 
-// Auto-populate Category Dropdown
+// Load Categories
 onSnapshot(collection(db, "categories"), (snap) => {
     const cats = snap.docs.map(d => d.data().name).sort();
     const select = document.getElementById('pCatSelect');
-    
-    // Keep current selection if any
     const currentVal = select.value;
     
     select.innerHTML = '<option value="">Choisir une catégorie...</option>' + 
@@ -61,8 +91,8 @@ onSnapshot(collection(db, "categories"), (snap) => {
 });
 
 
-// --- 4. PRODUCT MANAGEMENT ---
-window.saveProduct = async () => {
+// --- 3. PRODUCT MANAGEMENT ---
+document.getElementById('btnSaveProduct').addEventListener('click', async () => {
     const name = document.getElementById('pName').value;
     const category = document.getElementById('pCatSelect').value;
     const sellPrice = parseFloat(document.getElementById('pSell').value);
@@ -84,29 +114,37 @@ window.saveProduct = async () => {
     };
 
     try {
-        const btn = document.querySelector('.btn-primary');
+        const btn = document.getElementById('btnSaveProduct');
         btn.innerText = "⏳ Enregistrement...";
         
         await addDoc(collection(db, "products"), data);
         
-        // Clear form
-        document.querySelectorAll('.form-fields input').forEach(i => i.value = '');
-        document.getElementById('pCatSelect').value = '';
+        // Reset Form
+        document.getElementById('pName').value = '';
+        document.getElementById('pCost').value = '';
+        document.getElementById('pSell').value = '';
+        document.getElementById('pStock').value = '';
+        document.getElementById('pVariants').value = '';
         document.getElementById('pImg').value = '';
+        document.getElementById('pCatSelect').value = '';
         
-        window.updatePreview(); 
-        window.calc(); 
+        document.getElementById('previewImg').src = 'https://placehold.co/400x400/f8fafc/94a3b8?text=Aperçu';
+        calculateProfit(); 
         
         btn.innerText = "💾 Enregistrer le produit";
+        alert("Produit ajouté !");
     } catch(e) {
         console.error(e);
         alert("Erreur lors de l'ajout.");
     }
-};
+});
 
-// --- 5. INVENTORY TABLE & STATS ---
+// --- 4. INVENTORY TABLE & STATS ---
+// Make delete global so inline HTML onClick works
 window.deleteProd = async (id) => { 
-    if(confirm("Supprimer ce produit définitivement ?")) await deleteDoc(doc(db, "products", id)); 
+    if(confirm("Supprimer ce produit définitivement ?")) {
+        await deleteDoc(doc(db, "products", id)); 
+    }
 };
 
 onSnapshot(collection(db, "products"), (snap) => {
@@ -135,7 +173,6 @@ onSnapshot(collection(db, "products"), (snap) => {
         </tr>`;
     }).join('');
 
-    // Update Top Stat Cards
     document.getElementById('rev').innerText = `${rev.toLocaleString()} DH`;
     document.getElementById('prof').innerText = `${prof.toLocaleString()} DH`;
     document.getElementById('totalStock').innerText = totalStk.toLocaleString();
