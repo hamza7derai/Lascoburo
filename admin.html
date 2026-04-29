@@ -3,107 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lascoburo | Admin Dashboard</title>
+    <title>Lascoburo | Admin Pro</title>
     <link rel="stylesheet" href="admin-style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="admin-wrapper">
+    <div class="admin-layout">
         <aside class="sidebar">
-            <div class="logo">Lasco<span>Admin</span></div>
-            <nav>
-                <button class="nav-item active" onclick="switchTab('stats')">📊 Dashboard</button>
-                <button class="nav-item" onclick="switchTab('inventory')">📦 Inventaire</button>
-                <button class="nav-item" onclick="switchTab('cats')">📁 Catégories</button>
-            </nav>
+            <div class="sidebar-top">
+                <div class="logo">Lasco<span>Admin</span></div>
+                <nav class="side-nav">
+                    <button class="nav-btn active">📊 Dashboard</button>
+                    <button class="nav-btn">📦 Inventaire</button>
+                    <button class="nav-btn">🛒 Ventes</button>
+                    <button class="nav-btn">⚙️ Paramètres</button>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                <div class="user-profile">
+                    <div class="avatar">L</div>
+                    <div class="user-info">
+                        <strong>Lascoburo</strong>
+                        <span>Propriétaire</span>
+                    </div>
+                </div>
+            </div>
         </aside>
 
         <main class="main-content">
-            
-            <section id="stats" class="tab-content active">
-                <div class="stats-header">
-                    <h1 style="margin-top: 0;">Aperçu de l'activité</h1>
-                    <div class="stats-grid">
-                        <div class="card">
-                            <h3>Valeur de Vente</h3>
-                            <p id="rev">0 DH</p>
-                        </div>
-                        <div class="card profit">
-                            <h3>Profit Potentiel</h3>
-                            <p id="prof">0 DH</p>
-                        </div>
-                        <div class="card alert">
-                            <h3>Stock Bas</h3>
-                            <p id="low">0</p>
-                        </div>
+            <header class="top-header">
+                <div class="header-titles">
+                    <h1>Bonjour, Lascoburo 👋</h1>
+                    <p>Voici un aperçu de votre activité aujourd'hui.</p>
+                </div>
+                <div class="header-actions">
+                    <input type="text" class="search-bar" placeholder="Rechercher un produit...">
+                    <button class="icon-btn">🔔</button>
+                </div>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon blue">🛍️</div>
+                    <div class="stat-data">
+                        <span class="label">Valeur de vente</span>
+                        <strong id="rev">0 DH</strong>
                     </div>
                 </div>
-            </section>
+                <div class="stat-card">
+                    <div class="stat-icon green">📈</div>
+                    <div class="stat-data">
+                        <span class="label">Profit Potentiel</span>
+                        <strong id="prof" class="text-green">0 DH</strong>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon yellow">📦</div>
+                    <div class="stat-data">
+                        <span class="label">Stock Total</span>
+                        <strong id="totalStock">0</strong>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon red">⚠️</div>
+                    <div class="stat-data">
+                        <span class="label">Stock Bas</span>
+                        <strong id="low" class="text-red">0</strong>
+                    </div>
+                </div>
+            </div>
 
-            <section id="inventory" class="tab-content">
-                <h1 style="margin-top: 0;">Inventaire</h1>
-                
-                <div class="form-card">
-                    <h3>Ajouter un Produit</h3>
+            <div class="content-card">
+                <h2 class="card-title">Ajouter un produit</h2>
+                <div class="form-layout">
                     
-                    <div class="product-creation-layout">
-                        <div class="image-column">
-                            <div class="image-preview-box">
-                                <img id="previewImg" src="https://placehold.co/400x400/f1f5f9/a4b8c4?text=Aperçu" alt="Preview">
-                            </div>
-                            <input type="text" id="pImg" placeholder="Coller le lien de l'image ici..." oninput="updatePreview()">
+                    <div class="image-upload-zone">
+                        <div class="image-preview" id="previewContainer">
+                            <img id="previewImg" src="https://placehold.co/400x400/f8fafc/94a3b8?text=Aperçu" alt="Image">
+                        </div>
+                        <input type="text" id="pImg" class="input-field" placeholder="Coller le lien de l'image ici..." oninput="updatePreview()">
+                    </div>
+
+                    <div class="form-fields">
+                        <div class="input-group">
+                            <label>Nom du produit</label>
+                            <input type="text" id="pName" class="input-field" placeholder="Ex: Sac à dos ergonomique">
                         </div>
 
-                        <div class="details-column">
-                            <input type="text" id="pName" placeholder="Nom du produit (ex: Sac à dos)">
-                            <select id="pCatSelect"><option value="">Chargement des catégories...</option></select>
-                            
-                            <div class="price-row">
-                                <input type="number" id="pCost" placeholder="Prix d'Achat (DH)" oninput="calc()">
-                                <input type="number" id="pSell" placeholder="Prix de Vente (DH)" oninput="calc()">
+                        <div class="input-group">
+                            <label>Catégorie</label>
+                            <div class="category-wrapper">
+                                <select id="pCatSelect" class="input-field">
+                                    <option value="">Choisir une catégorie...</option>
+                                </select>
+                                <button class="btn-add-cat" onclick="promptNewCategory()" title="Ajouter une nouvelle catégorie">+</button>
                             </div>
-                            
-                            <div class="price-row">
-                                <input type="number" id="pStock" placeholder="Quantité en Stock">
-                                <input type="text" id="pVariants" placeholder="Couleurs/Tailles (Optionnel)">
-                            </div>
+                        </div>
 
-                            <div class="profit-box" id="profitInfo">Profit: 0 DH | Marge: 0%</div>
-                            <button class="btn-save" onclick="saveProduct()">Enregistrer le produit</button>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label>Prix d'achat (DH)</label>
+                                <input type="number" id="pCost" class="input-field" placeholder="Ex: 120" oninput="calc()">
+                            </div>
+                            <div class="input-group">
+                                <label>Prix de vente (DH)</label>
+                                <input type="number" id="pSell" class="input-field" placeholder="Ex: 199" oninput="calc()">
+                            </div>
+                        </div>
+
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label>Quantité en stock</label>
+                                <input type="number" id="pStock" class="input-field" placeholder="Ex: 50">
+                            </div>
+                            <div class="input-group">
+                                <label>Couleurs / Tailles (Optionnel)</label>
+                                <input type="text" id="pVariants" class="input-field" placeholder="Ex: Bleu, Rouge / M, L">
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <div class="profit-indicator" id="profitInfo">Profit: 0 DH | Marge: 0%</div>
+                            <button class="btn-primary" onclick="saveProduct()">💾 Enregistrer le produit</button>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="table-container">
-                    <table class="admin-table">
+            <div class="content-card">
+                <div class="table-header">
+                    <h2 class="card-title">Liste des produits</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
                         <thead>
                             <tr>
                                 <th>Image</th>
                                 <th>Produit</th>
                                 <th>Catégorie</th>
                                 <th>Stock</th>
-                                <th>Vente</th>
-                                <th>Actions</th>
+                                <th>Prix d'achat</th>
+                                <th>Prix de vente</th>
+                                <th>Profit</th>
+                                <th style="text-align: right;">Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="inventoryTable"></tbody>
+                        <tbody id="inventoryTable">
+                            </tbody>
                     </table>
                 </div>
-            </section>
-
-            <section id="cats" class="tab-content">
-                <h1 style="margin-top: 0;">Gérer les Catégories</h1>
-                
-                <div class="form-card">
-                    <h3>Nouvelle Catégorie</h3>
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <input type="text" id="newCatName" placeholder="Nom de la catégorie (ex: Géométrie)" style="flex: 1; margin: 0;">
-                        <button class="btn-save" onclick="addCategory()" style="margin: 0; width: auto; padding: 0 30px;">+ Créer</button>
-                    </div>
-                    <div id="catListDisplay" style="display: flex; flex-direction: column; gap: 10px;"></div>
-                </div>
-            </section>
+            </div>
 
         </main>
     </div>
