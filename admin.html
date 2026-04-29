@@ -45,29 +45,45 @@
                 <h1 style="margin-top: 0;">Inventaire</h1>
                 
                 <div class="form-card">
-                    <h3>Ajouter / Modifier un Produit</h3>
-                    <div class="form-grid">
-                        <input type="text" id="pName" placeholder="Nom du produit (ex: Sac à dos)">
-                        <select id="pCatSelect"><option value="">Chargement des catégories...</option></select>
-                        <input type="number" id="pCost" placeholder="Prix d'Achat (DH)" oninput="calc()">
-                        <input type="number" id="pSell" placeholder="Prix de Vente (DH)" oninput="calc()">
-                        <input type="number" id="pStock" placeholder="Quantité Stock">
-                        <input type="text" id="pVariants" placeholder="Variantes (ex: Bleu, Rouge)">
-                        <input type="text" id="pImg" placeholder="URL de l'image (PNG/JPG)" style="grid-column: span 2;">
+                    <h3>Ajouter un Produit</h3>
+                    
+                    <div class="product-creation-layout">
+                        <div class="image-column">
+                            <div class="image-preview-box">
+                                <img id="previewImg" src="https://placehold.co/400x400/f1f5f9/a4b8c4?text=Aperçu" alt="Preview">
+                            </div>
+                            <input type="text" id="pImg" placeholder="Coller le lien de l'image ici..." oninput="updatePreview()">
+                        </div>
+
+                        <div class="details-column">
+                            <input type="text" id="pName" placeholder="Nom du produit (ex: Sac à dos)">
+                            <select id="pCatSelect"><option value="">Chargement des catégories...</option></select>
+                            
+                            <div class="price-row">
+                                <input type="number" id="pCost" placeholder="Prix d'Achat (DH)" oninput="calc()">
+                                <input type="number" id="pSell" placeholder="Prix de Vente (DH)" oninput="calc()">
+                            </div>
+                            
+                            <div class="price-row">
+                                <input type="number" id="pStock" placeholder="Quantité en Stock">
+                                <input type="text" id="pVariants" placeholder="Couleurs/Tailles (Optionnel)">
+                            </div>
+
+                            <div class="profit-box" id="profitInfo">Profit: 0 DH | Marge: 0%</div>
+                            <button class="btn-save" onclick="saveProduct()">Enregistrer le produit</button>
+                        </div>
                     </div>
-                    <div class="profit-box" id="profitInfo">Profit: 0 DH | Marge: 0%</div>
-                    <button class="btn-save" onclick="saveProduct()">Enregistrer le produit</button>
                 </div>
 
                 <div class="table-container">
                     <table class="admin-table">
                         <thead>
                             <tr>
+                                <th>Image</th>
                                 <th>Produit</th>
                                 <th>Catégorie</th>
                                 <th>Stock</th>
                                 <th>Vente</th>
-                                <th>Profit/U</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -85,10 +101,7 @@
                         <input type="text" id="newCatName" placeholder="Nom de la catégorie (ex: Géométrie)" style="flex: 1; margin: 0;">
                         <button class="btn-save" onclick="addCategory()" style="margin: 0; width: auto; padding: 0 30px;">+ Créer</button>
                     </div>
-                    
-                    <div class="table-container" style="box-shadow: none; padding: 0;">
-                        <div id="catListDisplay" style="display: flex; flex-direction: column; gap: 10px;"></div>
-                    </div>
+                    <div id="catListDisplay" style="display: flex; flex-direction: column; gap: 10px;"></div>
                 </div>
             </section>
 
