@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lascoburo | Fournitures Scolaires Marrakech</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Lasco<span>buro</span></h1>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Rechercher un article...">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="categories" id="categoryList">
+                <button class="cat-pill active" data-cat="all">Tout</button>
+                </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="grid" id="productGrid">
+            </div>
+    </main>
+
+    <div id="stickyCart" class="sticky-cart-bar" onclick="toggleCart(true)">
+        <div class="cart-info">
+            <span id="cartCountBadge">0</span> Articles
+        </div>
+        <div class="cart-total" id="cartTotalSticky">0.00 DH</div>
+        <div class="cart-label">Voir le panier 🛒</div>
+    </div>
+
+    <div id="productModal" class="modal-overlay" onclick="closeModal()">
+        <div class="bottom-sheet" onclick="event.stopPropagation()">
+            <div class="handle"></div>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <div id="cartDrawer" class="cart-drawer">
+        <div class="cart-header">
+            <h2>Mon Panier</h2>
+            <button class="close-cart" onclick="toggleCart(false)">✕</button>
+        </div>
+        <div id="cartItemsList" class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="summary-line">
+                <span>Total</span>
+                <span id="cartFinalTotal">0.00 DH</span>
+            </div>
+            <button class="btn-primary whatsapp-btn" onclick="sendWhatsApp()">
+                Commander via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
