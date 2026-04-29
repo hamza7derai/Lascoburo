@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Cahier 96 pages - Grands Carreaux",
+    "price": 12,
+    "cost": 8.50,
+    "category": "Cahiers",
+    "stock": 120,
+    "image": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=400"
+  },
+  {
+    "id": 2,
+    "name": "Pack 10 Stylos BIC Blue",
+    "price": 15,
+    "cost": 10.20,
+    "category": "Stylos",
+    "stock": 45,
+    "image": "https://images.unsplash.com/photo-1585336261022-680e295ce3fe?auto=format&fit=crop&q=80&w=400"
+  },
+  {
+    "id": 3,
+    "name": "Sac à Dos Ergonomique Bleu",
+    "price": 249,
+    "cost": 180,
+    "category": "Sacs",
+    "stock": 8,
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=400"
+  },
+  {
+    "id": 4,
+    "name": "Calculatrice Scientifique",
+    "price": 185,
+    "cost": 140,
+    "category": "Bureau",
+    "stock": 15,
+    "image": "https://images.unsplash.com/photo-1574607383476-f517f220d356?auto=format&fit=crop&q=80&w=400"
+  }
+]
