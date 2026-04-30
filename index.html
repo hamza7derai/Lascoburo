@@ -99,6 +99,35 @@
         .sub-cat-pill { padding: 8px 16px; background: white; border: 1px solid var(--border); border-radius: 50px; font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: 0.2s; box-shadow: var(--shadow-sm); }
         .sub-cat-pill.active { background: var(--primary); color: white; border-color: var(--primary); }
 
+        /* =========================================
+           MANUELS (TEXTBOOKS) SPECIFIC STYLES
+        ========================================= */
+        .filter-row { display: flex; gap: 8px; margin-bottom: 24px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none;}
+        .filter-row::-webkit-scrollbar { display: none; }
+        .filter-select { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-weight: 600; color: var(--text-main); outline: none; appearance: none; padding-right: 30px; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2364748B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 10px center; background-size: 14px; flex-shrink: 0;}
+        .filter-btn { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 10px; display: flex; align-items: center; justify-content: center; color: var(--text-main); flex-shrink: 0;}
+
+        .help-banner { background: #EEF2FF; border-radius: 16px; padding: 16px; display: flex; gap: 16px; align-items: center; cursor: pointer; border: 1px solid #C7D2FE;}
+        .hb-icon { font-size: 32px; background: white; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); flex-shrink: 0;}
+        .hb-text h4 { font-size: 14px; font-weight: 800; color: var(--text-main); margin-bottom: 4px;}
+        .hb-text p { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; line-height: 1.3;}
+        .hb-link { font-size: 12px; font-weight: 800; color: var(--accent); }
+
+        .manuel-list { display: flex; flex-direction: column; gap: 16px; }
+        .manuel-card { background: white; border-radius: 20px; padding: 16px; display: flex; gap: 16px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); cursor: pointer; position: relative;}
+        .manuel-img { width: 80px; height: 100px; background: var(--bg); border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 5px; flex-shrink: 0; overflow: hidden;}
+        .manuel-img img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+        .manuel-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .manuel-info h3 { font-size: 15px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; line-height: 1.2; padding-right: 70px;}
+        .manuel-meta { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; font-weight: 500;}
+        .manuel-price { font-size: 16px; font-weight: 800; color: var(--primary); margin-top: 8px;}
+        .manuel-add-btn { position: absolute; right: 16px; bottom: 16px; background: var(--primary); color: white; border: none; width: 36px; height: 36px; border-radius: 12px; font-size: 20px; font-weight: bold; display: flex; align-items: center; justify-content: center; pointer-events: none;}
+        
+        .status-badge-top { position: absolute; top: 16px; right: 16px; background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 50px; font-size: 10px; font-weight: 800; }
+        .status-badge-top.rupture { background: #FEE2E2; color: #B91C1C; }
+        .stock-text-right { position: absolute; top: 40px; right: 16px; font-size: 10px; font-weight: 800; color: var(--success); }
+        .stock-text-right.rupture { color: var(--danger); }
+
         /* BOTTOM NAV */
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 12px 20px 24px 20px; z-index: 80; box-shadow: var(--shadow-nav); max-width: 600px; margin: 0 auto;}
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 6px; color: #94A3B8; text-decoration: none; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.2s;}
@@ -106,7 +135,7 @@
         .nav-item svg { width: 24px; height: 24px; stroke-width: 2; transition: 0.2s;}
         .nav-item.active svg { fill: var(--primary-light); stroke-width: 2.5; }
 
-        /* STICKY CART BAR (FIXED: Added opacity and pointer-events to completely hide it) */
+        /* STICKY CART BAR */
         .sticky-cart { position: fixed; bottom: 95px; left: 20px; right: 20px; background: var(--primary); border-radius: 20px; padding: 12px 16px 12px 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 30px rgba(30,58,138,0.35); z-index: 70; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; max-width: 560px; margin: 0 auto; }
         .sticky-cart.hidden { transform: translateY(250%); opacity: 0; pointer-events: none; }
         .sticky-cart-left { display: flex; align-items: center; gap: 14px; }
@@ -168,9 +197,6 @@
         .btn-large-primary:active { transform: scale(0.98); }
         .btn-outline { width: 100%; background: white; color: var(--text-main); border: 1px solid var(--border); padding: 16px; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; transition: 0.2s;}
         .btn-outline:active { transform: scale(0.98); }
-        .trust-badges { display: flex; justify-content: space-between; border-top: 1px solid var(--border); margin-top: 20px; padding-top: 20px; }
-        .trust-item { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; font-size: 10px; color: var(--text-muted); font-weight: 600; width: 30%; }
-        .trust-item svg { width: 20px; height: 20px; color: var(--text-main); stroke-width: 1.5; }
 
         /* Cart Modal */
         .cart-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
@@ -232,7 +258,6 @@
         <main class="product-grid" id="homeProductGrid"></main>
     </div>
 
-
     <div id="view-categories" class="app-view container">
         <div class="nav-header">
             <div class="ghost-btn"></div>
@@ -242,7 +267,6 @@
         <div class="cat-hub-grid" id="hubGrid"></div>
     </div>
 
-
     <div id="view-subcategory" class="app-view container">
         <div class="nav-header">
             <button class="back-btn" onclick="switchTab('categories')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
@@ -251,6 +275,49 @@
         </div>
         <div class="sub-cats-scroll" id="subCatPillMenu"></div>
         <main class="product-grid" id="subCatProductGrid"></main>
+    </div>
+
+    <div id="view-manuels" class="app-view container" style="padding-top: 20px;">
+        <div class="nav-header" style="margin-bottom: 5px; padding: 0;">
+            <h1 style="text-align: left; margin:0; font-size: 24px;">Manuels scolaires</h1>
+            <button class="ghost-btn" style="color:var(--text-muted);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px; font-weight: 500;">Trouvez rapidement votre manuel</p>
+
+        <div class="search-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="manuelSearch" placeholder="Rechercher un manuel (ex: Transmath)..." oninput="applyManuelFilters()">
+        </div>
+
+        <div class="filter-row">
+            <select id="filterNiveau" class="filter-select" onchange="applyManuelFilters()">
+                <option value="">Niveau</option>
+            </select>
+            <select id="filterMatiere" class="filter-select" onchange="applyManuelFilters()">
+                <option value="">Matière</option>
+            </select>
+            <select id="filterEditeur" class="filter-select" onchange="applyManuelFilters()">
+                <option value="">Éditeur</option>
+            </select>
+            <button class="filter-btn" onclick="applyManuelFilters()"><svg viewBox="0 0 24 24" style="width:16px;height:16px;"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg></button>
+        </div>
+
+        <div class="help-banner" onclick="requestManuelWhatsApp()">
+            <div class="hb-icon">📘</div>
+            <div class="hb-text">
+                <h4>Vous ne trouvez pas votre manuel ?</h4>
+                <p>Envoyez-nous le titre, on le cherche pour vous.</p>
+                <span class="hb-link">Demander un manuel ></span>
+            </div>
+        </div>
+
+        <div class="section-header" style="margin-top: 24px;">
+            <h2>Résultats</h2>
+            <span id="manuelCount" style="font-size: 13px; font-weight: 700; color: var(--text-muted);">0 manuels</span>
+        </div>
+
+        <div class="manuel-list" id="manuelListContainer">
+            </div>
     </div>
 
 
@@ -268,14 +335,14 @@
         <div class="sc-price-pill" id="scTotalPrice">0.00 DH</div>
     </div>
 
-
     <nav class="bottom-nav">
         <div class="nav-item active" id="tab-home" onclick="switchTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Accueil</div>
         <div class="nav-item" id="tab-categories" onclick="switchTab('categories')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Catégories</div>
-        <div class="nav-item" id="tab-favoris" onclick="alert('Bientôt disponible !')"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Favoris</div>
+        
+        <div class="nav-item" id="tab-manuels" onclick="switchTab('manuels')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg> Manuels</div>
+        
         <div class="nav-item" id="tab-profil" onclick="alert('Bientôt disponible !')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Profil</div>
     </nav>
-
 
     <div class="overlay" id="productOverlay" onclick="closeProductModal()"></div>
     <div class="bottom-sheet" id="productModal">
@@ -403,6 +470,11 @@
         onSnapshot(collection(db, "products"), snap => {
             allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             renderHome(); renderCategoriesHub(); 
+            
+            // Re-render textbooks specifically if data changes
+            loadManuelFilters();
+            applyManuelFilters();
+            
             if(activeMainCategory) { window.filterSubCategory('Tous'); }
         });
 
@@ -462,6 +534,84 @@
                 `;
             }).join('');
         }
+
+        // --- NEW: MANUELS SCOLAIRES ENGINE ---
+        function loadManuelFilters() {
+            const textbooks = allProducts.filter(p => p.isTextbook === true);
+            
+            // Extract unique values
+            const levels = [...new Set(textbooks.map(p => p.textbookLevel).filter(Boolean))].sort();
+            const subjects = [...new Set(textbooks.map(p => p.textbookSubject).filter(Boolean))].sort();
+            const publishers = [...new Set(textbooks.map(p => p.textbookPublisher).filter(Boolean))].sort();
+
+            // Populate Dropdowns
+            document.getElementById('filterNiveau').innerHTML = '<option value="">Niveau</option>' + levels.map(l => `<option value="${l}">${l}</option>`).join('');
+            document.getElementById('filterMatiere').innerHTML = '<option value="">Matière</option>' + subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+            document.getElementById('filterEditeur').innerHTML = '<option value="">Éditeur</option>' + publishers.map(e => `<option value="${e}">${e}</option>`).join('');
+        }
+
+        window.applyManuelFilters = () => {
+            const search = document.getElementById('manuelSearch').value.toLowerCase();
+            const level = document.getElementById('filterNiveau').value;
+            const subject = document.getElementById('filterMatiere').value;
+            const publisher = document.getElementById('filterEditeur').value;
+
+            let filtered = allProducts.filter(p => p.isTextbook === true);
+
+            if (search) filtered = filtered.filter(p => p.name.toLowerCase().includes(search) || (p.tags && p.tags.some(t => t.toLowerCase().includes(search))));
+            if (level) filtered = filtered.filter(p => p.textbookLevel === level);
+            if (subject) filtered = filtered.filter(p => p.textbookSubject === subject);
+            if (publisher) filtered = filtered.filter(p => p.textbookPublisher === publisher);
+
+            document.getElementById('manuelCount').innerText = `${filtered.length} manuel${filtered.length > 1 ? 's' : ''}`;
+            renderManuelList(filtered);
+        };
+
+        function renderManuelList(products) {
+            const container = document.getElementById('manuelListContainer');
+            if(products.length === 0) {
+                container.innerHTML = `<div class="empty-state">Aucun manuel trouvé pour ces critères.</div>`;
+                return;
+            }
+
+            container.innerHTML = products.map(p => {
+                let img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:bold; color:var(--primary); font-size:10px;">${p.name.substring(0,3)}</span>`;
+                
+                let stockClass = p.stock > 0 ? '' : 'rupture';
+                let stockText = p.stock > 0 ? 'Disponible' : 'Rupture';
+                
+                const sellP = parseFloat(p.sellPrice) || 0;
+                const promoP = parseFloat(p.promoPrice) || 0;
+                let displayPriceHTML = `${sellP.toFixed(2)} DH`;
+                if(promoP > 0 && promoP < sellP) { displayPriceHTML = `<span class="old-price" style="display:inline; margin-right:4px;">${sellP.toFixed(2)}</span> ${promoP.toFixed(2)} DH`; }
+
+                const meta1 = [p.textbookSubject, p.textbookLevel].filter(Boolean).join(' • ');
+                const meta2 = p.textbookPublisher ? `Éditeur : ${p.textbookPublisher}` : '';
+
+                return `
+                    <div class="manuel-card" onclick="window.openProductModal('${p.id}')">
+                        <div class="status-badge-top ${stockClass}">${stockText}</div>
+                        <div class="stock-text-right ${stockClass}">Stock: ${p.stock}</div>
+                        
+                        <div class="manuel-img">${img}</div>
+                        <div class="manuel-info">
+                            <h3>${p.name}</h3>
+                            ${meta1 ? `<div class="manuel-meta">${meta1}</div>` : ''}
+                            ${meta2 ? `<div class="manuel-meta">${meta2}</div>` : ''}
+                            <div class="manuel-price">${displayPriceHTML}</div>
+                        </div>
+                        <button class="manuel-add-btn" style="${p.stock <= 0 ? 'background:var(--border); color:var(--text-muted);' : ''}">+</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.requestManuelWhatsApp = () => {
+            const phone = "212600000000"; // ⚠️ REPLACE WITH REAL NUMBER
+            const msg = "Bonjour Lascoburo, je cherche un manuel scolaire que je n'ai pas trouvé sur la boutique. Pouvez-vous m'aider ?";
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
+        };
+
 
         document.getElementById('homeSearch').addEventListener('input', e => { 
             const searchQuery = e.target.value.toLowerCase(); 
@@ -612,7 +762,7 @@
                     </div>`;
             }).join('');
 
-            window.updateCartTotal(); // Recalculate totals with neighborhood
+            window.updateCartTotal(); 
         }
 
         window.updateCartTotal = () => {
