@@ -40,8 +40,9 @@
         .brand h1 { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
         .brand span { color: var(--text-main); }
         .brand p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-        .icon-btn-top { position: relative; background: white; border: 1px solid var(--border); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-main); cursor: pointer; box-shadow: var(--shadow-sm); }
-        .icon-btn-top .badge { position: absolute; top: -4px; right: -4px; background: var(--primary); color: white; font-size: 10px; font-weight: 800; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white; }
+        
+        .icon-btn-top { position: relative; background: var(--primary); width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; box-shadow: var(--shadow-sm); }
+        .icon-btn-top .badge { position: absolute; top: -6px; right: -6px; background: white; color: var(--primary); font-size: 11px; font-weight: 800; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         
         .search-wrapper { position: relative; margin-bottom: 24px; }
         .search-wrapper input { width: 100%; border: 1px solid var(--border); padding: 16px 20px 16px 50px; border-radius: var(--radius-pill); font-size: 15px; font-family: inherit; outline: none; background: white; box-shadow: var(--shadow-sm);}
@@ -75,27 +76,40 @@
         .btn-add { background: var(--primary); color: white; border: none; width: 32px; height: 32px; border-radius: 10px; font-size: 18px; font-weight: bold; pointer-events: none; }
 
         /* =========================================
-           NEW STICKY CART BAR (Reference: 1000120175)
+           NEW STICKY CART BAR (Lascotaco Style)
         ========================================= */
         .sticky-cart { 
             position: fixed; bottom: 20px; left: 20px; right: 20px; 
-            background: white; border-radius: 50px; padding: 8px 8px 8px 12px; 
-            display: flex; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
-            z-index: 90; transition: transform 0.4s; cursor: pointer; border: 1px solid var(--border);
-            max-width: 560px; margin: 0 auto;
+            background: var(--primary); border-radius: 20px; padding: 12px 16px 12px 12px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            box-shadow: 0 10px 30px rgba(30,58,138,0.35); z-index: 90; 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            cursor: pointer; max-width: 560px; margin: 0 auto;
         }
         .sticky-cart.hidden { transform: translateY(200%); }
         
-        .sc-icon-box { background: var(--primary); width: 44px; height: 44px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; position: relative; flex-shrink: 0;}
-        .sc-icon-box .badge { position: absolute; top: -6px; right: -6px; background: white; color: var(--primary); border: 2px solid var(--primary); width: 20px; height: 20px; border-radius: 50%; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center;}
+        .sticky-cart-left { display: flex; align-items: center; gap: 14px; }
         
-        .sc-text-stack { display: flex; flex-direction: column; margin-left: 12px; }
-        .sc-title { font-weight: 800; font-size: 14px; color: var(--text-main); }
-        .sc-subtitle { font-size: 11px; color: var(--text-muted); font-weight: 600;}
+        .sc-icon-box { 
+            background: rgba(255, 255, 255, 0.15); width: 48px; height: 48px; 
+            border-radius: 14px; display: flex; align-items: center; justify-content: center; 
+            color: white; position: relative; flex-shrink: 0;
+        }
+        .sc-icon-box .badge { 
+            position: absolute; top: -6px; right: -6px; background: white; 
+            color: var(--primary); width: 22px; height: 22px; border-radius: 50%; 
+            font-size: 11px; font-weight: 800; display: flex; align-items: center; 
+            justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
         
-        .sc-divider { width: 1px; height: 30px; background: var(--border); margin: 0 15px; }
+        .sc-text-stack { display: flex; flex-direction: column; gap: 2px;}
+        .sc-title { font-weight: 800; font-size: 16px; color: white; }
+        .sc-subtitle { font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 500; }
         
-        .sc-btn { background: var(--primary); color: white; border-radius: 50px; padding: 12px 20px; font-weight: 700; font-size: 13px; margin-left: auto; display: flex; align-items: center; gap: 5px; }
+        .sc-price-pill { 
+            background: white; color: var(--primary); font-weight: 800; 
+            font-size: 16px; padding: 12px 18px; border-radius: 14px; 
+        }
 
         /* =========================================
            MODALS (BOTTOM SHEETS)
@@ -108,7 +122,7 @@
         .close-modal-btn { position: absolute; top: 20px; right: 20px; background: var(--bg); border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-main); }
 
         /* =========================================
-           PRODUCT MODAL (Reference: 1000120172)
+           PRODUCT MODAL
         ========================================= */
         .modal-product-top { display: flex; gap: 15px; margin-bottom: 25px; align-items: center;}
         .modal-img-box { width: 130px; height: 130px; background: var(--bg); border-radius: 20px; display: flex; align-items: center; justify-content: center; padding: 15px; flex-shrink: 0; border: 1px solid var(--border);}
@@ -117,12 +131,10 @@
         .modal-info-stack h2 { font-size: 20px; font-weight: 800; line-height: 1.2; color: var(--text-main); }
         .modal-info-stack .price { font-size: 22px; font-weight: 800; color: var(--primary); }
         .stock-badge-pill { display: inline-flex; align-items: center; background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; gap: 6px; width: fit-content;}
-        .review-stars { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-top: 4px;}
-        .review-stars svg { width: 14px; height: 14px; fill: #F59E0B; color: #F59E0B; }
 
         .section-label { font-size: 16px; font-weight: 800; margin-bottom: 12px; display: block; color: var(--text-main);}
         
-        /* VARIANTS - SQUARES (Default) */
+        /* VARIANTS - SQUARES */
         .variant-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
         .variant-box { position: relative; border: 2px solid var(--border); border-radius: 12px; padding: 12px 16px; cursor: pointer; transition: 0.2s; font-weight: 700; font-size: 13px; color: var(--text-muted); text-align: center; flex: 1; min-width: 70px; display: flex; flex-direction: column; align-items: center; gap: 5px; }
         .variant-box.active { border-color: var(--accent); color: var(--accent); background: var(--primary-light); }
@@ -130,7 +142,7 @@
         .v-check svg { width: 12px; height: 12px; stroke-width: 3; }
         .variant-box.active .v-check { display: flex; }
 
-        /* VARIANTS - CIRCLES (For Colors) */
+        /* VARIANTS - CIRCLES (Colors) */
         .color-swatch-wrapper { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; margin-right: 15px;}
         .color-swatch { width: 44px; height: 44px; border-radius: 50%; border: 2px solid transparent; padding: 3px; transition: 0.2s; position: relative; }
         .color-swatch.active { border-color: var(--accent); }
@@ -146,7 +158,6 @@
         .qty-btn { width: 36px; height: 36px; background: transparent; border: none; font-size: 20px; font-weight: bold; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center;}
         .qty-number { width: 40px; text-align: center; font-weight: 800; font-size: 16px; color: var(--text-main);}
         
-        .price-summary { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--bg); border-radius: 16px; margin-bottom: 15px; font-weight: 700; font-size: 14px; border: 1px solid var(--border);}
         .btn-large-primary { width: 100%; background: var(--success); color: white; border: none; padding: 18px; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.2s;}
         .btn-large-primary:active { transform: scale(0.98); }
 
@@ -156,7 +167,7 @@
         .trust-item svg { width: 20px; height: 20px; color: var(--text-main); stroke-width: 1.5; }
 
         /* =========================================
-           CART MODAL (Reference: 1000120173)
+           CART MODAL
         ========================================= */
         .cart-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
         .cart-header-row h2 { font-weight: 800; font-size: 22px; color: var(--text-main); }
@@ -219,24 +230,19 @@
     </div>
 
     <div class="sticky-cart hidden" id="orderBar" onclick="openCartModal()">
-        <div class="sc-icon-box">
-            <svg viewBox="0 0 24 24" style="width:22px;height:22px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-            <div class="badge" id="scBadge">0</div>
-        </div>
-        <div class="sc-text-stack">
-            <span class="sc-title" id="scArticleCount">0 article</span>
-            <span class="sc-subtitle">Voir votre panier</span>
-        </div>
-        
-        <div class="sc-divider"></div>
-        
-        <div class="sc-text-stack">
-            <span class="sc-title" style="color: var(--primary);" id="scTotalPrice">0.00 DH</span>
-            <span class="sc-subtitle">Total</span>
+        <div class="sticky-cart-left">
+            <div class="sc-icon-box">
+                <svg viewBox="0 0 24 24" style="width:24px;height:24px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <div class="badge" id="scBadge">0</div>
+            </div>
+            <div class="sc-text-stack">
+                <span class="sc-title" id="scArticleCount">0 article</span>
+                <span class="sc-subtitle">Voir le panier</span>
+            </div>
         </div>
         
-        <div class="sc-btn">
-            Voir le panier <svg viewBox="0 0 24 24" style="width:16px;height:16px;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        <div class="sc-price-pill" id="scTotalPrice">
+            0.00 DH
         </div>
     </div>
 
@@ -322,7 +328,7 @@
             if(n.includes('jaune')) return '#F59E0B';
             if(n.includes('rose')) return '#EC4899';
             if(n.includes('blanc')) return '#FFFFFF';
-            return null; // Return null if it's not a common color
+            return null;
         }
 
         onSnapshot(collection(db, "products"), snap => {
@@ -376,7 +382,7 @@
             }).join('');
         }
 
-        // --- PRODUCT MODAL (Ref: 1000120172) ---
+        // --- PRODUCT MODAL ---
         window.openProductModal = (id) => {
             const product = allProducts.find(p => p.id === id);
             if (!product || product.stock <= 0) return;
@@ -436,10 +442,6 @@
                         <h2>${product.name}</h2>
                         <div class="price" id="modalMainPrice">${basePrice} DH</div>
                         <div class="stock-badge-pill"><div class="stock-dot"></div> Disponible (Stock: ${product.stock})</div>
-                        <div class="review-stars">
-                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 12 2"></polygon></svg>
-                            4.8 <span style="font-weight:600; font-size:11px;">(120 avis)</span>
-                        </div>
                     </div>
                 </div>
 
@@ -452,11 +454,6 @@
                         <div class="qty-number" id="modalQtyDisplay">1</div>
                         <button class="qty-btn" onclick="window.changeModalQty(1)">+</button>
                     </div>
-                </div>
-                
-                <div class="price-summary">
-                    <span style="color:var(--text-muted);">Prix unitaire</span>
-                    <span id="modalUnitPrice" style="color:var(--primary); font-size:15px;">${basePrice} DH</span>
                 </div>
 
                 <button class="btn-large-primary" onclick="window.confirmAddToCart()">
@@ -477,15 +474,12 @@
         };
 
         window.selectVariant = (index) => {
-            // Uncheck all square boxes
             document.querySelectorAll('.variant-box').forEach(b => b.classList.remove('active'));
-            // Uncheck all color circles
             document.querySelectorAll('.color-swatch-wrapper').forEach(w => {
                 w.classList.remove('active');
                 w.querySelector('.color-swatch').classList.remove('active');
             });
             
-            // Re-check clicked
             const squares = document.querySelectorAll('.variant-box');
             if(squares.length > 0) squares[index].classList.add('active');
             
@@ -512,7 +506,6 @@
             const basePrice = currentVariantObj ? currentVariantObj.price : currentModalProduct.sellPrice;
             const total = basePrice * currentModalQty;
             document.getElementById('modalMainPrice').innerText = `${basePrice} DH`;
-            document.getElementById('modalUnitPrice').innerText = `${basePrice} DH`;
             document.getElementById('modalBtnTotal').innerText = `${total.toFixed(2)} DH`;
         }
 
@@ -536,7 +529,7 @@
             updateCartUI(); closeProductModal();
         };
 
-        // --- CART LOGIC (Ref: 1000120173) ---
+        // --- CART LOGIC ---
         window.openCartModal = () => {
             if(cart.length === 0) return;
             renderCartModalList();
@@ -585,7 +578,7 @@
             if(newQty >= 1 && newQty <= item.product.stock) {
                 item.qty = newQty;
                 updateCartUI();
-                renderCartModalList(); // update modal instantly
+                renderCartModalList(); 
             }
         };
 
@@ -605,12 +598,10 @@
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             const totalPrice = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
             
-            // Update Sticky Bar (Ref: 1000120175)
             document.getElementById('scBadge').innerText = totalItems;
             document.getElementById('scArticleCount').innerText = totalItems + (totalItems > 1 ? " articles" : " article");
             document.getElementById('scTotalPrice').innerText = `${totalPrice.toFixed(2)} DH`;
             
-            // Update Top Header Badge
             document.querySelectorAll('.top-cart-badge').forEach(b => b.innerText = totalItems);
             
             const bar = document.getElementById('orderBar');
