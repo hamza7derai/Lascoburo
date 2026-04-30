@@ -28,7 +28,7 @@
         .container { padding: 20px; max-width: 600px; margin: 0 auto; position: relative; min-height: 100vh;}
         svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
         button { font-family: inherit; cursor: pointer; outline: none; border: none; background: none; }
-        input, select { font-family: inherit; }
+        input, select, textarea { font-family: inherit; }
 
         /* SPA VIEWS */
         .app-view { display: none; animation: fadeIn 0.3s ease; }
@@ -140,7 +140,7 @@
         .filter-banner.active { display: flex; }
         .filter-close { background: white; border: none; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--primary);}
 
-        /* WIZARD (AJOUTER PRODUIT) */
+        /* WIZARD */
         .stepper { display: flex; justify-content: space-between; position: relative; margin-bottom: 32px; padding: 0 20px; }
         .stepper::before { content: ''; position: absolute; top: 12px; left: 30px; right: 30px; height: 2px; background: var(--border); z-index: 1; }
         .step-dot { width: 26px; height: 26px; border-radius: 50%; background: var(--surface); border: 2px solid var(--border); color: var(--text-muted); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; position: relative; z-index: 2; transition:0.3s;}
@@ -150,11 +150,10 @@
         .wizard-step.active { display: block; }
         .wizard-footer { display: flex; gap: 12px; margin-top: 30px; }
         .wizard-footer .btn { flex: 1; }
-        
         .upload-box { border: 2px dashed var(--border); border-radius: var(--radius-card); padding: 40px 20px; text-align: center; background: var(--surface); margin-bottom: 24px; cursor: pointer; transition: 0.2s;}
         .upload-box:active { background: var(--bg-main); }
         
-        /* Variants UI Elements */
+        /* Variants & Toggles UI Elements */
         .toggle-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--surface); border-radius: var(--radius-btn); border: 1px solid var(--border); margin-bottom: 20px; }
         .switch { position: relative; display: inline-block; width: 50px; height: 30px; }
         .switch input { opacity: 0; width: 0; height: 0; }
@@ -246,7 +245,7 @@
                 <p>Consultez toutes vos ventes, profits, coûts et performances.</p>
             </div>
             <div class="msc-arrow">
-                <svg viewBox="0 0 24 24" style="width:16px; height:16px;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                <svg viewBox="0 0 24 24" style="width:20px; height:20px;"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </div>
         </div>
 
@@ -318,6 +317,7 @@
             <div class="summary-row"><span>Livraison</span><span>0.00 DH</span></div>
             <div class="summary-row total"><span>Total</span><span id="det-total">0.00 DH</span></div>
         </div>
+        
         <div class="action-stack" id="det-actions"></div>
     </div>
 
@@ -436,9 +436,20 @@
         </div>
 
         <div id="wizard-3" class="wizard-step">
-            <h3 style="font-size: 16px; margin-bottom: 4px; font-weight:800;">Variantes (optionnel)</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Ajoutez des variantes comme couleur, taille... Vous pourrez gérer le stock par variante.</p>
+            <h3 style="font-size: 16px; margin-bottom: 4px; font-weight:800;">Configuration finale</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Ajoutez des options supplémentaires à votre produit.</p>
             
+            <div class="toggle-wrapper">
+                <span class="toggle-label">Ajouter une description</span>
+                <label class="switch">
+                    <input type="checkbox" id="descToggle" onchange="document.getElementById('descConfig').style.display = this.checked ? 'block' : 'none'">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div id="descConfig" style="display:none; margin-bottom: 24px;">
+                <textarea id="pDesc" class="form-control" placeholder="Description détaillée du produit..." style="height: 120px; resize: none;"></textarea>
+            </div>
+
             <div class="toggle-wrapper">
                 <span class="toggle-label">Activer les variantes</span>
                 <label class="switch">
@@ -446,13 +457,11 @@
                     <span class="slider"></span>
                 </label>
             </div>
-
             <div id="variantConfig" style="display:none;">
                 <div class="form-group">
                     <label>Type de variante</label>
                     <select class="form-control" id="varType"><option>Couleur</option><option>Taille</option><option>Autre</option></select>
                 </div>
-
                 <div class="form-group">
                     <label>Options (ex: Bleu, Rouge)</label>
                     <div style="display:flex; gap:8px; margin-bottom: 12px;">
@@ -461,12 +470,10 @@
                     </div>
                     <div class="chip-container" id="vChips"></div>
                 </div>
-
                 <div style="margin-top: 32px;" id="vStockSection">
                     <label style="font-size: 13px; font-weight: 700; display:block; margin-bottom: 16px;">Stock par variante</label>
                     <div id="vRowsContainer"></div>
                 </div>
-                
                 <div class="info-banner" style="margin-top:24px; background:var(--surface); color:var(--text-main); border-color:var(--border);">
                     <svg viewBox="0 0 24 24" style="flex-shrink:0; color:var(--primary);"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
                     <div>
@@ -504,7 +511,6 @@
         </div>
         <div class="info-banner"><svg viewBox="0 0 24 24" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Les statistiques sont calculées en fonction des commandes livrées.</div>
     </div>
-
 
     <nav class="bottom-nav">
         <div class="nav-item active" id="nav-dashboard" onclick="switchTab('dashboard')">
@@ -719,6 +725,7 @@
             btn.innerText = '...'; btn.disabled = true;
 
             try {
+                if(!globalCategoriesData) globalCategoriesData = [];
                 if(currentCatAddingType === 'main') {
                     if(!globalCategoriesData.find(c => c.name.toLowerCase() === val.toLowerCase())) {
                         await addDoc(collection(db, "categories"), { name: val, subcategories: [] });
@@ -739,7 +746,7 @@
                     }
                 }
                 closeModals();
-            } catch (e) { console.error(e); alert("Erreur réseau"); } 
+            } catch (e) { console.error(e); showToast("Erreur. Vérifiez la connexion."); } 
             finally { btn.innerText = 'Ajouter'; btn.disabled = false; }
         });
 
@@ -799,7 +806,12 @@
                     }
                 });
 
-                // NO DASHBOARD STAT CARDS TO UPDATE HERE ANYMORE! Just Analytics:
+                document.getElementById('dashProfitToday').innerText = profitToday.toFixed(2) + ' DH';
+                document.getElementById('dashOrdersToday').innerText = ordersToday;
+                document.getElementById('dashProfitMonth').innerText = profit30Days.toFixed(2) + ' DH';
+                renderTrendArrow('dashProfitTrend', profitToday, profitYesterday, false);
+                renderTrendArrow('dashOrdersTrend', ordersToday, ordersYesterday, false);
+                
                 document.getElementById('statProfit').innerText = profitToday.toFixed(2) + ' DH'; renderTrendArrow('statProfitTrend', profitToday, profitYesterday, false);
                 document.getElementById('statRevenue').innerText = revenueToday.toFixed(2) + ' DH'; renderTrendArrow('statRevenueTrend', revenueToday, revenueYesterday, false);
                 document.getElementById('statCost').innerText = costToday.toFixed(2) + ' DH'; renderTrendArrow('statCostTrend', costToday, costYesterday, true);
@@ -822,11 +834,11 @@
             if(invertColors) colorClass = percentChange >= 0 ? 'trend-down' : 'trend-up';
 
             if (percentChange >= 0) {
-                el.className = `mc-trend ${colorClass}`;
-                el.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg> ${Math.abs(percentChange).toFixed(0)}% vs hier`;
+                el.className = `stat-trend ${colorClass}`;
+                el.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg> ${Math.abs(percentChange).toFixed(0)}%${elementId.includes('stat')?' vs hier':''}`;
             } else {
-                el.className = `mc-trend ${colorClass}`;
-                el.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg> ${Math.abs(percentChange).toFixed(0)}% vs hier`;
+                el.className = `stat-trend ${colorClass}`;
+                el.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg> ${Math.abs(percentChange).toFixed(0)}%${elementId.includes('stat')?' vs hier':''}`;
             }
         }
 
@@ -872,7 +884,7 @@
             if (document.getElementById('view-order-detail').classList.contains('active')) {
                 const currentId = document.getElementById('det-id').innerText.replace('#', '').toLowerCase();
                 const stillExists = allOrders.find(o => o.id.toLowerCase() === currentId || o.id.substring(0,6).toLowerCase() === currentId);
-                if(stillExists) window.viewOrder(stillExists.id);
+                if(stillExists) window.viewOrder(stillExists.id); else switchTab('commandes');
             }
         });
 
@@ -896,7 +908,6 @@
         window.filterProduits = (type) => {
             currentProductFilter = type; switchTab('produits'); renderProductsAdminList(allProducts);
         };
-
 
         // --- ORDER MANAGEMENT ---
         window.filterOrdersList = (status, tabElement) => {
@@ -987,6 +998,9 @@
             } else if (order.status === 'Annulée') { actionsHTML = `<div style="text-align:center; color:var(--danger); font-weight:700;">Commande annulée</div>`; } 
             else { actionsHTML = `<div style="text-align:center; color:var(--success); font-weight:700;">Commande complétée</div>`; }
             
+            // NEW: Delete Order / Restore Stock Button
+            actionsHTML += `<button class="btn btn-outline" style="color:var(--danger); border-color:var(--danger-light); margin-top: 24px;" onclick="promptDeleteOrder('${order.id}')">Supprimer la commande</button>`;
+            
             document.getElementById('det-actions').innerHTML = actionsHTML;
             switchTab('order-detail');
         };
@@ -994,11 +1008,51 @@
         window.promptOrderStatus = (orderId, newStatus) => {
             document.getElementById('modalTitle').innerText = "Mise à jour statut"; document.getElementById('modalMsg').innerText = `Voulez-vous marquer cette commande comme ${newStatus.toLowerCase()} ?`;
             const btn = document.getElementById('modalConfirmBtn');
-            btn.className = newStatus === 'Annulée' ? 'btn btn-primary' : 'btn btn-primary'; btn.style.background = newStatus === 'Annulée' ? 'var(--danger)' : 'var(--primary)';
+            btn.className = 'btn btn-primary'; btn.style.background = newStatus === 'Annulée' ? 'var(--danger)' : 'var(--primary)';
             window.confirmActionCallback = async () => {
                 closeModals();
                 try { await updateDoc(doc(db, "orders", orderId), { status: newStatus }); showToast(`Statut mis à jour`); } 
                 catch(e) { alert("Erreur réseau"); }
+            };
+            document.getElementById('confirmOverlay').classList.add('active');
+        };
+
+        // --- NEW: DELETE ORDER & RESTORE STOCK LOGIC ---
+        window.promptDeleteOrder = (orderId) => {
+            document.getElementById('modalTitle').innerText = "Supprimer la commande"; 
+            document.getElementById('modalMsg').innerText = "Cette action supprimera la commande et restaurera automatiquement le stock des articles. Confirmer ?";
+            const btn = document.getElementById('modalConfirmBtn');
+            btn.className = 'btn btn-primary'; btn.style.background = 'var(--danger)';
+            
+            window.confirmActionCallback = async () => {
+                closeModals();
+                try { 
+                    const order = allOrders.find(o => o.id === orderId);
+                    if(order && order.cart) {
+                        for(const item of order.cart) {
+                            if(item.product && item.product.id) {
+                                const currentProd = allProducts.find(p => p.id === item.product.id);
+                                if(currentProd) {
+                                    let newStock = (parseInt(currentProd.stock) || 0) + item.qty;
+                                    let updateData = { stock: newStock };
+                                    // Handle Variant stock restore
+                                    if(item.variantName && currentProd.variants) {
+                                        let updatedVariants = [...currentProd.variants];
+                                        let vIndex = updatedVariants.findIndex(v => v.name === item.variantName);
+                                        if(vIndex > -1) {
+                                            updatedVariants[vIndex].stock = (parseInt(updatedVariants[vIndex].stock) || 0) + item.qty;
+                                            updateData.variants = updatedVariants;
+                                        }
+                                    }
+                                    await updateDoc(doc(db, "products", item.product.id), updateData);
+                                }
+                            }
+                        }
+                    }
+                    await deleteDoc(doc(db, "orders", orderId)); 
+                    showToast("Commande supprimée et stock restauré"); 
+                    switchTab('commandes');
+                } catch(e) { console.error(e); alert("Erreur lors de la suppression."); }
             };
             document.getElementById('confirmOverlay').classList.add('active');
         };
@@ -1044,10 +1098,15 @@
             renderProductsAdminList(subset.filter(p => (p.name||'').toLowerCase().includes(q) || (p.category||'').toLowerCase().includes(q)));
         });
 
+        // FIXED DELETE PRODUCT TYPO
         window.promptDeleteProduct = (id) => {
             document.getElementById('modalTitle').innerText = "Supprimer le produit"; document.getElementById('modalMsg').innerText = "Cette action est irréversible. Confirmer ?";
             const btn = document.getElementById('modalConfirmBtn'); btn.style.background = 'var(--danger)';
-            window.confirmActionCallback = async () => { closeModals(); await deleteDoc(doc(db, "products", id)); showToast("Produit supprimé"); };
+            window.confirmActionCallback = async () => { 
+                closeModals(); 
+                await deleteDoc(doc(db, "products", id)); 
+                showToast("Produit supprimé"); 
+            };
             document.getElementById('confirmOverlay').classList.add('active');
         }
 
@@ -1059,6 +1118,11 @@
             document.getElementById('previewImg').style.display = 'none'; document.getElementById('uploadBoxUI').style.display = 'flex';
             document.getElementById('pLowStock').value = 5;
             
+            // Reset description
+            document.getElementById('descToggle').checked = false;
+            document.getElementById('descConfig').style.display = 'none';
+            document.getElementById('pDesc').value = '';
+
             // Reset variants
             document.getElementById('varToggle').checked = false;
             document.getElementById('variantConfig').style.display = 'none';
@@ -1081,6 +1145,15 @@
             document.getElementById('pImg').value = p.imageUrl || '';
             
             window.previewWizardImg();
+
+            // Load description
+            if(p.description) {
+                document.getElementById('descToggle').checked = true; document.getElementById('descConfig').style.display = 'block';
+                document.getElementById('pDesc').value = p.description;
+            } else {
+                document.getElementById('descToggle').checked = false; document.getElementById('descConfig').style.display = 'none';
+                document.getElementById('pDesc').value = '';
+            }
 
             if(p.variants && p.variants.length > 0) {
                 document.getElementById('varToggle').checked = true; document.getElementById('variantConfig').style.display = 'block';
@@ -1108,6 +1181,7 @@
                 stock: calculatedStock,
                 lowStockThreshold: parseInt(document.getElementById('pLowStock').value) || 5,
                 imageUrl: document.getElementById('pImg').value,
+                description: document.getElementById('descToggle').checked ? document.getElementById('pDesc').value.trim() : "",
                 variants: hasVars ? window.productVariants : []
             };
 
@@ -1120,6 +1194,17 @@
             } catch (e) { console.error(e); alert("Erreur lors de l'enregistrement."); }
         };
 
+        window.closeModals = () => {
+            document.getElementById('confirmOverlay').classList.remove('active');
+            document.getElementById('addCatOverlay').classList.remove('active');
+            document.getElementById('addCatModal').classList.remove('active');
+        };
+
+        document.getElementById('modalConfirmBtn').addEventListener('click', () => { if(window.confirmActionCallback) window.confirmActionCallback(); });
+        function showToast(msg) {
+            const t = document.getElementById('toastBox'); document.getElementById('toastMsg').innerText = msg;
+            t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000);
+        }
     </script>
 </body>
 </html>
