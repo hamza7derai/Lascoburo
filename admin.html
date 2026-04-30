@@ -99,7 +99,7 @@
         .btn-edit-prod { background: var(--primary-light); color: var(--primary); }
         .btn-del-prod { background: var(--danger-light); color: var(--danger); }
 
-        /* ANALYTICS */
+        /* ANALYTICS GRID */
         .analytics-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
         .date-picker-btn { background: var(--surface); border: 1px solid var(--border); padding: 8px 14px; border-radius: 10px; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px; box-shadow: var(--shadow-sm);}
         .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;}
@@ -120,6 +120,7 @@
         .form-group label { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; }
         .form-control { width: 100%; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius-btn); background: var(--surface); outline: none; font-size: 14px; font-weight: 500; transition: 0.2s; }
         .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+        .form-control:disabled { background: var(--bg-main); color: var(--text-muted); }
         .input-with-action { display: flex; gap: 10px; }
         .btn-plus-field { width: 50px; height: 50px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-btn); display: flex; align-items: center; justify-content: center; color: var(--text-muted); cursor: pointer; flex-shrink: 0; transition: 0.2s;}
         .btn-plus-field:active { background: var(--border); }
@@ -153,18 +154,20 @@
         .upload-box { border: 2px dashed var(--border); border-radius: var(--radius-card); padding: 40px 20px; text-align: center; background: var(--surface); margin-bottom: 24px; cursor: pointer; transition: 0.2s;}
         .upload-box:active { background: var(--bg-main); }
         
-        /* Variants & Toggles UI Elements */
-        .toggle-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--surface); border-radius: var(--radius-btn); border: 1px solid var(--border); margin-bottom: 20px; }
-        .switch { position: relative; display: inline-block; width: 50px; height: 30px; }
+        /* Toggles & Chips UI */
+        .toggle-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 0; background: transparent; border: none; margin-bottom: 0; }
+        .switch { position: relative; display: inline-block; width: 44px; height: 26px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border); transition: .3s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 2px; bottom: 2px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 2px; bottom: 2px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         input:checked + .slider { background-color: var(--primary); }
-        input:checked + .slider:before { transform: translateX(20px); }
+        input:checked + .slider:before { transform: translateX(18px); }
 
-        .chip-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+        .chip-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
         .v-chip { padding: 8px 12px; border-radius: 20px; background: var(--primary-light); color: var(--primary); border: 1px solid #C7D2FE; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
         .v-chip span { cursor: pointer; display: flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: rgba(0,0,0,0.1); border-radius: 50%; }
+        
+        .tag-chip { padding: 8px 12px; border-radius: 8px; background: var(--accent-light); color: var(--accent); border: 1px solid #BBF7D0; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
 
         .v-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
         .v-row:last-child { border-bottom: none; }
@@ -317,7 +320,6 @@
             <div class="summary-row"><span>Livraison</span><span>0.00 DH</span></div>
             <div class="summary-row total"><span>Total</span><span id="det-total">0.00 DH</span></div>
         </div>
-        
         <div class="action-stack" id="det-actions"></div>
     </div>
 
@@ -436,56 +438,100 @@
         </div>
 
         <div id="wizard-3" class="wizard-step">
-            <h3 style="font-size: 16px; margin-bottom: 4px; font-weight:800;">Configuration finale</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Ajoutez des options supplémentaires à votre produit.</p>
+            <h3 style="font-size: 16px; margin-bottom: 4px; font-weight:800;">Configuration avancée</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Configurez les options supplémentaires de votre produit.</p>
             
-            <div class="toggle-wrapper">
-                <span class="toggle-label">Ajouter une description</span>
-                <label class="switch">
-                    <input type="checkbox" id="descToggle" onchange="document.getElementById('descConfig').style.display = this.checked ? 'block' : 'none'">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            <div id="descConfig" style="display:none; margin-bottom: 24px;">
-                <textarea id="pDesc" class="form-control" placeholder="Description détaillée du produit..." style="height: 120px; resize: none;"></textarea>
+            <div class="card toggle-wrapper" style="margin-bottom:12px;">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <svg viewBox="0 0 24 24" style="color:var(--warning); fill:var(--warning);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <div>
+                        <span class="toggle-label" style="display:block; font-size:14px;">Produit en vedette</span>
+                        <span style="font-size:11px; color:var(--text-muted); font-weight: 500;">Affiché en haut de la boutique</span>
+                    </div>
+                </div>
+                <label class="switch"><input type="checkbox" id="pFeatured"><span class="slider"></span></label>
             </div>
 
-            <div class="toggle-wrapper">
-                <span class="toggle-label">Activer les variantes</span>
-                <label class="switch">
-                    <input type="checkbox" id="varToggle" onchange="document.getElementById('variantConfig').style.display = this.checked ? 'block' : 'none'">
-                    <span class="slider"></span>
-                </label>
+            <div class="card" style="margin-bottom:12px;">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px; color:var(--accent);">
+                    <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                    <span style="font-weight:800; font-size:14px; color:var(--text-main);">Prix & Promotion</span>
+                </div>
+                <div style="display:flex; gap:12px;">
+                    <div class="form-group" style="flex:1; margin-bottom:0;">
+                        <label>Prix normal (DH)</label>
+                        <input type="number" id="pNormalPrice" class="form-control" disabled>
+                    </div>
+                    <div class="form-group" style="flex:1; margin-bottom:0;">
+                        <label>Prix promo (optionnel)</label>
+                        <input type="number" id="pPromoPrice" class="form-control" placeholder="0.00" oninput="calculatePromo()">
+                    </div>
+                </div>
+                <div id="promoBadge" style="display:none; margin-top:12px; background:var(--accent-light); color:var(--accent); padding:8px 12px; border-radius:8px; font-size:12px; font-weight:700; align-items:center; gap:6px;">
+                    <svg viewBox="0 0 24 24" style="width:14px;"><line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg> 
+                    <span id="promoText"></span>
+                </div>
             </div>
-            <div id="variantConfig" style="display:none;">
-                <div class="form-group">
-                    <label>Type de variante</label>
-                    <select class="form-control" id="varType"><option>Couleur</option><option>Taille</option><option>Autre</option></select>
-                </div>
-                <div class="form-group">
-                    <label>Options (ex: Bleu, Rouge)</label>
-                    <div style="display:flex; gap:8px; margin-bottom: 12px;">
-                        <input type="text" id="vNameInput" class="form-control" placeholder="Ajouter une option..." style="padding: 12px;">
-                        <button class="btn-outline" style="width:auto; padding:0 16px; font-size:13px;" onclick="addVariantOption()">+ Ajouter</button>
+
+            <div class="card" style="margin-bottom:12px;">
+                <div class="toggle-wrapper" style="padding:0; border:none; margin-bottom:16px;">
+                    <div style="display:flex; align-items:center; gap:8px; color:var(--purple);">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                        <span style="font-weight:800; font-size:14px; color:var(--text-main);">Variantes</span>
                     </div>
-                    <div class="chip-container" id="vChips"></div>
+                    <label class="switch"><input type="checkbox" id="varToggle" onchange="document.getElementById('variantConfig').style.display = this.checked ? 'block' : 'none'"><span class="slider"></span></label>
                 </div>
-                <div style="margin-top: 32px;" id="vStockSection">
-                    <label style="font-size: 13px; font-weight: 700; display:block; margin-bottom: 16px;">Stock par variante</label>
-                    <div id="vRowsContainer"></div>
-                </div>
-                <div class="info-banner" style="margin-top:24px; background:var(--surface); color:var(--text-main); border-color:var(--border);">
-                    <svg viewBox="0 0 24 24" style="flex-shrink:0; color:var(--primary);"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
-                    <div>
-                        <strong style="display:block; margin-bottom:4px; color:var(--primary);">Conseil</strong>
-                        Le prix de vente défini à l'étape précédente sera appliqué à toutes les variantes.
+
+                <div id="variantConfig" style="display:none;">
+                    <div class="form-group">
+                        <label>Type de variante</label>
+                        <select class="form-control" id="varType" style="padding: 12px;"><option>Couleur</option><option>Taille</option><option>Autre</option></select>
                     </div>
+                    <div class="form-group">
+                        <label>Options (ex: Bleu, Rouge)</label>
+                        <div style="display:flex; gap:8px; margin-bottom: 12px;">
+                            <input type="text" id="vNameInput" class="form-control" placeholder="Ajouter une option..." style="padding: 12px;">
+                            <button class="btn-outline" style="width:auto; padding:0 16px; font-size:13px;" onclick="addVariantOption()">+ Ajouter</button>
+                        </div>
+                        <div class="chip-container" id="vChips"></div>
+                    </div>
+                    <div style="margin-top: 24px;" id="vStockSection">
+                        <label style="font-size: 13px; font-weight: 700; display:block; margin-bottom: 12px;">Stock par variante</label>
+                        <div id="vRowsContainer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom:12px;">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; color:var(--primary);">
+                    <svg viewBox="0 0 24 24"><line x1="21" y1="10" x2="3" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="21" y1="18" x2="3" y2="18"></line></svg>
+                    <span style="font-weight:800; font-size:14px; color:var(--text-main);">Description</span>
+                </div>
+                <textarea id="pDesc" class="form-control" placeholder="Description détaillée du produit (optionnel)..." style="height: 100px; resize: none;"></textarea>
+            </div>
+
+            <div class="card" style="margin-bottom:12px;">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; color:var(--accent);">
+                    <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                    <span style="font-weight:800; font-size:14px; color:var(--text-main);">Tags</span>
+                </div>
+                <div style="display:flex; gap:8px; margin-bottom: 12px;">
+                    <input type="text" id="pTagInput" class="form-control" placeholder="Ajouter un tag (ex: scolaire)..." style="padding: 12px;">
+                    <button class="btn-outline" style="width:auto; padding:0 16px; font-size:13px;" onclick="addTagOption()">+ Ajouter</button>
+                </div>
+                <div class="chip-container" id="tagChips"></div>
+            </div>
+
+            <div class="card" style="margin-bottom:12px;">
+                <div class="form-group" style="margin:0;">
+                    <label>SKU / Code produit</label>
+                    <input type="text" id="pSku" class="form-control" placeholder="Ex: AGENDA-001">
                 </div>
             </div>
 
             <div class="wizard-footer">
                 <button class="btn btn-outline" style="flex:0.5;" onclick="goToStep(2)"><svg viewBox="0 0 24 24" style="width:18px;"><polyline points="15 18 9 12 15 6"></polyline></svg> Précédent</button>
-                <button class="btn btn-success" onclick="saveProductData()">Enregistrer le produit <svg viewBox="0 0 24 24" style="width:18px;"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+                <button class="btn btn-success" onclick="saveProductData()">Enregistrer le produit <svg viewBox="0 0 24 24" style="width:18px;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg></button>
             </div>
         </div>
     </div>
@@ -511,6 +557,7 @@
         </div>
         <div class="info-banner"><svg viewBox="0 0 24 24" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Les statistiques sont calculées en fonction des commandes livrées.</div>
     </div>
+
 
     <nav class="bottom-nav">
         <div class="nav-item active" id="nav-dashboard" onclick="switchTab('dashboard')">
@@ -581,8 +628,8 @@
         let allOrders = [], allProducts = [], globalCategoriesData = [];
         let currentOrderFilter = 'Toutes', currentProductFilter = 'all', currentEditProductId = null; 
         
-        // Variants State
         window.productVariants = [];
+        window.productTags = []; // NEW TAGS ARRAY
         let currentCatAddingType = ''; 
 
         const safeNum = (val) => isNaN(parseFloat(val)) ? 0 : parseFloat(val);
@@ -641,8 +688,47 @@
                 if(index + 1 === step) el.classList.add('active');
                 if(index + 1 < step) el.classList.add('done');
             });
+            
+            // NEW: Pull Price to Step 3
+            if(step === 3) {
+                document.getElementById('pNormalPrice').value = document.getElementById('pSell').value;
+                calculatePromo();
+            }
             window.scrollTo(0,0);
         };
+
+        // --- SMART PROMO CALCULATION ---
+        window.calculatePromo = () => {
+            const normal = parseFloat(document.getElementById('pNormalPrice').value) || 0;
+            const promo = parseFloat(document.getElementById('pPromoPrice').value) || 0;
+            const badge = document.getElementById('promoBadge');
+            const text = document.getElementById('promoText');
+            
+            if (promo > 0 && promo < normal) {
+                const discount = Math.round(((normal - promo) / normal) * 100);
+                text.innerText = `Promotion active : ${discount}% de réduction`;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        };
+
+        // --- TAGS LOGIC ---
+        window.addTagOption = () => {
+            const input = document.getElementById('pTagInput');
+            const val = input.value.trim();
+            if(val && !window.productTags.includes(val.toLowerCase())) {
+                window.productTags.push(val.toLowerCase());
+                input.value = '';
+                renderTagsUI();
+            }
+        };
+        window.removeTag = (index) => { window.productTags.splice(index, 1); renderTagsUI(); };
+        function renderTagsUI() {
+            document.getElementById('tagChips').innerHTML = window.productTags.map((t, i) => `
+                <div class="tag-chip">${t} <span style="cursor:pointer;" onclick="removeTag(${i})"><svg viewBox="0 0 24 24" style="width:12px; height:12px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></div>
+            `).join('');
+        }
 
         // --- VARIANTS LOGIC ---
         function getColorHex(name) {
@@ -998,7 +1084,6 @@
             } else if (order.status === 'Annulée') { actionsHTML = `<div style="text-align:center; color:var(--danger); font-weight:700;">Commande annulée</div>`; } 
             else { actionsHTML = `<div style="text-align:center; color:var(--success); font-weight:700;">Commande complétée</div>`; }
             
-            // NEW: Delete Order / Restore Stock Button
             actionsHTML += `<button class="btn btn-outline" style="color:var(--danger); border-color:var(--danger-light); margin-top: 24px;" onclick="promptDeleteOrder('${order.id}')">Supprimer la commande</button>`;
             
             document.getElementById('det-actions').innerHTML = actionsHTML;
@@ -1017,7 +1102,6 @@
             document.getElementById('confirmOverlay').classList.add('active');
         };
 
-        // --- NEW: DELETE ORDER & RESTORE STOCK LOGIC ---
         window.promptDeleteOrder = (orderId) => {
             document.getElementById('modalTitle').innerText = "Supprimer la commande"; 
             document.getElementById('modalMsg').innerText = "Cette action supprimera la commande et restaurera automatiquement le stock des articles. Confirmer ?";
@@ -1035,7 +1119,6 @@
                                 if(currentProd) {
                                     let newStock = (parseInt(currentProd.stock) || 0) + item.qty;
                                     let updateData = { stock: newStock };
-                                    // Handle Variant stock restore
                                     if(item.variantName && currentProd.variants) {
                                         let updatedVariants = [...currentProd.variants];
                                         let vIndex = updatedVariants.findIndex(v => v.name === item.variantName);
@@ -1098,15 +1181,10 @@
             renderProductsAdminList(subset.filter(p => (p.name||'').toLowerCase().includes(q) || (p.category||'').toLowerCase().includes(q)));
         });
 
-        // FIXED DELETE PRODUCT TYPO
         window.promptDeleteProduct = (id) => {
             document.getElementById('modalTitle').innerText = "Supprimer le produit"; document.getElementById('modalMsg').innerText = "Cette action est irréversible. Confirmer ?";
             const btn = document.getElementById('modalConfirmBtn'); btn.style.background = 'var(--danger)';
-            window.confirmActionCallback = async () => { 
-                closeModals(); 
-                await deleteDoc(doc(db, "products", id)); 
-                showToast("Produit supprimé"); 
-            };
+            window.confirmActionCallback = async () => { closeModals(); await deleteDoc(doc(db, "products", id)); showToast("Produit supprimé"); };
             document.getElementById('confirmOverlay').classList.add('active');
         }
 
@@ -1118,14 +1196,10 @@
             document.getElementById('previewImg').style.display = 'none'; document.getElementById('uploadBoxUI').style.display = 'flex';
             document.getElementById('pLowStock').value = 5;
             
-            // Reset description
-            document.getElementById('descToggle').checked = false;
-            document.getElementById('descConfig').style.display = 'none';
-            document.getElementById('pDesc').value = '';
+            document.getElementById('pFeatured').checked = false;
+            window.productTags = []; renderTagsUI();
 
-            // Reset variants
-            document.getElementById('varToggle').checked = false;
-            document.getElementById('variantConfig').style.display = 'none';
+            document.getElementById('varToggle').checked = false; document.getElementById('variantConfig').style.display = 'none';
             window.productVariants = []; renderVariantUI();
             
             switchTab('ajouter'); goToStep(1); validateStep1(); validateStep2();
@@ -1144,16 +1218,13 @@
             document.getElementById('pStock').value = p.stock || ''; document.getElementById('pLowStock').value = p.lowStockThreshold || 5;
             document.getElementById('pImg').value = p.imageUrl || '';
             
+            document.getElementById('pFeatured').checked = p.featured || false;
+            document.getElementById('pPromoPrice').value = p.promoPrice || '';
+            
+            window.productTags = p.tags ? [...p.tags] : [];
+            renderTagsUI();
+            
             window.previewWizardImg();
-
-            // Load description
-            if(p.description) {
-                document.getElementById('descToggle').checked = true; document.getElementById('descConfig').style.display = 'block';
-                document.getElementById('pDesc').value = p.description;
-            } else {
-                document.getElementById('descToggle').checked = false; document.getElementById('descConfig').style.display = 'none';
-                document.getElementById('pDesc').value = '';
-            }
 
             if(p.variants && p.variants.length > 0) {
                 document.getElementById('varToggle').checked = true; document.getElementById('variantConfig').style.display = 'block';
@@ -1181,7 +1252,10 @@
                 stock: calculatedStock,
                 lowStockThreshold: parseInt(document.getElementById('pLowStock').value) || 5,
                 imageUrl: document.getElementById('pImg').value,
-                description: document.getElementById('descToggle').checked ? document.getElementById('pDesc').value.trim() : "",
+                featured: document.getElementById('pFeatured').checked,
+                promoPrice: parseFloat(document.getElementById('pPromoPrice').value) || null,
+                tags: window.productTags,
+                sku: document.getElementById('pSku').value || "",
                 variants: hasVars ? window.productVariants : []
             };
 
