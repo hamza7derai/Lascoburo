@@ -53,40 +53,41 @@
         .header-top h1 { font-size: 22px; font-weight: 800; color: var(--text-main); line-height: 1.2; }
         .header-top p { font-size: 13px; color: var(--text-muted); font-weight: 500; margin-top: 4px; }
         .icon-btn { width: 44px; height: 44px; background: var(--surface); border-radius: var(--radius-btn); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border); color: var(--text-main); position: relative; }
-        .icon-btn .badge { position: absolute; top: 8px; right: 10px; width: 8px; height: 8px; background: var(--danger); border-radius: 50%; }
+        .icon-btn .badge { position: absolute; top: 8px; right: 10px; width: 8px; height: 8px; background: var(--danger); border-radius: 50%; display: none; }
+        .icon-btn .badge.active { display: block; }
         
         .section-title { font-size: 16px; font-weight: 800; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
-        .section-link { font-size: 13px; color: var(--primary); font-weight: 600; text-decoration: none; }
+        .section-link { font-size: 13px; color: var(--primary); font-weight: 600; text-decoration: none; cursor: pointer; }
 
         /* =========================================
-           CARDS
+           CARDS & STATS
         ========================================= */
         .card { background: var(--surface); border-radius: var(--radius-card); padding: 16px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
         
-        /* Stats Scroll */
         .stats-scroll { display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; margin: 0 -20px 24px; padding: 0 20px 10px; }
         .stats-scroll::-webkit-scrollbar { display: none; }
-        .stat-card { background: var(--surface); border-radius: 16px; padding: 16px; min-width: 130px; box-shadow: var(--shadow-sm); flex-shrink: 0; border: 1px solid var(--border); }
+        .stat-card { background: var(--surface); border-radius: 16px; padding: 16px; min-width: 140px; box-shadow: var(--shadow-sm); flex-shrink: 0; border: 1px solid var(--border); }
         .stat-label { font-size: 11px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; display: block; }
         .stat-val { font-size: 18px; font-weight: 800; color: var(--text-main); margin-bottom: 6px; }
         .stat-trend { font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px; }
-        .trend-up { color: var(--accent); } .trend-down { color: var(--danger); }
+        .trend-up { color: var(--accent); } .trend-down { color: var(--danger); } .trend-flat { color: var(--text-muted); }
 
         /* Alerts */
-        .alert-card { border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
+        .alert-card { border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; font-size: 13px; font-weight: 600; cursor: pointer; display: none; }
+        .alert-card.active { display: flex; }
         .alert-card.warning { background: var(--warning-light); color: #B45309; border: 1px solid #FDE68A; }
         .alert-card.danger { background: var(--danger-light); color: #B91C1C; border: 1px solid #FECACA; }
         .alert-content { display: flex; align-items: center; gap: 12px; }
 
         /* Order Cards */
-        .order-card { padding: 16px; border: 1px solid var(--border); cursor: pointer; transition: 0.2s; }
+        .order-card { padding: 16px; border: 1px solid var(--border); cursor: pointer; transition: 0.2s; background: var(--surface); border-radius: var(--radius-card); margin-bottom: 12px; box-shadow: var(--shadow-sm); }
         .order-card:active { transform: scale(0.98); }
-        .order-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .order-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; border-bottom: 1px solid var(--bg-main); padding-bottom: 12px;}
         .o-id { font-size: 15px; font-weight: 800; }
         .o-date { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
         .o-client { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
         .o-items { font-size: 12px; color: var(--text-muted); }
-        .o-price { font-size: 16px; font-weight: 800; text-align: right; margin-top: 8px; }
+        .o-price { font-size: 16px; font-weight: 800; text-align: right; }
         
         .badge { padding: 6px 10px; border-radius: 8px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
         .b-pending { background: var(--warning-light); color: #D97706; }
@@ -97,7 +98,8 @@
         /* Top Products */
         .top-product { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--bg-main); }
         .top-product:last-child { border-bottom: none; padding-bottom: 0; }
-        .tp-img { width: 40px; height: 40px; background: var(--bg-main); border-radius: 8px; object-fit: contain; }
+        .tp-img { width: 40px; height: 40px; background: var(--primary-light); border-radius: 8px; object-fit: contain; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 2px;}
+        .tp-img img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply;}
         .tp-info { flex: 1; }
         .tp-info h4 { font-size: 13px; font-weight: 700; }
         .tp-info p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
@@ -109,11 +111,9 @@
         .search-box { position: relative; margin-bottom: 20px; display: flex; gap: 10px; }
         .search-box input { flex: 1; padding: 14px 16px 14px 44px; border: 1px solid var(--border); border-radius: var(--radius-btn); background: var(--surface); outline: none; font-size: 14px; }
         .search-box svg.search-icon { position: absolute; left: 16px; top: 14px; color: var(--text-muted); width: 18px; }
-        .filter-btn { width: 48px; height: 48px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-btn); display: flex; align-items: center; justify-content: center; color: var(--text-main); }
-
+        
         .form-group { margin-bottom: 20px; }
         .form-group label { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
-        .form-group label svg { width: 14px; height: 14px; }
         .form-control { width: 100%; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius-btn); background: var(--surface); outline: none; font-size: 14px; font-weight: 500; transition: 0.2s; }
         .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
         
@@ -123,7 +123,7 @@
         .upload-box span { font-size: 11px; color: var(--text-muted); }
 
         /* =========================================
-           BUTTONS & TABS
+           BUTTONS & WIZARD
         ========================================= */
         .btn { width: 100%; padding: 16px; border-radius: var(--radius-btn); font-size: 15px; font-weight: 700; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn:active { transform: scale(0.98); }
@@ -137,9 +137,6 @@
         .tab-pill { padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); white-space: nowrap; cursor: pointer; }
         .tab-pill.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        /* =========================================
-           WIZARD (STEPPER)
-        ========================================= */
         .stepper { display: flex; justify-content: space-between; position: relative; margin-bottom: 32px; padding: 0 20px; }
         .stepper::before { content: ''; position: absolute; top: 12px; left: 30px; right: 30px; height: 2px; background: var(--border); z-index: 1; }
         .step-dot { width: 26px; height: 26px; border-radius: 50%; background: var(--surface); border: 2px solid var(--border); color: var(--text-muted); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; position: relative; z-index: 2; }
@@ -151,40 +148,13 @@
         .wizard-footer { display: flex; gap: 12px; margin-top: 30px; }
         .wizard-footer .btn { flex: 1; }
 
-        /* iOS Toggle Switch */
         .toggle-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--surface); border-radius: var(--radius-btn); border: 1px solid var(--border); margin-bottom: 20px; }
-        .toggle-label { font-size: 14px; font-weight: 600; }
         .switch { position: relative; display: inline-block; width: 50px; height: 30px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border); transition: .3s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 2px; bottom: 2px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 2px; bottom: 2px; background-color: white; transition: .3s; border-radius: 50%; }
         input:checked + .slider { background-color: var(--accent); }
         input:checked + .slider:before { transform: translateX(20px); }
-
-        /* =========================================
-           ORDER DETAIL ELEMENTS
-        ========================================= */
-        .detail-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
-        .back-btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: var(--surface); border-radius: 50%; box-shadow: var(--shadow-sm); cursor: pointer; }
-        
-        .info-list { margin-bottom: 24px; }
-        .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-        .info-row:last-child { border-bottom: none; }
-        .info-label { color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
-        .info-val { font-weight: 600; text-align: right; }
-        
-        .item-row { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
-        .item-img { width: 48px; height: 48px; background: var(--primary-light); border-radius: 8px; }
-        .item-details { flex: 1; }
-        .item-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-        .item-meta { font-size: 12px; color: var(--text-muted); }
-        .item-price { font-size: 13px; font-weight: 700; text-align: right; }
-        
-        .summary-box { background: var(--surface); border-radius: var(--radius-btn); padding: 16px; margin-top: 24px; border: 1px solid var(--border); }
-        .summary-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 12px; color: var(--text-muted); font-weight: 500; }
-        .summary-row.total { font-size: 16px; font-weight: 800; color: var(--primary); margin-bottom: 0; padding-top: 12px; border-top: 1px dashed var(--border); }
-
-        .action-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
 
         /* =========================================
            BOTTOM NAV
@@ -194,24 +164,8 @@
         .nav-item.active { color: var(--primary); }
         .nav-item svg { width: 22px; height: 22px; stroke-width: 2.2; }
         .nav-item.active svg { fill: var(--primary-light); }
-
-        /* =========================================
-           MODALS & TOASTS
-        ========================================= */
-        .overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(4px); z-index: 1000; opacity: 0; pointer-events: none; transition: 0.3s; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .overlay.active { opacity: 1; pointer-events: auto; }
-        .modal { background: var(--surface); width: 100%; max-width: 340px; border-radius: 24px; padding: 24px; box-shadow: var(--shadow-modal); transform: scale(0.95); transition: 0.3s; text-align: center; }
-        .overlay.active .modal { transform: scale(1); }
-        .modal-icon { width: 48px; height: 48px; border-radius: 50%; background: var(--warning-light); color: var(--warning); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
-        .modal-icon svg { width: 24px; height: 24px; }
-        .modal h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
-        .modal p { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.4; }
-        .modal-actions { display: flex; gap: 12px; }
-        .modal-actions .btn { padding: 14px; font-size: 14px; }
-
-        .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px); background: var(--text-main); color: white; padding: 12px 24px; border-radius: 50px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow-modal); z-index: 1100; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .toast.show { transform: translateX(-50%) translateY(0); }
-        .toast svg { color: var(--accent); }
+        
+        .empty-state { text-align: center; padding: 30px; color: var(--text-muted); font-size: 13px; font-weight: 600;}
     </style>
 </head>
 <body>
@@ -224,39 +178,38 @@
             </div>
             <div class="icon-btn">
                 <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                <div class="badge"></div>
+                <div class="badge" id="notifBadge"></div>
             </div>
         </div>
 
         <div class="stats-scroll">
             <div class="stat-card">
-                <span class="stat-label">Ventes aujourd'hui</span>
-                <div class="stat-val">48.00 DH</div>
-                <div class="stat-trend trend-up"><svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg> 12%</div>
+                <span class="stat-label">Profit d'aujourd'hui</span>
+                <div class="stat-val" id="dashProfitToday">0.00 DH</div>
+                <div class="stat-trend trend-flat" id="dashProfitTrend">-</div>
             </div>
             <div class="stat-card">
-                <span class="stat-label">Commandes</span>
-                <div class="stat-val">1</div>
-                <div class="stat-trend trend-up"><svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg> 1</div>
+                <span class="stat-label">Commandes du jour</span>
+                <div class="stat-val" id="dashOrdersToday">0</div>
+                <div class="stat-trend trend-flat" id="dashOrdersTrend">-</div>
             </div>
             <div class="stat-card">
                 <span class="stat-label">Profit (30 jours)</span>
-                <div class="stat-val" style="color: var(--primary);">1132.00 DH</div>
-                <div class="stat-trend trend-up"><svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg> 18%</div>
+                <div class="stat-val" style="color: var(--primary);" id="dashProfitMonth">0.00 DH</div>
             </div>
         </div>
 
-        <div class="alert-card warning">
+        <div class="alert-card warning" id="alertLowStock" onclick="switchTab('produits')">
             <div class="alert-content">
                 <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                1 produit en stock faible
+                <span id="lowStockText">0 produit en stock faible</span>
             </div>
             <svg viewBox="0 0 24 24" style="width:16px; color:inherit;"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </div>
-        <div class="alert-card danger">
+        <div class="alert-card danger" id="alertOutOfStock" onclick="switchTab('produits')">
             <div class="alert-content">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
-                2 produits en rupture de stock
+                <span id="outOfStockText">0 produit en rupture de stock</span>
             </div>
             <svg viewBox="0 0 24 24" style="width:16px; color:inherit;"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </div>
@@ -265,42 +218,17 @@
             Dernières commandes
             <span class="section-link" onclick="switchTab('commandes')">Voir tout</span>
         </div>
-
-        <div class="card order-card" onclick="openOrderDetail('MIOLRN')">
-            <div class="order-header">
-                <div>
-                    <div class="o-id">#MIOLRN</div>
-                    <div class="o-date">30 avr., 03:55</div>
-                </div>
-                <div class="badge b-pending">En attente</div>
+        <div id="dashRecentOrdersContainer">
             </div>
-            <div class="o-client"><svg viewBox="0 0 24 24" style="width:14px; color:var(--text-muted);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> driss</div>
-            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                <div class="o-items">6 articles</div>
-                <div class="o-price">48.00 DH</div>
-            </div>
-            <div style="border-top: 1px solid var(--border); margin-top: 12px; padding-top: 12px;">
-                <span class="section-link">Voir détails <svg viewBox="0 0 24 24" style="width:14px; display:inline; vertical-align:middle;"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
-            </div>
-        </div>
 
         <div class="section-title" style="margin-top: 32px;">
             Produits populaires
             <span class="section-link" onclick="switchTab('produits')">Voir tout</span>
         </div>
-        
-        <div class="card">
-            <div class="top-product">
-                <div class="tp-img" style="background-image: url('https://placehold.co/80');"></div>
-                <div class="tp-info">
-                    <h4>G-2 Pilot</h4>
-                    <p>15 DH</p>
-                </div>
-                <div class="tp-sales">42 vendus</div>
-            </div>
+        <div class="card" id="dashPopularProductsContainer">
+            <div class="empty-state">Aucune vente pour le moment.</div>
         </div>
     </div>
-
 
     <div id="view-commandes" class="app-view container">
         <div class="header-top">
@@ -308,132 +236,21 @@
             <div class="icon-btn" style="width: 36px; height: 36px;"><svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></div>
         </div>
 
-        <div class="search-box">
-            <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" placeholder="Rechercher une commande...">
-            <div class="filter-btn"><svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg></div>
-        </div>
-
         <div class="tabs-scroll">
-            <div class="tab-pill active">Toutes</div>
-            <div class="tab-pill">En attente</div>
-            <div class="tab-pill">En cours</div>
-            <div class="tab-pill">Livrées</div>
-            <div class="tab-pill">Annulées</div>
+            <div class="tab-pill active" onclick="filterOrdersList('Toutes', this)">Toutes</div>
+            <div class="tab-pill" onclick="filterOrdersList('En attente', this)">En attente</div>
+            <div class="tab-pill" onclick="filterOrdersList('En cours', this)">En cours</div>
+            <div class="tab-pill" onclick="filterOrdersList('Livrées', this)">Livrées</div>
+            <div class="tab-pill" onclick="filterOrdersList('Annulées', this)">Annulées</div>
         </div>
 
-        <div class="card order-card" onclick="openOrderDetail('MIOLRN')">
-            <div class="order-header">
-                <div><div class="o-id">#MIOLRN</div><div class="o-date">30 avr., 03:55</div></div>
-                <div class="badge b-pending">En attente</div>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                <div>
-                    <div class="o-client"><svg viewBox="0 0 24 24" style="width:14px; color:var(--text-muted);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> driss</div>
-                    <div class="o-items">6 articles</div>
-                </div>
-                <div class="o-price">48.00 DH</div>
-            </div>
-        </div>
-
-        <div class="card order-card" onclick="openOrderDetail('MIOLRM')">
-            <div class="order-header">
-                <div><div class="o-id">#MIOLRM</div><div class="o-date">29 avr., 18:20</div></div>
-                <div class="badge b-processing">En cours</div>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                <div>
-                    <div class="o-client"><svg viewBox="0 0 24 24" style="width:14px; color:var(--text-muted);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> youssef</div>
-                    <div class="o-items">3 articles</div>
-                </div>
-                <div class="o-price">75.00 DH</div>
-            </div>
-        </div>
-
-        <div class="card order-card" onclick="openOrderDetail('MIOLRL')">
-            <div class="order-header">
-                <div><div class="o-id">#MIOLRL</div><div class="o-date">29 avr., 14:10</div></div>
-                <div class="badge b-delivered">Livrée</div>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                <div>
-                    <div class="o-client"><svg viewBox="0 0 24 24" style="width:14px; color:var(--text-muted);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> ahmed</div>
-                    <div class="o-items">4 articles</div>
-                </div>
-                <div class="o-price">120.00 DH</div>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="view-order-detail" class="app-view container">
-        <div class="detail-header">
-            <div class="back-btn" onclick="switchTab('commandes')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
-            <div style="flex:1; display: flex; justify-content: space-between; align-items: center;">
-                <h1 style="font-size: 20px; font-weight: 800;" id="detail-id">#MIOLRN</h1>
-                <div class="badge b-pending" id="detail-badge">En attente</div>
-            </div>
-        </div>
-
-        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px; font-weight: 500;">30 avr., 2025 à 03:55</p>
-
-        <div class="card info-list">
-            <h3 style="font-size: 14px; margin-bottom: 12px;">Informations</h3>
-            <div class="info-row">
-                <div class="info-label"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Client</div>
-                <div class="info-val">driss</div>
-            </div>
-            <div class="info-row">
-                <div class="info-label"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Téléphone</div>
-                <div class="info-val">06 12 34 56 78</div>
-            </div>
-            <div class="info-row">
-                <div class="info-label"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><line x1="2" y1="12" x2="22" y2="12"></line></svg> Canal</div>
-                <div class="info-val">WhatsApp</div>
-            </div>
-            <div class="info-row">
-                <div class="info-label"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg> Paiement</div>
-                <div class="info-val">À la livraison</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h3 style="font-size: 14px; margin-bottom: 12px;">Articles (6)</h3>
-            <div class="item-row">
-                <div class="item-img"></div>
-                <div class="item-details">
-                    <div class="item-name">Cahier de 96p (Bleu)</div>
-                    <div class="item-meta">x6</div>
-                </div>
-                <div class="item-price">36.00 DH</div>
-            </div>
-            <div class="item-row" style="border:none;">
-                <div class="item-img"></div>
-                <div class="item-details">
-                    <div class="item-name">Stylo Pilot G-2 (Rouge)</div>
-                    <div class="item-meta">x2</div>
-                </div>
-                <div class="item-price">12.00 DH</div>
-            </div>
-        </div>
-
-        <div class="summary-box">
-            <div class="summary-row"><span>Sous-total</span><span>48.00 DH</span></div>
-            <div class="summary-row"><span>Livraison</span><span>0.00 DH</span></div>
-            <div class="summary-row total"><span>Total</span><span>48.00 DH</span></div>
-        </div>
-
-        <div class="action-stack">
-            <button class="btn btn-primary" onclick="confirmAction('En cours', 'Marquer cette commande en cours de traitement ?')">Marquer en cours</button>
-            <button class="btn btn-success" onclick="confirmAction('Livrée', 'Confirmer que cette commande a été livrée ?')">Marquer comme livrée</button>
-            <button class="btn btn-danger-outline" onclick="confirmAction('Annulée', 'Êtes-vous sûr de vouloir annuler cette commande ?')">Annuler la commande</button>
-        </div>
+        <div id="adminOrderListContainer"></div>
     </div>
 
 
     <div id="view-ajouter" class="app-view container">
         <div class="header-top">
-            <div class="back-btn" onclick="switchTab('dashboard')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+            <div class="icon-btn" style="width: 40px; height: 40px; border-radius: 50%;" onclick="switchTab('dashboard')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
             <h1 style="font-size: 20px; text-align: center; flex:1; margin-right: 40px;">Ajouter un produit</h1>
         </div>
 
@@ -446,31 +263,21 @@
         <div id="wizard-1" class="wizard-step active">
             <h3 style="font-size: 14px; margin-bottom: 16px; color: var(--text-muted);">Informations de base</h3>
             
-            <div class="upload-box">
+            <div class="upload-box" onclick="document.getElementById('pImg').focus()">
                 <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                <p>Ajouter une image</p>
-                <span>PNG, JPG (max. 5MB)</span>
+                <p>Coller l'URL de l'image</p>
+                <input type="text" id="pImg" class="form-control" placeholder="https://..." style="margin-top:10px; display:none;" onblur="this.style.display='none'; if(this.value){ document.getElementById('previewImg').style.display='block'; document.getElementById('previewImg').src=this.value; }">
+                <img id="previewImg" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; margin-top: 10px; display: none; border: 1px solid var(--border); margin: 10px auto 0;" src="">
             </div>
 
             <div class="form-group">
                 <label>Nom du produit</label>
-                <input type="text" class="form-control" placeholder="Ex: Stylo Pilot G-2">
+                <input type="text" id="pName" class="form-control" placeholder="Ex: Stylo Pilot G-2">
             </div>
 
             <div class="form-group">
-                <label>Catégorie principale <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></label>
-                <select class="form-control">
-                    <option>Fournitures scolaires</option>
-                    <option>Papeterie</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Sous-catégorie <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></label>
-                <select class="form-control">
-                    <option>Stylos</option>
-                    <option>Cahiers</option>
-                </select>
+                <label>Catégorie principale</label>
+                <input type="text" id="pCat" class="form-control" placeholder="Ex: Fournitures scolaires">
             </div>
 
             <button class="btn btn-primary" style="margin-top: 30px;" onclick="goToStep(2)">Suivant</button>
@@ -481,28 +288,23 @@
             
             <div class="form-group">
                 <label>Prix d'achat (DH)</label>
-                <input type="number" class="form-control" placeholder="8.00">
+                <input type="number" id="pCost" class="form-control" placeholder="8.00">
             </div>
             
             <div class="form-group">
                 <label>Prix de vente (DH)</label>
-                <input type="number" class="form-control" placeholder="15.00">
+                <input type="number" id="pSell" class="form-control" placeholder="15.00">
             </div>
 
             <div class="form-group">
                 <label>Stock global</label>
-                <input type="number" class="form-control" placeholder="50">
+                <input type="number" id="pStock" class="form-control" placeholder="50">
             </div>
 
             <div class="form-group">
                 <label>Seuil de stock faible <svg viewBox="0 0 24 24" style="color:var(--text-muted);"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></label>
-                <input type="number" class="form-control" placeholder="5">
-                <span style="font-size: 11px; color: var(--text-muted); margin-top: 6px; display: block;">Alerte lorsque le stock atteint ce nombre</span>
-            </div>
-            
-            <div class="form-group">
-                <label>Code produit (SKU) <span style="font-weight: normal; color:var(--text-muted);">(optionnel)</span></label>
-                <input type="text" class="form-control" placeholder="SPILOT-G2">
+                <input type="number" id="pLowStock" class="form-control" placeholder="5" value="5">
+                <span style="font-size: 11px; color: var(--text-muted); margin-top: 6px; display: block;">Alerte jaune lorsque le stock atteint ce nombre</span>
             </div>
 
             <div class="wizard-footer">
@@ -512,46 +314,12 @@
         </div>
 
         <div id="wizard-3" class="wizard-step">
-            <h3 style="font-size: 14px; margin-bottom: 16px; color: var(--text-muted); text-align: center;">Variants (optionnel)</h3>
+            <h3 style="font-size: 14px; margin-bottom: 16px; color: var(--text-muted); text-align: center;">Configuration finale</h3>
             
-            <div class="toggle-wrapper">
-                <span class="toggle-label">Activer les variantes</span>
-                <label class="switch">
-                    <input type="checkbox" checked id="variantToggle" onchange="document.getElementById('variantConfig').style.display = this.checked ? 'block' : 'none'">
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-            <div id="variantConfig">
-                <div style="margin-bottom: 24px;">
-                    <label style="font-size: 13px; font-weight: 600; margin-bottom: 12px; display: block;">Couleurs</label>
-                    
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                        <div style="display:flex; align-items:center; gap:12px; font-size:13px; font-weight:600;"><div style="width:16px;height:16px;border-radius:50%;background:#2563EB;"></div> Bleu</div>
-                        <svg viewBox="0 0 24 24" style="color:var(--danger); width:18px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                    </div>
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                        <div style="display:flex; align-items:center; gap:12px; font-size:13px; font-weight:600;"><div style="width:16px;height:16px;border-radius:50%;background:#EF4444;"></div> Rouge</div>
-                        <svg viewBox="0 0 24 24" style="color:var(--danger); width:18px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                    </div>
-                    
-                    <div style="text-align: center; color: var(--primary); font-size: 13px; font-weight: 700; margin-top: 16px; cursor:pointer;">+ Ajouter une couleur</div>
-                </div>
-
-                <div style="border-top: 1px solid var(--border); padding-top: 24px;">
-                    <label style="font-size: 13px; font-weight: 600; margin-bottom: 16px; display: block;">Stock par variante</label>
-                    
-                    <div style="display:flex; align-items:center; gap:16px; margin-bottom:12px;">
-                        <span style="font-size: 13px; width: 60px;">Bleu</span>
-                        <input type="number" class="form-control" value="20" style="padding: 10px; flex:1;">
-                        <span style="font-size: 12px; color: var(--text-muted);">pièces</span>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:16px;">
-                        <span style="font-size: 13px; width: 60px;">Rouge</span>
-                        <input type="number" class="form-control" value="15" style="padding: 10px; flex:1;">
-                        <span style="font-size: 12px; color: var(--text-muted);">pièces</span>
-                    </div>
-                </div>
+            <div class="card" style="text-align: center; padding: 30px 20px;">
+                <svg viewBox="0 0 24 24" style="width: 40px; height: 40px; color: var(--accent); margin-bottom: 16px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <h4 style="margin-bottom: 8px;">Presque terminé !</h4>
+                <p style="font-size: 13px; color: var(--text-muted);">Vérifiez vos informations avant de mettre le produit en ligne sur l'application client.</p>
             </div>
 
             <div class="wizard-footer">
@@ -587,105 +355,292 @@
         </div>
     </nav>
 
-    <div class="overlay" id="confirmOverlay">
-        <div class="modal">
-            <div class="modal-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></div>
-            <h3 id="modalTitle">Confirmation</h3>
-            <p id="modalMsg">Êtes-vous sûr de vouloir effectuer cette action ?</p>
-            <div class="modal-actions">
-                <button class="btn btn-outline" onclick="closeConfirm()">Annuler</button>
-                <button class="btn btn-primary" id="modalConfirmBtn">Confirmer</button>
-            </div>
-        </div>
-    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    <div class="toast" id="toastBox">
-        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-        <span id="toastMsg">Action réussie</span>
-    </div>
+        // ⚠️ REPLACE WITH YOUR ACTUAL FIREBASE CONFIG
+        const firebaseConfig = {
+            apiKey: "AIzaSyCKY59mqLqD4GqQpkDEFqNybKIkwLvgId0",
+            authDomain: "lascoburo.firebaseapp.com",
+            projectId: "lascoburo",
+            storageBucket: "lascoburo.firebasestorage.app",
+            messagingSenderId: "918363477454",
+            appId: "1:918363477454:web:ef0a991d24de1ea992879f"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-    <script>
-        // SPA Navigation
-        function switchTab(tabId) {
+        let allOrders = [];
+        let allProducts = [];
+        let currentOrderFilter = 'Toutes';
+
+        // --- UI Navigation ---
+        window.switchTab = (tabId) => {
             document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById(`view-${tabId}`).classList.add('active');
-            
-            // Handle bottom nav highlight (Detail view shouldn't highlight nav generally, but we default to commandes)
-            let navTarget = tabId === 'order-detail' ? 'commandes' : tabId;
-            const navItem = document.getElementById(`nav-${navTarget}`);
+            const navItem = document.getElementById(`nav-${tabId}`);
             if(navItem) navItem.classList.add('active');
-            
             window.scrollTo(0,0);
-        }
+        };
 
-        // Details view specific
-        function openOrderDetail(id) {
-            document.getElementById('detail-id').innerText = "#" + id;
-            switchTab('order-detail');
-        }
-
-        // Wizard Stepper
-        function goToStep(step) {
+        window.goToStep = (step) => {
             document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('active'));
             document.getElementById(`wizard-${step}`).classList.add('active');
-            
             document.querySelectorAll('.step-dot').forEach((el, index) => {
                 el.classList.remove('active', 'done');
                 if(index + 1 === step) el.classList.add('active');
                 if(index + 1 < step) el.classList.add('done');
             });
             window.scrollTo(0,0);
-        }
+        };
 
-        function saveNewProduct() {
-            showToast("Produit ajouté avec succès");
-            setTimeout(() => switchTab('dashboard'), 1500);
-        }
-
-        // Custom Modal Logic
-        let confirmActionCallback = null;
-
-        function confirmAction(type, msg) {
-            document.getElementById('modalTitle').innerText = type === 'Annulée' ? "Annuler commande" : "Mise à jour statut";
-            document.getElementById('modalMsg').innerText = msg;
+        // --- DASHBOARD MATH & LOGIC ---
+        function calculateDashboard() {
+            // Setup Date Boundaries
+            const now = new Date();
+            const todayStr = now.toDateString();
             
-            const btn = document.getElementById('modalConfirmBtn');
-            if(type === 'Annulée') {
-                btn.className = 'btn btn-primary';
-                btn.style.background = 'var(--danger)';
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = yesterday.toDateString();
+            
+            const thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+            // Variables to track
+            let profitToday = 0;
+            let profitYesterday = 0;
+            let profit30Days = 0;
+            
+            let ordersToday = 0;
+            let ordersYesterday = 0;
+
+            let productSalesCounter = {}; // { productId: { info, count } }
+
+            // 1. Process All Orders
+            allOrders.forEach(order => {
+                const orderDate = new Date(order.timestamp);
+                const isToday = orderDate.toDateString() === todayStr;
+                const isYesterday = orderDate.toDateString() === yesterdayStr;
+                const isLast30Days = orderDate >= thirtyDaysAgo;
+
+                // Count physical commands (regardless of status, to track activity)
+                if (isToday) ordersToday++;
+                if (isYesterday) ordersYesterday++;
+
+                // Calculate Profit & Bestsellers (ONLY on delivered/Livrées orders)
+                if (order.status === 'Livrées' || order.status === 'Livrée') {
+                    let orderProfit = 0;
+                    
+                    if(order.cart) {
+                        order.cart.forEach(item => {
+                            const cost = parseFloat(item.product.costPrice) || 0;
+                            const sell = parseFloat(item.unitPrice) || parseFloat(item.product.sellPrice) || 0;
+                            orderProfit += (sell - cost) * item.qty;
+
+                            // Tally for Popular Products
+                            if (!productSalesCounter[item.product.id]) {
+                                productSalesCounter[item.product.id] = { product: item.product, totalSold: 0 };
+                            }
+                            productSalesCounter[item.product.id].totalSold += item.qty;
+                        });
+                    }
+
+                    if (isToday) profitToday += orderProfit;
+                    if (isYesterday) profitYesterday += orderProfit;
+                    if (isLast30Days) profit30Days += orderProfit;
+                }
+            });
+
+            // 2. Render Top Stats
+            document.getElementById('dashProfitToday').innerText = profitToday.toFixed(2) + ' DH';
+            document.getElementById('dashOrdersToday').innerText = ordersToday;
+            document.getElementById('dashProfitMonth').innerText = profit30Days.toFixed(2) + ' DH';
+
+            // 3. Render Trend Arrows
+            renderTrendArrow('dashProfitTrend', profitToday, profitYesterday);
+            renderTrendArrow('dashOrdersTrend', ordersToday, ordersYesterday);
+
+            // 4. Render Popular Products
+            renderPopularProducts(productSalesCounter);
+            
+            // 5. Render Recent Orders list (max 3)
+            const recentOrders = [...allOrders].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp)).slice(0, 3);
+            document.getElementById('dashRecentOrdersContainer').innerHTML = generateOrdersHTML(recentOrders);
+        }
+
+        function renderTrendArrow(elementId, todayVal, yesterdayVal) {
+            const el = document.getElementById(elementId);
+            if (yesterdayVal === 0 && todayVal === 0) {
+                el.className = 'stat-trend trend-flat';
+                el.innerText = '-';
+                return;
+            }
+            
+            let percentChange = 0;
+            if (yesterdayVal === 0 && todayVal > 0) percentChange = 100;
+            else percentChange = ((todayVal - yesterdayVal) / yesterdayVal) * 100;
+
+            if (percentChange >= 0) {
+                el.className = 'stat-trend trend-up';
+                el.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg> ${Math.abs(percentChange).toFixed(0)}%`;
             } else {
-                btn.className = 'btn btn-primary';
-                btn.style.background = 'var(--primary)';
+                el.className = 'stat-trend trend-down';
+                el.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg> ${Math.abs(percentChange).toFixed(0)}%`;
+            }
+        }
+
+        function renderPopularProducts(salesCounter) {
+            // Convert dictionary to array and sort by highest sales
+            const sortedProducts = Object.values(salesCounter).sort((a, b) => b.totalSold - a.totalSold).slice(0, 3); // top 3
+            
+            const container = document.getElementById('dashPopularProductsContainer');
+            if (sortedProducts.length === 0) {
+                container.innerHTML = '<div class="empty-state">Aucune vente enregistrée pour le moment.</div>';
+                return;
             }
 
-            confirmActionCallback = () => {
-                closeConfirm();
-                showToast("Statut mis à jour avec succès");
-                // Reset detail view badge to simulate change
-                const b = document.getElementById('detail-badge');
-                if(type === 'En cours') { b.className = 'badge b-processing'; b.innerText = 'En cours'; }
-                if(type === 'Livrée') { b.className = 'badge b-delivered'; b.innerText = 'Livrée'; }
-                if(type === 'Annulée') { b.className = 'badge b-cancelled'; b.innerText = 'Annulée'; }
-            };
-
-            document.getElementById('confirmOverlay').classList.add('active');
+            container.innerHTML = sortedProducts.map(item => {
+                const img = item.product.imageUrl ? `<img src="${item.product.imageUrl}">` : `<span style="font-weight:bold; color:var(--primary);">${item.product.name.charAt(0)}</span>`;
+                return `
+                <div class="top-product">
+                    <div class="tp-img">${img}</div>
+                    <div class="tp-info">
+                        <h4>${item.product.name}</h4>
+                        <p>${item.product.sellPrice} DH</p>
+                    </div>
+                    <div class="tp-sales">${item.totalSold} vendus</div>
+                </div>`;
+            }).join('');
         }
 
-        function closeConfirm() {
-            document.getElementById('confirmOverlay').classList.remove('active');
+        function calculateProductAlerts() {
+            let lowCount = 0;
+            let outCount = 0;
+
+            allProducts.forEach(p => {
+                const stock = parseInt(p.stock) || 0;
+                const limit = parseInt(p.lowStockThreshold) || 5;
+
+                if (stock === 0) {
+                    outCount++;
+                } else if (stock <= limit) {
+                    lowCount++;
+                }
+            });
+
+            // Handle Yellow Alert (Low Stock)
+            const lowAlertCard = document.getElementById('alertLowStock');
+            if (lowCount > 0) {
+                lowAlertCard.classList.add('active');
+                document.getElementById('lowStockText').innerText = `${lowCount} produit${lowCount>1?'s':''} en stock faible`;
+            } else {
+                lowAlertCard.classList.remove('active');
+            }
+
+            // Handle Red Alert (Out of Stock)
+            const outAlertCard = document.getElementById('alertOutOfStock');
+            if (outCount > 0) {
+                outAlertCard.classList.add('active');
+                document.getElementById('outOfStockText').innerText = `${outCount} produit${outCount>1?'s':''} en rupture de stock`;
+                document.getElementById('notifBadge').classList.add('active'); // Turn on bell red dot
+            } else {
+                outAlertCard.classList.remove('active');
+                document.getElementById('notifBadge').classList.remove('active');
+            }
         }
 
-        document.getElementById('modalConfirmBtn').addEventListener('click', () => {
-            if(confirmActionCallback) confirmActionCallback();
+        // --- FIREBASE LISTENERS ---
+        onSnapshot(collection(db, "orders"), snap => {
+            allOrders = snap.docs.map(d => ({id: d.id, ...d.data()}));
+            calculateDashboard(); // Recalculate everything when an order arrives/changes
+            renderFullOrdersList(); // Update View 2
         });
 
-        // Toast Logic
-        function showToast(msg) {
-            const t = document.getElementById('toastBox');
-            document.getElementById('toastMsg').innerText = msg;
-            t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 3000);
+        onSnapshot(collection(db, "products"), snap => {
+            allProducts = snap.docs.map(d => ({id: d.id, ...d.data()}));
+            calculateProductAlerts(); // Check stock levels
+        });
+
+
+        // --- WIZARD FORM SUBMIT ---
+        window.saveNewProduct = async () => {
+            const data = {
+                name: document.getElementById('pName').value,
+                category: document.getElementById('pCat').value || "Non classé",
+                costPrice: parseFloat(document.getElementById('pCost').value) || 0,
+                sellPrice: parseFloat(document.getElementById('pSell').value) || 0,
+                stock: parseInt(document.getElementById('pStock').value) || 0,
+                lowStockThreshold: parseInt(document.getElementById('pLowStock').value) || 5, // Important for alerts
+                imageUrl: document.getElementById('pImg').value,
+                timestamp: new Date().toISOString()
+            };
+
+            if(!data.name) return alert("Veuillez entrer un nom de produit.");
+            
+            try {
+                await addDoc(collection(db, "products"), data);
+                // Reset form
+                document.querySelectorAll('input').forEach(i => i.value = '');
+                document.getElementById('previewImg').style.display = 'none';
+                document.getElementById('pLowStock').value = 5;
+                
+                alert("Produit enregistré avec succès !");
+                switchTab('dashboard');
+            } catch (e) {
+                console.error(e);
+                alert("Erreur lors de l'enregistrement.");
+            }
+        };
+
+        // --- UTILS: Order Rendering ---
+        window.filterOrdersList = (status, tabElement) => {
+            document.querySelectorAll('.tab-pill').forEach(t => t.classList.remove('active'));
+            tabElement.classList.add('active');
+            currentOrderFilter = status;
+            renderFullOrdersList();
+        };
+
+        function renderFullOrdersList() {
+            let filtered = [...allOrders].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+            if (currentOrderFilter !== 'Toutes') {
+                // Handle slight spelling differences just in case (Livrée vs Livrées)
+                filtered = filtered.filter(o => o.status === currentOrderFilter || o.status + 's' === currentOrderFilter);
+            }
+            document.getElementById('adminOrderListContainer').innerHTML = generateOrdersHTML(filtered);
+        }
+
+        function generateOrdersHTML(ordersArray) {
+            if(ordersArray.length === 0) return `<div class="empty-state">Aucune commande trouvée.</div>`;
+            
+            return ordersArray.map(o => {
+                const date = new Date(o.timestamp).toLocaleDateString('fr-FR', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+                
+                let statusClass = 'b-pending';
+                if(o.status === 'En cours') statusClass = 'b-processing';
+                if(o.status === 'Livrée' || o.status === 'Livrées') statusClass = 'b-delivered';
+                if(o.status === 'Annulée') statusClass = 'b-cancelled';
+
+                return `
+                <div class="card order-card" onclick="alert('Module Détails Commande en cours de construction. \\nTotal: ${o.totalPrice.toFixed(2)} DH')">
+                    <div class="order-header">
+                        <div>
+                            <div class="o-id">#${o.id.substring(0,6).toUpperCase()}</div>
+                            <div class="o-date">${date}</div>
+                        </div>
+                        <div class="badge ${statusClass}">${o.status}</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                        <div>
+                            <div class="o-client"><svg viewBox="0 0 24 24" style="width:14px; color:var(--text-muted);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> ${o.customerName || 'Client'}</div>
+                            <div class="o-items">${o.totalItems || 0} articles</div>
+                        </div>
+                        <div class="o-price">${parseFloat(o.totalPrice || 0).toFixed(2)} DH</div>
+                    </div>
+                </div>`;
+            }).join('');
         }
     </script>
 </body>
