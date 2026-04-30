@@ -7,39 +7,62 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* ALL PREMIUM CSS INCLUDED */
-        :root { --primary: #1E3A8A; --primary-light: #EFF6FF; --accent: #2563EB; --success: #10B981; --danger: #EF4444; --bg: #F8FAFC; --surface: #FFFFFF; --text-main: #0F172A; --text-muted: #64748B; --border: #E2E8F0; --shadow-sm: 0 2px 8px rgba(0,0,0,0.04); --shadow-lg: 0 20px 25px -5px rgba(30,58,138,0.25); --radius-pill: 50px; }
+        /* =========================================
+           VARIABLES & RESET
+        ========================================= */
+        :root {
+            --primary: #1E3A8A;
+            --primary-light: #EFF6FF;
+            --accent: #2563EB;
+            --success: #10B981;
+            --danger: #EF4444;
+            --bg: #F8FAFC;
+            --surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+            --shadow-sm: 0 4px 10px rgba(0,0,0,0.04);
+            --shadow-lg: 0 20px 40px rgba(30,58,138,0.15);
+            --radius-pill: 50px;
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-main); padding-bottom: 120px; overflow-x: hidden;}
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-main); padding-bottom: 120px; }
+        
+        /* SCROLL LOCK CLASS */
+        body.no-scroll { overflow: hidden; height: 100vh; }
+        
         .container { padding: 0 20px; max-width: 600px; margin: 0 auto; }
         svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
         /* HEADER & SEARCH */
         .app-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
-        .brand h1 { font-size: 22px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
+        .brand h1 { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
         .brand span { color: var(--text-main); }
         .brand p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-        .icon-btn { position: relative; background: var(--primary); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; }
-        .badge { position: absolute; top: -2px; right: -2px; background: #EF4444; color: white; font-size: 10px; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .icon-btn-top { position: relative; background: white; border: 1px solid var(--border); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-main); cursor: pointer; box-shadow: var(--shadow-sm); }
+        .icon-btn-top .badge { position: absolute; top: -4px; right: -4px; background: var(--primary); color: white; font-size: 10px; font-weight: 800; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white; }
+        
         .search-wrapper { position: relative; margin-bottom: 24px; }
-        .search-wrapper input { width: 100%; border: 1px solid var(--border); padding: 16px 20px 16px 50px; border-radius: var(--radius-pill); font-size: 15px; font-family: inherit; outline: none; }
+        .search-wrapper input { width: 100%; border: 1px solid var(--border); padding: 16px 20px 16px 50px; border-radius: var(--radius-pill); font-size: 15px; font-family: inherit; outline: none; background: white; box-shadow: var(--shadow-sm);}
         .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); width: 20px; height: 20px; }
 
         /* CATEGORIES & BANNER */
         .categories-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; margin: 0 -20px 24px -20px; padding: 0 20px 10px 20px; scroll-behavior: smooth; }
         .categories-scroll::-webkit-scrollbar { display: none; }
-        .cat-chip { display: flex; align-items: center; gap: 8px; padding: 12px 20px; background: white; border: 1px solid var(--border); border-radius: var(--radius-pill); font-size: 14px; font-weight: 600; color: var(--text-muted); white-space: nowrap; cursor: pointer; transition: 0.2s; }
+        .cat-chip { display: flex; align-items: center; gap: 8px; padding: 12px 20px; background: white; border: 1px solid var(--border); border-radius: var(--radius-pill); font-size: 14px; font-weight: 600; color: var(--text-muted); white-space: nowrap; cursor: pointer; transition: 0.2s; box-shadow: var(--shadow-sm);}
         .cat-chip.active { background: var(--primary); color: white; border-color: var(--primary); }
-        .promo-banner { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 15px; margin-bottom: 30px; position: relative; }
+        
+        .promo-banner { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 15px; margin-bottom: 30px; position: relative; border: 1px solid #BFDBFE;}
         .promo-icon-bg { background: var(--primary); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .promo-text h3 { font-size: 14px; font-weight: 800; color: var(--primary); margin-bottom: 4px; }
-        .promo-text p { font-size: 12px; line-height: 1.4; max-width: 200px; }
+        .promo-text p { font-size: 12px; line-height: 1.4; max-width: 200px; color: var(--text-main);}
         .promo-image { position: absolute; right: 10px; bottom: 5px; font-size: 50px; }
 
         /* PRODUCT GRID */
         .section-header { margin-bottom: 16px; font-size: 18px; font-weight: 800; }
         .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .product-card { background: white; border-radius: 20px; padding: 12px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s; }
+        .product-card { background: white; border-radius: 20px; padding: 12px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s; border: 1px solid var(--border);}
         .product-card:active { transform: scale(0.97); }
         .product-img-box { background: var(--bg); border-radius: 16px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; overflow: hidden; padding:10px;}
         .product-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
@@ -51,58 +74,117 @@
         .stock-dot { width: 6px; height: 6px; background: var(--success); border-radius: 50%; }
         .btn-add { background: var(--primary); color: white; border: none; width: 32px; height: 32px; border-radius: 10px; font-size: 18px; font-weight: bold; pointer-events: none; }
 
-        /* STICKY CART */
-        .sticky-cart { position: fixed; bottom: 20px; left: 20px; right: 20px; background: var(--primary); border-radius: 16px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-lg); z-index: 90; transition: transform 0.4s; cursor: pointer; }
+        /* =========================================
+           NEW STICKY CART BAR (Reference: 1000120175)
+        ========================================= */
+        .sticky-cart { 
+            position: fixed; bottom: 20px; left: 20px; right: 20px; 
+            background: white; border-radius: 50px; padding: 8px 8px 8px 12px; 
+            display: flex; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            z-index: 90; transition: transform 0.4s; cursor: pointer; border: 1px solid var(--border);
+            max-width: 560px; margin: 0 auto;
+        }
         .sticky-cart.hidden { transform: translateY(200%); }
-        .cart-left { display: flex; align-items: center; gap: 15px; color: white; font-weight: 700; font-size:15px;}
-        .cart-left .divider { width: 2px; height: 16px; background: rgba(255,255,255,0.3); }
-        .btn-checkout-arrow { color: white; display: flex; align-items: center; font-size: 14px; font-weight:bold;}
+        
+        .sc-icon-box { background: var(--primary); width: 44px; height: 44px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; position: relative; flex-shrink: 0;}
+        .sc-icon-box .badge { position: absolute; top: -6px; right: -6px; background: white; color: var(--primary); border: 2px solid var(--primary); width: 20px; height: 20px; border-radius: 50%; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center;}
+        
+        .sc-text-stack { display: flex; flex-direction: column; margin-left: 12px; }
+        .sc-title { font-weight: 800; font-size: 14px; color: var(--text-main); }
+        .sc-subtitle { font-size: 11px; color: var(--text-muted); font-weight: 600;}
+        
+        .sc-divider { width: 1px; height: 30px; background: var(--border); margin: 0 15px; }
+        
+        .sc-btn { background: var(--primary); color: white; border-radius: 50px; padding: 12px 20px; font-weight: 700; font-size: 13px; margin-left: auto; display: flex; align-items: center; gap: 5px; }
 
-        /* MODALS */
-        .overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 1000; opacity: 0; pointer-events: none; transition: 0.3s; }
+        /* =========================================
+           MODALS (BOTTOM SHEETS)
+        ========================================= */
+        .overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(4px); z-index: 1000; opacity: 0; pointer-events: none; transition: 0.3s; }
         .overlay.active { opacity: 1; pointer-events: auto; }
-        .bottom-sheet { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-radius: 30px 30px 0 0; padding: 25px 20px 30px; z-index: 1001; transform: translateY(100%); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1); max-height: 90vh; overflow-y: auto; }
+        .bottom-sheet { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-radius: 30px 30px 0 0; padding: 25px 20px 30px; z-index: 1001; transform: translateY(100%); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1); max-height: 92vh; overflow-y: auto; max-width: 600px; margin: 0 auto;}
         .bottom-sheet.active { transform: translateY(0); }
-        .sheet-handle { width: 40px; height: 5px; background: #E2E8F0; border-radius: 10px; margin: 0 auto 20px; }
-        .close-modal-btn { position: absolute; top: 20px; right: 20px; background: var(--bg); border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .sheet-handle { width: 40px; height: 5px; background: #CBD5E1; border-radius: 10px; margin: 0 auto 20px; }
+        .close-modal-btn { position: absolute; top: 20px; right: 20px; background: var(--bg); border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-main); }
 
-        /* ADVANCED PRODUCT UI */
-        .modal-product-layout { display: flex; gap: 20px; margin-bottom: 20px; }
-        .modal-img-box { width: 110px; height: 110px; background: var(--bg); border-radius: 20px; display: flex; align-items: center; justify-content: center; padding: 10px; }
+        /* =========================================
+           PRODUCT MODAL (Reference: 1000120172)
+        ========================================= */
+        .modal-product-top { display: flex; gap: 15px; margin-bottom: 25px; align-items: center;}
+        .modal-img-box { width: 130px; height: 130px; background: var(--bg); border-radius: 20px; display: flex; align-items: center; justify-content: center; padding: 15px; flex-shrink: 0; border: 1px solid var(--border);}
         .modal-img-box img { max-width: 100%; max-height: 100%; mix-blend-mode: multiply; }
-        .modal-info h2 { font-size: 18px; font-weight: 800; margin-bottom: 5px; line-height: 1.2;}
-        .stock-badge { display: inline-flex; align-items: center; background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; gap: 6px; margin-top:8px;}
+        .modal-info-stack { display: flex; flex-direction: column; gap: 6px; }
+        .modal-info-stack h2 { font-size: 20px; font-weight: 800; line-height: 1.2; color: var(--text-main); }
+        .modal-info-stack .price { font-size: 22px; font-weight: 800; color: var(--primary); }
+        .stock-badge-pill { display: inline-flex; align-items: center; background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; gap: 6px; width: fit-content;}
+        .review-stars { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-top: 4px;}
+        .review-stars svg { width: 14px; height: 14px; fill: #F59E0B; color: #F59E0B; }
 
-        /* VARIANT SELECTORS */
-        .section-label { font-size: 14px; font-weight: 800; margin-bottom: 12px; display: block; }
+        .section-label { font-size: 16px; font-weight: 800; margin-bottom: 12px; display: block; color: var(--text-main);}
+        
+        /* VARIANTS - SQUARES (Default) */
         .variant-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
         .variant-box { position: relative; border: 2px solid var(--border); border-radius: 12px; padding: 12px 16px; cursor: pointer; transition: 0.2s; font-weight: 700; font-size: 13px; color: var(--text-muted); text-align: center; flex: 1; min-width: 70px; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        .variant-box.active { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
-        .v-check { position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; width: 20px; height: 20px; border-radius: 50%; display: none; align-items: center; justify-content: center; border: 2px solid white; }
+        .variant-box.active { border-color: var(--accent); color: var(--accent); background: var(--primary-light); }
+        .v-check { position: absolute; top: -8px; right: -8px; background: var(--accent); color: white; width: 20px; height: 20px; border-radius: 50%; display: none; align-items: center; justify-content: center; border: 2px solid white; }
         .v-check svg { width: 12px; height: 12px; stroke-width: 3; }
         .variant-box.active .v-check { display: flex; }
 
+        /* VARIANTS - CIRCLES (For Colors) */
+        .color-swatch-wrapper { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; margin-right: 15px;}
+        .color-swatch { width: 44px; height: 44px; border-radius: 50%; border: 2px solid transparent; padding: 3px; transition: 0.2s; position: relative; }
+        .color-swatch.active { border-color: var(--accent); }
+        .color-inner { width: 100%; height: 100%; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1);}
+        .color-swatch .check-icon { position: absolute; top: -4px; right: -4px; background: var(--accent); color: white; border-radius: 50%; width: 18px; height: 18px; display: none; align-items: center; justify-content: center; border: 2px solid white;}
+        .color-swatch.active .check-icon { display: flex; }
+        .color-name { font-size: 12px; font-weight: 700; color: var(--text-muted); }
+        .color-swatch-wrapper.active .color-name { color: var(--accent); }
+
         /* QTY & ADD BUTTON */
-        .qty-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .qty-controls { display: flex; align-items: center; background: var(--bg); border-radius: 12px; padding: 4px; }
-        .qty-btn { width: 36px; height: 36px; background: white; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: var(--shadow-sm); }
-        .qty-number { width: 40px; text-align: center; font-weight: 800; font-size: 16px; }
+        .qty-row-ui { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .qty-controls-pill { display: flex; align-items: center; background: var(--bg); border-radius: 12px; padding: 4px; border: 1px solid var(--border);}
+        .qty-btn { width: 36px; height: 36px; background: transparent; border: none; font-size: 20px; font-weight: bold; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center;}
+        .qty-number { width: 40px; text-align: center; font-weight: 800; font-size: 16px; color: var(--text-main);}
         
-        .price-summary { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: var(--bg); border-radius: 16px; margin-bottom: 15px; font-weight: 700; font-size: 14px;}
-        .btn-large-primary { width: 100%; background: var(--success); color: white; border: none; padding: 18px; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .price-summary { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--bg); border-radius: 16px; margin-bottom: 15px; font-weight: 700; font-size: 14px; border: 1px solid var(--border);}
+        .btn-large-primary { width: 100%; background: var(--success); color: white; border: none; padding: 18px; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.2s;}
+        .btn-large-primary:active { transform: scale(0.98); }
 
         /* TRUST BADGES */
         .trust-badges { display: flex; justify-content: space-between; border-top: 1px solid var(--border); margin-top: 20px; padding-top: 20px; }
         .trust-item { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; font-size: 10px; color: var(--text-muted); font-weight: 600; width: 30%; }
         .trust-item svg { width: 20px; height: 20px; color: var(--text-main); stroke-width: 1.5; }
 
-        /* CART MODAL */
-        .cart-item-row { display: flex; align-items: center; gap: 15px; background: white; border: 1px solid var(--border); padding: 12px; border-radius: 16px; margin-bottom: 12px;}
-        .cart-item-img { width: 60px; height: 60px; background: var(--bg); border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 5px; }
+        /* =========================================
+           CART MODAL (Reference: 1000120173)
+        ========================================= */
+        .cart-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .cart-header-row h2 { font-weight: 800; font-size: 22px; color: var(--text-main); }
+        
+        .cart-list-container { max-height: 45vh; overflow-y: auto; margin-bottom: 20px; padding-right: 5px;}
+        .cart-list-container::-webkit-scrollbar { width: 4px; }
+        .cart-list-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+        .cart-item-card { display: flex; padding: 12px; background: white; border: 1px solid var(--border); border-radius: 16px; margin-bottom: 12px; align-items: center; gap: 12px;}
+        .cart-item-img { width: 65px; height: 65px; background: var(--bg); border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 5px; flex-shrink: 0;}
         .cart-item-img img { max-width: 100%; max-height: 100%; mix-blend-mode: multiply; }
-        .cart-item-details { flex: 1; }
-        .variant-tag { font-size: 11px; background: var(--primary-light); color: var(--primary); padding: 2px 8px; border-radius: 6px; font-weight: 700; display: inline-block; margin-top: 4px;}
-        .btn-remove { background: #FEE2E2; color: var(--danger); border: none; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        
+        .cart-item-center { flex: 1; display: flex; flex-direction: column; justify-content: center;}
+        .cart-item-center h4 { font-size: 14px; font-weight: 800; margin-bottom: 4px; color: var(--text-main);}
+        .variant-tag-blue { font-size: 11px; background: var(--primary-light); color: var(--accent); padding: 3px 8px; border-radius: 6px; font-weight: 700; display: inline-block; width: fit-content; margin-bottom: 6px;}
+        .cart-item-price { font-size: 15px; font-weight: 800; color: var(--primary); }
+
+        .cart-item-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px;}
+        .btn-trash { background: #FEE2E2; color: var(--danger); border: none; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .qty-controls-small { display: flex; align-items: center; background: var(--bg); border-radius: 8px; padding: 2px; border: 1px solid var(--border);}
+        .qty-controls-small button { width: 26px; height: 26px; background: transparent; border: none; font-size: 16px; font-weight: bold; cursor: pointer; color: var(--text-muted); }
+        .qty-controls-small span { width: 24px; text-align: center; font-weight: 800; font-size: 13px; }
+
+        .promo-code-row { display: flex; justify-content: space-between; align-items: center; padding: 16px; border: 1px solid var(--border); border-radius: 16px; font-weight: 700; font-size: 14px; color: var(--text-main); margin-bottom: 20px;}
+        
+        .summary-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: var(--text-muted); margin-bottom: 12px; font-weight: 600;}
+        .summary-row.total { font-size: 20px; font-weight: 800; color: var(--text-main); margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border); margin-bottom: 20px;}
+        .free-delivery-badge { background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 800; }
     </style>
 </head>
 <body>
@@ -113,7 +195,7 @@
                 <h1>Lasco<span>buro</span></h1>
                 <p>Tout pour apprendre, créer, réussir.</p>
             </div>
-            <div class="icon-btn" onclick="openCartModal()">
+            <div class="icon-btn-top" onclick="openCartModal()">
                 <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                 <span class="badge top-cart-badge">0</span>
             </div>
@@ -137,14 +219,27 @@
     </div>
 
     <div class="sticky-cart hidden" id="orderBar" onclick="openCartModal()">
-        <div class="cart-left">
-            <svg viewBox="0 0 24 24" style="width:24px; height:24px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-            <span id="cartCountText">0 articles</span>
-            <div class="divider"></div>
-            <span id="cartPrice">0 DH</span>
+        <div class="sc-icon-box">
+            <svg viewBox="0 0 24 24" style="width:22px;height:22px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            <div class="badge" id="scBadge">0</div>
         </div>
-        <div class="btn-checkout-arrow">Voir le panier <svg viewBox="0 0 24 24" style="width:18px;height:18px;"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+        <div class="sc-text-stack">
+            <span class="sc-title" id="scArticleCount">0 article</span>
+            <span class="sc-subtitle">Voir votre panier</span>
+        </div>
+        
+        <div class="sc-divider"></div>
+        
+        <div class="sc-text-stack">
+            <span class="sc-title" style="color: var(--primary);" id="scTotalPrice">0.00 DH</span>
+            <span class="sc-subtitle">Total</span>
+        </div>
+        
+        <div class="sc-btn">
+            Voir le panier <svg viewBox="0 0 24 24" style="width:16px;height:16px;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
     </div>
+
 
     <div class="overlay" id="productOverlay" onclick="closeProductModal()"></div>
     <div class="bottom-sheet" id="productModal">
@@ -156,16 +251,38 @@
     <div class="overlay" id="cartOverlay" onclick="closeCartModal()"></div>
     <div class="bottom-sheet" id="cartModal">
         <div class="sheet-handle"></div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-            <h2 style="font-weight:800; font-size:22px;">Votre Panier</h2>
-            <button class="close-modal-btn" style="position:relative; top:0; right:0;" onclick="closeCartModal()"><svg viewBox="0 0 24 24" style="width:16px;height:16px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        
+        <div class="cart-header-row">
+            <h2>Votre Panier</h2>
+            <button class="close-modal-btn" style="position:static;" onclick="closeCartModal()"><svg viewBox="0 0 24 24" style="width:16px;height:16px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
         </div>
-        <div id="cartItemsContainer" style="max-height:40vh; overflow-y:auto; margin-bottom:20px;"></div>
-        <div style="display:flex; justify-content:space-between; font-size:20px; font-weight:800; margin-bottom:20px; border-top:2px dashed var(--border); padding-top:15px;">
-            <span>Total :</span><span style="color:var(--primary);" id="cartModalTotal">0 DH</span>
+        
+        <div class="cart-list-container" id="cartItemsContainer"></div>
+        
+        <div class="promo-code-row">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <svg viewBox="0 0 24 24" style="width:20px; color:#F59E0B;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                Ajouter un code promo
+            </div>
+            <svg viewBox="0 0 24 24" style="width:18px; color:var(--text-muted);"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </div>
+
+        <div class="summary-row">
+            <span id="cartModalSubText">Sous-total (0 article)</span>
+            <span id="cartModalSubTotal">0 DH</span>
+        </div>
+        <div class="summary-row">
+            <span>Livraison</span>
+            <span class="free-delivery-badge">Gratuite</span>
+        </div>
+        
+        <div class="summary-row total">
+            <span>Total</span>
+            <span style="color:var(--primary);" id="cartModalTotal">0 DH</span>
+        </div>
+        
         <button class="btn-large-primary" onclick="triggerWhatsApp()">
-            <svg viewBox="0 0 24 24" style="fill:white; stroke:none; width:20px; height:20px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            <svg viewBox="0 0 24 24" style="fill:white; stroke:none; width:22px; height:22px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
             Commander via WhatsApp
         </button>
     </div>
@@ -194,6 +311,19 @@
             'Sacs': '<svg viewBox="0 0 24 24"><path d="M4 10h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10z"></path><path d="M8 10V6a4 4 0 0 1 8 0v4"></path></svg>',
             'default': '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>'
         };
+
+        // Utility to detect and extract color hexes for the circular swatches
+        function getColorHex(name) {
+            const n = name.toLowerCase();
+            if(n.includes('bleu')) return '#2563EB';
+            if(n.includes('rouge')) return '#EF4444';
+            if(n.includes('noir')) return '#0F172A';
+            if(n.includes('vert')) return '#10B981';
+            if(n.includes('jaune')) return '#F59E0B';
+            if(n.includes('rose')) return '#EC4899';
+            if(n.includes('blanc')) return '#FFFFFF';
+            return null; // Return null if it's not a common color
+        }
 
         onSnapshot(collection(db, "products"), snap => {
             allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -229,11 +359,10 @@
             grid.innerHTML = filtered.map(p => {
                 let img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:bold; color:var(--primary);">${p.name.split(' ')[0]}</span>`;
                 let stockHTML = p.stock > 0 ? `<div class="stock-indicator"><div class="stock-dot"></div> En stock</div>` : `<div class="stock-indicator" style="color:var(--danger);"><div class="stock-dot" style="background:var(--danger);"></div> Rupture</div>`;
-                // Determine display price (if variants exist, use lowest variant price or main price)
+                
                 let displayPrice = p.sellPrice;
-                if(p.variants && p.variants.length > 0) {
-                    displayPrice = `À partir de ${Math.min(...p.variants.map(v => v.price))}`;
-                }
+                if(p.variants && p.variants.length > 0) { displayPrice = `À partir de ${Math.min(...p.variants.map(v => v.price))}`; }
+                
                 return `
                     <div class="product-card" onclick="window.openProductModal('${p.id}')">
                         <div class="product-img-box">${img}</div>
@@ -247,7 +376,7 @@
             }).join('');
         }
 
-        // --- ADVANCED MODAL (VARIANTS INTEGRATION) ---
+        // --- PRODUCT MODAL (Ref: 1000120172) ---
         window.openProductModal = (id) => {
             const product = allProducts.find(p => p.id === id);
             if (!product || product.stock <= 0) return;
@@ -255,43 +384,70 @@
             currentModalProduct = product;
             currentModalQty = 1;
             
-            // Check for variants
             let variantsHTML = '';
             currentVariantObj = null;
 
             if(product.variants && product.variants.length > 0) {
-                currentVariantObj = product.variants[0]; // Select first by default
-                variantsHTML = `
-                    <span class="section-label">Options disponibles</span>
-                    <div class="variant-grid" id="modalVariantsGrid">
-                        ${product.variants.map((v, i) => `
-                            <div class="variant-box ${i === 0 ? 'active' : ''}" onclick="window.selectVariant(${i})">
-                                <div class="v-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                                <span>${v.name}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
+                currentVariantObj = product.variants[0];
+                
+                // Check if variants are colors
+                const firstVarHex = getColorHex(product.variants[0].name);
+                const isColorType = firstVarHex !== null;
+
+                if (isColorType) {
+                    variantsHTML = `
+                        <span class="section-label">Couleur</span>
+                        <div style="display:flex; margin-bottom:25px; overflow-x:auto; padding-bottom:5px;">
+                            ${product.variants.map((v, i) => {
+                                const hex = getColorHex(v.name) || '#CBD5E1';
+                                return `
+                                <div class="color-swatch-wrapper ${i === 0 ? 'active' : ''}" onclick="window.selectVariant(${i})">
+                                    <div class="color-swatch ${i === 0 ? 'active' : ''}">
+                                        <div class="color-inner" style="background:${hex};"></div>
+                                        <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                    </div>
+                                    <span class="color-name">${v.name}</span>
+                                </div>`;
+                            }).join('')}
+                        </div>
+                    `;
+                } else {
+                    variantsHTML = `
+                        <span class="section-label">Option</span>
+                        <div class="variant-grid">
+                            ${product.variants.map((v, i) => `
+                                <div class="variant-box ${i === 0 ? 'active' : ''}" onclick="window.selectVariant(${i})">
+                                    <div class="v-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                    <span>${v.name}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
             }
 
             let basePrice = currentVariantObj ? currentVariantObj.price : product.sellPrice;
             let img = product.imageUrl ? `<img src="${product.imageUrl}">` : `<span>Img</span>`;
 
             document.getElementById('productModalContent').innerHTML = `
-                <div class="modal-product-layout">
+                <div class="modal-product-top">
                     <div class="modal-img-box">${img}</div>
-                    <div class="modal-info">
+                    <div class="modal-info-stack">
                         <h2>${product.name}</h2>
-                        <div class="price" id="modalMainPrice" style="color:var(--primary); font-weight:800; font-size:20px;">${basePrice} DH</div>
-                        <div class="stock-badge"><div class="stock-dot"></div> Disponible (Stock: ${product.stock})</div>
+                        <div class="price" id="modalMainPrice">${basePrice} DH</div>
+                        <div class="stock-badge-pill"><div class="stock-dot"></div> Disponible (Stock: ${product.stock})</div>
+                        <div class="review-stars">
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 12 2"></polygon></svg>
+                            4.8 <span style="font-weight:600; font-size:11px;">(120 avis)</span>
+                        </div>
                     </div>
                 </div>
 
                 ${variantsHTML}
 
-                <span class="section-label" style="margin-top:10px;">Quantité</span>
-                <div class="qty-row">
-                    <div class="qty-controls">
+                <div class="qty-row-ui">
+                    <span class="section-label" style="margin:0;">Quantité</span>
+                    <div class="qty-controls-pill">
                         <button class="qty-btn" onclick="window.changeModalQty(-1)">-</button>
                         <div class="qty-number" id="modalQtyDisplay">1</div>
                         <button class="qty-btn" onclick="window.changeModalQty(1)">+</button>
@@ -299,30 +455,45 @@
                 </div>
                 
                 <div class="price-summary">
-                    <span>Prix unitaire</span>
-                    <span id="modalUnitPrice" style="color:var(--primary);">${basePrice} DH</span>
+                    <span style="color:var(--text-muted);">Prix unitaire</span>
+                    <span id="modalUnitPrice" style="color:var(--primary); font-size:15px;">${basePrice} DH</span>
                 </div>
 
                 <button class="btn-large-primary" onclick="window.confirmAddToCart()">
-                    <svg viewBox="0 0 24 24" style="width:20px;height:20px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    <svg viewBox="0 0 24 24" style="fill:white; stroke:white; width:22px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                     Ajouter au panier • <span id="modalBtnTotal">${basePrice} DH</span>
                 </button>
 
                 <div class="trust-badges">
-                    <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Produit de qualité</div>
+                    <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Produit<br>de qualité</div>
                     <div class="trust-item"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> Livraison rapide<br>- 30 min</div>
                     <div class="trust-item"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><polyline points="23 20 23 14 17 14"></polyline><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg> Retour facile<br>sous 7 jours</div>
                 </div>
             `;
 
+            document.body.classList.add('no-scroll');
             document.getElementById('productOverlay').classList.add('active');
             document.getElementById('productModal').classList.add('active');
         };
 
         window.selectVariant = (index) => {
-            const boxes = document.querySelectorAll('.variant-box');
-            boxes.forEach(b => b.classList.remove('active'));
-            boxes[index].classList.add('active');
+            // Uncheck all square boxes
+            document.querySelectorAll('.variant-box').forEach(b => b.classList.remove('active'));
+            // Uncheck all color circles
+            document.querySelectorAll('.color-swatch-wrapper').forEach(w => {
+                w.classList.remove('active');
+                w.querySelector('.color-swatch').classList.remove('active');
+            });
+            
+            // Re-check clicked
+            const squares = document.querySelectorAll('.variant-box');
+            if(squares.length > 0) squares[index].classList.add('active');
+            
+            const circles = document.querySelectorAll('.color-swatch-wrapper');
+            if(circles.length > 0) {
+                circles[index].classList.add('active');
+                circles[index].querySelector('.color-swatch').classList.add('active');
+            }
             
             currentVariantObj = currentModalProduct.variants[index];
             updateModalPrices();
@@ -340,19 +511,21 @@
         function updateModalPrices() {
             const basePrice = currentVariantObj ? currentVariantObj.price : currentModalProduct.sellPrice;
             const total = basePrice * currentModalQty;
-            
             document.getElementById('modalMainPrice').innerText = `${basePrice} DH`;
             document.getElementById('modalUnitPrice').innerText = `${basePrice} DH`;
             document.getElementById('modalBtnTotal').innerText = `${total.toFixed(2)} DH`;
         }
 
-        window.closeProductModal = () => { document.getElementById('productOverlay').classList.remove('active'); document.getElementById('productModal').classList.remove('active'); };
+        window.closeProductModal = () => { 
+            document.body.classList.remove('no-scroll');
+            document.getElementById('productOverlay').classList.remove('active'); 
+            document.getElementById('productModal').classList.remove('active'); 
+        };
 
         window.confirmAddToCart = () => {
             const priceToUse = currentVariantObj ? currentVariantObj.price : currentModalProduct.sellPrice;
             const variantNameToUse = currentVariantObj ? currentVariantObj.name : null;
 
-            // Check if exact same item+variant is in cart
             const existingIndex = cart.findIndex(c => c.product.id === currentModalProduct.id && c.variantName === variantNameToUse);
             if(existingIndex > -1) {
                 const newTotalQty = cart[existingIndex].qty + currentModalQty;
@@ -363,40 +536,81 @@
             updateCartUI(); closeProductModal();
         };
 
-        // --- CART LOGIC ---
+        // --- CART LOGIC (Ref: 1000120173) ---
         window.openCartModal = () => {
             if(cart.length === 0) return;
+            renderCartModalList();
+            document.body.classList.add('no-scroll');
+            document.getElementById('cartOverlay').classList.add('active'); 
+            document.getElementById('cartModal').classList.add('active');
+        };
+
+        function renderCartModalList() {
             document.getElementById('cartItemsContainer').innerHTML = cart.map((item, index) => {
                 let img = item.product.imageUrl ? `<img src="${item.product.imageUrl}">` : '';
-                let vTag = item.variantName ? `<span class="variant-tag">${item.variantName}</span>` : '';
+                let vTag = item.variantName ? `<span class="variant-tag-blue">${item.variantName}</span>` : '';
                 return `
-                    <div class="cart-item-row">
+                    <div class="cart-item-card">
                         <div class="cart-item-img">${img}</div>
-                        <div class="cart-item-details">
-                            <h4 style="margin-bottom:0;">${item.product.name}</h4>
+                        <div class="cart-item-center">
+                            <h4>${item.product.name}</h4>
                             ${vTag}
-                            <div style="color:var(--primary); font-weight:800; font-size:14px; margin-top:4px;">${item.unitPrice} DH</div>
+                            <div class="cart-item-price">${item.unitPrice} DH</div>
                         </div>
-                        <div style="font-weight:800; font-size:14px; background:var(--bg); padding:6px 12px; border-radius:10px; color:var(--text-muted);">x${item.qty}</div>
-                        <button class="btn-remove" onclick="window.removeFromCart(${index})"><svg viewBox="0 0 24 24" style="width:18px;height:18px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+                        <div class="cart-item-right">
+                            <button class="btn-trash" onclick="window.removeFromCart(${index})">
+                                <svg viewBox="0 0 24 24" style="width:16px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            </button>
+                            <div class="qty-controls-small">
+                                <button onclick="window.changeCartQty(${index}, -1)">-</button>
+                                <span>${item.qty}</span>
+                                <button onclick="window.changeCartQty(${index}, 1)">+</button>
+                            </div>
+                        </div>
                     </div>
                 `;
             }).join('');
 
             const total = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
+            const itemsCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            
+            document.getElementById('cartModalSubText').innerText = `Sous-total (${itemsCount} article${itemsCount>1?'s':''})`;
+            document.getElementById('cartModalSubTotal').innerText = total.toFixed(2) + ' DH';
             document.getElementById('cartModalTotal').innerText = total.toFixed(2) + ' DH';
-            document.getElementById('cartOverlay').classList.add('active'); document.getElementById('cartModal').classList.add('active');
+        }
+
+        window.changeCartQty = (index, delta) => {
+            const item = cart[index];
+            const newQty = item.qty + delta;
+            if(newQty >= 1 && newQty <= item.product.stock) {
+                item.qty = newQty;
+                updateCartUI();
+                renderCartModalList(); // update modal instantly
+            }
         };
 
-        window.closeCartModal = () => { document.getElementById('cartOverlay').classList.remove('active'); document.getElementById('cartModal').classList.remove('active'); };
-        window.removeFromCart = (index) => { cart.splice(index, 1); updateCartUI(); if(cart.length === 0) closeCartModal(); else openCartModal(); };
+        window.closeCartModal = () => { 
+            document.body.classList.remove('no-scroll');
+            document.getElementById('cartOverlay').classList.remove('active'); 
+            document.getElementById('cartModal').classList.remove('active'); 
+        };
+        
+        window.removeFromCart = (index) => { 
+            cart.splice(index, 1); 
+            updateCartUI(); 
+            if(cart.length === 0) closeCartModal(); else renderCartModalList(); 
+        };
 
         function updateCartUI() {
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             const totalPrice = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
             
-            document.getElementById('cartCountText').innerText = totalItems + (totalItems > 1 ? " articles" : " article");
-            document.getElementById('cartPrice').innerText = `${totalPrice.toFixed(2)} DH`;
+            // Update Sticky Bar (Ref: 1000120175)
+            document.getElementById('scBadge').innerText = totalItems;
+            document.getElementById('scArticleCount').innerText = totalItems + (totalItems > 1 ? " articles" : " article");
+            document.getElementById('scTotalPrice').innerText = `${totalPrice.toFixed(2)} DH`;
+            
+            // Update Top Header Badge
             document.querySelectorAll('.top-cart-badge').forEach(b => b.innerText = totalItems);
             
             const bar = document.getElementById('orderBar');
