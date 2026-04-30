@@ -64,6 +64,15 @@
         .msc-content p { font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.3;}
         .msc-arrow { background: white; color: var(--primary); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;}
 
+        /* STATS (DASHBOARD) */
+        .stats-scroll { display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; margin: 0 -20px 24px; padding: 0 20px 10px; }
+        .stats-scroll::-webkit-scrollbar { display: none; }
+        .stat-card { background: var(--surface); border-radius: 16px; padding: 16px; min-width: 140px; box-shadow: var(--shadow-sm); flex-shrink: 0; border: 1px solid var(--border); }
+        .stat-label { font-size: 11px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; display: block; }
+        .stat-val { font-size: 18px; font-weight: 800; color: var(--text-main); margin-bottom: 6px; }
+        .stat-trend { font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+        .trend-up { color: var(--accent); } .trend-down { color: var(--danger); } .trend-flat { color: var(--text-muted); }
+
         /* ALERTS */
         .alert-card { border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; font-size: 13px; font-weight: 600; cursor: pointer; display: none; transition: 0.2s;}
         .alert-card:active { transform: scale(0.98); }
@@ -161,14 +170,6 @@
         .wizard-footer { display: flex; gap: 12px; margin-top: 30px; }
         .wizard-footer .btn { flex: 1; }
         .upload-box { border: 2px dashed var(--border); border-radius: var(--radius-card); padding: 40px 20px; text-align: center; background: var(--surface); margin-bottom: 24px; cursor: pointer; }
-        
-        .toggle-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--surface); border-radius: var(--radius-btn); border: 1px solid var(--border); margin-bottom: 20px; }
-        .switch { position: relative; display: inline-block; width: 50px; height: 30px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border); transition: .3s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 2px; bottom: 2px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        input:checked + .slider { background-color: var(--accent); }
-        input:checked + .slider:before { transform: translateX(20px); }
 
         /* ORDER DETAILS */
         .detail-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
@@ -229,16 +230,20 @@
             </div>
         </div>
 
-        <div class="main-stat-card" onclick="switchTab('analytics')">
-            <div class="msc-icon">
-                <svg viewBox="0 0 24 24" style="width:28px; height:28px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line><line x1="13" y1="13" x2="17" y2="17"></line><line x1="17" y1="13" x2="17" y2="17"></line><line x1="13" y1="17" x2="17" y2="17"></line></svg>
+        <div class="stats-scroll">
+            <div class="stat-card">
+                <span class="stat-label">Profit d'aujourd'hui</span>
+                <div class="stat-val" id="dashProfitToday">0.00 DH</div>
+                <div class="stat-trend trend-flat" id="dashProfitTrend">-</div>
             </div>
-            <div class="msc-content">
-                <h3>Statistiques</h3>
-                <p>Consultez toutes vos ventes, profits, coûts et performances.</p>
+            <div class="stat-card">
+                <span class="stat-label">Commandes du jour</span>
+                <div class="stat-val" id="dashOrdersToday">0</div>
+                <div class="stat-trend trend-flat" id="dashOrdersTrend">-</div>
             </div>
-            <div class="msc-arrow">
-                <svg viewBox="0 0 24 24" style="width:20px; height:20px;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <div class="stat-card">
+                <span class="stat-label">Profit (30 jours)</span>
+                <div class="stat-val" style="color: var(--primary);" id="dashProfitMonth">0.00 DH</div>
             </div>
         </div>
 
@@ -565,7 +570,7 @@
 
         const safeNum = (val) => isNaN(parseFloat(val)) ? 0 : parseFloat(val);
 
-        // --- UI Navigation with localStorage ---
+        // --- UI Navigation ---
         window.switchTab = (tabId) => {
             document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -575,7 +580,6 @@
             const navItem = document.getElementById(`nav-${navTarget}`);
             if(navItem) navItem.classList.add('active');
             
-            // Save state so refresh doesn't break
             if(tabId !== 'order-detail') {
                 localStorage.setItem('lascoAdminTab', tabId);
             }
@@ -625,21 +629,31 @@
 
                 allOrders.forEach(order => {
                     if(!order) return;
-                    const ts = order.timestamp ? new Date(order.timestamp) : new Date();
-                    const isToday = ts.toDateString() === todayStr;
-                    const isYesterday = ts.toDateString() === yesterdayStr;
-                    const isLast30Days = ts >= thirtyDaysAgo;
+                    
+                    let orderDate = new Date();
+                    if (order.timestamp) {
+                        const parsed = new Date(order.timestamp);
+                        if (!isNaN(parsed.getTime())) orderDate = parsed;
+                    }
+                    
+                    const isToday = orderDate.toDateString() === todayStr;
+                    const isYesterday = orderDate.toDateString() === yesterdayStr;
+                    const isLast30Days = orderDate >= thirtyDaysAgo;
 
-                    // Populate Popular Products using ALL non-cancelled orders to ensure visibility!
+                    // Commandes du jour tracks ALL orders
+                    if (isToday) ordersToday++;
+                    if (isYesterday) ordersYesterday++;
+
+                    // Bestsellers track all active orders (Not Cancelled)
                     if (order.status !== 'Annulée') {
                         if(order.cart && Array.isArray(order.cart)) {
                             order.cart.forEach(item => {
                                 const p = item.product || {};
                                 const qty = parseInt(item.qty) || 0;
-                                if (p.id) {
-                                    if (!productSalesCounter[p.id]) productSalesCounter[p.id] = { product: p, totalSold: 0 };
-                                    productSalesCounter[p.id].totalSold += qty;
-                                }
+                                const key = p.id || p.name || 'inconnu';
+                                
+                                if (!productSalesCounter[key]) productSalesCounter[key] = { product: p, totalSold: 0 };
+                                productSalesCounter[key].totalSold += qty;
                             });
                         }
                     }
@@ -659,8 +673,8 @@
                             });
                         }
 
-                        if (isToday) { profitToday += (orderRev - orderCost); revenueToday += orderRev; costToday += orderCost; ordersToday++; itemsToday += orderItems; }
-                        if (isYesterday) { profitYesterday += (orderRev - orderCost); revenueYesterday += orderRev; costYesterday += orderCost; ordersYesterday++; itemsYesterday += orderItems; }
+                        if (isToday) { profitToday += (orderRev - orderCost); revenueToday += orderRev; costToday += orderCost; itemsToday += orderItems; }
+                        if (isYesterday) { profitYesterday += (orderRev - orderCost); revenueYesterday += orderRev; costYesterday += orderCost; itemsYesterday += orderItems; }
                         if (isLast30Days) profit30Days += (orderRev - orderCost);
                     }
                 });
@@ -686,22 +700,26 @@
 
                 renderPopularProducts(productSalesCounter);
                 
-                // FIXED SORTING LOGIC FOR RECENT ORDERS
-                const recentOrders = [...allOrders].sort((a,b) => {
-                    const timeA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
-                    const timeB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
-                    return timeB - timeA;
-                }).slice(0, 2);
+                const getTime = (ts) => {
+                    if (!ts) return 0;
+                    const t = new Date(ts).getTime();
+                    return isNaN(t) ? 0 : t;
+                };
+                const recentOrders = [...allOrders].sort((a,b) => getTime(b.timestamp) - getTime(a.timestamp)).slice(0, 2);
                 document.getElementById('dashRecentOrdersContainer').innerHTML = generateOrdersHTML(recentOrders);
 
-            } catch (error) { console.error("Calc Error:", error); }
+            } catch (error) { 
+                console.error("Dashboard Error:", error); 
+                document.getElementById('dashRecentOrdersContainer').innerHTML = `<div class="empty-state">Erreur de chargement.</div>`;
+            }
         }
 
         function renderTrendArrow(elementId, todayVal, yesterdayVal, invertColors = false) {
             const el = document.getElementById(elementId);
             if (!el) return;
-            if (yesterdayVal === 0 && todayVal === 0) { el.className = 'mc-trend trend-flat'; el.innerText = '-'; return; }
+            if (yesterdayVal === 0 && todayVal === 0) { el.className = 'stat-trend trend-flat'; el.innerText = '-'; return; }
             let percentChange = (yesterdayVal === 0 && todayVal > 0) ? 100 : ((todayVal - yesterdayVal) / yesterdayVal) * 100;
+            
             let colorClass = percentChange >= 0 ? 'trend-up' : 'trend-down';
             if(invertColors) colorClass = percentChange >= 0 ? 'trend-down' : 'trend-up';
 
@@ -718,7 +736,7 @@
             try {
                 const sortedProducts = Object.values(salesCounter).sort((a, b) => b.totalSold - a.totalSold).slice(0, 3); 
                 const container = document.getElementById('dashPopularProductsContainer');
-                if (sortedProducts.length === 0) { container.innerHTML = '<div class="empty-state">Aucune commande enregistrée.</div>'; return; }
+                if (sortedProducts.length === 0) { container.innerHTML = '<div class="empty-state">Aucune vente enregistrée.</div>'; return; }
                 
                 container.innerHTML = sortedProducts.map(item => {
                     const p = item.product || {};
@@ -727,7 +745,10 @@
                     const img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:bold; color:var(--primary);">${name.charAt(0)}</span>`;
                     return `<div class="top-product"><div class="tp-img">${img}</div><div class="tp-info"><h4>${name}</h4><p>${price} DH</p></div><div class="tp-sales">${item.totalSold} vendus</div></div>`;
                 }).join('');
-            } catch (error) { console.error("PopProd Error:", error); }
+            } catch (error) { 
+                console.error("PopProd Error:", error); 
+                document.getElementById('dashPopularProductsContainer').innerHTML = '<div class="empty-state">Erreur de chargement.</div>';
+            }
         }
 
         function calculateProductAlerts() {
@@ -782,11 +803,13 @@
         };
 
         function renderFullOrdersList() {
-            let filtered = [...allOrders].sort((a,b) => {
-                const timeA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
-                const timeB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
-                return timeB - timeA;
-            });
+            const getTime = (ts) => {
+                if (!ts) return 0;
+                const t = new Date(ts).getTime();
+                return isNaN(t) ? 0 : t;
+            };
+            let filtered = [...allOrders].sort((a,b) => getTime(b.timestamp) - getTime(a.timestamp));
+            
             if (currentOrderFilter !== 'Toutes') {
                 filtered = filtered.filter(o => o.status === currentOrderFilter || o.status + 's' === currentOrderFilter);
             }
@@ -797,8 +820,13 @@
             try {
                 if(!ordersArray || ordersArray.length === 0) return `<div class="empty-state">Aucune commande.</div>`;
                 return ordersArray.map(o => {
-                    const ts = o.timestamp ? new Date(o.timestamp) : new Date();
-                    const date = ts.toLocaleDateString('fr-FR', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+                    let orderDate = new Date();
+                    if (o.timestamp) {
+                        const parsed = new Date(o.timestamp);
+                        if (!isNaN(parsed.getTime())) orderDate = parsed;
+                    }
+                    const date = orderDate.toLocaleDateString('fr-FR', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+                    
                     let statusClass = 'b-pending';
                     if(o.status === 'En cours') statusClass = 'b-processing';
                     if(o.status === 'Livrée' || o.status === 'Livrées') statusClass = 'b-delivered';
@@ -828,8 +856,13 @@
             if(!order) return;
 
             document.getElementById('det-id').innerText = "#" + order.id.substring(0,6).toUpperCase();
-            const ts = order.timestamp ? new Date(order.timestamp) : new Date();
-            document.getElementById('det-date').innerText = ts.toLocaleDateString('fr-FR', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'});
+            
+            let orderDate = new Date();
+            if (order.timestamp) {
+                const parsed = new Date(order.timestamp);
+                if (!isNaN(parsed.getTime())) orderDate = parsed;
+            }
+            document.getElementById('det-date').innerText = orderDate.toLocaleDateString('fr-FR', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'});
             document.getElementById('det-client').innerText = order.customerName || 'Inconnu';
             
             let statusClass = 'b-pending';
