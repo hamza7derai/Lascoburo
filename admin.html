@@ -535,6 +535,7 @@
             </div>
         </div>
     </div>
+
     <div class="toast" id="toastBox">
         <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         <span id="toastMsg">Action réussie</span>
@@ -562,10 +563,9 @@
         let currentEditProductId = null; 
         let currentProductFilter = 'all';
 
-        // --- SAFE DATA EXTRACTORS ---
         const safeNum = (val) => isNaN(parseFloat(val)) ? 0 : parseFloat(val);
 
-        // --- UI Navigation ---
+        // --- UI Navigation with localStorage ---
         window.switchTab = (tabId) => {
             document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -575,6 +575,11 @@
             const navItem = document.getElementById(`nav-${navTarget}`);
             if(navItem) navItem.classList.add('active');
             
+            // Save state so refresh doesn't break
+            if(tabId !== 'order-detail') {
+                localStorage.setItem('lascoAdminTab', tabId);
+            }
+            
             if(tabId !== 'produits' && currentProductFilter !== 'all') {
                 currentProductFilter = 'all';
                 document.getElementById('prodFilterBanner').classList.remove('active');
@@ -582,6 +587,12 @@
             }
             window.scrollTo(0,0);
         };
+
+        // Initialize state on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTab = localStorage.getItem('lascoAdminTab') || 'dashboard';
+            switchTab(savedTab);
+        });
 
         window.goToStep = (step) => {
             document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('active'));
@@ -619,24 +630,32 @@
                     const isYesterday = ts.toDateString() === yesterdayStr;
                     const isLast30Days = ts >= thirtyDaysAgo;
 
+                    // Populate Popular Products using ALL non-cancelled orders to ensure visibility!
+                    if (order.status !== 'Annulée') {
+                        if(order.cart && Array.isArray(order.cart)) {
+                            order.cart.forEach(item => {
+                                const p = item.product || {};
+                                const qty = parseInt(item.qty) || 0;
+                                if (p.id) {
+                                    if (!productSalesCounter[p.id]) productSalesCounter[p.id] = { product: p, totalSold: 0 };
+                                    productSalesCounter[p.id].totalSold += qty;
+                                }
+                            });
+                        }
+                    }
+
+                    // Profit/Revenue ONLY tracks completed "Livrées" orders
                     if (order.status === 'Livrées' || order.status === 'Livrée') {
                         let orderCost = 0, orderRev = 0, orderItems = 0;
-                        
                         if(order.cart && Array.isArray(order.cart)) {
                             order.cart.forEach(item => {
                                 const p = item.product || {};
                                 const cost = safeNum(p.costPrice);
                                 const sell = safeNum(item.unitPrice) || safeNum(p.sellPrice);
                                 const qty = parseInt(item.qty) || 0;
-                                
                                 orderCost += cost * qty;
                                 orderRev += sell * qty;
                                 orderItems += qty;
-
-                                if (p.id) {
-                                    if (!productSalesCounter[p.id]) productSalesCounter[p.id] = { product: p, totalSold: 0 };
-                                    productSalesCounter[p.id].totalSold += qty;
-                                }
                             });
                         }
 
@@ -666,7 +685,13 @@
                 renderTrendArrow('statItemsTrend', itemsToday, itemsYesterday, false);
 
                 renderPopularProducts(productSalesCounter);
-                const recentOrders = [...allOrders].sort((a,b) => (b.timestamp ? new Date(b.timestamp) : 0) - (a.timestamp ? new Date(a.timestamp) : 0)).slice(0, 2);
+                
+                // FIXED SORTING LOGIC FOR RECENT ORDERS
+                const recentOrders = [...allOrders].sort((a,b) => {
+                    const timeA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
+                    const timeB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
+                    return timeB - timeA;
+                }).slice(0, 2);
                 document.getElementById('dashRecentOrdersContainer').innerHTML = generateOrdersHTML(recentOrders);
 
             } catch (error) { console.error("Calc Error:", error); }
@@ -693,7 +718,7 @@
             try {
                 const sortedProducts = Object.values(salesCounter).sort((a, b) => b.totalSold - a.totalSold).slice(0, 3); 
                 const container = document.getElementById('dashPopularProductsContainer');
-                if (sortedProducts.length === 0) { container.innerHTML = '<div class="empty-state">Aucune vente enregistrée.</div>'; return; }
+                if (sortedProducts.length === 0) { container.innerHTML = '<div class="empty-state">Aucune commande enregistrée.</div>'; return; }
                 
                 container.innerHTML = sortedProducts.map(item => {
                     const p = item.product || {};
@@ -757,8 +782,14 @@
         };
 
         function renderFullOrdersList() {
-            let filtered = [...allOrders].sort((a,b) => (b.timestamp ? new Date(b.timestamp) : 0) - (a.timestamp ? new Date(a.timestamp) : 0));
-            if (currentOrderFilter !== 'Toutes') filtered = filtered.filter(o => o.status === currentOrderFilter || o.status + 's' === currentOrderFilter);
+            let filtered = [...allOrders].sort((a,b) => {
+                const timeA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
+                const timeB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
+                return timeB - timeA;
+            });
+            if (currentOrderFilter !== 'Toutes') {
+                filtered = filtered.filter(o => o.status === currentOrderFilter || o.status + 's' === currentOrderFilter);
+            }
             document.getElementById('adminOrderListContainer').innerHTML = generateOrdersHTML(filtered);
         }
 
@@ -917,7 +948,9 @@
         window.promptDeleteProduct = (id) => {
             document.getElementById('modalTitle').innerText = "Supprimer le produit";
             document.getElementById('modalMsg').innerText = "Cette action est irréversible. Confirmer ?";
-            document.getElementById('modalConfirmBtn').style.background = 'var(--danger)';
+            const btn = document.getElementById('modalConfirmBtn');
+            btn.style.background = 'var(--danger)';
+            
             window.confirmActionCallback = async () => {
                 closeConfirm();
                 await deleteDoc(doc(db, "products", id));
