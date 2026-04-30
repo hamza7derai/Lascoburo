@@ -101,7 +101,6 @@
 
         /* ANALYTICS GRID */
         .analytics-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
-        .date-picker-btn { background: var(--surface); border: 1px solid var(--border); padding: 8px 14px; border-radius: 10px; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px; box-shadow: var(--shadow-sm);}
         .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;}
         .metric-card { background: var(--surface); border-radius: 16px; padding: 16px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
         .mc-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items:center; justify-content: center; margin-bottom: 12px;}
@@ -154,7 +153,7 @@
         .upload-box { border: 2px dashed var(--border); border-radius: var(--radius-card); padding: 40px 20px; text-align: center; background: var(--surface); margin-bottom: 24px; cursor: pointer; transition: 0.2s;}
         .upload-box:active { background: var(--bg-main); }
         
-        /* Toggles & Chips UI */
+        /* Variants & Toggles UI Elements */
         .toggle-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 0; background: transparent; border: none; margin-bottom: 0; }
         .switch { position: relative; display: inline-block; width: 44px; height: 26px; }
         .switch input { opacity: 0; width: 0; height: 0; }
@@ -248,7 +247,7 @@
                 <p>Consultez toutes vos ventes, profits, coûts et performances.</p>
             </div>
             <div class="msc-arrow">
-                <svg viewBox="0 0 24 24" style="width:20px; height:20px;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                <svg viewBox="0 0 24 24" style="width:16px; height:16px;"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </div>
         </div>
 
@@ -539,9 +538,6 @@
     <div id="view-analytics" class="app-view container">
         <div class="analytics-header">
             <h1 style="font-size: 20px; font-weight:800;">Statistiques</h1>
-            <div class="date-picker-btn">
-                <svg viewBox="0 0 24 24" style="width:14px; color:var(--text-muted);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Aujourd'hui <svg viewBox="0 0 24 24" style="width:14px; margin-left:4px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </div>
         </div>
         <h3 style="font-size: 14px; margin-bottom: 12px;">Résumé</h3>
         <div class="analytics-grid">
@@ -558,28 +554,12 @@
         <div class="info-banner"><svg viewBox="0 0 24 24" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Les statistiques sont calculées en fonction des commandes livrées.</div>
     </div>
 
-
     <nav class="bottom-nav">
-        <div class="nav-item active" id="nav-dashboard" onclick="switchTab('dashboard')">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
-            Dashboard
-        </div>
-        <div class="nav-item" id="nav-ajouter" onclick="prepareAddProduct()">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-            Ajouter
-        </div>
-        <div class="nav-item" id="nav-produits" onclick="switchTab('produits')">
-            <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-            Produits
-        </div>
-        <div class="nav-item" id="nav-commandes" onclick="switchTab('commandes')">
-            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-            Commandes
-        </div>
-        <div class="nav-item" id="nav-analytics" onclick="switchTab('analytics')">
-            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-            Analytics
-        </div>
+        <div class="nav-item active" id="nav-dashboard" onclick="switchTab('dashboard')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg> Dashboard</div>
+        <div class="nav-item" id="nav-ajouter" onclick="prepareAddProduct()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg> Ajouter</div>
+        <div class="nav-item" id="nav-produits" onclick="switchTab('produits')"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> Produits</div>
+        <div class="nav-item" id="nav-commandes" onclick="switchTab('commandes')"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg> Commandes</div>
+        <div class="nav-item" id="nav-analytics" onclick="switchTab('analytics')"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Analytics</div>
     </nav>
 
     <div class="overlay" id="confirmOverlay">
@@ -587,26 +567,17 @@
             <div class="modal-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></div>
             <h3 id="modalTitle">Confirmation</h3>
             <p id="modalMsg">Êtes-vous sûr de vouloir effectuer cette action ?</p>
-            <div class="modal-actions">
-                <button class="btn btn-outline" onclick="closeModals()">Annuler</button>
-                <button class="btn btn-primary" id="modalConfirmBtn">Confirmer</button>
-            </div>
+            <div class="modal-actions"><button class="btn btn-outline" onclick="closeModals()">Annuler</button><button class="btn btn-primary" id="modalConfirmBtn">Confirmer</button></div>
         </div>
     </div>
-
     <div class="overlay" id="addCatOverlay" onclick="if(event.target===this) closeModals()"></div>
     <div class="bottom-sheet" id="addCatModal">
-        <div class="sheet-handle"></div>
-        <h2 style="font-size: 18px; font-weight:800; margin-bottom:20px;" id="catModalTitle">Ajouter</h2>
-        <div class="form-group">
-            <input type="text" id="newCatInput" class="form-control" placeholder="Nom de la catégorie..." autofocus>
-        </div>
+        <div class="sheet-handle"></div><h2 style="font-size: 18px; font-weight:800; margin-bottom:20px;" id="catModalTitle">Ajouter</h2>
+        <div class="form-group"><input type="text" id="newCatInput" class="form-control" placeholder="Nom de la catégorie..." autofocus></div>
         <button class="btn btn-primary" id="btnSaveCategory">Ajouter</button>
     </div>
-
     <div class="toast" id="toastBox">
-        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-        <span id="toastMsg">Action réussie</span>
+        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><span id="toastMsg">Action réussie</span>
     </div>
 
     <script type="module">
@@ -627,23 +598,16 @@
 
         let allOrders = [], allProducts = [], globalCategoriesData = [];
         let currentOrderFilter = 'Toutes', currentProductFilter = 'all', currentEditProductId = null; 
-        
-        window.productVariants = [];
-        window.productTags = []; // NEW TAGS ARRAY
-        let currentCatAddingType = ''; 
-
+        window.productVariants = []; window.productTags = []; let currentCatAddingType = ''; 
         const safeNum = (val) => isNaN(parseFloat(val)) ? 0 : parseFloat(val);
 
-        // --- UI Navigation ---
         window.switchTab = (tabId) => {
             document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById(`view-${tabId}`).classList.add('active');
-            
             let navTarget = tabId === 'order-detail' ? 'commandes' : tabId;
             const navItem = document.getElementById(`nav-${navTarget}`);
             if(navItem) navItem.classList.add('active');
-            
             if(tabId !== 'order-detail') localStorage.setItem('lascoAdminTab', tabId);
             if(tabId !== 'produits' && currentProductFilter !== 'all') {
                 currentProductFilter = 'all'; document.getElementById('prodFilterBanner').classList.remove('active');
@@ -653,75 +617,46 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-            const savedTab = localStorage.getItem('lascoAdminTab') || 'dashboard';
-            switchTab(savedTab);
+            const savedTab = localStorage.getItem('lascoAdminTab') || 'dashboard'; switchTab(savedTab);
         });
 
-        // --- WIZARD VALIDATION & NAVIGATION ---
         window.validateStep1 = () => {
-            const name = document.getElementById('pName').value.trim();
-            const cat = document.getElementById('pCat').value;
-            const btn = document.getElementById('btnNext1');
-            if(name && cat) { btn.disabled = false; } else { btn.disabled = true; }
+            const name = document.getElementById('pName').value.trim(); const cat = document.getElementById('pCat').value;
+            const btn = document.getElementById('btnNext1'); if(name && cat) { btn.disabled = false; } else { btn.disabled = true; }
         };
 
         window.previewWizardImg = () => {
-            const url = document.getElementById('pImg').value;
-            const imgEl = document.getElementById('previewImg');
+            const url = document.getElementById('pImg').value; const imgEl = document.getElementById('previewImg');
             if(url) { imgEl.src = url; imgEl.style.display = 'block'; document.getElementById('uploadBoxUI').style.display='none'; }
             else { imgEl.style.display = 'none'; document.getElementById('uploadBoxUI').style.display='flex'; }
         }
 
         window.validateStep2 = () => {
-            const sell = document.getElementById('pSell').value;
-            const stock = document.getElementById('pStock').value;
-            const lowStock = document.getElementById('pLowStock').value;
-            const btn = document.getElementById('btnNext2');
-            if(sell !== "" && stock !== "" && lowStock !== "") { btn.disabled = false; } else { btn.disabled = true; }
+            const sell = document.getElementById('pSell').value; const stock = document.getElementById('pStock').value; const lowStock = document.getElementById('pLowStock').value;
+            const btn = document.getElementById('btnNext2'); if(sell !== "" && stock !== "" && lowStock !== "") { btn.disabled = false; } else { btn.disabled = true; }
         };
 
         window.goToStep = (step) => {
             document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('active'));
             document.getElementById(`wizard-${step}`).classList.add('active');
             document.querySelectorAll('.step-dot').forEach((el, index) => {
-                el.classList.remove('active', 'done');
-                if(index + 1 === step) el.classList.add('active');
-                if(index + 1 < step) el.classList.add('done');
+                el.classList.remove('active', 'done'); if(index + 1 === step) el.classList.add('active'); if(index + 1 < step) el.classList.add('done');
             });
-            
-            // NEW: Pull Price to Step 3
-            if(step === 3) {
-                document.getElementById('pNormalPrice').value = document.getElementById('pSell').value;
-                calculatePromo();
-            }
+            if(step === 3) { document.getElementById('pNormalPrice').value = document.getElementById('pSell').value; calculatePromo(); }
             window.scrollTo(0,0);
         };
 
-        // --- SMART PROMO CALCULATION ---
         window.calculatePromo = () => {
             const normal = parseFloat(document.getElementById('pNormalPrice').value) || 0;
             const promo = parseFloat(document.getElementById('pPromoPrice').value) || 0;
-            const badge = document.getElementById('promoBadge');
-            const text = document.getElementById('promoText');
-            
-            if (promo > 0 && promo < normal) {
-                const discount = Math.round(((normal - promo) / normal) * 100);
-                text.innerText = `Promotion active : ${discount}% de réduction`;
-                badge.style.display = 'flex';
-            } else {
-                badge.style.display = 'none';
-            }
+            const badge = document.getElementById('promoBadge'); const text = document.getElementById('promoText');
+            if (promo > 0 && promo < normal) { const discount = Math.round(((normal - promo) / normal) * 100); text.innerText = `Promotion active : ${discount}% de réduction`; badge.style.display = 'flex'; } 
+            else { badge.style.display = 'none'; }
         };
 
-        // --- TAGS LOGIC ---
         window.addTagOption = () => {
-            const input = document.getElementById('pTagInput');
-            const val = input.value.trim();
-            if(val && !window.productTags.includes(val.toLowerCase())) {
-                window.productTags.push(val.toLowerCase());
-                input.value = '';
-                renderTagsUI();
-            }
+            const input = document.getElementById('pTagInput'); const val = input.value.trim();
+            if(val && !window.productTags.includes(val.toLowerCase())) { window.productTags.push(val.toLowerCase()); input.value = ''; renderTagsUI(); }
         };
         window.removeTag = (index) => { window.productTags.splice(index, 1); renderTagsUI(); };
         function renderTagsUI() {
@@ -730,25 +665,16 @@
             `).join('');
         }
 
-        // --- VARIANTS LOGIC ---
         function getColorHex(name) {
-            const n = name.toLowerCase();
-            if(n.includes('bleu')) return '#2563EB'; if(n.includes('rouge')) return '#EF4444';
+            const n = name.toLowerCase(); if(n.includes('bleu')) return '#2563EB'; if(n.includes('rouge')) return '#EF4444';
             if(n.includes('noir')) return '#0F172A'; if(n.includes('vert')) return '#10B981';
-            if(n.includes('jaune')) return '#F59E0B'; if(n.includes('rose')) return '#EC4899';
-            if(n.includes('blanc')) return '#FFFFFF'; return null;
+            if(n.includes('jaune')) return '#F59E0B'; if(n.includes('rose')) return '#EC4899'; if(n.includes('blanc')) return '#FFFFFF'; return null;
         }
 
         window.addVariantOption = () => {
-            const input = document.getElementById('vNameInput');
-            const name = input.value.trim();
-            if(name && !window.productVariants.find(v => v.name.toLowerCase() === name.toLowerCase())) {
-                window.productVariants.push({ name: name, stock: 0 });
-                input.value = '';
-                renderVariantUI();
-            }
+            const input = document.getElementById('vNameInput'); const name = input.value.trim();
+            if(name && !window.productVariants.find(v => v.name.toLowerCase() === name.toLowerCase())) { window.productVariants.push({ name: name, stock: 0 }); input.value = ''; renderVariantUI(); }
         };
-
         window.removeVar = (index) => { window.productVariants.splice(index, 1); renderVariantUI(); };
         window.updateVarStock = (index, val) => { window.productVariants[index].stock = parseInt(val) || 0; };
 
@@ -757,134 +683,77 @@
             document.getElementById('vChips').innerHTML = window.productVariants.map((v, i) => `
                 <div class="v-chip">${v.name} <span onclick="removeVar(${i})"><svg viewBox="0 0 24 24" style="width:12px; height:12px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></div>
             `).join('');
-
             if(window.productVariants.length > 0) {
                 document.getElementById('vStockSection').style.display = 'block';
                 document.getElementById('vRowsContainer').innerHTML = window.productVariants.map((v, i) => {
-                    let dotColor = '#CBD5E1'; 
-                    if(isColor) { const hex = getColorHex(v.name); if(hex) dotColor = hex; }
+                    let dotColor = '#CBD5E1'; if(isColor) { const hex = getColorHex(v.name); if(hex) dotColor = hex; }
                     return `
-                    <div class="v-row">
-                        <div class="v-row-left"><div class="v-dot" style="background:${dotColor};"></div>${v.name}</div>
-                        <div class="v-row-right">
-                            <input type="number" class="form-control" value="${v.stock}" onchange="updateVarStock(${i}, this.value)" style="padding:10px; width:70px; text-align:center;">
-                            <span style="font-size:12px; color:var(--text-muted);">pièces</span>
-                        </div>
-                        <button class="btn-icon-small" style="background:#FEE2E2; color:var(--danger); flex-shrink:0;" onclick="removeVar(${i})">
-                            <svg viewBox="0 0 24 24" style="width:16px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                        </button>
+                    <div class="v-row"><div class="v-row-left"><div class="v-dot" style="background:${dotColor};"></div>${v.name}</div>
+                        <div class="v-row-right"><input type="number" class="form-control" value="${v.stock}" onchange="updateVarStock(${i}, this.value)" style="padding:10px; width:70px; text-align:center;"><span style="font-size:12px; color:var(--text-muted);">pièces</span></div>
+                        <button class="btn-icon-small" style="background:#FEE2E2; color:var(--danger); flex-shrink:0;" onclick="removeVar(${i})"><svg viewBox="0 0 24 24" style="width:16px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
                     </div>`;
                 }).join('');
             } else { document.getElementById('vStockSection').style.display = 'none'; }
         }
-        
         document.getElementById('varType').addEventListener('change', renderVariantUI);
 
-
-        // --- CATEGORY MODAL LOGIC ---
         window.openAddCategoryModal = (type) => {
             currentCatAddingType = type;
-            if(type === 'main') {
-                document.getElementById('catModalTitle').innerText = "Nouvelle catégorie principale";
-            } else {
-                const mainCat = document.getElementById('pCat').value;
-                if(!mainCat) return alert("Sélectionnez d'abord une catégorie principale.");
+            if(type === 'main') { document.getElementById('catModalTitle').innerText = "Nouvelle catégorie principale"; } 
+            else {
+                const mainCat = document.getElementById('pCat').value; if(!mainCat) return alert("Sélectionnez d'abord une catégorie principale.");
                 document.getElementById('catModalTitle').innerText = `Sous-catégorie pour '${mainCat}'`;
             }
             document.getElementById('newCatInput').value = '';
-            document.getElementById('addCatOverlay').classList.add('active');
-            document.getElementById('addCatModal').classList.add('active');
+            document.getElementById('addCatOverlay').classList.add('active'); document.getElementById('addCatModal').classList.add('active');
             setTimeout(() => document.getElementById('newCatInput').focus(), 100);
         };
 
-        window.closeModals = () => {
-            document.getElementById('confirmOverlay').classList.remove('active');
-            document.getElementById('addCatOverlay').classList.remove('active');
-            document.getElementById('addCatModal').classList.remove('active');
-        };
+        window.closeModals = () => { document.getElementById('confirmOverlay').classList.remove('active'); document.getElementById('addCatOverlay').classList.remove('active'); document.getElementById('addCatModal').classList.remove('active'); };
 
         document.getElementById('btnSaveCategory').addEventListener('click', async () => {
-            const val = document.getElementById('newCatInput').value.trim();
-            if(!val) return;
-
-            const btn = document.getElementById('btnSaveCategory');
-            btn.innerText = '...'; btn.disabled = true;
-
+            const val = document.getElementById('newCatInput').value.trim(); if(!val) return;
+            const btn = document.getElementById('btnSaveCategory'); btn.innerText = '...'; btn.disabled = true;
             try {
                 if(!globalCategoriesData) globalCategoriesData = [];
                 if(currentCatAddingType === 'main') {
                     if(!globalCategoriesData.find(c => c.name.toLowerCase() === val.toLowerCase())) {
-                        await addDoc(collection(db, "categories"), { name: val, subcategories: [] });
-                        showToast("Catégorie créée !");
+                        await addDoc(collection(db, "categories"), { name: val, subcategories: [] }); showToast("Catégorie créée !");
                         setTimeout(() => { document.getElementById('pCat').value = val; loadSubCats(); validateStep1(); }, 800);
                     }
                 } else {
-                    const mainCatName = document.getElementById('pCat').value;
-                    const catDoc = globalCategoriesData.find(c => c.name === mainCatName);
+                    const mainCatName = document.getElementById('pCat').value; const catDoc = globalCategoriesData.find(c => c.name === mainCatName);
                     if(catDoc) {
                         let subs = catDoc.subcategories || [];
-                        if(!subs.includes(val)) {
-                            subs.push(val);
-                            await updateDoc(doc(db, "categories", catDoc.id), { subcategories: subs });
-                            showToast("Sous-catégorie ajoutée !");
-                            setTimeout(() => { document.getElementById('pSubCat').value = val; }, 800);
-                        }
+                        if(!subs.includes(val)) { subs.push(val); await updateDoc(doc(db, "categories", catDoc.id), { subcategories: subs }); showToast("Sous-catégorie ajoutée !"); setTimeout(() => { document.getElementById('pSubCat').value = val; }, 800); }
                     }
                 }
                 closeModals();
-            } catch (e) { console.error(e); showToast("Erreur. Vérifiez la connexion."); } 
-            finally { btn.innerText = 'Ajouter'; btn.disabled = false; }
+            } catch (e) { console.error(e); showToast("Erreur. Vérifiez la connexion."); } finally { btn.innerText = 'Ajouter'; btn.disabled = false; }
         });
 
-        // --- DASHBOARD MATH & STATS ---
         function calculateDashboard() {
             try {
-                const now = new Date();
-                const todayStr = now.toDateString();
-                const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
-                const yesterdayStr = yesterday.toDateString();
-                const thirtyDaysAgo = new Date(); thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
-                let profitToday = 0, profitYesterday = 0, profit30Days = 0;
-                let revenueToday = 0, revenueYesterday = 0;
-                let costToday = 0, costYesterday = 0;
-                let ordersToday = 0, ordersYesterday = 0;
-                let itemsToday = 0, itemsYesterday = 0;
-                let productSalesCounter = {}; 
+                const now = new Date(); const todayStr = now.toDateString(); const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1); const yesterdayStr = yesterday.toDateString(); const thirtyDaysAgo = new Date(); thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+                let profitToday = 0, profitYesterday = 0, profit30Days = 0, revenueToday = 0, revenueYesterday = 0, costToday = 0, costYesterday = 0, ordersToday = 0, ordersYesterday = 0, itemsToday = 0, itemsYesterday = 0; let productSalesCounter = {}; 
 
                 allOrders.forEach(order => {
-                    if(!order) return;
-                    let orderDate = new Date();
+                    if(!order) return; let orderDate = new Date();
                     if (order.timestamp) { const parsed = new Date(order.timestamp); if (!isNaN(parsed.getTime())) orderDate = parsed; }
-                    const isToday = orderDate.toDateString() === todayStr;
-                    const isYesterday = orderDate.toDateString() === yesterdayStr;
-                    const isLast30Days = orderDate >= thirtyDaysAgo;
+                    const isToday = orderDate.toDateString() === todayStr; const isYesterday = orderDate.toDateString() === yesterdayStr; const isLast30Days = orderDate >= thirtyDaysAgo;
 
-                    if (isToday) ordersToday++;
-                    if (isYesterday) ordersYesterday++;
+                    if (isToday) ordersToday++; if (isYesterday) ordersYesterday++;
 
                     if (order.status !== 'Annulée') {
                         if(order.cart && Array.isArray(order.cart)) {
-                            order.cart.forEach(item => {
-                                const p = item.product || {};
-                                const qty = parseInt(item.qty) || 0;
-                                const key = p.id || p.name || 'inconnu';
-                                if (!productSalesCounter[key]) productSalesCounter[key] = { product: p, totalSold: 0 };
-                                productSalesCounter[key].totalSold += qty;
-                            });
+                            order.cart.forEach(item => { const p = item.product || {}; const qty = parseInt(item.qty) || 0; const key = p.id || p.name || 'inconnu'; if (!productSalesCounter[key]) productSalesCounter[key] = { product: p, totalSold: 0 }; productSalesCounter[key].totalSold += qty; });
                         }
                     }
 
                     if (order.status === 'Livrées' || order.status === 'Livrée') {
                         let orderCost = 0, orderRev = 0, orderItems = 0;
                         if(order.cart && Array.isArray(order.cart)) {
-                            order.cart.forEach(item => {
-                                const p = item.product || {};
-                                const cost = safeNum(p.costPrice);
-                                const sell = safeNum(item.unitPrice) || safeNum(p.sellPrice);
-                                const qty = parseInt(item.qty) || 0;
-                                orderCost += cost * qty; orderRev += sell * qty; orderItems += qty;
-                            });
+                            order.cart.forEach(item => { const p = item.product || {}; const cost = safeNum(p.costPrice); const sell = safeNum(item.unitPrice) || safeNum(p.sellPrice); const qty = parseInt(item.qty) || 0; orderCost += cost * qty; orderRev += sell * qty; orderItems += qty; });
                         }
                         if (isToday) { profitToday += (orderRev - orderCost); revenueToday += orderRev; costToday += orderCost; itemsToday += orderItems; }
                         if (isYesterday) { profitYesterday += (orderRev - orderCost); revenueYesterday += orderRev; costYesterday += orderCost; itemsYesterday += orderItems; }
@@ -892,12 +761,8 @@
                     }
                 });
 
-                document.getElementById('dashProfitToday').innerText = profitToday.toFixed(2) + ' DH';
-                document.getElementById('dashOrdersToday').innerText = ordersToday;
-                document.getElementById('dashProfitMonth').innerText = profit30Days.toFixed(2) + ' DH';
-                renderTrendArrow('dashProfitTrend', profitToday, profitYesterday, false);
-                renderTrendArrow('dashOrdersTrend', ordersToday, ordersYesterday, false);
-                
+                document.getElementById('dashProfitToday').innerText = profitToday.toFixed(2) + ' DH'; document.getElementById('dashOrdersToday').innerText = ordersToday; document.getElementById('dashProfitMonth').innerText = profit30Days.toFixed(2) + ' DH';
+                renderTrendArrow('dashProfitTrend', profitToday, profitYesterday, false); renderTrendArrow('dashOrdersTrend', ordersToday, ordersYesterday, false);
                 document.getElementById('statProfit').innerText = profitToday.toFixed(2) + ' DH'; renderTrendArrow('statProfitTrend', profitToday, profitYesterday, false);
                 document.getElementById('statRevenue').innerText = revenueToday.toFixed(2) + ' DH'; renderTrendArrow('statRevenueTrend', revenueToday, revenueYesterday, false);
                 document.getElementById('statCost').innerText = costToday.toFixed(2) + ' DH'; renderTrendArrow('statCostTrend', costToday, costYesterday, true);
@@ -912,61 +777,42 @@
         }
 
         function renderTrendArrow(elementId, todayVal, yesterdayVal, invertColors = false) {
-            const el = document.getElementById(elementId);
-            if (!el) return;
+            const el = document.getElementById(elementId); if (!el) return;
             if (yesterdayVal === 0 && todayVal === 0) { el.className = 'mc-trend trend-flat'; el.innerText = '-'; return; }
             let percentChange = (yesterdayVal === 0 && todayVal > 0) ? 100 : ((todayVal - yesterdayVal) / yesterdayVal) * 100;
-            let colorClass = percentChange >= 0 ? 'trend-up' : 'trend-down';
-            if(invertColors) colorClass = percentChange >= 0 ? 'trend-down' : 'trend-up';
-
-            if (percentChange >= 0) {
-                el.className = `stat-trend ${colorClass}`;
-                el.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg> ${Math.abs(percentChange).toFixed(0)}%${elementId.includes('stat')?' vs hier':''}`;
-            } else {
-                el.className = `stat-trend ${colorClass}`;
-                el.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg> ${Math.abs(percentChange).toFixed(0)}%${elementId.includes('stat')?' vs hier':''}`;
-            }
+            let colorClass = percentChange >= 0 ? 'trend-up' : 'trend-down'; if(invertColors) colorClass = percentChange >= 0 ? 'trend-down' : 'trend-up';
+            el.className = `stat-trend ${colorClass}`;
+            el.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="${percentChange >= 0 ? '23 6 13.5 15.5 8.5 10.5 1 18' : '23 18 13.5 8.5 8.5 13.5 1 6'}"></polyline><polyline points="${percentChange >= 0 ? '17 6 23 6 23 12' : '17 18 23 18 23 12'}"></polyline></svg> ${Math.abs(percentChange).toFixed(0)}%${elementId.includes('stat')?' vs hier':''}`;
         }
 
         function renderPopularProducts(salesCounter) {
             try {
-                const sortedProducts = Object.values(salesCounter).sort((a, b) => b.totalSold - a.totalSold).slice(0, 3); 
-                const container = document.getElementById('dashPopularProductsContainer');
+                const sortedProducts = Object.values(salesCounter).sort((a, b) => b.totalSold - a.totalSold).slice(0, 3); const container = document.getElementById('dashPopularProductsContainer');
                 if (sortedProducts.length === 0) { container.innerHTML = '<div class="empty-state">Aucune vente enregistrée.</div>'; return; }
-                
                 container.innerHTML = sortedProducts.map(item => {
-                    const p = item.product || {};
-                    const name = p.name || 'Produit inconnu';
-                    const price = safeNum(p.sellPrice).toFixed(2);
+                    const p = item.product || {}; const name = p.name || 'Produit inconnu'; const price = safeNum(p.sellPrice).toFixed(2);
                     const img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:bold; color:var(--primary);">${name.charAt(0)}</span>`;
                     return `<div class="top-product"><div class="tp-img">${img}</div><div class="tp-info"><h4>${name}</h4><p>${price} DH</p></div><div class="tp-sales">${item.totalSold} vendus</div></div>`;
                 }).join('');
             } catch (error) { console.error("PopProd Error:", error); }
         }
 
-        // --- FIREBASE LISTENERS & INITIALIZATION ---
         window.loadSubCats = () => {
-            const main = document.getElementById('pCat').value;
-            const subEl = document.getElementById('pSubCat');
+            const main = document.getElementById('pCat').value; const subEl = document.getElementById('pSubCat');
             const catDoc = globalCategoriesData.find(c => c.name === main);
-            if(catDoc && catDoc.subcategories && catDoc.subcategories.length > 0) {
-                subEl.innerHTML = '<option value="">(Optionnel) Choisir...</option>' + catDoc.subcategories.map(s => `<option value="${s}">${s}</option>`).join('');
-            } else {
-                subEl.innerHTML = '<option value="">Aucune sous-catégorie</option>';
-            }
+            if(catDoc && catDoc.subcategories && catDoc.subcategories.length > 0) { subEl.innerHTML = '<option value="">(Optionnel) Choisir...</option>' + catDoc.subcategories.map(s => `<option value="${s}">${s}</option>`).join(''); } 
+            else { subEl.innerHTML = '<option value="">Aucune sous-catégorie</option>'; }
         };
 
         onSnapshot(collection(db, "categories"), snap => {
-            globalCategoriesData = snap.docs.map(d => ({id: d.id, ...d.data()}));
-            globalCategoriesData.sort((a,b) => a.name.localeCompare(b.name));
+            globalCategoriesData = snap.docs.map(d => ({id: d.id, ...d.data()})); globalCategoriesData.sort((a,b) => a.name.localeCompare(b.name));
             const currentSelected = document.getElementById('pCat').value;
             document.getElementById('pCat').innerHTML = '<option value="">Sélectionner...</option>' + globalCategoriesData.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
             if(currentSelected && globalCategoriesData.find(c => c.name === currentSelected)) document.getElementById('pCat').value = currentSelected;
         });
 
         onSnapshot(collection(db, "orders"), snap => {
-            allOrders = snap.docs.map(d => ({id: d.id, ...d.data()}));
-            calculateDashboard(); renderFullOrdersList(); 
+            allOrders = snap.docs.map(d => ({id: d.id, ...d.data()})); calculateDashboard(); renderFullOrdersList(); 
             if (document.getElementById('view-order-detail').classList.contains('active')) {
                 const currentId = document.getElementById('det-id').innerText.replace('#', '').toLowerCase();
                 const stillExists = allOrders.find(o => o.id.toLowerCase() === currentId || o.id.substring(0,6).toLowerCase() === currentId);
@@ -977,30 +823,16 @@
         onSnapshot(collection(db, "products"), snap => {
             allProducts = snap.docs.map(d => ({id: d.id, ...d.data()}));
             let lowCount = 0, outCount = 0;
-            allProducts.forEach(p => {
-                const stock = parseInt(p.stock) || 0; const limit = parseInt(p.lowStockThreshold) || 5;
-                if (stock <= 0) outCount++; else if (stock <= limit) lowCount++;
-            });
+            allProducts.forEach(p => { const stock = parseInt(p.stock) || 0; const limit = parseInt(p.lowStockThreshold) || 5; if (stock <= 0) outCount++; else if (stock <= limit) lowCount++; });
             const lowAlertCard = document.getElementById('alertLowStock');
-            if (lowCount > 0) { lowAlertCard.classList.add('active'); document.getElementById('lowStockText').innerText = `${lowCount} produit${lowCount>1?'s':''} en stock faible`; } 
-            else lowAlertCard.classList.remove('active');
+            if (lowCount > 0) { lowAlertCard.classList.add('active'); document.getElementById('lowStockText').innerText = `${lowCount} produit${lowCount>1?'s':''} en stock faible`; } else lowAlertCard.classList.remove('active');
             const outAlertCard = document.getElementById('alertOutOfStock');
-            if (outCount > 0) { outAlertCard.classList.add('active'); document.getElementById('outOfStockText').innerText = `${outCount} produit${outCount>1?'s':''} en rupture de stock`; } 
-            else outAlertCard.classList.remove('active');
-            
+            if (outCount > 0) { outAlertCard.classList.add('active'); document.getElementById('outOfStockText').innerText = `${outCount} produit${outCount>1?'s':''} en rupture de stock`; } else outAlertCard.classList.remove('active');
             if(currentProductFilter === 'all') renderProductsAdminList(allProducts); else filterProduits(currentProductFilter);
         });
 
-        window.filterProduits = (type) => {
-            currentProductFilter = type; switchTab('produits'); renderProductsAdminList(allProducts);
-        };
-
-        // --- ORDER MANAGEMENT ---
-        window.filterOrdersList = (status, tabElement) => {
-            document.querySelectorAll('.tab-pill').forEach(t => t.classList.remove('active'));
-            tabElement.classList.add('active');
-            currentOrderFilter = status; renderFullOrdersList();
-        };
+        window.filterProduits = (type) => { currentProductFilter = type; switchTab('produits'); renderProductsAdminList(allProducts); };
+        window.filterOrdersList = (status, tabElement) => { document.querySelectorAll('.tab-pill').forEach(t => t.classList.remove('active')); tabElement.classList.add('active'); currentOrderFilter = status; renderFullOrdersList(); };
 
         function renderFullOrdersList() {
             const getTime = (ts) => { if (!ts) return 0; const t = new Date(ts).getTime(); return isNaN(t) ? 0 : t; };
@@ -1013,68 +845,32 @@
             try {
                 if(!ordersArray || ordersArray.length === 0) return `<div class="empty-state">Aucune commande.</div>`;
                 return ordersArray.map(o => {
-                    let orderDate = new Date();
-                    if (o.timestamp) { const parsed = new Date(o.timestamp); if (!isNaN(parsed.getTime())) orderDate = parsed; }
+                    let orderDate = new Date(); if (o.timestamp) { const parsed = new Date(o.timestamp); if (!isNaN(parsed.getTime())) orderDate = parsed; }
                     const date = orderDate.toLocaleDateString('fr-FR', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
-                    let statusClass = 'b-pending';
-                    if(o.status === 'En cours') statusClass = 'b-processing';
-                    if(o.status === 'Livrée' || o.status === 'Livrées') statusClass = 'b-delivered';
-                    if(o.status === 'Annulée') statusClass = 'b-cancelled';
-                    
-                    const price = safeNum(o.totalPrice).toFixed(2);
-                    const items = parseInt(o.totalItems) || 0;
-                    const cName = o.customerName || 'Client';
-
-                    return `
-                    <div class="card order-card" onclick="window.viewOrder('${o.id}')">
-                        <div class="order-header">
-                            <div><div class="o-id">#${o.id.substring(0,6).toUpperCase()}</div><div class="o-date">${date}</div></div>
-                            <div class="badge ${statusClass}">${o.status}</div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                            <div><div class="o-client"><svg viewBox="0 0 24 24" style="width:14px; color:var(--text-muted);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> ${cName}</div><div class="o-items">${items} articles</div></div>
-                            <div class="o-price">${price} DH</div>
-                        </div>
-                    </div>`;
+                    let statusClass = 'b-pending'; if(o.status === 'En cours') statusClass = 'b-processing'; if(o.status === 'Livrée' || o.status === 'Livrées') statusClass = 'b-delivered'; if(o.status === 'Annulée') statusClass = 'b-cancelled';
+                    const price = safeNum(o.totalPrice).toFixed(2); const items = parseInt(o.totalItems) || 0; const cName = o.customerName || 'Client';
+                    return `<div class="card order-card" onclick="window.viewOrder('${o.id}')"><div class="order-header"><div><div class="o-id">#${o.id.substring(0,6).toUpperCase()}</div><div class="o-date">${date}</div></div><div class="badge ${statusClass}">${o.status}</div></div><div style="display: flex; justify-content: space-between; align-items: flex-end;"><div><div class="o-client"><svg viewBox="0 0 24 24" style="width:14px; color:var(--text-muted);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> ${cName}</div><div class="o-items">${items} articles</div></div><div class="o-price">${price} DH</div></div></div>`;
                 }).join('');
             } catch (e) { console.error("Order HTML Error:", e); return `<div class="empty-state">Erreur d'affichage.</div>`; }
         }
 
         window.viewOrder = (orderId) => {
-            const order = allOrders.find(o => o.id === orderId);
-            if(!order) return;
-
+            const order = allOrders.find(o => o.id === orderId); if(!order) return;
             document.getElementById('det-id').innerText = "#" + order.id.substring(0,6).toUpperCase();
-            let orderDate = new Date();
-            if (order.timestamp) { const parsed = new Date(order.timestamp); if (!isNaN(parsed.getTime())) orderDate = parsed; }
+            let orderDate = new Date(); if (order.timestamp) { const parsed = new Date(order.timestamp); if (!isNaN(parsed.getTime())) orderDate = parsed; }
             document.getElementById('det-date').innerText = orderDate.toLocaleDateString('fr-FR', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'});
             document.getElementById('det-client').innerText = order.customerName || 'Inconnu';
             
-            let statusClass = 'b-pending';
-            if(order.status === 'En cours') statusClass = 'b-processing';
-            if(order.status === 'Livrée' || order.status === 'Livrées') statusClass = 'b-delivered';
-            if(order.status === 'Annulée') statusClass = 'b-cancelled';
-            
-            const badge = document.getElementById('det-badge');
-            badge.className = `badge ${statusClass}`;
-            badge.innerText = (order.status || 'Inconnu').toUpperCase();
+            let statusClass = 'b-pending'; if(order.status === 'En cours') statusClass = 'b-processing'; if(order.status === 'Livrée' || order.status === 'Livrées') statusClass = 'b-delivered'; if(order.status === 'Annulée') statusClass = 'b-cancelled';
+            const badge = document.getElementById('det-badge'); badge.className = `badge ${statusClass}`; badge.innerText = (order.status || 'Inconnu').toUpperCase();
 
             document.getElementById('det-items-count').innerText = `Articles (${order.totalItems || 0})`;
             document.getElementById('det-items-list').innerHTML = (order.cart || []).map(item => {
-                const p = item.product || {};
-                const img = p.imageUrl ? `<img src="${p.imageUrl}">` : '';
-                const vText = item.variantName ? `<span style="color:var(--primary);">${item.variantName}</span>` : '';
-                const price = safeNum(item.unitPrice) || safeNum(p.sellPrice);
-                return `
-                <div class="item-row">
-                    <div class="item-img">${img}</div>
-                    <div class="item-details"><div class="item-name">${p.name || 'Produit'} ${vText}</div><div class="item-meta">x${item.qty}</div></div>
-                    <div class="item-price">${(price * item.qty).toFixed(2)} DH</div>
-                </div>`;
+                const p = item.product || {}; const img = p.imageUrl ? `<img src="${p.imageUrl}">` : ''; const vText = item.variantName ? `<span style="color:var(--primary);">${item.variantName}</span>` : ''; const price = safeNum(item.unitPrice) || safeNum(p.sellPrice);
+                return `<div class="item-row"><div class="item-img">${img}</div><div class="item-details"><div class="item-name">${p.name || 'Produit'} ${vText}</div><div class="item-meta">x${item.qty}</div></div><div class="item-price">${(price * item.qty).toFixed(2)} DH</div></div>`;
             }).join('');
 
-            const total = safeNum(order.totalPrice).toFixed(2);
-            document.getElementById('det-subtotal').innerText = `${total} DH`; document.getElementById('det-total').innerText = `${total} DH`;
+            const total = safeNum(order.totalPrice).toFixed(2); document.getElementById('det-subtotal').innerText = `${total} DH`; document.getElementById('det-total').innerText = `${total} DH`;
 
             let actionsHTML = '';
             if(order.status !== 'Annulée' && order.status !== 'Livrée' && order.status !== 'Livrées') {
@@ -1083,31 +879,20 @@
                 actionsHTML += `<button class="btn btn-danger-outline" onclick="promptOrderStatus('${order.id}', 'Annulée')">Annuler la commande</button>`;
             } else if (order.status === 'Annulée') { actionsHTML = `<div style="text-align:center; color:var(--danger); font-weight:700;">Commande annulée</div>`; } 
             else { actionsHTML = `<div style="text-align:center; color:var(--success); font-weight:700;">Commande complétée</div>`; }
-            
             actionsHTML += `<button class="btn btn-outline" style="color:var(--danger); border-color:var(--danger-light); margin-top: 24px;" onclick="promptDeleteOrder('${order.id}')">Supprimer la commande</button>`;
             
-            document.getElementById('det-actions').innerHTML = actionsHTML;
-            switchTab('order-detail');
+            document.getElementById('det-actions').innerHTML = actionsHTML; switchTab('order-detail');
         };
 
         window.promptOrderStatus = (orderId, newStatus) => {
             document.getElementById('modalTitle').innerText = "Mise à jour statut"; document.getElementById('modalMsg').innerText = `Voulez-vous marquer cette commande comme ${newStatus.toLowerCase()} ?`;
-            const btn = document.getElementById('modalConfirmBtn');
-            btn.className = 'btn btn-primary'; btn.style.background = newStatus === 'Annulée' ? 'var(--danger)' : 'var(--primary)';
-            window.confirmActionCallback = async () => {
-                closeModals();
-                try { await updateDoc(doc(db, "orders", orderId), { status: newStatus }); showToast(`Statut mis à jour`); } 
-                catch(e) { alert("Erreur réseau"); }
-            };
-            document.getElementById('confirmOverlay').classList.add('active');
+            const btn = document.getElementById('modalConfirmBtn'); btn.className = 'btn btn-primary'; btn.style.background = newStatus === 'Annulée' ? 'var(--danger)' : 'var(--primary)';
+            window.confirmActionCallback = async () => { closeModals(); try { await updateDoc(doc(db, "orders", orderId), { status: newStatus }); showToast(`Statut mis à jour`); } catch(e) { alert("Erreur réseau"); } }; document.getElementById('confirmOverlay').classList.add('active');
         };
 
         window.promptDeleteOrder = (orderId) => {
-            document.getElementById('modalTitle').innerText = "Supprimer la commande"; 
-            document.getElementById('modalMsg').innerText = "Cette action supprimera la commande et restaurera automatiquement le stock des articles. Confirmer ?";
-            const btn = document.getElementById('modalConfirmBtn');
-            btn.className = 'btn btn-primary'; btn.style.background = 'var(--danger)';
-            
+            document.getElementById('modalTitle').innerText = "Supprimer la commande"; document.getElementById('modalMsg').innerText = "Cette action supprimera la commande et restaurera automatiquement le stock des articles. Confirmer ?";
+            const btn = document.getElementById('modalConfirmBtn'); btn.className = 'btn btn-primary'; btn.style.background = 'var(--danger)';
             window.confirmActionCallback = async () => {
                 closeModals();
                 try { 
@@ -1117,168 +902,99 @@
                             if(item.product && item.product.id) {
                                 const currentProd = allProducts.find(p => p.id === item.product.id);
                                 if(currentProd) {
-                                    let newStock = (parseInt(currentProd.stock) || 0) + item.qty;
-                                    let updateData = { stock: newStock };
+                                    let newStock = (parseInt(currentProd.stock) || 0) + item.qty; let updateData = { stock: newStock };
                                     if(item.variantName && currentProd.variants) {
-                                        let updatedVariants = [...currentProd.variants];
-                                        let vIndex = updatedVariants.findIndex(v => v.name === item.variantName);
-                                        if(vIndex > -1) {
-                                            updatedVariants[vIndex].stock = (parseInt(updatedVariants[vIndex].stock) || 0) + item.qty;
-                                            updateData.variants = updatedVariants;
-                                        }
+                                        let updatedVariants = [...currentProd.variants]; let vIndex = updatedVariants.findIndex(v => v.name === item.variantName);
+                                        if(vIndex > -1) { updatedVariants[vIndex].stock = (parseInt(updatedVariants[vIndex].stock) || 0) + item.qty; updateData.variants = updatedVariants; }
                                     }
                                     await updateDoc(doc(db, "products", item.product.id), updateData);
                                 }
                             }
                         }
                     }
-                    await deleteDoc(doc(db, "orders", orderId)); 
-                    showToast("Commande supprimée et stock restauré"); 
-                    switchTab('commandes');
+                    await deleteDoc(doc(db, "orders", orderId)); showToast("Commande supprimée et stock restauré"); switchTab('commandes');
                 } catch(e) { console.error(e); alert("Erreur lors de la suppression."); }
-            };
-            document.getElementById('confirmOverlay').classList.add('active');
+            }; document.getElementById('confirmOverlay').classList.add('active');
         };
 
-        // --- PRODUCT MANAGEMENT ---
         function renderProductsAdminList(productsArray) {
             try {
-                let filtered = productsArray;
-                const filterBanner = document.getElementById('prodFilterBanner');
+                let filtered = productsArray; const filterBanner = document.getElementById('prodFilterBanner');
                 if (currentProductFilter === 'rupture') { filtered = filtered.filter(p => (parseInt(p.stock)||0) <= 0); filterBanner.classList.add('active'); document.getElementById('prodFilterText').innerText = "Filtre: Rupture de stock"; } 
                 else if (currentProductFilter === 'faible') { filtered = filtered.filter(p => { const s = parseInt(p.stock)||0; return s > 0 && s <= (parseInt(p.lowStockThreshold)||5); }); filterBanner.classList.add('active'); document.getElementById('prodFilterText').innerText = "Filtre: Stock faible"; } 
                 else { filterBanner.classList.remove('active'); }
-
-                document.getElementById('prodCountText').innerText = `${filtered.length} produits`;
-                const container = document.getElementById('adminProductListContainer');
+                document.getElementById('prodCountText').innerText = `${filtered.length} produits`; const container = document.getElementById('adminProductListContainer');
                 if(filtered.length === 0) { container.innerHTML = `<div class="empty-state">Aucun produit trouvé.</div>`; return; }
 
                 container.innerHTML = filtered.map(p => {
-                    const name = p.name || 'Inconnu';
-                    const img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:800;color:var(--text-muted);">${name.charAt(0)}</span>`;
+                    const name = p.name || 'Inconnu'; const img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:800;color:var(--text-muted);">${name.charAt(0)}</span>`;
                     const stock = parseInt(p.stock)||0; const limit = parseInt(p.lowStockThreshold)||5;
                     let stockClass = 'stock-good', stockText = `${stock} en stock`;
                     if (stock <= 0) { stockClass = 'stock-out'; stockText = 'Rupture'; } else if (stock <= limit) { stockClass = 'stock-low'; stockText = `Stock: ${stock} (Faible)`; }
 
-                    return `
-                    <div class="prod-card">
-                        <div class="prod-img-box">${img}</div>
-                        <div class="prod-info"><h4>${name}</h4><div class="prod-meta">${p.category||'Sans cat'} • <strong style="color:var(--primary);">${safeNum(p.sellPrice)} DH</strong></div><div class="prod-stock ${stockClass}">${stockText}</div></div>
-                        <div class="prod-actions">
-                            <button class="btn-icon-small btn-edit-prod" onclick="editProduct('${p.id}')"><svg viewBox="0 0 24 24" style="width:18px;"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button>
-                            <button class="btn-icon-small btn-del-prod" onclick="promptDeleteProduct('${p.id}')"><svg viewBox="0 0 24 24" style="width:18px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                        </div>
-                    </div>`;
+                    return `<div class="prod-card"><div class="prod-img-box">${img}</div><div class="prod-info"><h4>${name}</h4><div class="prod-meta">${p.category||'Sans cat'} • <strong style="color:var(--primary);">${safeNum(p.sellPrice)} DH</strong></div><div class="prod-stock ${stockClass}">${stockText}</div></div><div class="prod-actions"><button class="btn-icon-small btn-edit-prod" onclick="editProduct('${p.id}')"><svg viewBox="0 0 24 24" style="width:18px;"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button><button class="btn-icon-small btn-del-prod" onclick="promptDeleteProduct('${p.id}')"><svg viewBox="0 0 24 24" style="width:18px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button></div></div>`;
                 }).join('');
             } catch(e) { console.error("Prod List Error:", e); }
         }
 
         document.getElementById('searchProdInput').addEventListener('input', e => {
-            const q = e.target.value.toLowerCase();
-            let subset = allProducts;
-            if (currentProductFilter === 'rupture') subset = subset.filter(p => (parseInt(p.stock)||0) <= 0);
-            if (currentProductFilter === 'faible') subset = subset.filter(p => { const s = parseInt(p.stock)||0; return s > 0 && s <= (parseInt(p.lowStockThreshold)||5); });
+            const q = e.target.value.toLowerCase(); let subset = allProducts;
+            if (currentProductFilter === 'rupture') subset = subset.filter(p => (parseInt(p.stock)||0) <= 0); if (currentProductFilter === 'faible') subset = subset.filter(p => { const s = parseInt(p.stock)||0; return s > 0 && s <= (parseInt(p.lowStockThreshold)||5); });
             renderProductsAdminList(subset.filter(p => (p.name||'').toLowerCase().includes(q) || (p.category||'').toLowerCase().includes(q)));
         });
 
         window.promptDeleteProduct = (id) => {
             document.getElementById('modalTitle').innerText = "Supprimer le produit"; document.getElementById('modalMsg').innerText = "Cette action est irréversible. Confirmer ?";
             const btn = document.getElementById('modalConfirmBtn'); btn.style.background = 'var(--danger)';
-            window.confirmActionCallback = async () => { closeModals(); await deleteDoc(doc(db, "products", id)); showToast("Produit supprimé"); };
-            document.getElementById('confirmOverlay').classList.add('active');
+            window.confirmActionCallback = async () => { closeModals(); await deleteDoc(doc(db, "products", id)); showToast("Produit supprimé"); }; document.getElementById('confirmOverlay').classList.add('active');
         }
 
-        // --- ADD/EDIT PRODUCT LOGIC ---
         window.prepareAddProduct = () => {
-            currentEditProductId = null;
-            document.getElementById('wizardTitle').innerText = "Ajouter un produit";
-            document.querySelectorAll('#view-ajouter input').forEach(i => { if(i.type !== 'checkbox') i.value = '' });
-            document.getElementById('previewImg').style.display = 'none'; document.getElementById('uploadBoxUI').style.display = 'flex';
-            document.getElementById('pLowStock').value = 5;
-            
-            document.getElementById('pFeatured').checked = false;
-            window.productTags = []; renderTagsUI();
-
-            document.getElementById('varToggle').checked = false; document.getElementById('variantConfig').style.display = 'none';
-            window.productVariants = []; renderVariantUI();
-            
+            currentEditProductId = null; document.getElementById('wizardTitle').innerText = "Ajouter un produit"; document.querySelectorAll('#view-ajouter input').forEach(i => { if(i.type !== 'checkbox') i.value = '' });
+            document.getElementById('previewImg').style.display = 'none'; document.getElementById('uploadBoxUI').style.display = 'flex'; document.getElementById('pLowStock').value = 5;
+            document.getElementById('pFeatured').checked = false; window.productTags = []; renderTagsUI();
+            document.getElementById('varToggle').checked = false; document.getElementById('variantConfig').style.display = 'none'; window.productVariants = []; renderVariantUI();
             switchTab('ajouter'); goToStep(1); validateStep1(); validateStep2();
         };
 
         window.editProduct = (id) => {
-            const p = allProducts.find(x => x.id === id);
-            if(!p) return;
-            currentEditProductId = id;
-            document.getElementById('wizardTitle').innerText = "Modifier le produit";
-            
-            document.getElementById('pName').value = p.name || '';
-            document.getElementById('pCat').value = p.category || '';
+            const p = allProducts.find(x => x.id === id); if(!p) return;
+            currentEditProductId = id; document.getElementById('wizardTitle').innerText = "Modifier le produit";
+            document.getElementById('pName').value = p.name || ''; document.getElementById('pCat').value = p.category || '';
             loadSubCats(); setTimeout(() => document.getElementById('pSubCat').value = p.subCategory || '', 100);
             document.getElementById('pCost').value = p.costPrice || ''; document.getElementById('pSell').value = p.sellPrice || '';
             document.getElementById('pStock').value = p.stock || ''; document.getElementById('pLowStock').value = p.lowStockThreshold || 5;
             document.getElementById('pImg').value = p.imageUrl || '';
-            
-            document.getElementById('pFeatured').checked = p.featured || false;
-            document.getElementById('pPromoPrice').value = p.promoPrice || '';
-            
-            window.productTags = p.tags ? [...p.tags] : [];
-            renderTagsUI();
-            
+            document.getElementById('pFeatured').checked = p.featured || false; document.getElementById('pPromoPrice').value = p.promoPrice || '';
+            window.productTags = p.tags ? [...p.tags] : []; renderTagsUI();
             window.previewWizardImg();
 
-            if(p.variants && p.variants.length > 0) {
-                document.getElementById('varToggle').checked = true; document.getElementById('variantConfig').style.display = 'block';
-                window.productVariants = [...p.variants]; renderVariantUI();
-            } else {
-                document.getElementById('varToggle').checked = false; document.getElementById('variantConfig').style.display = 'none';
-                window.productVariants = []; renderVariantUI();
-            }
+            if(p.variants && p.variants.length > 0) { document.getElementById('varToggle').checked = true; document.getElementById('variantConfig').style.display = 'block'; window.productVariants = [...p.variants]; renderVariantUI(); } 
+            else { document.getElementById('varToggle').checked = false; document.getElementById('variantConfig').style.display = 'none'; window.productVariants = []; renderVariantUI(); }
             switchTab('ajouter'); goToStep(1); validateStep1(); validateStep2();
         };
 
         window.saveProductData = async () => {
             const hasVars = document.getElementById('varToggle').checked;
             let calculatedStock = parseInt(document.getElementById('pStock').value) || 0;
-            if(hasVars && window.productVariants.length > 0) {
-                calculatedStock = window.productVariants.reduce((sum, v) => sum + (parseInt(v.stock) || 0), 0);
-            }
+            if(hasVars && window.productVariants.length > 0) { calculatedStock = window.productVariants.reduce((sum, v) => sum + (parseInt(v.stock) || 0), 0); }
 
             const data = {
-                name: document.getElementById('pName').value,
-                category: document.getElementById('pCat').value || "Non classé",
-                subCategory: document.getElementById('pSubCat').value || "",
-                costPrice: parseFloat(document.getElementById('pCost').value) || 0,
-                sellPrice: parseFloat(document.getElementById('pSell').value) || 0,
-                stock: calculatedStock,
-                lowStockThreshold: parseInt(document.getElementById('pLowStock').value) || 5,
-                imageUrl: document.getElementById('pImg').value,
-                featured: document.getElementById('pFeatured').checked,
-                promoPrice: parseFloat(document.getElementById('pPromoPrice').value) || null,
-                tags: window.productTags,
-                sku: document.getElementById('pSku').value || "",
-                variants: hasVars ? window.productVariants : []
+                name: document.getElementById('pName').value, category: document.getElementById('pCat').value || "Non classé", subCategory: document.getElementById('pSubCat').value || "",
+                costPrice: parseFloat(document.getElementById('pCost').value) || 0, sellPrice: parseFloat(document.getElementById('pSell').value) || 0, stock: calculatedStock,
+                lowStockThreshold: parseInt(document.getElementById('pLowStock').value) || 5, imageUrl: document.getElementById('pImg').value, featured: document.getElementById('pFeatured').checked,
+                promoPrice: parseFloat(document.getElementById('pPromoPrice').value) || null, tags: window.productTags, sku: document.getElementById('pSku').value || "", variants: hasVars ? window.productVariants : []
             };
 
             if(!data.name || !data.category) return alert("Veuillez remplir les informations de base.");
-            
             try {
                 if(currentEditProductId) { await updateDoc(doc(db, "products", currentEditProductId), data); showToast("Produit modifié !"); } 
                 else { data.timestamp = new Date().toISOString(); await addDoc(collection(db, "products"), data); showToast("Nouveau produit ajouté !"); }
                 switchTab('produits');
             } catch (e) { console.error(e); alert("Erreur lors de l'enregistrement."); }
         };
-
-        window.closeModals = () => {
-            document.getElementById('confirmOverlay').classList.remove('active');
-            document.getElementById('addCatOverlay').classList.remove('active');
-            document.getElementById('addCatModal').classList.remove('active');
-        };
-
         document.getElementById('modalConfirmBtn').addEventListener('click', () => { if(window.confirmActionCallback) window.confirmActionCallback(); });
-        function showToast(msg) {
-            const t = document.getElementById('toastBox'); document.getElementById('toastMsg').innerText = msg;
-            t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000);
-        }
+        function showToast(msg) { const t = document.getElementById('toastBox'); document.getElementById('toastMsg').innerText = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
     </script>
 </body>
 </html>
