@@ -81,9 +81,7 @@
         .cat-hub-arrow { position: absolute; right: 20px; color: var(--primary); opacity: 0.5; }
         .bg-blue { background: #EEF2FF; border-color: #C7D2FE; } .bg-gray { background: #F8FAFC; border-color: #E2E8F0; } .bg-green { background: #F0FDF4; border-color: #BBF7D0; } .bg-pink { background: #FDF2F8; border-color: #FBCFE8; }
 
-        /* =========================================
-           NEW: SUB-CATEGORY HORIZONTAL PILLS
-        ========================================= */
+        /* HORIZONTAL PILLS (Sub-categories) */
         .sub-cats-scroll { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; margin: 0 -20px 20px -20px; padding: 0 20px; }
         .sub-cats-scroll::-webkit-scrollbar { display: none; }
         .sub-cat-pill { padding: 8px 16px; background: white; border: 1px solid var(--border); border-radius: 50px; font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: 0.2s; box-shadow: var(--shadow-sm); }
@@ -228,8 +226,7 @@
             <button class="ghost-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
         </div>
 
-        <div class="sub-cats-scroll" id="subCatPillMenu">
-            </div>
+        <div class="sub-cats-scroll" id="subCatPillMenu"></div>
         
         <main class="product-grid" id="subCatProductGrid"></main>
     </div>
@@ -301,7 +298,8 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        // CRITICAL UPDATE: 'addDoc' imported here to save orders to Firebase
+        import { getFirestore, collection, onSnapshot, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCKY59mqLqD4GqQpkDEFqNybKIkwLvgId0",
@@ -353,7 +351,7 @@
             window.scrollTo(0,0);
         };
 
-        // --- NEW: CATEGORY TO SUB-CATEGORY LOGIC ---
+        // --- CATEGORY TO SUB-CATEGORY LOGIC ---
         window.openCategory = (catName) => {
             activeMainCategory = catName;
             document.getElementById('subCatTitle').innerText = catName;
@@ -364,7 +362,6 @@
             
             if(catData && catData.subcategories) {
                 catData.subcategories.forEach(sub => {
-                    // Remove spaces for ID safety
                     const safeId = sub.replace(/\s+/g, '-'); 
                     pillHTML += `<div class="sub-cat-pill" id="pill-${safeId}" onclick="window.filterSubCategory('${sub}')">${sub}</div>`;
                 });
@@ -379,13 +376,11 @@
         };
 
         window.filterSubCategory = (subCatName) => {
-            // Update UI styles for pills
             document.querySelectorAll('.sub-cat-pill').forEach(p => p.classList.remove('active'));
             const safeId = subCatName === 'Tous' ? 'Tous' : subCatName.replace(/\s+/g, '-');
             const pill = document.getElementById(`pill-${safeId}`);
             if(pill) pill.classList.add('active');
 
-            // Filter the actual products
             let filtered = allProducts.filter(p => p.category === activeMainCategory);
             if(subCatName !== 'Tous') {
                 filtered = filtered.filter(p => p.subCategory === subCatName);
@@ -395,29 +390,22 @@
         };
 
         // --- DATA LOADING ---
-        // 1. Listen to Categories collection first to get subcategories
         onSnapshot(collection(db, "categories"), snap => {
             globalCategoriesData = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             globalCategoriesData.sort((a,b) => a.name.localeCompare(b.name));
             renderCategoriesHub();
         });
 
-        // 2. Listen to Products
         onSnapshot(collection(db, "products"), snap => {
             allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             renderHome();
-            
-            // If user is currently looking at a category, refresh it
             if(activeMainCategory) {
-                // Re-apply "Tous" filter by default just to be safe on refresh
                 window.filterSubCategory('Tous');
             }
         });
 
         function renderHome() {
-            // Extract unique categories directly from products for the quick circles
             const activeCats = [...new Set(allProducts.map(p => p.category))].filter(Boolean);
-            
             let circlesHTML = '';
             activeCats.forEach(cat => {
                 const icon = (categoryIcons[cat] || categoryIcons['default']).icon;
@@ -429,8 +417,6 @@
                 `;
             });
             document.getElementById('homeQuickCats').innerHTML = circlesHTML;
-
-            // Render best sellers (first 6 for now)
             renderProductGrid(allProducts.slice(0, 6), 'homeProductGrid');
         }
 
@@ -484,7 +470,7 @@
 
         // --- SEARCH ---
         document.getElementById('homeSearch').addEventListener('input', e => { 
-            searchQuery = e.target.value.toLowerCase(); 
+            const searchQuery = e.target.value.toLowerCase(); 
             const filtered = allProducts.filter(p => p.name.toLowerCase().includes(searchQuery));
             renderProductGrid(filtered, 'homeProductGrid');
         });
@@ -713,16 +699,48 @@
             if(totalItems > 0) bar.classList.remove('hidden'); else bar.classList.add('hidden');
         }
 
-        window.triggerWhatsApp = () => {
+        // --- NEW: AUTOMATED FIREBASE ORDER SYNC ---
+        window.triggerWhatsApp = async () => {
+            if(cart.length === 0) return;
+
+            // 1. Ask for customer name
+            const customerName = window.prompt("Veuillez entrer votre nom pour finaliser la commande :");
+            if(!customerName || customerName.trim() === "") return;
+
+            const total = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+
+            // 2. Save order to Firebase
+            try {
+                await addDoc(collection(db, "orders"), {
+                    customerName: customerName,
+                    cart: cart, // saves all items, quantities, and variants
+                    totalPrice: total,
+                    totalItems: totalItems,
+                    status: "En attente", // default status
+                    timestamp: new Date().toISOString()
+                });
+            } catch (error) {
+                console.error("Error saving order:", error);
+                alert("Une erreur est survenue. Veuillez réessayer.");
+                return;
+            }
+
+            // 3. Generate WhatsApp Message
             const phone = "212600000000"; // ⚠️ REPLACE WITH REAL NUMBER
-            let msg = "📦 *Nouvelle commande Lascoburo*\n\n";
+            let msg = `📦 *Nouvelle commande Lascoburo*\n👤 Client: ${customerName}\n\n`;
             cart.forEach(item => {
                 const vText = item.variantName ? ` (${item.variantName})` : '';
                 msg += `• ${item.product.name}${vText} (x${item.qty}) - ${(item.unitPrice * item.qty).toFixed(2)} DH\n`;
             });
-            const total = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
             msg += `\n💰 *Total à payer : ${total.toFixed(2)} DH*`;
+            
+            // 4. Open WhatsApp and clear cart
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
+            
+            cart = []; 
+            updateCartUI();
+            closeCartModal();
         };
     </script>
 </body>
