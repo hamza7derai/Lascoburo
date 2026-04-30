@@ -153,7 +153,7 @@
         .upload-box { border: 2px dashed var(--border); border-radius: var(--radius-card); padding: 40px 20px; text-align: center; background: var(--surface); margin-bottom: 24px; cursor: pointer; transition: 0.2s;}
         .upload-box:active { background: var(--bg-main); }
         
-        /* Variants & Toggles UI Elements */
+        /* Toggles & Chips UI */
         .toggle-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 0; background: transparent; border: none; margin-bottom: 0; }
         .switch { position: relative; display: inline-block; width: 44px; height: 26px; }
         .switch input { opacity: 0; width: 0; height: 0; }
@@ -475,6 +475,30 @@
 
             <div class="card" style="margin-bottom:12px;">
                 <div class="toggle-wrapper" style="padding:0; border:none; margin-bottom:16px;">
+                    <div style="display:flex; align-items:center; gap:8px; color:var(--primary);">
+                        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        <span style="font-weight:800; font-size:14px; color:var(--text-main);">Manuel scolaire</span>
+                    </div>
+                    <label class="switch"><input type="checkbox" id="textbookToggle" onchange="document.getElementById('textbookConfig').style.display = this.checked ? 'block' : 'none'"><span class="slider"></span></label>
+                </div>
+                <div id="textbookConfig" style="display:none;">
+                    <div class="form-group">
+                        <label>Niveau (ex: 2AC, Tronc Commun)</label>
+                        <input type="text" id="tbLevel" class="form-control" placeholder="Ajouter le niveau...">
+                    </div>
+                    <div class="form-group">
+                        <label>Matière (ex: Mathématiques, Français)</label>
+                        <input type="text" id="tbSubject" class="form-control" placeholder="Ajouter la matière...">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Éditeur (ex: Nathan, Hatier)</label>
+                        <input type="text" id="tbPublisher" class="form-control" placeholder="Ajouter l'éditeur...">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom:12px;">
+                <div class="toggle-wrapper" style="padding:0; border:none; margin-bottom:16px;">
                     <div style="display:flex; align-items:center; gap:8px; color:var(--purple);">
                         <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
                         <span style="font-weight:800; font-size:14px; color:var(--text-main);">Variantes</span>
@@ -732,7 +756,6 @@
             } catch (e) { console.error(e); showToast("Erreur. Vérifiez la connexion."); } finally { btn.innerText = 'Ajouter'; btn.disabled = false; }
         });
 
-        // --- DASHBOARD MATH & STATS ---
         function calculateDashboard() {
             try {
                 const now = new Date(); const todayStr = now.toDateString(); const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1); const yesterdayStr = yesterday.toDateString(); const thirtyDaysAgo = new Date(); thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
@@ -980,7 +1003,13 @@
         window.prepareAddProduct = () => {
             currentEditProductId = null; document.getElementById('wizardTitle').innerText = "Ajouter un produit"; document.querySelectorAll('#view-ajouter input').forEach(i => { if(i.type !== 'checkbox') i.value = '' });
             document.getElementById('previewImg').style.display = 'none'; document.getElementById('uploadBoxUI').style.display = 'flex'; document.getElementById('pLowStock').value = 5;
+            
             document.getElementById('pFeatured').checked = false; window.productTags = []; renderTagsUI();
+            
+            // Textbooks reset
+            document.getElementById('textbookToggle').checked = false; document.getElementById('textbookConfig').style.display = 'none';
+            document.getElementById('tbLevel').value = ''; document.getElementById('tbSubject').value = ''; document.getElementById('tbPublisher').value = '';
+
             document.getElementById('varToggle').checked = false; document.getElementById('variantConfig').style.display = 'none'; window.productVariants = []; renderVariantUI();
             switchTab('ajouter'); goToStep(1); validateStep1(); validateStep2();
         };
@@ -996,6 +1025,17 @@
             document.getElementById('pFeatured').checked = p.featured || false; document.getElementById('pPromoPrice').value = p.promoPrice || '';
             window.productTags = p.tags ? [...p.tags] : []; renderTagsUI(); window.previewWizardImg();
 
+            // Textbooks load
+            if(p.isTextbook) {
+                document.getElementById('textbookToggle').checked = true; document.getElementById('textbookConfig').style.display = 'block';
+                document.getElementById('tbLevel').value = p.textbookLevel || '';
+                document.getElementById('tbSubject').value = p.textbookSubject || '';
+                document.getElementById('tbPublisher').value = p.textbookPublisher || '';
+            } else {
+                document.getElementById('textbookToggle').checked = false; document.getElementById('textbookConfig').style.display = 'none';
+                document.getElementById('tbLevel').value = ''; document.getElementById('tbSubject').value = ''; document.getElementById('tbPublisher').value = '';
+            }
+
             if(p.variants && p.variants.length > 0) { document.getElementById('varToggle').checked = true; document.getElementById('variantConfig').style.display = 'block'; window.productVariants = [...p.variants]; renderVariantUI(); } 
             else { document.getElementById('varToggle').checked = false; document.getElementById('variantConfig').style.display = 'none'; window.productVariants = []; renderVariantUI(); }
             switchTab('ajouter'); goToStep(1); validateStep1(); validateStep2();
@@ -1010,7 +1050,12 @@
                 name: document.getElementById('pName').value, category: document.getElementById('pCat').value || "Non classé", subCategory: document.getElementById('pSubCat').value || "",
                 costPrice: parseFloat(document.getElementById('pCost').value) || 0, sellPrice: parseFloat(document.getElementById('pSell').value) || 0, stock: calculatedStock,
                 lowStockThreshold: parseInt(document.getElementById('pLowStock').value) || 5, imageUrl: document.getElementById('pImg').value, featured: document.getElementById('pFeatured').checked,
-                promoPrice: parseFloat(document.getElementById('pPromoPrice').value) || null, tags: window.productTags, sku: document.getElementById('pSku').value || "", variants: hasVars ? window.productVariants : []
+                promoPrice: parseFloat(document.getElementById('pPromoPrice').value) || null, tags: window.productTags, sku: document.getElementById('pSku').value || "", 
+                isTextbook: document.getElementById('textbookToggle').checked,
+                textbookLevel: document.getElementById('textbookToggle').checked ? document.getElementById('tbLevel').value.trim() : "",
+                textbookSubject: document.getElementById('textbookToggle').checked ? document.getElementById('tbSubject').value.trim() : "",
+                textbookPublisher: document.getElementById('textbookToggle').checked ? document.getElementById('tbPublisher').value.trim() : "",
+                variants: hasVars ? window.productVariants : []
             };
 
             if(!data.name || !data.category) return alert("Veuillez remplir les informations de base.");
