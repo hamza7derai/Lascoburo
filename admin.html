@@ -38,7 +38,7 @@
         .data-table th { text-align: left; padding: 15px; border-bottom: 1px solid var(--border); font-size: 12px; text-transform: uppercase; }
         .data-table td { padding: 15px; border-bottom: 1px solid #F1F5F9; font-size: 14px; }
         
-        /* VARIANTS UI CSS */
+        /* VARIANTS UI */
         .variants-box { background: #F8FAFC; border: 2px dashed #CBD5E1; border-radius: 16px; padding: 20px; margin-top: 10px; display: none; }
         .v-tag { background: white; border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; margin: 5px; box-shadow: var(--shadow); }
         .v-tag button { background: #FEE2E2; color: #EF4444; border: none; border-radius: 6px; width: 24px; height: 24px; cursor: pointer; font-weight: bold; }
@@ -70,9 +70,18 @@
                     <div>
                         <div class="input-group"><label>Nom du produit</label><input type="text" id="pName" class="input-field" placeholder="Ex: Stylo Pilot G-2"></div>
                         
-                        <div class="input-group">
-                            <div class="label-with-action"><label>Catégorie</label><button type="button" id="btnShowAddCat" class="text-btn-action">+ Nouvelle Catégorie</button></div>
-                            <select id="pCatSelect" class="input-field"><option value="">Choisir...</option></select>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <div class="label-with-action">
+                                    <label>Catégorie Pincipale</label>
+                                    <button type="button" id="btnShowAddCat" class="text-btn-action">+ Nouvelle Catégorie</button>
+                                </div>
+                                <select id="pCatSelect" class="input-field"><option value="">Choisir...</option></select>
+                            </div>
+                            <div class="input-group">
+                                <label>Sous-catégorie</label>
+                                <select id="pSubCatSelect" class="input-field"><option value="">Choisir la catégorie d'abord...</option></select>
+                            </div>
                         </div>
 
                         <div class="input-row">
@@ -105,7 +114,7 @@
 
             <div class="content-card">
                 <h2 style="margin-bottom:20px;">Liste des produits</h2>
-                <div style="overflow-x:auto;"><table class="data-table"><thead><tr><th>Image</th><th>Produit</th><th>Catégorie</th><th>Stock</th><th>Prix</th><th>Actions</th></tr></thead><tbody id="inventoryTable"></tbody></table></div>
+                <div style="overflow-x:auto;"><table class="data-table"><thead><tr><th>Image</th><th>Produit</th><th>Catégorie > Sous-cat</th><th>Stock</th><th>Prix</th><th>Actions</th></tr></thead><tbody id="inventoryTable"></tbody></table></div>
             </div>
         </main>
     </div>
@@ -125,26 +134,62 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Preview Logic
+        let globalCategories = []; // Store raw category data
+
         document.getElementById('pImg').addEventListener('input', e => {
             document.getElementById('previewImg').src = e.target.value || 'https://placehold.co/400x400/f8fafc/94a3b8?text=Image';
         });
 
-        // Categories
+        // --- NEW CATEGORY SYSTEM WITH SUBCATEGORIES ---
         document.getElementById('btnShowAddCat').addEventListener('click', async () => {
-            const cat = window.prompt("Nom de la catégorie :");
-            if(cat) await addDoc(collection(db, "categories"), { name: cat.trim() });
+            const cat = window.prompt("1. Nom de la catégorie principale (ex: Fournitures scolaires) :");
+            if(cat) {
+                const subCatsRaw = window.prompt("2. Sous-catégories (séparées par des virgules) (ex: Stylos, Cahiers, Gommes) :");
+                let subCats = [];
+                if(subCatsRaw) {
+                    subCats = subCatsRaw.split(',').map(s => s.trim()).filter(s => s !== '');
+                }
+                
+                // Save to Firebase as an object with subcategories array
+                await addDoc(collection(db, "categories"), { name: cat.trim(), subcategories: subCats });
+                alert("Catégorie et sous-catégories ajoutées !");
+            }
         });
+
+        // Load Categories into Dropdown
         onSnapshot(collection(db, "categories"), snap => {
-            const cats = snap.docs.map(d => d.data().name).sort();
-            document.getElementById('pCatSelect').innerHTML = '<option value="">Choisir...</option>' + cats.map(c => `<option value="${c}">${c}</option>`).join('');
+            globalCategories = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            
+            // Sort alphabetically by name
+            globalCategories.sort((a,b) => a.name.localeCompare(b.name));
+            
+            document.getElementById('pCatSelect').innerHTML = '<option value="">Choisir...</option>' + 
+                globalCategories.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
         });
+
+        // When Main Category changes, update SubCategory dropdown
+        document.getElementById('pCatSelect').addEventListener('change', (e) => {
+            const selectedCatName = e.target.value;
+            const subCatSelect = document.getElementById('pSubCatSelect');
+            
+            if(!selectedCatName) {
+                subCatSelect.innerHTML = '<option value="">Choisir la catégorie d\'abord...</option>';
+                return;
+            }
+
+            const catData = globalCategories.find(c => c.name === selectedCatName);
+            if(catData && catData.subcategories && catData.subcategories.length > 0) {
+                subCatSelect.innerHTML = '<option value="">(Optionnel) Choisir sous-cat...</option>' + 
+                    catData.subcategories.map(sub => `<option value="${sub}">${sub}</option>`).join('');
+            } else {
+                subCatSelect.innerHTML = '<option value="">Aucune sous-catégorie disponible</option>';
+            }
+        });
+
 
         // --- VARIANTS LOGIC ---
         window.productVariants = [];
-        window.toggleVariants = () => {
-            document.getElementById('variantsBox').style.display = document.getElementById('hasVariants').checked ? 'block' : 'none';
-        };
+        window.toggleVariants = () => { document.getElementById('variantsBox').style.display = document.getElementById('hasVariants').checked ? 'block' : 'none'; };
         window.addVariant = () => {
             const n = document.getElementById('vName').value.trim();
             const p = parseFloat(document.getElementById('vPrice').value);
@@ -155,35 +200,32 @@
                 renderVariants();
             }
         };
-        window.removeVariant = (idx) => {
-            window.productVariants.splice(idx, 1);
-            renderVariants();
-        };
+        window.removeVariant = (idx) => { window.productVariants.splice(idx, 1); renderVariants(); };
         function renderVariants() {
             document.getElementById('vList').innerHTML = window.productVariants.map((v, i) => 
                 `<div class="v-tag">${v.name} - ${v.price} DH <button type="button" onclick="removeVariant(${i})">X</button></div>`
             ).join('');
         }
 
-        // Save Product
+        // Save Product (Now includes subCategory)
         document.getElementById('btnSaveProduct').addEventListener('click', async () => {
             const data = {
                 name: document.getElementById('pName').value,
                 category: document.getElementById('pCatSelect').value,
+                subCategory: document.getElementById('pSubCatSelect').value || "", // NEW
                 costPrice: parseFloat(document.getElementById('pCost').value) || 0,
                 sellPrice: parseFloat(document.getElementById('pSell').value) || 0,
                 stock: parseInt(document.getElementById('pStock').value) || 0,
                 imageUrl: document.getElementById('pImg').value,
-                // Attach variants if enabled
                 variants: document.getElementById('hasVariants').checked ? window.productVariants : [],
                 timestamp: new Date()
             };
 
-            if(!data.name || !data.category) return alert("Remplissez le nom et la catégorie.");
+            if(!data.name || !data.category) return alert("Remplissez le nom et la catégorie principale.");
             
             await addDoc(collection(db, "products"), data);
             alert("Produit ajouté !");
-            window.location.reload(); // Quick reset
+            window.location.reload(); 
         });
 
         // Table
@@ -194,10 +236,12 @@
             document.getElementById('inventoryTable').innerHTML = prods.map(p => {
                 rev += p.sellPrice * p.stock; stk += p.stock;
                 const vBadge = p.variants && p.variants.length > 0 ? `<br><small style="color:#2563EB;">${p.variants.length} options</small>` : '';
+                const subCatDisplay = p.subCategory ? `<br><small style="color:var(--text-muted);">↳ ${p.subCategory}</small>` : '';
+                
                 return `<tr>
                     <td><img src="${p.imageUrl || 'https://placehold.co/40x40'}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;"></td>
                     <td><strong>${p.name}</strong>${vBadge}</td>
-                    <td>${p.category}</td>
+                    <td>${p.category} ${subCatDisplay}</td>
                     <td>${p.stock}</td>
                     <td>${p.sellPrice} DH</td>
                     <td><button onclick="deleteProd('${p.id}')" style="background:#FEE2E2; color:#EF4444; border:none; padding:8px; border-radius:6px; cursor:pointer;">X</button></td>
@@ -209,3 +253,4 @@
     </script>
 </body>
 </html>
+
