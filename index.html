@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lascoburo | App</title>
+    <title>Lascoburo | Boutique</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
@@ -37,9 +37,9 @@
         .quick-cats { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px; scrollbar-width: none; margin: 0 -20px 20px -20px; padding: 0 20px 15px 20px; }
         .quick-cats::-webkit-scrollbar { display: none; }
         .q-cat-item { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; min-width: 65px;}
-        .q-cat-circle { width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border); color: var(--accent); transition: 0.2s;}
+        .q-cat-circle { width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border); font-size: 24px; transition: 0.2s;}
         .q-cat-item:active .q-cat-circle { background: var(--primary-light); transform: scale(0.95); border-color: var(--accent);}
-        .q-cat-item span { font-size: 11px; font-weight: 700; color: var(--text-muted); text-align: center; }
+        .q-cat-item span { font-size: 11px; font-weight: 700; color: var(--text-muted); text-align: center; line-height: 1.2;}
 
         /* BANNER */
         .promo-banner { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 15px; margin-bottom: 30px; position: relative; border: 1px solid #BFDBFE;}
@@ -66,26 +66,38 @@
         .stock-dot { width: 6px; height: 6px; background: var(--success); border-radius: 50%; }
         .btn-add { background: var(--primary); color: white; border: none; width: 32px; height: 32px; border-radius: 10px; font-size: 18px; font-weight: bold; pointer-events: none; }
 
-        /* CATEGORIES HUB */
+        /* =========================================
+           CATEGORIES HUB (HERO CARDS)
+        ========================================= */
         .nav-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; margin-bottom: 10px;}
         .nav-header h1 { font-size: 20px; font-weight: 800; flex: 1; text-align: center;}
         .nav-header .back-btn { background: white; border: 1px solid var(--border); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--shadow-sm); color: var(--text-main);}
         .nav-header .ghost-btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: var(--text-main); background: transparent; border: none; cursor: pointer;}
+        
         .cat-hub-grid { display: flex; flex-direction: column; gap: 16px; }
-        .cat-hub-card { border-radius: 20px; padding: 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border: 1px solid rgba(0,0,0,0.05); box-shadow: var(--shadow-sm); transition: 0.2s; position: relative; overflow: hidden;}
-        .cat-hub-card:active { transform: scale(0.98); }
-        .cat-hub-info { z-index: 2; }
-        .cat-hub-info h3 { font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 6px; }
-        .cat-hub-info p { font-size: 12px; color: var(--text-muted); font-weight: 600; }
-        .cat-hub-img { font-size: 60px; z-index: 2;}
-        .cat-hub-arrow { position: absolute; right: 20px; color: var(--primary); opacity: 0.5; }
-        .bg-blue { background: #EEF2FF; border-color: #C7D2FE; } .bg-gray { background: #F8FAFC; border-color: #E2E8F0; } .bg-green { background: #F0FDF4; border-color: #BBF7D0; } .bg-pink { background: #FDF2F8; border-color: #FBCFE8; }
+        .hero-cat-card { border-radius: 20px; padding: 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; box-shadow: var(--shadow-sm); transition: 0.2s; position: relative; overflow: hidden; border: 1px solid transparent;}
+        .hero-cat-card:active { transform: scale(0.98); }
+        
+        .hero-cat-info { z-index: 2; flex: 1; }
+        .hero-cat-info h3 { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
+        .hero-cat-info p { font-size: 12px; font-weight: 500; margin-bottom: 12px; line-height: 1.3; opacity: 0.8;}
+        .hero-cat-badge { display: inline-block; padding: 4px 10px; border-radius: 50px; font-size: 10px; font-weight: 700; background: rgba(255,255,255,0.6); }
+        
+        .hero-cat-img { font-size: 70px; z-index: 2; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); margin-left: 10px;}
+        .hero-cat-arrow { position: absolute; right: 15px; opacity: 0.5; width: 20px;}
+
+        /* Hero Themes */
+        .theme-blue { background: #EEF2FF; border-color: #C7D2FE; } .theme-blue h3 { color: #1E3A8A; } .theme-blue p { color: #3B82F6; } .theme-blue .hero-cat-badge { color: #1E3A8A; }
+        .theme-gray { background: #F8FAFC; border-color: #E2E8F0; } .theme-gray h3 { color: #1E293B; } .theme-gray p { color: #64748B; } .theme-gray .hero-cat-badge { color: #334155; }
+        .theme-green { background: #F0FDF4; border-color: #BBF7D0; } .theme-green h3 { color: #166534; } .theme-green p { color: #22C55E; } .theme-green .hero-cat-badge { color: #166534; }
+        .theme-pink { background: #FDF2F8; border-color: #FBCFE8; } .theme-pink h3 { color: #9D174D; } .theme-pink p { color: #EC4899; } .theme-pink .hero-cat-badge { color: #9D174D; }
+        .theme-purple { background: #F5F3FF; border-color: #DDD6FE; } .theme-purple h3 { color: #5B21B6; } .theme-purple p { color: #8B5CF6; } .theme-purple .hero-cat-badge { color: #5B21B6; }
 
         /* HORIZONTAL PILLS (Sub-categories) */
         .sub-cats-scroll { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; margin: 0 -20px 20px -20px; padding: 0 20px; }
         .sub-cats-scroll::-webkit-scrollbar { display: none; }
         .sub-cat-pill { padding: 8px 16px; background: white; border: 1px solid var(--border); border-radius: 50px; font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: 0.2s; box-shadow: var(--shadow-sm); }
-        .sub-cat-pill.active { background: var(--text-main); color: white; border-color: var(--text-main); }
+        .sub-cat-pill.active { background: var(--primary); color: white; border-color: var(--primary); }
 
         /* BOTTOM NAVIGATION BAR */
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 12px 20px 24px 20px; z-index: 80; box-shadow: var(--shadow-nav); max-width: 600px; margin: 0 auto;}
@@ -167,7 +179,7 @@
         .summary-row.total { font-size: 20px; font-weight: 800; color: var(--text-main); margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border); margin-bottom: 20px;}
         .free-delivery-badge { background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 800; }
         
-        .empty-state { text-align: center; padding: 40px; color: var(--text-muted); grid-column: span 2; font-weight: 600;}
+        .empty-state { text-align: center; padding: 40px; color: var(--text-muted); font-weight: 600; grid-column: span 2;}
     </style>
 </head>
 <body>
@@ -189,7 +201,8 @@
             <input type="text" id="homeSearch" placeholder="Rechercher un produit...">
         </div>
 
-        <div class="quick-cats" id="homeQuickCats"></div>
+        <div class="quick-cats" id="homeQuickCats">
+            </div>
 
         <div class="promo-banner">
             <div class="promo-icon-bg"><svg viewBox="0 0 24 24" style="fill:white; stroke:none;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
@@ -213,7 +226,8 @@
             <button class="ghost-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
         </div>
         
-        <div class="cat-hub-grid" id="hubGrid"></div>
+        <div class="cat-hub-grid" id="hubGrid">
+            </div>
     </div>
 
 
@@ -298,9 +312,9 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        // CRITICAL UPDATE: 'addDoc' imported here to save orders to Firebase
         import { getFirestore, collection, onSnapshot, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+        // ⚠️ REPLACE WITH YOUR ACTUAL FIREBASE CONFIG
         const firebaseConfig = {
             apiKey: "AIzaSyCKY59mqLqD4GqQpkDEFqNybKIkwLvgId0",
             authDomain: "lascoburo.firebaseapp.com",
@@ -321,24 +335,21 @@
         let currentModalQty = 1;
         let currentVariantObj = null;
 
-        const categoryIcons = {
-            'Cahiers': { icon: '<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>', colorClass: 'bg-blue', emoji: '📘' },
-            'Stylos': { icon: '<svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>', colorClass: 'bg-gray', emoji: '🖊️' },
-            'Sacs': { icon: '<svg viewBox="0 0 24 24"><path d="M4 10h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10z"></path><path d="M8 10V6a4 4 0 0 1 8 0v4"></path></svg>', colorClass: 'bg-pink', emoji: '🎒' },
-            'Papeterie': { icon: '<svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>', colorClass: 'bg-green', emoji: '📏' },
-            'default': { icon: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>', colorClass: 'bg-gray', emoji: '📦' }
-        };
+        // --- HARDCODED HERO CATEGORIES (Matching the Design) ---
+        const HERO_CATEGORIES = [
+            { id: "Fournitures scolaires", title: "Fournitures scolaires", desc: "Tout pour l'école", colorClass: "theme-blue", emoji: "🎒" },
+            { id: "Bureau & Impression", title: "Bureau & Impression", desc: "Impression, toners et papeterie", colorClass: "theme-gray", emoji: "🖨️" },
+            { id: "Livres & Culture", title: "Livres & Culture", desc: "Livres, romans, Qur'an et plus", colorClass: "theme-green", emoji: "📗" },
+            { id: "Sacs & Accessoires", title: "Sacs & Accessoires", desc: "Sacs, trousses et accessoires", colorClass: "theme-pink", emoji: "👝" },
+            { id: "Jeux & Électronique", title: "Jeux & Électronique", desc: "Jeux, gadgets et accessoires tech", colorClass: "theme-purple", emoji: "🎮" }
+        ];
 
         function getColorHex(name) {
             const n = name.toLowerCase();
-            if(n.includes('bleu')) return '#2563EB';
-            if(n.includes('rouge')) return '#EF4444';
-            if(n.includes('noir')) return '#0F172A';
-            if(n.includes('vert')) return '#10B981';
-            if(n.includes('jaune')) return '#F59E0B';
-            if(n.includes('rose')) return '#EC4899';
-            if(n.includes('blanc')) return '#FFFFFF';
-            return null;
+            if(n.includes('bleu')) return '#2563EB'; if(n.includes('rouge')) return '#EF4444';
+            if(n.includes('noir')) return '#0F172A'; if(n.includes('vert')) return '#10B981';
+            if(n.includes('jaune')) return '#F59E0B'; if(n.includes('rose')) return '#EC4899';
+            if(n.includes('blanc')) return '#FFFFFF'; return null;
         }
 
         // --- SPA TAB SWITCHING ---
@@ -392,52 +403,51 @@
         // --- DATA LOADING ---
         onSnapshot(collection(db, "categories"), snap => {
             globalCategoriesData = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            globalCategoriesData.sort((a,b) => a.name.localeCompare(b.name));
-            renderCategoriesHub();
         });
 
         onSnapshot(collection(db, "products"), snap => {
             allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             renderHome();
+            renderCategoriesHub(); // Re-render to update product counts
             if(activeMainCategory) {
                 window.filterSubCategory('Tous');
             }
         });
 
         function renderHome() {
-            const activeCats = [...new Set(allProducts.map(p => p.category))].filter(Boolean);
+            // Quick Circles (Only show the 5 Hero Categories)
             let circlesHTML = '';
-            activeCats.forEach(cat => {
-                const icon = (categoryIcons[cat] || categoryIcons['default']).icon;
+            HERO_CATEGORIES.forEach(cat => {
                 circlesHTML += `
-                    <div class="q-cat-item" onclick="window.openCategory('${cat}')">
-                        <div class="q-cat-circle">${icon}</div>
-                        <span>${cat}</span>
+                    <div class="q-cat-item" onclick="window.openCategory('${cat.id}')">
+                        <div class="q-cat-circle" style="color:var(--primary);">${cat.emoji}</div>
+                        <span>${cat.title}</span>
                     </div>
                 `;
             });
             document.getElementById('homeQuickCats').innerHTML = circlesHTML;
+
+            // Render best sellers (first 6 for now)
             renderProductGrid(allProducts.slice(0, 6), 'homeProductGrid');
         }
 
         function renderCategoriesHub() {
             let hubHTML = '';
-            const classes = ['bg-blue', 'bg-gray', 'bg-green', 'bg-pink'];
             
-            globalCategoriesData.forEach((catObj, index) => {
-                const catName = catObj.name;
-                const data = categoryIcons[catName] || categoryIcons['default'];
-                const count = allProducts.filter(p => p.category === catName).length;
-                const bgClass = classes[index % classes.length];
+            // ONLY loop through the defined Hero Categories
+            HERO_CATEGORIES.forEach((hero) => {
+                // Count products that match this main category
+                const count = allProducts.filter(p => p.category === hero.id).length;
 
                 hubHTML += `
-                    <div class="cat-hub-card ${bgClass}" onclick="window.openCategory('${catName}')">
-                        <div class="cat-hub-info">
-                            <h3>${catName}</h3>
-                            <p>${count} produits</p>
+                    <div class="hero-cat-card ${hero.colorClass}" onclick="window.openCategory('${hero.id}')">
+                        <div class="hero-cat-info">
+                            <h3>${hero.title}</h3>
+                            <p>${hero.desc}</p>
+                            <span class="hero-cat-badge">${count} produits</span>
                         </div>
-                        <div class="cat-hub-img">${data.emoji}</div>
-                        <svg class="cat-hub-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        <div class="hero-cat-img">${hero.emoji}</div>
+                        <svg class="hero-cat-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 `;
             });
@@ -699,25 +709,23 @@
             if(totalItems > 0) bar.classList.remove('hidden'); else bar.classList.add('hidden');
         }
 
-        // --- NEW: AUTOMATED FIREBASE ORDER SYNC ---
+        // --- AUTOMATED FIREBASE ORDER SYNC ---
         window.triggerWhatsApp = async () => {
             if(cart.length === 0) return;
 
-            // 1. Ask for customer name
             const customerName = window.prompt("Veuillez entrer votre nom pour finaliser la commande :");
             if(!customerName || customerName.trim() === "") return;
 
             const total = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
 
-            // 2. Save order to Firebase
             try {
                 await addDoc(collection(db, "orders"), {
                     customerName: customerName,
-                    cart: cart, // saves all items, quantities, and variants
+                    cart: cart, 
                     totalPrice: total,
                     totalItems: totalItems,
-                    status: "En attente", // default status
+                    status: "En attente",
                     timestamp: new Date().toISOString()
                 });
             } catch (error) {
@@ -726,7 +734,6 @@
                 return;
             }
 
-            // 3. Generate WhatsApp Message
             const phone = "212600000000"; // ⚠️ REPLACE WITH REAL NUMBER
             let msg = `📦 *Nouvelle commande Lascoburo*\n👤 Client: ${customerName}\n\n`;
             cart.forEach(item => {
@@ -735,7 +742,6 @@
             });
             msg += `\n💰 *Total à payer : ${total.toFixed(2)} DH*`;
             
-            // 4. Open WhatsApp and clear cart
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
             
             cart = []; 
