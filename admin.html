@@ -2,126 +2,367 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lascoburo | Admin Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lascoburo | Admin Mobile</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* CSS Admin Integré */
-        :root { --primary: #1E3A8A; --primary-light: #2563EB; --success: #10B981; --danger: #EF4444; --warning: #F59E0B; --bg: #F4F7FE; --card: #FFFFFF; --text-main: #1E293B; --text-muted: #64748B; --border: #E2E8F0; --shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-main); }
-        .admin-layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
-        .sidebar { background: var(--primary); color: white; padding: 30px 20px; }
-        .logo { font-size: 24px; font-weight: 800; margin-bottom: 40px; }
-        .logo span { color: var(--success); }
-        .nav-btn { display: block; width: 100%; padding: 14px 20px; border-radius: 12px; border:none; background: transparent; color: #94A3B8; text-align: left; font-size: 15px; font-weight: 500; cursor: pointer; margin-bottom: 8px; }
-        .nav-btn.active { background: rgba(255,255,255,0.1); color: white; font-weight: 600; }
-        .main-content { padding: 40px; overflow-y: auto; height: 100vh; }
-        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: var(--card); padding: 24px; border-radius: 20px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 20px; }
-        .stat-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; background: #E0E7FF; }
-        .stat-data .label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
-        .stat-data strong { font-size: 22px; font-weight: 800; color: var(--text-main); }
-        .content-card { background: var(--card); padding: 30px; border-radius: 20px; box-shadow: var(--shadow); margin-bottom: 30px; }
-        .form-layout { display: grid; grid-template-columns: 250px 1fr; gap: 40px; }
-        .image-preview { width: 100%; aspect-ratio: 1; border-radius: 16px; border: 2px dashed #CBD5E1; overflow: hidden; background: #F8FAFC; display: flex; align-items: center; justify-content: center; margin-bottom:15px;}
-        .image-preview img { width: 100%; height: 100%; object-fit: cover; }
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; }
-        .input-field { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--border); font-size: 14px; font-family: inherit; background: #F8FAFC; outline: none; }
-        .input-field:focus { border-color: var(--primary-light); background: white; }
-        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .btn-primary { background: var(--success); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; width: 100%; }
-        .label-with-action { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .text-btn-action { background: var(--warning); color: white; border: none; font-size: 11px; font-weight: 700; cursor: pointer; padding: 4px 10px; border-radius: 6px; }
-        .data-table { width: 100%; border-collapse: collapse; }
-        .data-table th { text-align: left; padding: 15px; border-bottom: 1px solid var(--border); font-size: 12px; text-transform: uppercase; }
-        .data-table td { padding: 15px; border-bottom: 1px solid #F1F5F9; font-size: 14px; }
-        
-        /* VARIANTS UI */
-        .variants-box { background: #F8FAFC; border: 2px dashed #CBD5E1; border-radius: 16px; padding: 20px; margin-top: 10px; display: none; }
-        .v-tag { background: white; border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; margin: 5px; box-shadow: var(--shadow); }
-        .v-tag button { background: #FEE2E2; color: #EF4444; border: none; border-radius: 6px; width: 24px; height: 24px; cursor: pointer; font-weight: bold; }
+        /* =========================================
+           VARIABLES & RESET
+        ========================================= */
+        :root {
+            --primary: #1E3A8A; --primary-light: #EFF6FF; --accent: #2563EB; 
+            --success: #10B981; --danger: #EF4444; --warning: #F59E0B; --info: #3B82F6;
+            --bg: #F8FAFC; --surface: #FFFFFF; --text-main: #0F172A; --text-muted: #64748B; 
+            --border: #E2E8F0; --shadow-sm: 0 4px 10px rgba(0,0,0,0.04); --shadow-nav: 0 -4px 20px rgba(0,0,0,0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-main); padding-bottom: 90px; }
+        .container { padding: 20px; max-width: 600px; margin: 0 auto; }
+        svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-        @media (max-width: 1024px) { .admin-layout { grid-template-columns: 1fr; } .sidebar { display: none; } .form-layout { grid-template-columns: 1fr; } .stats-row { grid-template-columns: 1fr 1fr; } }
+        /* SPA VIEWS */
+        .app-view { display: none; animation: fadeIn 0.3s ease; }
+        .app-view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* HEADERS */
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .header h1 { font-size: 22px; font-weight: 800; color: var(--text-main); }
+        .header p { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+        .icon-btn { width: 40px; height: 40px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border); color: var(--text-main); cursor: pointer;}
+
+        /* STATS CARDS (Horizontal Scroll) */
+        .stats-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; margin: 0 -20px 24px; padding: 0 20px 10px; scrollbar-width: none; }
+        .stats-scroll::-webkit-scrollbar { display: none; }
+        .stat-card { background: white; border-radius: 16px; padding: 16px; min-width: 140px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); flex-shrink: 0;}
+        .stat-card .label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .stat-card .value { font-size: 20px; font-weight: 800; color: var(--text-main); }
+        .stat-card .trend { font-size: 11px; font-weight: 700; color: var(--success); margin-top: 4px; display: flex; align-items: center; gap: 4px;}
+
+        /* CARDS & LISTS */
+        .card { background: white; border-radius: 16px; padding: 16px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 12px; }
+        .flex-between { display: flex; justify-content: space-between; align-items: center; }
+        
+        /* ALERTS */
+        .alert-box { background: #FFFBEB; border: 1px solid #FEF3C7; border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; margin-bottom: 12px; color: #B45309; font-weight: 600; font-size: 13px;}
+        .alert-box svg { color: #F59E0B; }
+
+        /* PRODUCT CARDS (Replacing Table) */
+        .prod-card-admin { display: flex; align-items: center; gap: 12px; padding: 12px; background: white; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 12px;}
+        .prod-img { width: 50px; height: 50px; background: var(--bg); border-radius: 10px; object-fit: cover; }
+        .prod-info { flex: 1; }
+        .prod-info h4 { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 2px;}
+        .prod-info p { font-size: 12px; color: var(--text-muted); }
+        .prod-actions { display: flex; gap: 8px; }
+        .btn-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; font-weight: bold;}
+        .btn-edit { background: var(--primary-light); color: var(--accent); }
+        .btn-del { background: #FEE2E2; color: var(--danger); }
+
+        /* ORDER CARDS */
+        .order-card { background: white; border-radius: 16px; padding: 16px; border: 1px solid var(--border); margin-bottom: 12px; box-shadow: var(--shadow-sm);}
+        .order-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; border-bottom: 1px solid var(--bg); padding-bottom: 12px;}
+        .o-id { font-weight: 800; font-size: 15px; color: var(--text-main); }
+        .o-date { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 2px;}
+        .o-client { font-size: 13px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;}
+        .o-details { font-size: 12px; color: var(--text-muted); margin-bottom: 12px;}
+        .status-badge { padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase;}
+        .status-pending { background: #FEF3C7; color: #D97706; }
+        .status-processing { background: #DBEAFE; color: #1D4ED8; }
+        .status-delivered { background: #D1FAE5; color: #059669; }
+        .status-cancelled { background: #FEE2E2; color: #DC2626; }
+        
+        .order-tabs { display: flex; gap: 10px; overflow-x: auto; margin-bottom: 16px; scrollbar-width: none; }
+        .order-tabs::-webkit-scrollbar { display: none; }
+        .o-tab { padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; color: var(--text-muted); background: white; border: 1px solid var(--border); cursor: pointer; white-space: nowrap;}
+        .o-tab.active { background: var(--primary-light); color: var(--accent); border-color: var(--primary-light); }
+
+        /* WIZARD (3-Step Form) */
+        .wizard-steps { display: flex; justify-content: space-between; position: relative; margin-bottom: 30px; padding: 0 20px;}
+        .wizard-steps::before { content: ''; position: absolute; top: 14px; left: 30px; right: 30px; height: 2px; background: var(--border); z-index: 1;}
+        .step-circle { width: 30px; height: 30px; border-radius: 50%; background: white; border: 2px solid var(--border); color: var(--text-muted); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; position: relative; z-index: 2; transition: 0.3s;}
+        .step-circle.active { border-color: var(--primary); background: var(--primary); color: white; }
+        .step-circle.done { border-color: var(--primary); background: var(--primary); color: white; }
+        
+        .wizard-content { display: none; animation: fadeIn 0.3s; }
+        .wizard-content.active { display: block; }
+        
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+        .form-control { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border); background: white; font-family: inherit; font-size: 14px; outline: none; }
+        .form-control:focus { border-color: var(--accent); }
+        
+        .img-upload-box { border: 2px dashed var(--border); border-radius: 16px; padding: 30px 20px; text-align: center; background: white; margin-bottom: 20px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;}
+        .img-upload-box svg { color: var(--text-muted); width: 32px; height: 32px; margin-bottom: 10px; }
+        .img-preview { width: 80px; height: 80px; border-radius: 12px; object-fit: cover; margin-top: 10px; display: none; border: 1px solid var(--border);}
+
+        .btn-primary { width: 100%; background: var(--primary); color: white; border: none; padding: 16px; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; transition: 0.2s;}
+        .btn-primary:active { transform: scale(0.98); }
+        .btn-outline { width: 100%; background: white; color: var(--text-main); border: 1px solid var(--border); padding: 16px; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer;}
+        .btn-success { background: var(--success); }
+        
+        .wizard-nav { display: flex; gap: 12px; margin-top: 24px; }
+
+        /* VARIANTS TOGGLE */
+        .toggle-switch { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: white; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 16px; font-weight: 700; font-size: 14px;}
+        .switch { position: relative; display: inline-block; width: 46px; height: 26px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border); transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--success); }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* FAB (Floating Action Button) */
+        .fab { position: fixed; bottom: 100px; right: 20px; width: 56px; height: 56px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(30,58,138,0.4); border: none; cursor: pointer; z-index: 80; transition: 0.2s;}
+        .fab:active { transform: scale(0.9); }
+
+        /* BOTTOM NAV */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 12px 20px 24px 20px; z-index: 100; box-shadow: var(--shadow-nav); max-width: 600px; margin: 0 auto;}
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #94A3B8; text-decoration: none; font-size: 10px; font-weight: 700; cursor: pointer; transition: 0.2s; width: 20%;}
+        .nav-item.active { color: var(--accent); }
+        .nav-item svg { width: 22px; height: 22px; stroke-width: 2; }
+        .nav-item.active svg { fill: var(--primary-light); stroke-width: 2.5; }
+        
+        /* SETTINGS LIST */
+        .settings-list { background: white; border-radius: 16px; border: 1px solid var(--border); overflow: hidden; }
+        .setting-item { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--bg); color: var(--text-main); font-weight: 600; font-size: 14px;}
+        .setting-item:last-child { border-bottom: none; }
+        .setting-item-left { display: flex; align-items: center; gap: 12px; }
+        .setting-item-left svg { width: 20px; height: 20px; color: var(--text-muted); }
     </style>
 </head>
 <body>
 
-    <div class="admin-layout">
-        <aside class="sidebar"><div class="logo">Lasco<span>Admin</span></div><nav><button class="nav-btn active">📊 Dashboard</button></nav></aside>
+    <div id="view-dashboard" class="app-view active container">
+        <div class="header">
+            <div>
+                <h1>Bonjour, Lascoburo 👋</h1>
+                <p>Aperçu de votre activité</p>
+            </div>
+            <div class="icon-btn"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>
+        </div>
 
-        <main class="main-content">
-            <header style="margin-bottom: 30px;"><h1>Bonjour, Lascoburo 👋</h1></header>
+        <div class="stats-scroll">
+            <div class="stat-card">
+                <span class="label">Ventes Totales</span>
+                <div class="value" id="dashRevenue">0 DH</div>
+            </div>
+            <div class="stat-card">
+                <span class="label">Commandes</span>
+                <div class="value" id="dashOrdersCount">0</div>
+            </div>
+            <div class="stat-card">
+                <span class="label">Profit Potentiel</span>
+                <div class="value" id="dashProfit" style="color: var(--success);">0 DH</div>
+            </div>
+        </div>
 
-            <div class="stats-row">
-                <div class="stat-card"><div class="stat-icon">🛍️</div><div class="stat-data"><span class="label">Valeur Vente</span><strong id="rev">0 DH</strong></div></div>
-                <div class="stat-card"><div class="stat-icon" style="background:#D1FAE5; color:#10B981;">📦</div><div class="stat-data"><span class="label">Stock Total</span><strong id="totalStock">0</strong></div></div>
+        <div class="alert-box">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <div id="dashStockAlert">0 produits en stock faible</div>
+        </div>
+
+        <div class="flex-between" style="margin: 24px 0 12px;">
+            <h2 style="font-size: 16px; font-weight: 800;">Dernières commandes</h2>
+            <span style="font-size: 12px; color: var(--accent); font-weight: 700;" onclick="switchTab('commandes')">Voir tout</span>
+        </div>
+        <div id="dashRecentOrders"></div>
+    </div>
+
+
+    <div id="view-ajouter" class="app-view container">
+        <div class="header">
+            <div>
+                <h1>Ajouter un produit</h1>
+                <p>Création étape par étape</p>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 24px 16px;">
+            <div class="wizard-steps">
+                <div class="step-circle active" id="indicator-1">1</div>
+                <div class="step-circle" id="indicator-2">2</div>
+                <div class="step-circle" id="indicator-3">3</div>
             </div>
 
-            <div class="content-card">
-                <h2 style="margin-bottom:25px; color:var(--primary);">Nouveau Produit</h2>
-                <div class="form-layout">
-                    <div>
-                        <div class="image-preview"><img id="previewImg" src="https://placehold.co/400x400/f8fafc/94a3b8?text=Image"></div>
-                        <input type="text" id="pImg" class="input-field" placeholder="Lien de l'image...">
+            <div id="step-1" class="wizard-content active">
+                <h3 style="font-size: 14px; margin-bottom: 16px; text-align: center;">Informations de base</h3>
+                
+                <div class="img-upload-box" onclick="document.getElementById('pImg').focus()">
+                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    <span style="font-size: 13px; font-weight: 700;">Coller l'URL de l'image</span>
+                    <input type="text" id="pImg" class="form-control" placeholder="https://..." style="margin-top: 10px; display:none;" onblur="this.style.display='none'; document.getElementById('previewImg').style.display='block'; document.getElementById('previewImg').src=this.value;">
+                    <img id="previewImg" class="img-preview" src="">
+                </div>
+
+                <div class="form-group">
+                    <label>Nom du produit</label>
+                    <input type="text" id="pName" class="form-control" placeholder="Ex: Stylo Pilot G-2">
+                </div>
+                
+                <div class="form-group">
+                    <label>Catégorie principale</label>
+                    <input type="text" id="pCat" class="form-control" placeholder="Ex: Fournitures scolaires">
+                </div>
+
+                <div class="form-group">
+                    <label>Sous-catégorie (Optionnel)</label>
+                    <input type="text" id="pSubCat" class="form-control" placeholder="Ex: Stylos">
+                </div>
+
+                <button class="btn-primary" style="margin-top: 10px;" onclick="goToStep(2)">Suivant</button>
+            </div>
+
+            <div id="step-2" class="wizard-content">
+                <h3 style="font-size: 14px; margin-bottom: 16px; text-align: center;">Prix & Stock</h3>
+                
+                <div style="display: flex; gap: 12px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Prix d'achat (DH)</label>
+                        <input type="number" id="pCost" class="form-control" placeholder="0.00">
                     </div>
-
-                    <div>
-                        <div class="input-group"><label>Nom du produit</label><input type="text" id="pName" class="input-field" placeholder="Ex: Stylo Pilot G-2"></div>
-                        
-                        <div class="input-row">
-                            <div class="input-group">
-                                <div class="label-with-action">
-                                    <label>Catégorie Pincipale</label>
-                                    <button type="button" id="btnShowAddCat" class="text-btn-action">+ Nouvelle Catégorie</button>
-                                </div>
-                                <select id="pCatSelect" class="input-field"><option value="">Choisir...</option></select>
-                            </div>
-                            <div class="input-group">
-                                <label>Sous-catégorie</label>
-                                <select id="pSubCatSelect" class="input-field"><option value="">Choisir la catégorie d'abord...</option></select>
-                            </div>
-                        </div>
-
-                        <div class="input-row">
-                            <div class="input-group"><label>Prix d'achat (DH)</label><input type="number" id="pCost" class="input-field" placeholder="Coût"></div>
-                            <div class="input-group"><label>Prix de vente Standard (DH)</label><input type="number" id="pSell" class="input-field" placeholder="Vente"></div>
-                        </div>
-                        <div class="input-group"><label>Quantité en stock globale</label><input type="number" id="pStock" class="input-field" placeholder="Stock"></div>
-
-                        <div class="input-group" style="background: #EFF6FF; padding: 15px; border-radius: 12px; border: 1px solid #BFDBFE;">
-                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin: 0; color: #1E3A8A;">
-                                <input type="checkbox" id="hasVariants" style="width: 20px; height: 20px;" onchange="toggleVariants()">
-                                <strong>Activer les variantes (Couleurs, Tailles, etc.)</strong>
-                            </label>
-                            
-                            <div id="variantsBox" class="variants-box">
-                                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Ajoutez des options. Si activé, le client devra choisir une option avant d'ajouter au panier.</p>
-                                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                                    <input type="text" id="vName" class="input-field" placeholder="Ex: Bleu" style="padding: 10px;">
-                                    <input type="number" id="vPrice" class="input-field" placeholder="Prix (DH)" style="padding: 10px; width: 120px;">
-                                    <button type="button" onclick="addVariant()" style="background: var(--primary); color: white; border: none; border-radius: 10px; padding: 0 15px; font-weight: bold; cursor: pointer;">+</button>
-                                </div>
-                                <div id="vList"></div>
-                            </div>
-                        </div>
-
-                        <button type="button" id="btnSaveProduct" class="btn-primary">💾 Enregistrer le produit</button>
+                    <div class="form-group" style="flex:1;">
+                        <label>Prix de vente (DH)</label>
+                        <input type="number" id="pSell" class="form-control" placeholder="0.00">
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Stock global</label>
+                    <input type="number" id="pStock" class="form-control" placeholder="Quantité">
+                </div>
+
+                <div class="wizard-nav">
+                    <button class="btn-outline" onclick="goToStep(1)">Précédent</button>
+                    <button class="btn-primary" onclick="goToStep(3)">Suivant</button>
                 </div>
             </div>
 
-            <div class="content-card">
-                <h2 style="margin-bottom:20px;">Liste des produits</h2>
-                <div style="overflow-x:auto;"><table class="data-table"><thead><tr><th>Image</th><th>Produit</th><th>Catégorie > Sous-cat</th><th>Stock</th><th>Prix</th><th>Actions</th></tr></thead><tbody id="inventoryTable"></tbody></table></div>
+            <div id="step-3" class="wizard-content">
+                <h3 style="font-size: 14px; margin-bottom: 16px; text-align: center;">Variantes (Optionnel)</h3>
+                
+                <div class="toggle-switch">
+                    <span>Activer les variantes</span>
+                    <label class="switch">
+                        <input type="checkbox" id="hasVariants" onchange="document.getElementById('vBox').style.display = this.checked ? 'block' : 'none'">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div id="vBox" style="display: none; background: var(--bg); padding: 16px; border-radius: 12px; margin-bottom: 16px;">
+                    <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                        <input type="text" id="vName" class="form-control" placeholder="Ex: Bleu" style="padding: 10px;">
+                        <input type="number" id="vPrice" class="form-control" placeholder="Prix" style="padding: 10px; width: 80px;">
+                        <button onclick="addVariant()" class="btn-primary" style="width: 44px; padding:0;">+</button>
+                    </div>
+                    <div id="vList"></div>
+                </div>
+
+                <div class="wizard-nav">
+                    <button class="btn-outline" onclick="goToStep(2)">Précédent</button>
+                    <button class="btn-primary btn-success" onclick="saveProduct()">Enregistrer</button>
+                </div>
             </div>
-        </main>
+        </div>
     </div>
+
+
+    <div id="view-produits" class="app-view container">
+        <div class="header" style="margin-bottom: 16px;">
+            <div>
+                <h1>Produits</h1>
+                <p id="prodCount">0 produits</p>
+            </div>
+            <div class="icon-btn"><svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></div>
+        </div>
+
+        <div class="form-group">
+            <input type="text" id="searchAdminProd" class="form-control" placeholder="Rechercher un produit..." style="padding-left: 16px; border-radius: 50px;">
+        </div>
+
+        <div id="adminProductList"></div>
+
+        <button class="fab" onclick="switchTab('ajouter')">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </button>
+    </div>
+
+
+    <div id="view-commandes" class="app-view container">
+        <div class="header" style="margin-bottom: 16px;">
+            <div>
+                <h1>Commandes</h1>
+                <p>Gestion des ventes</p>
+            </div>
+        </div>
+
+        <div class="order-tabs">
+            <div class="o-tab active" onclick="filterOrders('Toutes', this)">Toutes</div>
+            <div class="o-tab" onclick="filterOrders('En attente', this)">En attente</div>
+            <div class="o-tab" onclick="filterOrders('En cours', this)">En cours</div>
+            <div class="o-tab" onclick="filterOrders('Livrées', this)">Livrées</div>
+        </div>
+
+        <div id="adminOrderList"></div>
+    </div>
+
+
+    <div id="view-plus" class="app-view container">
+        <div class="header">
+            <div>
+                <h1>Plus</h1>
+                <p>Paramètres et Analytics</p>
+            </div>
+        </div>
+
+        <div class="settings-list">
+            <div class="setting-item">
+                <div class="setting-item-left"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Mon profil</div>
+                <svg viewBox="0 0 24 24" style="width: 16px; color: var(--border);"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+            <div class="setting-item">
+                <div class="setting-item-left"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Analytics détaillés</div>
+                <svg viewBox="0 0 24 24" style="width: 16px; color: var(--border);"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+            <div class="setting-item">
+                <div class="setting-item-left"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Gérer les Catégories</div>
+                <svg viewBox="0 0 24 24" style="width: 16px; color: var(--border);"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+        </div>
+        
+        <button class="btn-outline" style="margin-top: 24px; color: var(--danger); border-color: #FEE2E2;">
+            <svg viewBox="0 0 24 24" style="width: 18px; margin-right: 8px; display:inline-block; vertical-align:middle;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            Déconnexion
+        </button>
+    </div>
+
+
+    <nav class="bottom-nav">
+        <div class="nav-item active" id="nav-dashboard" onclick="switchTab('dashboard')">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+            Dashboard
+        </div>
+        <div class="nav-item" id="nav-ajouter" onclick="switchTab('ajouter')">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            Ajouter
+        </div>
+        <div class="nav-item" id="nav-produits" onclick="switchTab('produits')">
+            <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            Produits
+        </div>
+        <div class="nav-item" id="nav-commandes" onclick="switchTab('commandes')">
+            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            Commandes
+        </div>
+        <div class="nav-item" id="nav-plus" onclick="switchTab('plus')">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+            Plus
+        </div>
+    </nav>
+
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCKY59mqLqD4GqQpkDEFqNybKIkwLvgId0",
@@ -134,62 +375,32 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        let globalCategories = []; // Store raw category data
+        let allProducts = [];
+        let allOrders = [];
+        let currentOrderFilter = 'Toutes';
 
-        document.getElementById('pImg').addEventListener('input', e => {
-            document.getElementById('previewImg').src = e.target.value || 'https://placehold.co/400x400/f8fafc/94a3b8?text=Image';
-        });
+        // --- SPA NAVIGATION ---
+        window.switchTab = (tabId) => {
+            document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(`view-${tabId}`).classList.add('active');
+            document.getElementById(`nav-${tabId}`).classList.add('active');
+            window.scrollTo(0,0);
+        };
 
-        // --- NEW CATEGORY SYSTEM WITH SUBCATEGORIES ---
-        document.getElementById('btnShowAddCat').addEventListener('click', async () => {
-            const cat = window.prompt("1. Nom de la catégorie principale (ex: Fournitures scolaires) :");
-            if(cat) {
-                const subCatsRaw = window.prompt("2. Sous-catégories (séparées par des virgules) (ex: Stylos, Cahiers, Gommes) :");
-                let subCats = [];
-                if(subCatsRaw) {
-                    subCats = subCatsRaw.split(',').map(s => s.trim()).filter(s => s !== '');
-                }
-                
-                // Save to Firebase as an object with subcategories array
-                await addDoc(collection(db, "categories"), { name: cat.trim(), subcategories: subCats });
-                alert("Catégorie et sous-catégories ajoutées !");
-            }
-        });
-
-        // Load Categories into Dropdown
-        onSnapshot(collection(db, "categories"), snap => {
-            globalCategories = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        // --- 3-STEP WIZARD LOGIC ---
+        window.goToStep = (step) => {
+            document.querySelectorAll('.wizard-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(`step-${step}`).classList.add('active');
             
-            // Sort alphabetically by name
-            globalCategories.sort((a,b) => a.name.localeCompare(b.name));
-            
-            document.getElementById('pCatSelect').innerHTML = '<option value="">Choisir...</option>' + 
-                globalCategories.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
-        });
+            document.querySelectorAll('.step-circle').forEach((el, index) => {
+                el.classList.remove('active', 'done');
+                if(index + 1 === step) el.classList.add('active');
+                if(index + 1 < step) el.classList.add('done');
+            });
+        };
 
-        // When Main Category changes, update SubCategory dropdown
-        document.getElementById('pCatSelect').addEventListener('change', (e) => {
-            const selectedCatName = e.target.value;
-            const subCatSelect = document.getElementById('pSubCatSelect');
-            
-            if(!selectedCatName) {
-                subCatSelect.innerHTML = '<option value="">Choisir la catégorie d\'abord...</option>';
-                return;
-            }
-
-            const catData = globalCategories.find(c => c.name === selectedCatName);
-            if(catData && catData.subcategories && catData.subcategories.length > 0) {
-                subCatSelect.innerHTML = '<option value="">(Optionnel) Choisir sous-cat...</option>' + 
-                    catData.subcategories.map(sub => `<option value="${sub}">${sub}</option>`).join('');
-            } else {
-                subCatSelect.innerHTML = '<option value="">Aucune sous-catégorie disponible</option>';
-            }
-        });
-
-
-        // --- VARIANTS LOGIC ---
         window.productVariants = [];
-        window.toggleVariants = () => { document.getElementById('variantsBox').style.display = document.getElementById('hasVariants').checked ? 'block' : 'none'; };
         window.addVariant = () => {
             const n = document.getElementById('vName').value.trim();
             const p = parseFloat(document.getElementById('vPrice').value);
@@ -203,54 +414,156 @@
         window.removeVariant = (idx) => { window.productVariants.splice(idx, 1); renderVariants(); };
         function renderVariants() {
             document.getElementById('vList').innerHTML = window.productVariants.map((v, i) => 
-                `<div class="v-tag">${v.name} - ${v.price} DH <button type="button" onclick="removeVariant(${i})">X</button></div>`
+                `<div style="display:inline-block; background:white; border:1px solid var(--border); padding:6px 10px; border-radius:8px; margin:4px; font-size:12px;">${v.name} (${v.price} DH) <span style="color:red; margin-left:8px; cursor:pointer;" onclick="removeVariant(${i})">X</span></div>`
             ).join('');
         }
 
-        // Save Product (Now includes subCategory)
-        document.getElementById('btnSaveProduct').addEventListener('click', async () => {
+        window.saveProduct = async () => {
             const data = {
                 name: document.getElementById('pName').value,
-                category: document.getElementById('pCatSelect').value,
-                subCategory: document.getElementById('pSubCatSelect').value || "", // NEW
+                category: document.getElementById('pCat').value || "Non classé",
+                subCategory: document.getElementById('pSubCat').value || "",
                 costPrice: parseFloat(document.getElementById('pCost').value) || 0,
                 sellPrice: parseFloat(document.getElementById('pSell').value) || 0,
                 stock: parseInt(document.getElementById('pStock').value) || 0,
                 imageUrl: document.getElementById('pImg').value,
                 variants: document.getElementById('hasVariants').checked ? window.productVariants : [],
-                timestamp: new Date()
+                timestamp: new Date().toISOString()
             };
 
-            if(!data.name || !data.category) return alert("Remplissez le nom et la catégorie principale.");
+            if(!data.name) return alert("Veuillez entrer un nom de produit.");
             
             await addDoc(collection(db, "products"), data);
-            alert("Produit ajouté !");
-            window.location.reload(); 
+            alert("Produit enregistré avec succès !");
+            
+            // Reset form
+            document.querySelectorAll('input').forEach(i => { if(i.type !== 'checkbox') i.value = ''});
+            window.productVariants = []; renderVariants();
+            goToStep(1);
+            switchTab('produits');
+        };
+
+
+        // --- DATA FETCHING & RENDERING ---
+        
+        // Products
+        window.deleteProd = async (id) => { if(confirm("Supprimer ce produit ?")) await deleteDoc(doc(db, "products", id)); };
+        
+        onSnapshot(collection(db, "products"), snap => {
+            allProducts = snap.docs.map(d => ({id: d.id, ...d.data()}));
+            document.getElementById('prodCount').innerText = `${allProducts.length} produits`;
+            
+            // Dashboard Calcs
+            let potentialProfit = 0;
+            let lowStockCount = 0;
+            allProducts.forEach(p => {
+                potentialProfit += (p.sellPrice - p.costPrice) * p.stock;
+                if(p.stock > 0 && p.stock <= 5) lowStockCount++;
+            });
+            document.getElementById('dashProfit').innerText = `${potentialProfit.toFixed(2)} DH`;
+            document.getElementById('dashStockAlert').innerText = `${lowStockCount} produits en stock faible`;
+            
+            renderProductsList(allProducts);
         });
 
-        // Table
-        window.deleteProd = async (id) => { if(confirm("Supprimer ?")) await deleteDoc(doc(db, "products", id)); };
-        onSnapshot(collection(db, "products"), snap => {
-            const prods = snap.docs.map(d => ({id: d.id, ...d.data()}));
-            let rev = 0, stk = 0;
-            document.getElementById('inventoryTable').innerHTML = prods.map(p => {
-                rev += p.sellPrice * p.stock; stk += p.stock;
-                const vBadge = p.variants && p.variants.length > 0 ? `<br><small style="color:#2563EB;">${p.variants.length} options</small>` : '';
-                const subCatDisplay = p.subCategory ? `<br><small style="color:var(--text-muted);">↳ ${p.subCategory}</small>` : '';
-                
-                return `<tr>
-                    <td><img src="${p.imageUrl || 'https://placehold.co/40x40'}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;"></td>
-                    <td><strong>${p.name}</strong>${vBadge}</td>
-                    <td>${p.category} ${subCatDisplay}</td>
-                    <td>${p.stock}</td>
-                    <td>${p.sellPrice} DH</td>
-                    <td><button onclick="deleteProd('${p.id}')" style="background:#FEE2E2; color:#EF4444; border:none; padding:8px; border-radius:6px; cursor:pointer;">X</button></td>
-                </tr>`;
+        function renderProductsList(list) {
+            document.getElementById('adminProductList').innerHTML = list.map(p => {
+                const stockColor = p.stock <= 5 ? (p.stock === 0 ? 'var(--danger)' : 'var(--warning)') : 'var(--success)';
+                return `
+                <div class="prod-card-admin">
+                    <img src="${p.imageUrl || 'https://placehold.co/100x100'}" class="prod-img">
+                    <div class="prod-info">
+                        <h4>${p.name}</h4>
+                        <p>${p.category} • ${p.sellPrice} DH</p>
+                        <p style="font-weight:700; color:${stockColor}; font-size:11px; margin-top:4px;">Stock: ${p.stock}</p>
+                    </div>
+                    <div class="prod-actions">
+                        <button class="btn-icon btn-del" onclick="deleteProd('${p.id}')"><svg viewBox="0 0 24 24" style="width:16px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+                    </div>
+                </div>`;
             }).join('');
-            document.getElementById('rev').innerText = rev + " DH";
-            document.getElementById('totalStock').innerText = stk;
+        }
+
+        document.getElementById('searchAdminProd').addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            renderProductsList(allProducts.filter(p => p.name.toLowerCase().includes(q)));
         });
+
+        // Orders
+        window.changeOrderStatus = async (id, newStatus) => {
+            await updateDoc(doc(db, "orders", id), { status: newStatus });
+        };
+
+        onSnapshot(collection(db, "orders"), snap => {
+            allOrders = snap.docs.map(d => ({id: d.id, ...d.data()}));
+            
+            // Sort by newest first
+            allOrders.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            // Dashboard Calcs
+            let revenue = 0;
+            allOrders.forEach(o => { if(o.status === "Livrées") revenue += o.totalPrice; });
+            document.getElementById('dashRevenue').innerText = `${revenue.toFixed(2)} DH`;
+            document.getElementById('dashOrdersCount').innerText = allOrders.length;
+            
+            renderOrdersList();
+            
+            // Render 3 recent orders on dashboard
+            document.getElementById('dashRecentOrders').innerHTML = renderOrderCards(allOrders.slice(0,3));
+        });
+
+        window.filterOrders = (status, tabElement) => {
+            document.querySelectorAll('.o-tab').forEach(t => t.classList.remove('active'));
+            tabElement.classList.add('active');
+            currentOrderFilter = status;
+            renderOrdersList();
+        };
+
+        function renderOrdersList() {
+            let filtered = allOrders;
+            if(currentOrderFilter !== 'Toutes') {
+                filtered = allOrders.filter(o => o.status === currentOrderFilter);
+            }
+            document.getElementById('adminOrderList').innerHTML = renderOrderCards(filtered);
+        }
+
+        function renderOrderCards(orders) {
+            if(orders.length === 0) return `<div style="text-align:center; padding:20px; color:var(--text-muted);">Aucune commande.</div>`;
+            
+            return orders.map(o => {
+                const date = new Date(o.timestamp).toLocaleDateString('fr-FR', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+                
+                let statusClass = 'status-pending';
+                if(o.status === 'En cours') statusClass = 'status-processing';
+                if(o.status === 'Livrées') statusClass = 'status-delivered';
+                if(o.status === 'Annulée') statusClass = 'status-cancelled';
+
+                let actionBtns = '';
+                if(o.status === 'En attente') {
+                    actionBtns = `<button onclick="changeOrderStatus('${o.id}', 'En cours')" style="background:var(--primary); color:white; border:none; padding:8px 12px; border-radius:8px; font-weight:700; font-size:12px; cursor:pointer;">Traiter</button>`;
+                } else if(o.status === 'En cours') {
+                    actionBtns = `<button onclick="changeOrderStatus('${o.id}', 'Livrées')" style="background:var(--success); color:white; border:none; padding:8px 12px; border-radius:8px; font-weight:700; font-size:12px; cursor:pointer;">Marquer Livrée</button>`;
+                }
+
+                return `
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="o-id">#${o.id.substring(0,6).toUpperCase()}</div>
+                            <div class="o-date">${date}</div>
+                        </div>
+                        <span class="status-badge ${statusClass}">${o.status}</span>
+                    </div>
+                    <div class="o-client"><svg viewBox="0 0 24 24" style="width:16px; color:var(--text-muted);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> ${o.customerName || 'Client inconnu'}</div>
+                    <div class="o-details">${o.totalItems} articles • <strong style="color:var(--primary);">${o.totalPrice.toFixed(2)} DH</strong></div>
+                    
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;">
+                        <span style="font-size:12px; color:var(--accent); font-weight:700; cursor:pointer;" onclick="alert('Détails: ${o.cart.map(i => i.qty + 'x ' + i.product.name).join(', ')}')">Voir détails</span>
+                        ${actionBtns}
+                    </div>
+                </div>`;
+            }).join('');
+        }
     </script>
 </body>
 </html>
-
