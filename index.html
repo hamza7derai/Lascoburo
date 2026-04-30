@@ -10,50 +10,30 @@
         /* =========================================
            VARIABLES & RESET
         ========================================= */
-        :root {
-            --primary: #1E3A8A;
-            --primary-light: #EFF6FF;
-            --accent: #2563EB;
-            --success: #10B981;
-            --danger: #EF4444;
-            --bg: #F8FAFC;
-            --surface: #FFFFFF;
-            --text-main: #0F172A;
-            --text-muted: #64748B;
-            --border: #E2E8F0;
-            --shadow-sm: 0 4px 10px rgba(0,0,0,0.04);
-            --shadow-nav: 0 -4px 20px rgba(0,0,0,0.06);
-            --radius-pill: 50px;
-        }
-
+        :root { --primary: #1E3A8A; --primary-light: #EFF6FF; --accent: #2563EB; --success: #10B981; --danger: #EF4444; --bg: #F8FAFC; --surface: #FFFFFF; --text-main: #0F172A; --text-muted: #64748B; --border: #E2E8F0; --shadow-sm: 0 4px 10px rgba(0,0,0,0.04); --shadow-nav: 0 -4px 20px rgba(0,0,0,0.06); --radius-pill: 50px; }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-main); padding-bottom: 160px; overflow-x: hidden; }
         body.no-scroll { overflow: hidden; height: 100vh; }
         .container { padding: 0 20px; max-width: 600px; margin: 0 auto; }
         svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-        /* =========================================
-           APP NAVIGATION (SPA VIEWS)
-        ========================================= */
+        /* APP NAVIGATION (SPA VIEWS) */
         .app-view { display: none; animation: fadeIn 0.3s ease; }
         .app-view.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* HEADER */
+        /* HEADER & SEARCH */
         .app-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
         .brand h1 { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
         .brand span { color: var(--text-main); }
         .brand p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-        
         .icon-btn-top { position: relative; background: var(--primary); width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; box-shadow: var(--shadow-sm); }
         .icon-btn-top .badge { position: absolute; top: -6px; right: -6px; background: white; color: var(--primary); font-size: 11px; font-weight: 800; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        
-        /* SEARCH */
         .search-wrapper { position: relative; margin-bottom: 24px; }
         .search-wrapper input { width: 100%; border: 1px solid var(--border); padding: 16px 20px 16px 50px; border-radius: var(--radius-pill); font-size: 15px; font-family: inherit; outline: none; background: white; box-shadow: var(--shadow-sm);}
         .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); width: 20px; height: 20px; }
 
-        /* QUICK CIRCLE CATEGORIES (HOME) */
+        /* QUICK CATEGORIES (HOME) */
         .quick-cats { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px; scrollbar-width: none; margin: 0 -20px 20px -20px; padding: 0 20px 15px 20px; }
         .quick-cats::-webkit-scrollbar { display: none; }
         .q-cat-item { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; min-width: 65px;}
@@ -86,14 +66,11 @@
         .stock-dot { width: 6px; height: 6px; background: var(--success); border-radius: 50%; }
         .btn-add { background: var(--primary); color: white; border: none; width: 32px; height: 32px; border-radius: 10px; font-size: 18px; font-weight: bold; pointer-events: none; }
 
-        /* =========================================
-           CATEGORIES HUB (New Screen)
-        ========================================= */
+        /* CATEGORIES HUB */
         .nav-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; margin-bottom: 10px;}
         .nav-header h1 { font-size: 20px; font-weight: 800; flex: 1; text-align: center;}
         .nav-header .back-btn { background: white; border: 1px solid var(--border); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--shadow-sm); color: var(--text-main);}
         .nav-header .ghost-btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: var(--text-main); background: transparent; border: none; cursor: pointer;}
-
         .cat-hub-grid { display: flex; flex-direction: column; gap: 16px; }
         .cat-hub-card { border-radius: 20px; padding: 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border: 1px solid rgba(0,0,0,0.05); box-shadow: var(--shadow-sm); transition: 0.2s; position: relative; overflow: hidden;}
         .cat-hub-card:active { transform: scale(0.98); }
@@ -102,25 +79,24 @@
         .cat-hub-info p { font-size: 12px; color: var(--text-muted); font-weight: 600; }
         .cat-hub-img { font-size: 60px; z-index: 2;}
         .cat-hub-arrow { position: absolute; right: 20px; color: var(--primary); opacity: 0.5; }
-
-        /* Specific card colors */
-        .bg-blue { background: #EEF2FF; border-color: #C7D2FE; }
-        .bg-gray { background: #F8FAFC; border-color: #E2E8F0; }
-        .bg-green { background: #F0FDF4; border-color: #BBF7D0; }
-        .bg-pink { background: #FDF2F8; border-color: #FBCFE8; }
+        .bg-blue { background: #EEF2FF; border-color: #C7D2FE; } .bg-gray { background: #F8FAFC; border-color: #E2E8F0; } .bg-green { background: #F0FDF4; border-color: #BBF7D0; } .bg-pink { background: #FDF2F8; border-color: #FBCFE8; }
 
         /* =========================================
-           BOTTOM NAVIGATION BAR
+           NEW: SUB-CATEGORY HORIZONTAL PILLS
         ========================================= */
+        .sub-cats-scroll { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; margin: 0 -20px 20px -20px; padding: 0 20px; }
+        .sub-cats-scroll::-webkit-scrollbar { display: none; }
+        .sub-cat-pill { padding: 8px 16px; background: white; border: 1px solid var(--border); border-radius: 50px; font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: 0.2s; box-shadow: var(--shadow-sm); }
+        .sub-cat-pill.active { background: var(--text-main); color: white; border-color: var(--text-main); }
+
+        /* BOTTOM NAVIGATION BAR */
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 12px 20px 24px 20px; z-index: 80; box-shadow: var(--shadow-nav); max-width: 600px; margin: 0 auto;}
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 6px; color: #94A3B8; text-decoration: none; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.2s;}
         .nav-item.active { color: var(--accent); }
         .nav-item svg { width: 24px; height: 24px; stroke-width: 2; transition: 0.2s;}
         .nav-item.active svg { fill: var(--primary-light); stroke-width: 2.5; }
 
-        /* =========================================
-           STICKY CART BAR (Moved up above Bottom Nav)
-        ========================================= */
+        /* STICKY CART BAR */
         .sticky-cart { position: fixed; bottom: 85px; left: 20px; right: 20px; background: var(--primary); border-radius: 20px; padding: 12px 16px 12px 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 30px rgba(30,58,138,0.35); z-index: 90; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; max-width: 560px; margin: 0 auto; }
         .sticky-cart.hidden { transform: translateY(200%); }
         .sticky-cart-left { display: flex; align-items: center; gap: 14px; }
@@ -131,9 +107,7 @@
         .sc-subtitle { font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 500; }
         .sc-price-pill { background: white; color: var(--primary); font-weight: 800; font-size: 16px; padding: 12px 18px; border-radius: 14px; }
 
-        /* =========================================
-           MODALS (BOTTOM SHEETS) - Same as previous
-        ========================================= */
+        /* MODALS */
         .overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(4px); z-index: 1000; opacity: 0; pointer-events: none; transition: 0.3s; }
         .overlay.active { opacity: 1; pointer-events: auto; }
         .bottom-sheet { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-radius: 30px 30px 0 0; padding: 25px 20px 30px; z-index: 1001; transform: translateY(100%); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1); max-height: 92vh; overflow-y: auto; max-width: 600px; margin: 0 auto;}
@@ -141,7 +115,7 @@
         .sheet-handle { width: 40px; height: 5px; background: #CBD5E1; border-radius: 10px; margin: 0 auto 20px; }
         .close-modal-btn { position: absolute; top: 20px; right: 20px; background: var(--bg); border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-main); }
         
-        /* Product Modal Inner */
+        /* Product Modal */
         .modal-product-top { display: flex; gap: 15px; margin-bottom: 25px; align-items: center;}
         .modal-img-box { width: 130px; height: 130px; background: var(--bg); border-radius: 20px; display: flex; align-items: center; justify-content: center; padding: 15px; flex-shrink: 0; border: 1px solid var(--border);}
         .modal-img-box img { max-width: 100%; max-height: 100%; mix-blend-mode: multiply; }
@@ -174,7 +148,7 @@
         .trust-item { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; font-size: 10px; color: var(--text-muted); font-weight: 600; width: 30%; }
         .trust-item svg { width: 20px; height: 20px; color: var(--text-main); stroke-width: 1.5; }
 
-        /* Cart Modal Inner */
+        /* Cart Modal */
         .cart-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
         .cart-header-row h2 { font-weight: 800; font-size: 22px; color: var(--text-main); }
         .cart-list-container { max-height: 45vh; overflow-y: auto; margin-bottom: 20px; padding-right: 5px;}
@@ -195,7 +169,6 @@
         .summary-row.total { font-size: 20px; font-weight: 800; color: var(--text-main); margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border); margin-bottom: 20px;}
         .free-delivery-badge { background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 800; }
         
-        /* Utils */
         .empty-state { text-align: center; padding: 40px; color: var(--text-muted); grid-column: span 2; font-weight: 600;}
     </style>
 </head>
@@ -218,8 +191,7 @@
             <input type="text" id="homeSearch" placeholder="Rechercher un produit...">
         </div>
 
-        <div class="quick-cats" id="homeQuickCats">
-            </div>
+        <div class="quick-cats" id="homeQuickCats"></div>
 
         <div class="promo-banner">
             <div class="promo-icon-bg"><svg viewBox="0 0 24 24" style="fill:white; stroke:none;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
@@ -238,12 +210,12 @@
 
     <div id="view-categories" class="app-view container">
         <div class="nav-header">
-            <div class="ghost-btn"></div> <h1>Catégories</h1>
+            <div class="ghost-btn"></div>
+            <h1>Catégories</h1>
             <button class="ghost-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
         </div>
         
-        <div class="cat-hub-grid" id="hubGrid">
-            </div>
+        <div class="cat-hub-grid" id="hubGrid"></div>
     </div>
 
 
@@ -255,8 +227,11 @@
             <h1 id="subCatTitle">Catégorie</h1>
             <button class="ghost-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
         </div>
+
+        <div class="sub-cats-scroll" id="subCatPillMenu">
+            </div>
         
-        <main class="product-grid" id="subCatProductGrid" style="margin-top: 10px;"></main>
+        <main class="product-grid" id="subCatProductGrid"></main>
     </div>
 
 
@@ -340,14 +315,15 @@
         const db = getFirestore(app);
 
         let allProducts = [];
-        let allCategories = [];
+        let globalCategoriesData = []; // Full category objects from Firebase
+        let activeMainCategory = '';   // Which category we are viewing in View 3
+        
         let cart = [];
         let currentModalProduct = null;
         let currentModalQty = 1;
         let currentVariantObj = null;
 
-        // Visual mapping for categories
-        const categoryData = {
+        const categoryIcons = {
             'Cahiers': { icon: '<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>', colorClass: 'bg-blue', emoji: '📘' },
             'Stylos': { icon: '<svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>', colorClass: 'bg-gray', emoji: '🖊️' },
             'Sacs': { icon: '<svg viewBox="0 0 24 24"><path d="M4 10h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10z"></path><path d="M8 10V6a4 4 0 0 1 8 0v4"></path></svg>', colorClass: 'bg-pink', emoji: '🎒' },
@@ -367,45 +343,84 @@
             return null;
         }
 
-        // --- SPA TAB SWITCHING LOGIC ---
+        // --- SPA TAB SWITCHING ---
         window.switchTab = (tabId) => {
-            // Hide all views
             document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
-            // Remove active state from nav
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            
-            // Show target view
             document.getElementById(`view-${tabId}`).classList.add('active');
-            
-            // Highlight nav if applicable
             const navEl = document.getElementById(`tab-${tabId}`);
             if(navEl) navEl.classList.add('active');
-
             window.scrollTo(0,0);
         };
 
+        // --- NEW: CATEGORY TO SUB-CATEGORY LOGIC ---
         window.openCategory = (catName) => {
+            activeMainCategory = catName;
             document.getElementById('subCatTitle').innerText = catName;
+            
+            // Render the Horizontal Sub-Category Pills
+            const catData = globalCategoriesData.find(c => c.name === catName);
+            let pillHTML = `<div class="sub-cat-pill active" id="pill-Tous" onclick="window.filterSubCategory('Tous')">Tous</div>`;
+            
+            if(catData && catData.subcategories) {
+                catData.subcategories.forEach(sub => {
+                    // Remove spaces for ID safety
+                    const safeId = sub.replace(/\s+/g, '-'); 
+                    pillHTML += `<div class="sub-cat-pill" id="pill-${safeId}" onclick="window.filterSubCategory('${sub}')">${sub}</div>`;
+                });
+            }
+            document.getElementById('subCatPillMenu').innerHTML = pillHTML;
+
+            // Render all products for this main category
             const filtered = allProducts.filter(p => p.category === catName);
             renderProductGrid(filtered, 'subCatProductGrid');
+            
             window.switchTab('subcategory');
         };
 
-        // --- DATA LOADING & RENDERING ---
-        onSnapshot(collection(db, "products"), snap => {
-            allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            const rawCategories = [...new Set(allProducts.map(p => p.category))];
-            allCategories = rawCategories.filter(cat => cat && cat.trim() !== '').sort();
+        window.filterSubCategory = (subCatName) => {
+            // Update UI styles for pills
+            document.querySelectorAll('.sub-cat-pill').forEach(p => p.classList.remove('active'));
+            const safeId = subCatName === 'Tous' ? 'Tous' : subCatName.replace(/\s+/g, '-');
+            const pill = document.getElementById(`pill-${safeId}`);
+            if(pill) pill.classList.add('active');
+
+            // Filter the actual products
+            let filtered = allProducts.filter(p => p.category === activeMainCategory);
+            if(subCatName !== 'Tous') {
+                filtered = filtered.filter(p => p.subCategory === subCatName);
+            }
             
-            renderHome();
+            renderProductGrid(filtered, 'subCatProductGrid');
+        };
+
+        // --- DATA LOADING ---
+        // 1. Listen to Categories collection first to get subcategories
+        onSnapshot(collection(db, "categories"), snap => {
+            globalCategoriesData = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            globalCategoriesData.sort((a,b) => a.name.localeCompare(b.name));
             renderCategoriesHub();
         });
 
+        // 2. Listen to Products
+        onSnapshot(collection(db, "products"), snap => {
+            allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            renderHome();
+            
+            // If user is currently looking at a category, refresh it
+            if(activeMainCategory) {
+                // Re-apply "Tous" filter by default just to be safe on refresh
+                window.filterSubCategory('Tous');
+            }
+        });
+
         function renderHome() {
-            // Quick Circles
+            // Extract unique categories directly from products for the quick circles
+            const activeCats = [...new Set(allProducts.map(p => p.category))].filter(Boolean);
+            
             let circlesHTML = '';
-            allCategories.forEach(cat => {
-                const icon = (categoryData[cat] || categoryData['default']).icon;
+            activeCats.forEach(cat => {
+                const icon = (categoryIcons[cat] || categoryIcons['default']).icon;
                 circlesHTML += `
                     <div class="q-cat-item" onclick="window.openCategory('${cat}')">
                         <div class="q-cat-circle">${icon}</div>
@@ -415,24 +430,24 @@
             });
             document.getElementById('homeQuickCats').innerHTML = circlesHTML;
 
-            // Home Grid (Best Sellers - just showing all for now, max 6)
+            // Render best sellers (first 6 for now)
             renderProductGrid(allProducts.slice(0, 6), 'homeProductGrid');
         }
 
         function renderCategoriesHub() {
             let hubHTML = '';
-            // Alternate colors
             const classes = ['bg-blue', 'bg-gray', 'bg-green', 'bg-pink'];
             
-            allCategories.forEach((cat, index) => {
-                const data = categoryData[cat] || categoryData['default'];
-                const count = allProducts.filter(p => p.category === cat).length;
+            globalCategoriesData.forEach((catObj, index) => {
+                const catName = catObj.name;
+                const data = categoryIcons[catName] || categoryIcons['default'];
+                const count = allProducts.filter(p => p.category === catName).length;
                 const bgClass = classes[index % classes.length];
 
                 hubHTML += `
-                    <div class="cat-hub-card ${bgClass}" onclick="window.openCategory('${cat}')">
+                    <div class="cat-hub-card ${bgClass}" onclick="window.openCategory('${catName}')">
                         <div class="cat-hub-info">
-                            <h3>${cat}</h3>
+                            <h3>${catName}</h3>
                             <p>${count} produits</p>
                         </div>
                         <div class="cat-hub-img">${data.emoji}</div>
