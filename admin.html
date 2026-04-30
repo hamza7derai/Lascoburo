@@ -39,31 +39,23 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-main); color: var(--text-main); padding-bottom: 90px; }
         .container { padding: 20px; max-width: 600px; margin: 0 auto; position: relative; min-height: 100vh;}
         svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-        
         button { font-family: inherit; cursor: pointer; outline: none; border: none; background: none; }
         input, select { font-family: inherit; }
 
-        /* =========================================
-           SPA VIEWS
-        ========================================= */
+        /* SPA VIEWS */
         .app-view { display: none; animation: fadeIn 0.3s ease; }
         .app-view.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* =========================================
-           TYPOGRAPHY & HEADERS
-        ========================================= */
+        /* HEADERS */
         .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
         .header-top h1 { font-size: 22px; font-weight: 800; color: var(--text-main); line-height: 1.2; }
         .header-top p { font-size: 13px; color: var(--text-muted); font-weight: 500; margin-top: 4px; }
         .icon-btn { width: 44px; height: 44px; background: var(--surface); border-radius: var(--radius-btn); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border); color: var(--text-main); cursor: pointer;}
-        
         .section-title { font-size: 16px; font-weight: 800; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
         .section-link { font-size: 13px; color: var(--primary); font-weight: 600; text-decoration: none; cursor: pointer; }
 
-        /* =========================================
-           DASHBOARD BIG CARD & ALERTS
-        ========================================= */
+        /* BIG ANALYTICS BUTTON (DASHBOARD) */
         .main-stat-card { background: linear-gradient(135deg, #3A5BC7 0%, #1E3A8A 100%); border-radius: var(--radius-card); padding: 20px; color: white; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 25px rgba(45, 75, 155, 0.3); margin-bottom: 20px; cursor: pointer; transition: 0.2s; }
         .main-stat-card:active { transform: scale(0.98); }
         .msc-icon { width: 50px; height: 50px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items:center; justify-content: center; margin-right: 16px; flex-shrink: 0;}
@@ -72,6 +64,7 @@
         .msc-content p { font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.3;}
         .msc-arrow { background: white; color: var(--primary); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;}
 
+        /* ALERTS */
         .alert-card { border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; font-size: 13px; font-weight: 600; cursor: pointer; display: none; transition: 0.2s;}
         .alert-card:active { transform: scale(0.98); }
         .alert-card.active { display: flex; }
@@ -79,11 +72,8 @@
         .alert-card.danger { background: var(--danger-light); color: #B91C1C; border: 1px solid #FECACA; }
         .alert-content { display: flex; align-items: center; gap: 12px; }
 
-        /* =========================================
-           ORDER & PRODUCT CARDS
-        ========================================= */
+        /* CARDS */
         .card { background: var(--surface); border-radius: var(--radius-card); padding: 16px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
-        
         .order-card { padding: 16px; border: 1px solid var(--border); cursor: pointer; transition: 0.2s; background: var(--surface); border-radius: var(--radius-card); margin-bottom: 12px; box-shadow: var(--shadow-sm); }
         .order-card:active { transform: scale(0.98); }
         .order-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; border-bottom: 1px solid var(--bg-main); padding-bottom: 12px;}
@@ -108,6 +98,7 @@
         .tp-info p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
         .tp-sales { font-size: 12px; font-weight: 700; color: var(--accent); }
 
+        /* PRODUCT ADMIN CARDS */
         .prod-card { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--surface); border-radius: var(--radius-card); border: 1px solid var(--border); margin-bottom: 12px; box-shadow: var(--shadow-sm);}
         .prod-img-box { width: 50px; height: 50px; background: var(--bg-main); border-radius: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden;}
         .prod-img-box img { max-width: 100%; max-height: 100%; mix-blend-mode: multiply; object-fit: cover;}
@@ -122,12 +113,9 @@
         .btn-edit-prod { background: var(--primary-light); color: var(--primary); }
         .btn-del-prod { background: var(--danger-light); color: var(--danger); }
 
-        /* =========================================
-           ANALYTICS GRID
-        ========================================= */
+        /* ANALYTICS GRID */
         .analytics-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
         .date-picker-btn { background: var(--surface); border: 1px solid var(--border); padding: 8px 14px; border-radius: 10px; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px; box-shadow: var(--shadow-sm);}
-        
         .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;}
         .metric-card { background: var(--surface); border-radius: 16px; padding: 16px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
         .mc-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items:center; justify-content: center; margin-bottom: 12px;}
@@ -135,16 +123,12 @@
         .mc-val { font-size: 18px; font-weight: 800; color: var(--text-main); margin-bottom: 8px;}
         .mc-trend { font-size: 11px; font-weight: 700; display: flex; align-items:center; gap:4px; }
         .trend-up { color: var(--accent); } .trend-down { color: var(--danger); } .trend-flat { color: var(--text-muted); }
-        
         .info-banner { background: var(--primary-light); color: var(--primary); padding: 16px; border-radius: 16px; display: flex; align-items:flex-start; gap: 12px; font-size: 12px; font-weight: 600; line-height: 1.4; border: 1px solid #C7D2FE;}
 
-        /* =========================================
-           FORMS, INPUTS & BUTTONS
-        ========================================= */
+        /* FORMS */
         .search-box { position: relative; margin-bottom: 20px; display: flex; gap: 10px; }
         .search-box input { flex: 1; padding: 14px 16px 14px 44px; border: 1px solid var(--border); border-radius: var(--radius-btn); background: var(--surface); outline: none; font-size: 14px; }
         .search-box svg.search-icon { position: absolute; left: 16px; top: 14px; color: var(--text-muted); width: 18px; }
-        
         .form-group { margin-bottom: 20px; }
         .form-group label { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
         .form-control { width: 100%; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius-btn); background: var(--surface); outline: none; font-size: 14px; font-weight: 500; transition: 0.2s; }
@@ -162,24 +146,20 @@
         .tab-pill { padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); white-space: nowrap; cursor: pointer; transition: 0.2s;}
         .tab-pill.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        .filter-banner { background: var(--primary-light); border: 1px solid #C7D2FE; border-radius: 12px; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 13px; font-weight: 700; color: var(--primary); display: none;}
+        .filter-banner { background: var(--primary-light); border: 1px solid #C7D2FE; border-radius: 12px; padding: 10px 16px; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 13px; font-weight: 700; color: var(--primary); display: none;}
         .filter-banner.active { display: flex; }
         .filter-close { background: white; border: none; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--primary);}
 
-        /* =========================================
-           WIZARD (ADD PRODUCT)
-        ========================================= */
+        /* WIZARD */
         .stepper { display: flex; justify-content: space-between; position: relative; margin-bottom: 32px; padding: 0 20px; }
         .stepper::before { content: ''; position: absolute; top: 12px; left: 30px; right: 30px; height: 2px; background: var(--border); z-index: 1; }
         .step-dot { width: 26px; height: 26px; border-radius: 50%; background: var(--surface); border: 2px solid var(--border); color: var(--text-muted); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; position: relative; z-index: 2; }
         .step-dot.active { border-color: var(--primary); background: var(--primary); color: white; }
         .step-dot.done { border-color: var(--primary); background: var(--primary); color: white; }
-        
         .wizard-step { display: none; animation: fadeIn 0.3s; }
         .wizard-step.active { display: block; }
         .wizard-footer { display: flex; gap: 12px; margin-top: 30px; }
         .wizard-footer .btn { flex: 1; }
-
         .upload-box { border: 2px dashed var(--border); border-radius: var(--radius-card); padding: 40px 20px; text-align: center; background: var(--surface); margin-bottom: 24px; cursor: pointer; }
         
         .toggle-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--surface); border-radius: var(--radius-btn); border: 1px solid var(--border); margin-bottom: 20px; }
@@ -190,9 +170,7 @@
         input:checked + .slider { background-color: var(--accent); }
         input:checked + .slider:before { transform: translateX(20px); }
 
-        /* =========================================
-           ORDER DETAILS
-        ========================================= */
+        /* ORDER DETAILS */
         .detail-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
         .back-btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: var(--surface); border-radius: 50%; box-shadow: var(--shadow-sm); cursor: pointer; flex-shrink: 0;}
         .info-list { padding: 8px 16px; margin-bottom: 24px;}
@@ -215,9 +193,7 @@
         .summary-row.total { font-size: 16px; font-weight: 800; color: var(--primary); margin-bottom: 0; padding-top: 12px; border-top: 1px dashed var(--border); }
         .action-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
 
-        /* =========================================
-           FAB & BOTTOM NAV
-        ========================================= */
+        /* FAB & BOTTOM NAV */
         .fab { position: fixed; bottom: 100px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(45, 75, 155, 0.4); border: none; cursor: pointer; z-index: 80; transition: 0.2s;}
         .fab:active { transform: scale(0.9); }
         
@@ -286,15 +262,13 @@
             Dernières commandes
             <span class="section-link" onclick="switchTab('commandes')">Voir tout</span>
         </div>
-        <div id="dashRecentOrdersContainer">
-            </div>
+        <div id="dashRecentOrdersContainer"></div>
 
         <div class="section-title" style="margin-top: 32px;">
             Produits populaires
             <span class="section-link" onclick="switchTab('produits')">Voir tout</span>
         </div>
-        <div class="card" id="dashPopularProductsContainer" style="padding-top: 4px; padding-bottom: 4px;">
-            </div>
+        <div class="card" id="dashPopularProductsContainer" style="padding-top: 4px; padding-bottom: 4px;"></div>
     </div>
 
     <div id="view-commandes" class="app-view container">
@@ -362,7 +336,6 @@
         <div class="action-stack" id="det-actions"></div>
     </div>
 
-
     <div id="view-produits" class="app-view container">
         <div class="header-top">
             <div>
@@ -387,7 +360,6 @@
             <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
         </button>
     </div>
-
 
     <div id="view-ajouter" class="app-view container">
         <div class="header-top">
@@ -431,17 +403,14 @@
                 <label>Prix d'achat (DH)</label>
                 <input type="number" id="pCost" class="form-control" placeholder="8.00">
             </div>
-            
             <div class="form-group">
                 <label>Prix de vente (DH)</label>
                 <input type="number" id="pSell" class="form-control" placeholder="15.00">
             </div>
-
             <div class="form-group">
                 <label>Stock global</label>
                 <input type="number" id="pStock" class="form-control" placeholder="50">
             </div>
-
             <div class="form-group">
                 <label>Seuil de stock faible</label>
                 <input type="number" id="pLowStock" class="form-control" placeholder="5" value="5">
@@ -455,13 +424,11 @@
 
         <div id="wizard-3" class="wizard-step">
             <h3 style="font-size: 14px; margin-bottom: 16px; color: var(--text-muted); text-align: center;">Configuration finale</h3>
-            
             <div class="card" style="text-align: center; padding: 30px 20px;">
                 <svg viewBox="0 0 24 24" style="width: 40px; height: 40px; color: var(--accent); margin-bottom: 16px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                 <h4 style="margin-bottom: 8px;">Presque terminé !</h4>
                 <p style="font-size: 13px; color: var(--text-muted);">Vérifiez vos informations avant de mettre le produit en ligne.</p>
             </div>
-
             <div class="wizard-footer">
                 <button class="btn btn-outline" onclick="goToStep(2)">Précédent</button>
                 <button class="btn btn-success" onclick="saveProductData()">Enregistrer le produit</button>
@@ -568,7 +535,6 @@
             </div>
         </div>
     </div>
-
     <div class="toast" id="toastBox">
         <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         <span id="toastMsg">Action réussie</span>
@@ -596,6 +562,9 @@
         let currentEditProductId = null; 
         let currentProductFilter = 'all';
 
+        // --- SAFE DATA EXTRACTORS ---
+        const safeNum = (val) => isNaN(parseFloat(val)) ? 0 : parseFloat(val);
+
         // --- UI Navigation ---
         window.switchTab = (tabId) => {
             document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
@@ -606,13 +575,11 @@
             const navItem = document.getElementById(`nav-${navTarget}`);
             if(navItem) navItem.classList.add('active');
             
-            // Clear product filter if switching tabs normally (except via alert)
             if(tabId !== 'produits' && currentProductFilter !== 'all') {
                 currentProductFilter = 'all';
                 document.getElementById('prodFilterBanner').classList.remove('active');
                 if(allProducts.length) renderProductsAdminList(allProducts);
             }
-            
             window.scrollTo(0,0);
         };
 
@@ -627,124 +594,115 @@
             window.scrollTo(0,0);
         };
 
-        // --- DASHBOARD & ANALYTICS MATH ---
+        // --- DASHBOARD MATH ---
         function calculateDashboard() {
-            const now = new Date();
-            const todayStr = now.toDateString();
-            const yesterday = new Date();
-            yesterday.setDate(yesterday.getDate() - 1);
-            const yesterdayStr = yesterday.toDateString();
-            const thirtyDaysAgo = new Date();
-            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+            try {
+                const now = new Date();
+                const todayStr = now.toDateString();
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                const yesterdayStr = yesterday.toDateString();
+                const thirtyDaysAgo = new Date();
+                thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
-            let profitToday = 0, profitYesterday = 0, profit30Days = 0;
-            let revenueToday = 0, revenueYesterday = 0;
-            let costToday = 0, costYesterday = 0;
-            let ordersToday = 0, ordersYesterday = 0;
-            let itemsToday = 0, itemsYesterday = 0;
-            let productSalesCounter = {}; 
+                let profitToday = 0, profitYesterday = 0, profit30Days = 0;
+                let revenueToday = 0, revenueYesterday = 0;
+                let costToday = 0, costYesterday = 0;
+                let ordersToday = 0, ordersYesterday = 0;
+                let itemsToday = 0, itemsYesterday = 0;
+                let productSalesCounter = {}; 
 
-            allOrders.forEach(order => {
-                const orderDate = new Date(order.timestamp);
-                const isToday = orderDate.toDateString() === todayStr;
-                const isYesterday = orderDate.toDateString() === yesterdayStr;
-                const isLast30Days = orderDate >= thirtyDaysAgo;
+                allOrders.forEach(order => {
+                    if(!order) return;
+                    const ts = order.timestamp ? new Date(order.timestamp) : new Date();
+                    const isToday = ts.toDateString() === todayStr;
+                    const isYesterday = ts.toDateString() === yesterdayStr;
+                    const isLast30Days = ts >= thirtyDaysAgo;
 
-                // Analytics counts ONLY "Livrées" (Delivered)
-                if (order.status === 'Livrées' || order.status === 'Livrée') {
-                    let orderCost = 0, orderRev = 0, orderItems = 0;
-                    
-                    if(order.cart) {
-                        order.cart.forEach(item => {
-                            const cost = parseFloat(item.product.costPrice) || 0;
-                            const sell = parseFloat(item.unitPrice) || parseFloat(item.product.sellPrice) || 0;
-                            const qty = item.qty;
-                            
-                            orderCost += cost * qty;
-                            orderRev += sell * qty;
-                            orderItems += qty;
+                    if (order.status === 'Livrées' || order.status === 'Livrée') {
+                        let orderCost = 0, orderRev = 0, orderItems = 0;
+                        
+                        if(order.cart && Array.isArray(order.cart)) {
+                            order.cart.forEach(item => {
+                                const p = item.product || {};
+                                const cost = safeNum(p.costPrice);
+                                const sell = safeNum(item.unitPrice) || safeNum(p.sellPrice);
+                                const qty = parseInt(item.qty) || 0;
+                                
+                                orderCost += cost * qty;
+                                orderRev += sell * qty;
+                                orderItems += qty;
 
-                            if (!productSalesCounter[item.product.id]) productSalesCounter[item.product.id] = { product: item.product, totalSold: 0 };
-                            productSalesCounter[item.product.id].totalSold += qty;
-                        });
+                                if (p.id) {
+                                    if (!productSalesCounter[p.id]) productSalesCounter[p.id] = { product: p, totalSold: 0 };
+                                    productSalesCounter[p.id].totalSold += qty;
+                                }
+                            });
+                        }
+
+                        if (isToday) { profitToday += (orderRev - orderCost); revenueToday += orderRev; costToday += orderCost; ordersToday++; itemsToday += orderItems; }
+                        if (isYesterday) { profitYesterday += (orderRev - orderCost); revenueYesterday += orderRev; costYesterday += orderCost; ordersYesterday++; itemsYesterday += orderItems; }
+                        if (isLast30Days) profit30Days += (orderRev - orderCost);
                     }
+                });
 
-                    if (isToday) {
-                        profitToday += (orderRev - orderCost);
-                        revenueToday += orderRev;
-                        costToday += orderCost;
-                        ordersToday++;
-                        itemsToday += orderItems;
-                    }
-                    if (isYesterday) {
-                        profitYesterday += (orderRev - orderCost);
-                        revenueYesterday += orderRev;
-                        costYesterday += orderCost;
-                        ordersYesterday++;
-                        itemsYesterday += orderItems;
-                    }
-                    if (isLast30Days) profit30Days += (orderRev - orderCost);
-                }
-            });
+                // Update Dash
+                document.getElementById('dashProfitToday').innerText = profitToday.toFixed(2) + ' DH';
+                document.getElementById('dashOrdersToday').innerText = ordersToday;
+                document.getElementById('dashProfitMonth').innerText = profit30Days.toFixed(2) + ' DH';
+                renderTrendArrow('dashProfitTrend', profitToday, profitYesterday, false);
+                renderTrendArrow('dashOrdersTrend', ordersToday, ordersYesterday, false);
+                
+                // Update Analytics
+                document.getElementById('statProfit').innerText = profitToday.toFixed(2) + ' DH';
+                renderTrendArrow('statProfitTrend', profitToday, profitYesterday, false);
+                document.getElementById('statRevenue').innerText = revenueToday.toFixed(2) + ' DH';
+                renderTrendArrow('statRevenueTrend', revenueToday, revenueYesterday, false);
+                document.getElementById('statCost').innerText = costToday.toFixed(2) + ' DH';
+                renderTrendArrow('statCostTrend', costToday, costYesterday, true);
+                document.getElementById('statOrders').innerText = ordersToday;
+                renderTrendArrow('statOrdersTrend', ordersToday, ordersYesterday, false);
+                document.getElementById('statItems').innerText = itemsToday;
+                renderTrendArrow('statItemsTrend', itemsToday, itemsYesterday, false);
 
-            // Update Dashboard Tab
-            document.getElementById('dashProfitToday').innerText = profitToday.toFixed(2) + ' DH';
-            document.getElementById('dashOrdersToday').innerText = ordersToday;
-            document.getElementById('dashProfitMonth').innerText = profit30Days.toFixed(2) + ' DH';
-            renderTrendArrow('dashProfitTrend', profitToday, profitYesterday);
-            renderTrendArrow('dashOrdersTrend', ordersToday, ordersYesterday);
-            
-            renderPopularProducts(productSalesCounter);
-            
-            const recentOrders = [...allOrders].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp)).slice(0, 2); // Max 2
-            document.getElementById('dashRecentOrdersContainer').innerHTML = generateOrdersHTML(recentOrders);
+                renderPopularProducts(productSalesCounter);
+                const recentOrders = [...allOrders].sort((a,b) => (b.timestamp ? new Date(b.timestamp) : 0) - (a.timestamp ? new Date(a.timestamp) : 0)).slice(0, 2);
+                document.getElementById('dashRecentOrdersContainer').innerHTML = generateOrdersHTML(recentOrders);
 
-            // Update Analytics Tab
-            document.getElementById('statProfit').innerText = profitToday.toFixed(2) + ' DH';
-            renderTrendArrow('statProfitTrend', profitToday, profitYesterday, false);
-            
-            document.getElementById('statRevenue').innerText = revenueToday.toFixed(2) + ' DH';
-            renderTrendArrow('statRevenueTrend', revenueToday, revenueYesterday, false);
-            
-            document.getElementById('statCost').innerText = costToday.toFixed(2) + ' DH';
-            renderTrendArrow('statCostTrend', costToday, costYesterday, true); // True means red=up, but we keep standard green=growth for simplicity unless requested
-            
-            document.getElementById('statOrders').innerText = ordersToday;
-            renderTrendArrow('statOrdersTrend', ordersToday, ordersYesterday, false);
-            
-            document.getElementById('statItems').innerText = itemsToday;
-            renderTrendArrow('statItemsTrend', itemsToday, itemsYesterday, false);
+            } catch (error) { console.error("Calc Error:", error); }
         }
 
         function renderTrendArrow(elementId, todayVal, yesterdayVal, invertColors = false) {
             const el = document.getElementById(elementId);
-            if (yesterdayVal === 0 && todayVal === 0) {
-                el.className = 'mc-trend trend-flat'; el.innerText = '-'; return;
-            }
+            if (!el) return;
+            if (yesterdayVal === 0 && todayVal === 0) { el.className = 'mc-trend trend-flat'; el.innerText = '-'; return; }
             let percentChange = (yesterdayVal === 0 && todayVal > 0) ? 100 : ((todayVal - yesterdayVal) / yesterdayVal) * 100;
-            
             let colorClass = percentChange >= 0 ? 'trend-up' : 'trend-down';
             if(invertColors) colorClass = percentChange >= 0 ? 'trend-down' : 'trend-up';
 
             if (percentChange >= 0) {
-                el.className = `mc-trend ${colorClass}`;
-                el.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg> ${Math.abs(percentChange).toFixed(0)}% vs hier`;
+                el.className = `stat-trend ${colorClass}`;
+                el.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg> ${Math.abs(percentChange).toFixed(0)}%${elementId.includes('stat')?' vs hier':''}`;
             } else {
-                el.className = `mc-trend ${colorClass}`;
-                el.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg> ${Math.abs(percentChange).toFixed(0)}% vs hier`;
+                el.className = `stat-trend ${colorClass}`;
+                el.innerHTML = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg> ${Math.abs(percentChange).toFixed(0)}%${elementId.includes('stat')?' vs hier':''}`;
             }
         }
 
         function renderPopularProducts(salesCounter) {
-            const sortedProducts = Object.values(salesCounter).sort((a, b) => b.totalSold - a.totalSold).slice(0, 3); 
-            const container = document.getElementById('dashPopularProductsContainer');
-            if (sortedProducts.length === 0) {
-                container.innerHTML = '<div class="empty-state">Aucune vente enregistrée.</div>'; return;
-            }
-            container.innerHTML = sortedProducts.map(item => {
-                const img = item.product.imageUrl ? `<img src="${item.product.imageUrl}">` : `<span style="font-weight:bold; color:var(--primary);">${item.product.name.charAt(0)}</span>`;
-                return `<div class="top-product"><div class="tp-img">${img}</div><div class="tp-info"><h4>${item.product.name}</h4><p>${item.product.sellPrice} DH</p></div><div class="tp-sales">${item.totalSold} vendus</div></div>`;
-            }).join('');
+            try {
+                const sortedProducts = Object.values(salesCounter).sort((a, b) => b.totalSold - a.totalSold).slice(0, 3); 
+                const container = document.getElementById('dashPopularProductsContainer');
+                if (sortedProducts.length === 0) { container.innerHTML = '<div class="empty-state">Aucune vente enregistrée.</div>'; return; }
+                
+                container.innerHTML = sortedProducts.map(item => {
+                    const p = item.product || {};
+                    const name = p.name || 'Produit inconnu';
+                    const price = safeNum(p.sellPrice).toFixed(2);
+                    const img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:bold; color:var(--primary);">${name.charAt(0)}</span>`;
+                    return `<div class="top-product"><div class="tp-img">${img}</div><div class="tp-info"><h4>${name}</h4><p>${price} DH</p></div><div class="tp-sales">${item.totalSold} vendus</div></div>`;
+                }).join('');
+            } catch (error) { console.error("PopProd Error:", error); }
         }
 
         function calculateProductAlerts() {
@@ -757,18 +715,13 @@
             });
 
             const lowAlertCard = document.getElementById('alertLowStock');
-            if (lowCount > 0) {
-                lowAlertCard.classList.add('active');
-                document.getElementById('lowStockText').innerText = `${lowCount} produit${lowCount>1?'s':''} en stock faible`;
-            } else lowAlertCard.classList.remove('active');
+            if (lowCount > 0) { lowAlertCard.classList.add('active'); document.getElementById('lowStockText').innerText = `${lowCount} produit${lowCount>1?'s':''} en stock faible`; } 
+            else lowAlertCard.classList.remove('active');
 
             const outAlertCard = document.getElementById('alertOutOfStock');
-            if (outCount > 0) {
-                outAlertCard.classList.add('active');
-                document.getElementById('outOfStockText').innerText = `${outCount} produit${outCount>1?'s':''} en rupture de stock`;
-            } else outAlertCard.classList.remove('active');
+            if (outCount > 0) { outAlertCard.classList.add('active'); document.getElementById('outOfStockText').innerText = `${outCount} produit${outCount>1?'s':''} en rupture de stock`; } 
+            else outAlertCard.classList.remove('active');
             
-            // Filter processing logic
             window.filterProduits = (type) => {
                 currentProductFilter = type;
                 switchTab('produits');
@@ -781,7 +734,6 @@
             allOrders = snap.docs.map(d => ({id: d.id, ...d.data()}));
             calculateDashboard(); 
             renderFullOrdersList(); 
-            
             if (document.getElementById('view-order-detail').classList.contains('active')) {
                 const currentId = document.getElementById('det-id').innerText.replace('#', '').toLowerCase();
                 const stillExists = allOrders.find(o => o.id.toLowerCase() === currentId || o.id.substring(0,6).toLowerCase() === currentId);
@@ -792,9 +744,9 @@
         onSnapshot(collection(db, "products"), snap => {
             allProducts = snap.docs.map(d => ({id: d.id, ...d.data()}));
             calculateProductAlerts(); 
-            renderProductsAdminList(allProducts);
+            if(currentProductFilter === 'all') renderProductsAdminList(allProducts);
+            else filterProduits(currentProductFilter);
         });
-
 
         // --- ORDER MANAGEMENT ---
         window.filterOrdersList = (status, tabElement) => {
@@ -805,40 +757,39 @@
         };
 
         function renderFullOrdersList() {
-            let filtered = [...allOrders].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
-            if (currentOrderFilter !== 'Toutes') {
-                filtered = filtered.filter(o => o.status === currentOrderFilter || o.status + 's' === currentOrderFilter);
-            }
+            let filtered = [...allOrders].sort((a,b) => (b.timestamp ? new Date(b.timestamp) : 0) - (a.timestamp ? new Date(a.timestamp) : 0));
+            if (currentOrderFilter !== 'Toutes') filtered = filtered.filter(o => o.status === currentOrderFilter || o.status + 's' === currentOrderFilter);
             document.getElementById('adminOrderListContainer').innerHTML = generateOrdersHTML(filtered);
         }
 
         function generateOrdersHTML(ordersArray) {
-            if(ordersArray.length === 0) return `<div class="empty-state">Aucune commande.</div>`;
-            return ordersArray.map(o => {
-                const date = new Date(o.timestamp).toLocaleDateString('fr-FR', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
-                let statusClass = 'b-pending';
-                if(o.status === 'En cours') statusClass = 'b-processing';
-                if(o.status === 'Livrée' || o.status === 'Livrées') statusClass = 'b-delivered';
-                if(o.status === 'Annulée') statusClass = 'b-cancelled';
+            try {
+                if(!ordersArray || ordersArray.length === 0) return `<div class="empty-state">Aucune commande.</div>`;
+                return ordersArray.map(o => {
+                    const ts = o.timestamp ? new Date(o.timestamp) : new Date();
+                    const date = ts.toLocaleDateString('fr-FR', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+                    let statusClass = 'b-pending';
+                    if(o.status === 'En cours') statusClass = 'b-processing';
+                    if(o.status === 'Livrée' || o.status === 'Livrées') statusClass = 'b-delivered';
+                    if(o.status === 'Annulée') statusClass = 'b-cancelled';
+                    
+                    const price = safeNum(o.totalPrice).toFixed(2);
+                    const items = parseInt(o.totalItems) || 0;
+                    const cName = o.customerName || 'Client';
 
-                return `
-                <div class="card order-card" onclick="window.viewOrder('${o.id}')">
-                    <div class="order-header">
-                        <div>
-                            <div class="o-id">#${o.id.substring(0,6).toUpperCase()}</div>
-                            <div class="o-date">${date}</div>
+                    return `
+                    <div class="card order-card" onclick="window.viewOrder('${o.id}')">
+                        <div class="order-header">
+                            <div><div class="o-id">#${o.id.substring(0,6).toUpperCase()}</div><div class="o-date">${date}</div></div>
+                            <div class="badge ${statusClass}">${o.status}</div>
                         </div>
-                        <div class="badge ${statusClass}">${o.status}</div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                        <div>
-                            <div class="o-client"><svg viewBox="0 0 24 24" style="width:14px; color:var(--text-muted);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> ${o.customerName || 'Client'}</div>
-                            <div class="o-items">${o.totalItems || 0} articles</div>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                            <div><div class="o-client"><svg viewBox="0 0 24 24" style="width:14px; color:var(--text-muted);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> ${cName}</div><div class="o-items">${items} articles</div></div>
+                            <div class="o-price">${price} DH</div>
                         </div>
-                        <div class="o-price">${parseFloat(o.totalPrice || 0).toFixed(2)} DH</div>
-                    </div>
-                </div>`;
-            }).join('');
+                    </div>`;
+                }).join('');
+            } catch (e) { console.error("Order HTML Error:", e); return `<div class="empty-state">Erreur d'affichage.</div>`; }
         }
 
         window.viewOrder = (orderId) => {
@@ -846,7 +797,8 @@
             if(!order) return;
 
             document.getElementById('det-id').innerText = "#" + order.id.substring(0,6).toUpperCase();
-            document.getElementById('det-date').innerText = new Date(order.timestamp).toLocaleDateString('fr-FR', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'});
+            const ts = order.timestamp ? new Date(order.timestamp) : new Date();
+            document.getElementById('det-date').innerText = ts.toLocaleDateString('fr-FR', {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'});
             document.getElementById('det-client').innerText = order.customerName || 'Inconnu';
             
             let statusClass = 'b-pending';
@@ -856,47 +808,41 @@
             
             const badge = document.getElementById('det-badge');
             badge.className = `badge ${statusClass}`;
-            badge.innerText = order.status.toUpperCase();
+            badge.innerText = (order.status || 'Inconnu').toUpperCase();
 
-            document.getElementById('det-items-count').innerText = `Articles (${order.totalItems})`;
+            document.getElementById('det-items-count').innerText = `Articles (${order.totalItems || 0})`;
             document.getElementById('det-items-list').innerHTML = (order.cart || []).map(item => {
-                const img = item.product.imageUrl ? `<img src="${item.product.imageUrl}">` : '';
+                const p = item.product || {};
+                const img = p.imageUrl ? `<img src="${p.imageUrl}">` : '';
                 const vText = item.variantName ? `<span style="color:var(--primary);">${item.variantName}</span>` : '';
+                const price = safeNum(item.unitPrice) || safeNum(p.sellPrice);
                 return `
                 <div class="item-row">
                     <div class="item-img">${img}</div>
-                    <div class="item-details">
-                        <div class="item-name">${item.product.name} ${vText}</div>
-                        <div class="item-meta">x${item.qty}</div>
-                    </div>
-                    <div class="item-price">${(item.unitPrice * item.qty).toFixed(2)} DH</div>
+                    <div class="item-details"><div class="item-name">${p.name || 'Produit'} ${vText}</div><div class="item-meta">x${item.qty}</div></div>
+                    <div class="item-price">${(price * item.qty).toFixed(2)} DH</div>
                 </div>`;
             }).join('');
 
-            document.getElementById('det-subtotal').innerText = `${order.totalPrice.toFixed(2)} DH`;
-            document.getElementById('det-total').innerText = `${order.totalPrice.toFixed(2)} DH`;
+            const total = safeNum(order.totalPrice).toFixed(2);
+            document.getElementById('det-subtotal').innerText = `${total} DH`;
+            document.getElementById('det-total').innerText = `${total} DH`;
 
             let actionsHTML = '';
             if(order.status !== 'Annulée' && order.status !== 'Livrée' && order.status !== 'Livrées') {
-                if(order.status === 'En attente') {
-                    actionsHTML += `<button class="btn btn-primary" onclick="promptOrderStatus('${order.id}', 'En cours')">Marquer en cours</button>`;
-                }
+                if(order.status === 'En attente') actionsHTML += `<button class="btn btn-primary" onclick="promptOrderStatus('${order.id}', 'En cours')">Marquer en cours</button>`;
                 actionsHTML += `<button class="btn btn-success" onclick="promptOrderStatus('${order.id}', 'Livrées')">Marquer comme livrée</button>`;
                 actionsHTML += `<button class="btn btn-danger-outline" onclick="promptOrderStatus('${order.id}', 'Annulée')">Annuler la commande</button>`;
-            } else if (order.status === 'Annulée') {
-                actionsHTML = `<div style="text-align:center; color:var(--danger); font-weight:700;">Commande annulée</div>`;
-            } else {
-                actionsHTML = `<div style="text-align:center; color:var(--success); font-weight:700;">Commande complétée</div>`;
-            }
+            } else if (order.status === 'Annulée') { actionsHTML = `<div style="text-align:center; color:var(--danger); font-weight:700;">Commande annulée</div>`; } 
+            else { actionsHTML = `<div style="text-align:center; color:var(--success); font-weight:700;">Commande complétée</div>`; }
+            
             document.getElementById('det-actions').innerHTML = actionsHTML;
-
             switchTab('order-detail');
         };
 
         window.promptOrderStatus = (orderId, newStatus) => {
-            let msg = `Voulez-vous marquer cette commande comme ${newStatus.toLowerCase()} ?`;
             document.getElementById('modalTitle').innerText = "Mise à jour statut";
-            document.getElementById('modalMsg').innerText = msg;
+            document.getElementById('modalMsg').innerText = `Voulez-vous marquer cette commande comme ${newStatus.toLowerCase()} ?`;
             
             const btn = document.getElementById('modalConfirmBtn');
             btn.className = newStatus === 'Annulée' ? 'btn btn-primary' : 'btn btn-primary';
@@ -904,10 +850,8 @@
 
             window.confirmActionCallback = async () => {
                 closeConfirm();
-                try {
-                    await updateDoc(doc(db, "orders", orderId), { status: newStatus });
-                    showToast(`Statut mis à jour`);
-                } catch(e) { alert("Erreur réseau"); }
+                try { await updateDoc(doc(db, "orders", orderId), { status: newStatus }); showToast(`Statut mis à jour`); } 
+                catch(e) { alert("Erreur réseau"); }
             };
             document.getElementById('confirmOverlay').classList.add('active');
         };
@@ -915,70 +859,65 @@
 
         // --- PRODUCT MANAGEMENT ---
         function renderProductsAdminList(productsArray) {
-            let filtered = productsArray;
-            const filterBanner = document.getElementById('prodFilterBanner');
-            
-            if (currentProductFilter === 'rupture') {
-                filtered = filtered.filter(p => p.stock <= 0);
-                filterBanner.classList.add('active');
-                document.getElementById('prodFilterText').innerText = "Filtre: Rupture de stock";
-            } else if (currentProductFilter === 'faible') {
-                filtered = filtered.filter(p => p.stock > 0 && p.stock <= (p.lowStockThreshold||5));
-                filterBanner.classList.add('active');
-                document.getElementById('prodFilterText').innerText = "Filtre: Stock faible";
-            } else {
-                filterBanner.classList.remove('active');
-            }
-
-            document.getElementById('prodCountText').innerText = `${filtered.length} produits`;
-            const container = document.getElementById('adminProductListContainer');
-            
-            if(filtered.length === 0) {
-                container.innerHTML = `<div class="empty-state">Aucun produit trouvé.</div>`;
-                return;
-            }
-
-            container.innerHTML = filtered.map(p => {
-                const img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:800;color:var(--text-muted);">${p.name.charAt(0)}</span>`;
+            try {
+                let filtered = productsArray;
+                const filterBanner = document.getElementById('prodFilterBanner');
                 
-                let stockClass = 'stock-good';
-                let stockText = `${p.stock} en stock`;
-                const limit = parseInt(p.lowStockThreshold) || 5;
-                
-                if (p.stock <= 0) { stockClass = 'stock-out'; stockText = 'Rupture'; }
-                else if (p.stock <= limit) { stockClass = 'stock-low'; stockText = `Stock: ${p.stock} (Faible)`; }
+                if (currentProductFilter === 'rupture') {
+                    filtered = filtered.filter(p => (parseInt(p.stock)||0) <= 0);
+                    filterBanner.classList.add('active');
+                    document.getElementById('prodFilterText').innerText = "Filtre: Rupture de stock";
+                } else if (currentProductFilter === 'faible') {
+                    filtered = filtered.filter(p => { const s = parseInt(p.stock)||0; return s > 0 && s <= (parseInt(p.lowStockThreshold)||5); });
+                    filterBanner.classList.add('active');
+                    document.getElementById('prodFilterText').innerText = "Filtre: Stock faible";
+                } else {
+                    filterBanner.classList.remove('active');
+                }
 
-                return `
-                <div class="prod-card">
-                    <div class="prod-img-box">${img}</div>
-                    <div class="prod-info">
-                        <h4>${p.name}</h4>
-                        <div class="prod-meta">${p.category} • <strong style="color:var(--primary);">${p.sellPrice} DH</strong></div>
-                        <div class="prod-stock ${stockClass}">${stockText}</div>
-                    </div>
-                    <div class="prod-actions">
-                        <button class="btn-icon-small btn-edit-prod" onclick="editProduct('${p.id}')"><svg viewBox="0 0 24 24" style="width:18px;"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button>
-                        <button class="btn-icon-small btn-del-prod" onclick="promptDeleteProduct('${p.id}')"><svg viewBox="0 0 24 24" style="width:18px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                    </div>
-                </div>`;
-            }).join('');
+                document.getElementById('prodCountText').innerText = `${filtered.length} produits`;
+                const container = document.getElementById('adminProductListContainer');
+                
+                if(filtered.length === 0) { container.innerHTML = `<div class="empty-state">Aucun produit trouvé.</div>`; return; }
+
+                container.innerHTML = filtered.map(p => {
+                    const name = p.name || 'Inconnu';
+                    const img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:800;color:var(--text-muted);">${name.charAt(0)}</span>`;
+                    const stock = parseInt(p.stock)||0;
+                    const limit = parseInt(p.lowStockThreshold)||5;
+                    let stockClass = 'stock-good', stockText = `${stock} en stock`;
+                    if (stock <= 0) { stockClass = 'stock-out'; stockText = 'Rupture'; }
+                    else if (stock <= limit) { stockClass = 'stock-low'; stockText = `Stock: ${stock} (Faible)`; }
+
+                    return `
+                    <div class="prod-card">
+                        <div class="prod-img-box">${img}</div>
+                        <div class="prod-info">
+                            <h4>${name}</h4>
+                            <div class="prod-meta">${p.category||'Sans cat'} • <strong style="color:var(--primary);">${safeNum(p.sellPrice)} DH</strong></div>
+                            <div class="prod-stock ${stockClass}">${stockText}</div>
+                        </div>
+                        <div class="prod-actions">
+                            <button class="btn-icon-small btn-edit-prod" onclick="editProduct('${p.id}')"><svg viewBox="0 0 24 24" style="width:18px;"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button>
+                            <button class="btn-icon-small btn-del-prod" onclick="promptDeleteProduct('${p.id}')"><svg viewBox="0 0 24 24" style="width:18px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+                        </div>
+                    </div>`;
+                }).join('');
+            } catch(e) { console.error("Prod List Error:", e); }
         }
 
         document.getElementById('searchProdInput').addEventListener('input', e => {
             const q = e.target.value.toLowerCase();
             let subset = allProducts;
-            if (currentProductFilter === 'rupture') subset = subset.filter(p => p.stock <= 0);
-            if (currentProductFilter === 'faible') subset = subset.filter(p => p.stock > 0 && p.stock <= (p.lowStockThreshold||5));
-            
-            renderProductsAdminList(subset.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)));
+            if (currentProductFilter === 'rupture') subset = subset.filter(p => (parseInt(p.stock)||0) <= 0);
+            if (currentProductFilter === 'faible') subset = subset.filter(p => { const s = parseInt(p.stock)||0; return s > 0 && s <= (parseInt(p.lowStockThreshold)||5); });
+            renderProductsAdminList(subset.filter(p => (p.name||'').toLowerCase().includes(q) || (p.category||'').toLowerCase().includes(q)));
         });
 
         window.promptDeleteProduct = (id) => {
             document.getElementById('modalTitle').innerText = "Supprimer le produit";
             document.getElementById('modalMsg').innerText = "Cette action est irréversible. Confirmer ?";
-            const btn = document.getElementById('modalConfirmBtn');
-            btn.style.background = 'var(--danger)';
-            
+            document.getElementById('modalConfirmBtn').style.background = 'var(--danger)';
             window.confirmActionCallback = async () => {
                 closeConfirm();
                 await deleteDoc(doc(db, "products", id));
@@ -987,25 +926,20 @@
             document.getElementById('confirmOverlay').classList.add('active');
         }
 
-        // --- WIZARD ADD/EDIT LOGIC ---
         window.prepareAddProduct = () => {
             currentEditProductId = null;
             document.getElementById('wizardTitle').innerText = "Ajouter un produit";
             document.querySelectorAll('input').forEach(i => { if(i.type !== 'checkbox') i.value = '' });
             document.getElementById('previewImg').style.display = 'none';
             document.getElementById('pLowStock').value = 5;
-            
-            switchTab('ajouter');
-            goToStep(1);
+            switchTab('ajouter'); goToStep(1);
         };
 
         window.editProduct = (id) => {
             const p = allProducts.find(x => x.id === id);
             if(!p) return;
-            
             currentEditProductId = id;
             document.getElementById('wizardTitle').innerText = "Modifier le produit";
-            
             document.getElementById('pName').value = p.name || '';
             document.getElementById('pCat').value = p.category || '';
             document.getElementById('pCost').value = p.costPrice || '';
@@ -1013,16 +947,9 @@
             document.getElementById('pStock').value = p.stock || '';
             document.getElementById('pLowStock').value = p.lowStockThreshold || 5;
             document.getElementById('pImg').value = p.imageUrl || '';
-
-            if(p.imageUrl) {
-                document.getElementById('previewImg').src = p.imageUrl;
-                document.getElementById('previewImg').style.display = 'block';
-            } else {
-                document.getElementById('previewImg').style.display = 'none';
-            }
-
-            switchTab('ajouter');
-            goToStep(1);
+            if(p.imageUrl) { document.getElementById('previewImg').src = p.imageUrl; document.getElementById('previewImg').style.display = 'block'; } 
+            else { document.getElementById('previewImg').style.display = 'none'; }
+            switchTab('ajouter'); goToStep(1);
         };
 
         window.saveProductData = async () => {
@@ -1035,31 +962,16 @@
                 lowStockThreshold: parseInt(document.getElementById('pLowStock').value) || 5,
                 imageUrl: document.getElementById('pImg').value
             };
-
             if(!data.name) return alert("Veuillez entrer un nom de produit.");
-            
             try {
-                if(currentEditProductId) {
-                    await updateDoc(doc(db, "products", currentEditProductId), data);
-                    showToast("Produit modifié avec succès !");
-                } else {
-                    data.timestamp = new Date().toISOString();
-                    await addDoc(collection(db, "products"), data);
-                    showToast("Nouveau produit ajouté !");
-                }
+                if(currentEditProductId) { await updateDoc(doc(db, "products", currentEditProductId), data); showToast("Produit modifié !"); } 
+                else { data.timestamp = new Date().toISOString(); await addDoc(collection(db, "products"), data); showToast("Nouveau produit ajouté !"); }
                 switchTab('produits');
-            } catch (e) {
-                console.error(e);
-                alert("Erreur lors de l'enregistrement.");
-            }
+            } catch (e) { console.error(e); alert("Erreur lors de l'enregistrement."); }
         };
 
-        // Modal Helpers
         window.closeConfirm = () => document.getElementById('confirmOverlay').classList.remove('active');
-        document.getElementById('modalConfirmBtn').addEventListener('click', () => {
-            if(window.confirmActionCallback) window.confirmActionCallback();
-        });
-
+        document.getElementById('modalConfirmBtn').addEventListener('click', () => { if(window.confirmActionCallback) window.confirmActionCallback(); });
         function showToast(msg) {
             const t = document.getElementById('toastBox');
             document.getElementById('toastMsg').innerText = msg;
