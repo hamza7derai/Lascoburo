@@ -17,16 +17,10 @@
         .container { padding: 0 20px; max-width: 600px; margin: 0 auto; }
         svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-        /* APP NAVIGATION (SPA VIEWS) & ANIMATIONS */
-        .app-view { display: none; }
-        .app-view.active { display: block; animation: viewFadeIn 0.3s ease; }
-        @keyframes viewFadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animated-card { animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        /* APP NAVIGATION (SPA VIEWS) */
+        .app-view { display: none; animation: fadeIn 0.3s ease; }
+        .app-view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* HEADER & SEARCH */
         .app-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
@@ -37,8 +31,7 @@
         .icon-btn-top:active { transform: scale(0.9); }
         .icon-btn-top .badge { position: absolute; top: -6px; right: -6px; background: white; color: var(--primary); font-size: 11px; font-weight: 800; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .search-wrapper { position: relative; margin-bottom: 24px; }
-        .search-wrapper input { width: 100%; border: 1px solid var(--border); padding: 16px 20px 16px 50px; border-radius: var(--radius-pill); font-size: 15px; font-family: inherit; outline: none; background: white; box-shadow: var(--shadow-sm); transition: 0.3s;}
-        .search-wrapper input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--primary-light); }
+        .search-wrapper input { width: 100%; border: 1px solid var(--border); padding: 16px 20px 16px 50px; border-radius: var(--radius-pill); font-size: 15px; font-family: inherit; outline: none; background: white; box-shadow: var(--shadow-sm);}
         .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); width: 20px; height: 20px; }
 
         /* QUICK CATEGORIES (HOME) */
@@ -62,11 +55,10 @@
         .section-header a { font-size: 13px; font-weight: 700; color: var(--text-muted); text-decoration: none; }
         
         .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .product-card { background: white; border-radius: 20px; padding: 12px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid var(--border); position: relative; overflow: hidden;}
-        .product-card:active { transform: scale(0.97); box-shadow: none;}
+        .product-card { background: white; border-radius: 20px; padding: 12px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s; border: 1px solid var(--border); position: relative; overflow: hidden;}
+        .product-card:active { transform: scale(0.97); }
         .product-img-box { background: var(--bg); border-radius: 16px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; overflow: hidden; padding:10px;}
-        .product-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; transition: transform 0.3s;}
-        .product-card:hover .product-img-box img { transform: scale(1.05); }
+        .product-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
         .product-info h3 { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
         .product-info p { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
         .product-footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; }
@@ -91,8 +83,7 @@
         .hero-cat-info h3 { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
         .hero-cat-info p { font-size: 12px; font-weight: 500; margin-bottom: 12px; line-height: 1.3; opacity: 0.8;}
         .hero-cat-badge { display: inline-block; padding: 4px 10px; border-radius: 50px; font-size: 10px; font-weight: 700; background: rgba(255,255,255,0.6); }
-        .hero-cat-img { font-size: 70px; z-index: 2; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); margin-left: 10px; transition: transform 0.3s;}
-        .hero-cat-card:hover .hero-cat-img { transform: scale(1.1) rotate(5deg); }
+        .hero-cat-img { font-size: 70px; z-index: 2; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); margin-left: 10px;}
         .hero-cat-arrow { position: absolute; right: 15px; opacity: 0.5; width: 20px;}
 
         /* Hero Themes */
@@ -113,24 +104,19 @@
         ========================================= */
         .filter-row { display: flex; gap: 8px; margin-bottom: 24px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none;}
         .filter-row::-webkit-scrollbar { display: none; }
-        .filter-select { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-weight: 600; color: var(--text-main); outline: none; appearance: none; padding-right: 30px; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2364748B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 10px center; background-size: 14px; flex-shrink: 0; transition:0.2s;}
-        .filter-select:focus { border-color: var(--accent); }
-        .filter-btn { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 10px; display: flex; align-items: center; justify-content: center; color: var(--text-main); flex-shrink: 0; transition:0.2s;}
-        .filter-btn:active { background: var(--bg); }
+        .filter-select { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-weight: 600; color: var(--text-main); outline: none; appearance: none; padding-right: 30px; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2364748B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 10px center; background-size: 14px; flex-shrink: 0;}
+        .filter-btn { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 10px; display: flex; align-items: center; justify-content: center; color: var(--text-main); flex-shrink: 0;}
 
-        .help-banner { background: #EEF2FF; border-radius: 16px; padding: 16px; display: flex; gap: 16px; align-items: center; cursor: pointer; border: 1px solid #C7D2FE; transition:0.2s;}
-        .help-banner:active { transform: scale(0.98); }
+        .help-banner { background: #EEF2FF; border-radius: 16px; padding: 16px; display: flex; gap: 16px; align-items: center; cursor: pointer; border: 1px solid #C7D2FE;}
         .hb-icon { font-size: 32px; background: white; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); flex-shrink: 0;}
         .hb-text h4 { font-size: 14px; font-weight: 800; color: var(--text-main); margin-bottom: 4px;}
         .hb-text p { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; line-height: 1.3;}
         .hb-link { font-size: 12px; font-weight: 800; color: var(--accent); }
 
         .manuel-list { display: flex; flex-direction: column; gap: 16px; }
-        .manuel-card { background: white; border-radius: 20px; padding: 16px; display: flex; gap: 16px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); cursor: pointer; position: relative; transition: 0.2s;}
-        .manuel-card:active { transform: scale(0.98); }
+        .manuel-card { background: white; border-radius: 20px; padding: 16px; display: flex; gap: 16px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); cursor: pointer; position: relative;}
         .manuel-img { width: 80px; height: 100px; background: var(--bg); border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 5px; flex-shrink: 0; overflow: hidden;}
-        .manuel-img img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; transition: 0.3s;}
-        .manuel-card:hover .manuel-img img { transform: scale(1.05); }
+        .manuel-img img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
         .manuel-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .manuel-info h3 { font-size: 15px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; line-height: 1.2; padding-right: 70px;}
         .manuel-meta { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; font-weight: 500;}
@@ -166,8 +152,7 @@
         .bottom-sheet { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-radius: 30px 30px 0 0; padding: 25px 20px 30px; z-index: 1001; transform: translateY(100%); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1); max-height: 92vh; overflow-y: auto; max-width: 600px; margin: 0 auto;}
         .bottom-sheet.active { transform: translateY(0); }
         .sheet-handle { width: 40px; height: 5px; background: #CBD5E1; border-radius: 10px; margin: 0 auto 20px; }
-        .close-modal-btn { position: absolute; top: 20px; right: 20px; background: var(--bg); border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-main); z-index: 10; transition:0.2s;}
-        .close-modal-btn:active { transform: scale(0.9); }
+        .close-modal-btn { position: absolute; top: 20px; right: 20px; background: var(--bg); border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-main); z-index: 10;}
         
         /* Product Modal UI */
         .modal-product-top { display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-start;}
@@ -206,8 +191,7 @@
         
         .qty-row-ui { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
         .qty-controls-pill { display: flex; align-items: center; background: var(--bg); border-radius: 12px; padding: 4px; border: 1px solid var(--border);}
-        .qty-btn { width: 36px; height: 36px; background: transparent; border: none; font-size: 20px; font-weight: bold; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center; transition: 0.2s;}
-        .qty-btn:active { transform: scale(0.8); }
+        .qty-btn { width: 36px; height: 36px; background: transparent; border: none; font-size: 20px; font-weight: bold; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center;}
         .qty-number { width: 40px; text-align: center; font-weight: 800; font-size: 16px; color: var(--text-main);}
         .btn-large-primary { width: 100%; background: var(--success); color: white; border: none; padding: 18px; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.2s;}
         .btn-large-primary:active { transform: scale(0.98); }
@@ -226,11 +210,9 @@
         .variant-tag-blue { font-size: 11px; background: var(--primary-light); color: var(--accent); padding: 3px 8px; border-radius: 6px; font-weight: 700; display: inline-block; width: fit-content; margin-bottom: 6px;}
         .cart-item-price { font-size: 15px; font-weight: 800; color: var(--primary); }
         .cart-item-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px;}
-        .btn-trash { background: #FEE2E2; color: var(--danger); border: none; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
-        .btn-trash:active { transform: scale(0.9); }
+        .btn-trash { background: #FEE2E2; color: var(--danger); border: none; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
         .qty-controls-small { display: flex; align-items: center; background: var(--bg); border-radius: 8px; padding: 2px; border: 1px solid var(--border);}
-        .qty-controls-small button { width: 26px; height: 26px; background: transparent; border: none; font-size: 16px; font-weight: bold; cursor: pointer; color: var(--text-muted); transition: 0.2s;}
-        .qty-controls-small button:active { transform: scale(0.8); }
+        .qty-controls-small button { width: 26px; height: 26px; background: transparent; border: none; font-size: 16px; font-weight: bold; cursor: pointer; color: var(--text-muted); }
         .qty-controls-small span { width: 24px; text-align: center; font-weight: 800; font-size: 13px; }
         .promo-code-row { display: flex; justify-content: space-between; align-items: center; padding: 16px; border: 1px solid var(--border); border-radius: 16px; font-weight: 700; font-size: 14px; color: var(--text-main); margin-bottom: 20px;}
         
@@ -243,7 +225,7 @@
 </head>
 <body>
 
-    <div id="view-home" class="app-view container">
+    <div id="view-home" class="app-view active container">
         <header class="app-header">
             <div class="brand">
                 <h1>Lasco<span>buro</span></h1>
@@ -354,7 +336,7 @@
     </div>
 
     <nav class="bottom-nav">
-        <div class="nav-item" id="tab-home" onclick="switchTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Accueil</div>
+        <div class="nav-item active" id="tab-home" onclick="switchTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Accueil</div>
         <div class="nav-item" id="tab-categories" onclick="switchTab('categories')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Catégories</div>
         
         <div class="nav-item" id="tab-manuels" onclick="switchTab('manuels')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg> Manuels</div>
@@ -405,6 +387,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, onSnapshot, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+        // ⚠️ REPLACE WITH YOUR ACTUAL FIREBASE CONFIG
         const firebaseConfig = {
             apiKey: "AIzaSyCKY59mqLqD4GqQpkDEFqNybKIkwLvgId0",
             authDomain: "lascoburo.firebaseapp.com",
@@ -447,13 +430,7 @@
             document.getElementById(`view-${tabId}`).classList.add('active');
             const navEl = document.getElementById(`tab-${tabId}`);
             if(navEl) navEl.classList.add('active');
-            
-            // Persist the tab ignoring the deep subcategory view to prevent bugs on reload
-            if (tabId !== 'subcategory') {
-                localStorage.setItem('lascoStoreTab', tabId);
-            }
-            
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            window.scrollTo(0,0);
         };
 
         window.openCategory = (catName) => {
@@ -494,6 +471,7 @@
             allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             renderHome(); renderCategoriesHub(); 
             
+            // Re-render textbooks specifically if data changes
             loadManuelFilters();
             applyManuelFilters();
             
@@ -520,7 +498,7 @@
             HERO_CATEGORIES.forEach((hero) => {
                 const count = allProducts.filter(p => p.category === hero.id).length;
                 hubHTML += `
-                    <div class="hero-cat-card animated-card ${hero.colorClass}" onclick="window.openCategory('${hero.id}')">
+                    <div class="hero-cat-card ${hero.colorClass}" onclick="window.openCategory('${hero.id}')">
                         <div class="hero-cat-info"><h3>${hero.title}</h3><p>${hero.desc}</p><span class="hero-cat-badge">${count} produits</span></div>
                         <div class="hero-cat-img">${hero.emoji}</div><svg class="hero-cat-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>`;
@@ -533,7 +511,7 @@
             if (products.length === 0) return grid.innerHTML = `<div class="empty-state">Aucun produit.</div>`;
 
             grid.innerHTML = products.map(p => {
-                let img = p.imageUrl ? `<img src="${p.imageUrl}" loading="lazy">` : `<span style="font-weight:bold; color:var(--primary);">${p.name.split(' ')[0]}</span>`;
+                let img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:bold; color:var(--primary);">${p.name.split(' ')[0]}</span>`;
                 let stockHTML = p.stock > 0 ? `<div class="stock-indicator"><div class="stock-dot"></div> En stock</div>` : `<div class="stock-indicator" style="color:var(--danger);"><div class="stock-dot" style="background:var(--danger);"></div> Rupture</div>`;
                 
                 const sellP = parseFloat(p.sellPrice) || 0;
@@ -544,7 +522,7 @@
                 const vedetteHTML = p.featured ? `<div class="badge-vedette">⭐ Vedette</div>` : '';
 
                 return `
-                    <div class="product-card animated-card" onclick="window.openProductModal('${p.id}')">
+                    <div class="product-card" onclick="window.openProductModal('${p.id}')">
                         ${vedetteHTML}
                         <div class="product-img-box">${img}</div>
                         <div class="product-info"><h3>${p.name}</h3><p>${p.category}</p></div>
@@ -557,12 +535,16 @@
             }).join('');
         }
 
+        // --- NEW: MANUELS SCOLAIRES ENGINE ---
         function loadManuelFilters() {
             const textbooks = allProducts.filter(p => p.isTextbook === true);
+            
+            // Extract unique values
             const levels = [...new Set(textbooks.map(p => p.textbookLevel).filter(Boolean))].sort();
             const subjects = [...new Set(textbooks.map(p => p.textbookSubject).filter(Boolean))].sort();
             const publishers = [...new Set(textbooks.map(p => p.textbookPublisher).filter(Boolean))].sort();
 
+            // Populate Dropdowns
             document.getElementById('filterNiveau').innerHTML = '<option value="">Niveau</option>' + levels.map(l => `<option value="${l}">${l}</option>`).join('');
             document.getElementById('filterMatiere').innerHTML = '<option value="">Matière</option>' + subjects.map(s => `<option value="${s}">${s}</option>`).join('');
             document.getElementById('filterEditeur').innerHTML = '<option value="">Éditeur</option>' + publishers.map(e => `<option value="${e}">${e}</option>`).join('');
@@ -593,7 +575,7 @@
             }
 
             container.innerHTML = products.map(p => {
-                let img = p.imageUrl ? `<img src="${p.imageUrl}" loading="lazy">` : `<span style="font-weight:bold; color:var(--primary); font-size:10px;">${p.name.substring(0,3)}</span>`;
+                let img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:bold; color:var(--primary); font-size:10px;">${p.name.substring(0,3)}</span>`;
                 
                 let stockClass = p.stock > 0 ? '' : 'rupture';
                 let stockText = p.stock > 0 ? 'Disponible' : 'Rupture';
@@ -607,7 +589,7 @@
                 const meta2 = p.textbookPublisher ? `Éditeur : ${p.textbookPublisher}` : '';
 
                 return `
-                    <div class="manuel-card animated-card" onclick="window.openProductModal('${p.id}')">
+                    <div class="manuel-card" onclick="window.openProductModal('${p.id}')">
                         <div class="status-badge-top ${stockClass}">${stockText}</div>
                         <div class="stock-text-right ${stockClass}">Stock: ${p.stock}</div>
                         
@@ -684,7 +666,7 @@
 
             let descHTML = '';
             if(product.description && product.description.trim() !== '') { descHTML = `<div class="product-desc-box">${product.description}</div>`; }
-            let img = product.imageUrl ? `<img src="${product.imageUrl}" loading="lazy">` : `<span>Img</span>`;
+            let img = product.imageUrl ? `<img src="${product.imageUrl}">` : `<span>Img</span>`;
             const vedetteHTML = product.featured ? `<div class="badge-vedette" style="top: -10px; left:-10px;">⭐ Vedette</div>` : '';
 
             document.getElementById('productModalContent').innerHTML = `
@@ -698,4 +680,168 @@
                     <span class="section-label" style="margin:0;">Quantité</span>
                     <div class="qty-controls-pill"><button class="qty-btn" onclick="window.changeModalQty(-1)">-</button><div class="qty-number" id="modalQtyDisplay">1</div><button class="qty-btn" onclick="window.changeModalQty(1)">+</button></div>
                 </div>
-                <button class="btn-large-primary" onclick="window.confirmAddToCart()"><svg viewBox="0 0 24 24" style="fill:white; stroke:white; width:22px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> Ajouter au panier • <span id="modalBtn
+                <button class="btn-large-primary" onclick="window.confirmAddToCart()"><svg viewBox="0 0 24 24" style="fill:white; stroke:white; width:22px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> Ajouter au panier • <span id="modalBtnTotal">${activePrice.toFixed(2)} DH</span></button>
+            `;
+            document.body.classList.add('no-scroll');
+            document.getElementById('productOverlay').classList.add('active');
+            document.getElementById('productModal').classList.add('active');
+        };
+
+        window.selectVariant = (index) => {
+            const v = currentModalProduct.variants[index]; if(v.stock <= 0) return; 
+
+            document.querySelectorAll('.variant-box').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.color-swatch-wrapper').forEach(w => { w.classList.remove('active'); w.querySelector('.color-swatch').classList.remove('active'); });
+            
+            const squares = document.querySelectorAll('.variant-box'); if(squares.length > 0) squares[index].classList.add('active');
+            const circles = document.querySelectorAll('.color-swatch-wrapper'); if(circles.length > 0) { circles[index].classList.add('active'); circles[index].querySelector('.color-swatch').classList.add('active'); }
+            
+            currentVariantObj = v; currentModalQty = 1;
+            document.getElementById('modalQtyDisplay').innerText = currentModalQty; document.getElementById('modalStockLimit').innerText = v.stock;
+            updateModalPrices();
+        };
+
+        window.changeModalQty = (change) => {
+            const maxStock = currentVariantObj ? currentVariantObj.stock : currentModalProduct.stock; const newQty = currentModalQty + change;
+            if(newQty >= 1 && newQty <= maxStock) { currentModalQty = newQty; document.getElementById('modalQtyDisplay').innerText = currentModalQty; updateModalPrices(); }
+        };
+
+        function updateModalPrices() {
+            const sellP = parseFloat(currentModalProduct.sellPrice) || 0; const promoP = parseFloat(currentModalProduct.promoPrice) || 0;
+            const activePrice = (promoP > 0 && promoP < sellP) ? promoP : sellP;
+            const total = activePrice * currentModalQty;
+            document.getElementById('modalBtnTotal').innerText = `${total.toFixed(2)} DH`;
+        }
+
+        window.closeProductModal = () => { document.body.classList.remove('no-scroll'); document.getElementById('productOverlay').classList.remove('active'); document.getElementById('productModal').classList.remove('active'); };
+
+        window.confirmAddToCart = () => {
+            const sellP = parseFloat(currentModalProduct.sellPrice) || 0; const promoP = parseFloat(currentModalProduct.promoPrice) || 0;
+            const priceToUse = (promoP > 0 && promoP < sellP) ? promoP : sellP;
+            const variantNameToUse = currentVariantObj ? currentVariantObj.name : null; const maxStock = currentVariantObj ? currentVariantObj.stock : currentModalProduct.stock;
+
+            const existingIndex = cart.findIndex(c => c.product.id === currentModalProduct.id && c.variantName === variantNameToUse);
+            if(existingIndex > -1) { const newTotalQty = cart[existingIndex].qty + currentModalQty; cart[existingIndex].qty = newTotalQty > maxStock ? maxStock : newTotalQty; } 
+            else { cart.push({ product: currentModalProduct, qty: currentModalQty, unitPrice: priceToUse, variantName: variantNameToUse }); }
+            updateCartUI(); closeProductModal();
+        };
+
+        // --- CART LOGIC ---
+        window.openCartModal = () => {
+            renderCartModalList();
+            document.body.classList.add('no-scroll');
+            document.getElementById('cartOverlay').classList.add('active'); 
+            document.getElementById('cartModal').classList.add('active');
+        };
+
+        function renderCartModalList() {
+            if(cart.length === 0) {
+                document.getElementById('cartItemsContainer').innerHTML = `
+                    <div style="text-align:center; padding: 40px 20px;">
+                        <svg viewBox="0 0 24 24" style="width:48px; height:48px; color:var(--text-muted); margin-bottom:16px; opacity:0.5;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        <h3 style="font-size:16px; font-weight:800; color:var(--text-main); margin-bottom:8px;">Votre panier est vide</h3>
+                        <p style="font-size:13px; color:var(--text-muted); margin-bottom:24px;">Il semble que vous n'ayez pas encore ajouté d'articles.</p>
+                        <button class="btn-outline" style="width:100%; border-color:var(--primary); color:var(--primary);" onclick="closeCartModal()">Retour à la boutique</button>
+                    </div>`;
+                document.getElementById('cartSummaryArea').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('cartSummaryArea').style.display = 'block';
+
+            document.getElementById('cartItemsContainer').innerHTML = cart.map((item, index) => {
+                let img = item.product.imageUrl ? `<img src="${item.product.imageUrl}">` : ''; let vTag = item.variantName ? `<span class="variant-tag-blue">${item.variantName}</span>` : '';
+                return `
+                    <div class="cart-item-card">
+                        <div class="cart-item-img">${img}</div>
+                        <div class="cart-item-center"><h4>${item.product.name}</h4>${vTag}<div class="cart-item-price">${item.unitPrice.toFixed(2)} DH</div></div>
+                        <div class="cart-item-right">
+                            <button class="btn-trash" onclick="window.removeFromCart(${index})"><svg viewBox="0 0 24 24" style="width:16px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+                            <div class="qty-controls-small"><button onclick="window.changeCartQty(${index}, -1)">-</button><span>${item.qty}</span><button onclick="window.changeCartQty(${index}, 1)">+</button></div>
+                        </div>
+                    </div>`;
+            }).join('');
+
+            window.updateCartTotal(); 
+        }
+
+        window.updateCartTotal = () => {
+            const subTotal = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
+            const deliveryFee = parseFloat(document.getElementById('cartNeighborhood').value) || 0;
+            const total = subTotal + deliveryFee;
+            const itemsCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            
+            document.getElementById('cartModalSubText').innerText = `Sous-total (${itemsCount} article${itemsCount>1?'s':''})`;
+            document.getElementById('cartModalSubTotal').innerText = subTotal.toFixed(2) + ' DH';
+            document.getElementById('cartModalTotal').innerText = total.toFixed(2) + ' DH';
+        };
+
+        window.changeCartQty = (index, delta) => {
+            const item = cart[index];
+            let maxStock = item.product.stock;
+            if(item.variantName && item.product.variants) { const v = item.product.variants.find(x => x.name === item.variantName); if(v) maxStock = v.stock; }
+            const newQty = item.qty + delta;
+            if(newQty >= 1 && newQty <= maxStock) { item.qty = newQty; updateCartUI(); renderCartModalList(); }
+        };
+
+        window.closeCartModal = () => { document.body.classList.remove('no-scroll'); document.getElementById('cartOverlay').classList.remove('active'); document.getElementById('cartModal').classList.remove('active'); };
+        window.removeFromCart = (index) => { cart.splice(index, 1); updateCartUI(); renderCartModalList(); };
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
+            
+            document.getElementById('scBadge').innerText = totalItems;
+            document.getElementById('scArticleCount').innerText = totalItems + (totalItems > 1 ? " articles" : " article");
+            document.getElementById('scTotalPrice').innerText = `${totalPrice.toFixed(2)} DH`;
+            document.querySelectorAll('.top-cart-badge').forEach(b => b.innerText = totalItems);
+            
+            const bar = document.getElementById('orderBar');
+            if(totalItems > 0) bar.classList.remove('hidden'); else bar.classList.add('hidden');
+        }
+
+        // --- AUTOMATED FIREBASE ORDER SYNC & WHATSAPP ---
+        window.triggerWhatsApp = async () => {
+            if(cart.length === 0) return;
+
+            const customerName = window.prompt("Veuillez entrer votre nom pour finaliser la commande :");
+            if(!customerName || customerName.trim() === "") return;
+
+            const subTotal = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            
+            const neighborhoodSelect = document.getElementById('cartNeighborhood');
+            const deliveryFee = parseFloat(neighborhoodSelect.value) || 0;
+            const neighborhoodName = neighborhoodSelect.options[neighborhoodSelect.selectedIndex].getAttribute('data-name');
+            const total = subTotal + deliveryFee;
+
+            try {
+                await addDoc(collection(db, "orders"), {
+                    customerName: customerName,
+                    cart: cart, 
+                    totalPrice: total,
+                    totalItems: totalItems,
+                    deliveryFee: deliveryFee,
+                    neighborhood: neighborhoodName,
+                    status: "En attente",
+                    timestamp: new Date().toISOString()
+                });
+            } catch (error) { console.error("Error saving order:", error); alert("Une erreur est survenue."); return; }
+
+            const phone = "212600000000"; // ⚠️ REPLACE WITH REAL NUMBER
+            let msg = `📦 *Nouvelle commande Lascoburo*\n👤 Client: ${customerName}\n🛵 Quartier: ${neighborhoodName}\n\n`;
+            cart.forEach(item => {
+                const vText = item.variantName ? ` (${item.variantName})` : '';
+                msg += `• ${item.product.name}${vText} (x${item.qty}) - ${(item.unitPrice * item.qty).toFixed(2)} DH\n`;
+            });
+            msg += `\nSous-total : ${subTotal.toFixed(2)} DH`;
+            if (deliveryFee > 0) msg += `\nLivraison : ${deliveryFee.toFixed(2)} DH`;
+            msg += `\n💰 *Total à payer : ${total.toFixed(2)} DH*`;
+            msg += `\n\n📍 _Merci de nous envoyer votre position (Localisation) ou votre adresse exacte pour la livraison._`;
+            
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
+            cart = []; updateCartUI(); closeCartModal();
+        };
+    </script>
+</body>
+</html>
