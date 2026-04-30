@@ -27,7 +27,8 @@
         .brand h1 { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
         .brand span { color: var(--text-main); }
         .brand p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-        .icon-btn-top { position: relative; background: var(--primary); width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; box-shadow: var(--shadow-sm); }
+        .icon-btn-top { position: relative; background: var(--primary); width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; box-shadow: var(--shadow-sm); transition: 0.2s;}
+        .icon-btn-top:active { transform: scale(0.9); }
         .icon-btn-top .badge { position: absolute; top: -6px; right: -6px; background: white; color: var(--primary); font-size: 11px; font-weight: 800; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .search-wrapper { position: relative; margin-bottom: 24px; }
         .search-wrapper input { width: 100%; border: 1px solid var(--border); padding: 16px 20px 16px 50px; border-radius: var(--radius-pill); font-size: 15px; font-family: inherit; outline: none; background: white; box-shadow: var(--shadow-sm);}
@@ -105,9 +106,9 @@
         .nav-item svg { width: 24px; height: 24px; stroke-width: 2; transition: 0.2s;}
         .nav-item.active svg { fill: var(--primary-light); stroke-width: 2.5; }
 
-        /* STICKY CART */
-        .sticky-cart { position: fixed; bottom: 85px; left: 20px; right: 20px; background: var(--primary); border-radius: 20px; padding: 12px 16px 12px 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 30px rgba(30,58,138,0.35); z-index: 90; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; max-width: 560px; margin: 0 auto; }
-        .sticky-cart.hidden { transform: translateY(200%); }
+        /* STICKY CART BAR (FIXED: Added opacity and pointer-events to completely hide it) */
+        .sticky-cart { position: fixed; bottom: 95px; left: 20px; right: 20px; background: var(--primary); border-radius: 20px; padding: 12px 16px 12px 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 30px rgba(30,58,138,0.35); z-index: 70; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; max-width: 560px; margin: 0 auto; }
+        .sticky-cart.hidden { transform: translateY(250%); opacity: 0; pointer-events: none; }
         .sticky-cart-left { display: flex; align-items: center; gap: 14px; }
         .sc-icon-box { background: rgba(255, 255, 255, 0.15); width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: white; position: relative; flex-shrink: 0; }
         .sc-icon-box .badge { position: absolute; top: -6px; right: -6px; background: white; color: var(--primary); width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
@@ -165,6 +166,8 @@
         .qty-number { width: 40px; text-align: center; font-weight: 800; font-size: 16px; color: var(--text-main);}
         .btn-large-primary { width: 100%; background: var(--success); color: white; border: none; padding: 18px; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.2s;}
         .btn-large-primary:active { transform: scale(0.98); }
+        .btn-outline { width: 100%; background: white; color: var(--text-main); border: 1px solid var(--border); padding: 16px; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; transition: 0.2s;}
+        .btn-outline:active { transform: scale(0.98); }
         .trust-badges { display: flex; justify-content: space-between; border-top: 1px solid var(--border); margin-top: 20px; padding-top: 20px; }
         .trust-item { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; font-size: 10px; color: var(--text-muted); font-weight: 600; width: 30%; }
         .trust-item svg { width: 20px; height: 20px; color: var(--text-main); stroke-width: 1.5; }
@@ -186,10 +189,12 @@
         .qty-controls-small button { width: 26px; height: 26px; background: transparent; border: none; font-size: 16px; font-weight: bold; cursor: pointer; color: var(--text-muted); }
         .qty-controls-small span { width: 24px; text-align: center; font-weight: 800; font-size: 13px; }
         .promo-code-row { display: flex; justify-content: space-between; align-items: center; padding: 16px; border: 1px solid var(--border); border-radius: 16px; font-weight: 700; font-size: 14px; color: var(--text-main); margin-bottom: 20px;}
+        
+        .form-control { border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; font-size: 13px; font-family: inherit; outline: none; background: white; font-weight: 600;}
+        .form-control:focus { border-color: var(--accent); }
+
         .summary-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: var(--text-muted); margin-bottom: 12px; font-weight: 600;}
         .summary-row.total { font-size: 20px; font-weight: 800; color: var(--text-main); margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border); margin-bottom: 20px;}
-        .free-delivery-badge { background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 800; }
-        .empty-state { text-align: center; padding: 40px; color: var(--text-muted); font-weight: 600; grid-column: span 2;}
     </style>
 </head>
 <body>
@@ -227,6 +232,7 @@
         <main class="product-grid" id="homeProductGrid"></main>
     </div>
 
+
     <div id="view-categories" class="app-view container">
         <div class="nav-header">
             <div class="ghost-btn"></div>
@@ -235,6 +241,7 @@
         </div>
         <div class="cat-hub-grid" id="hubGrid"></div>
     </div>
+
 
     <div id="view-subcategory" class="app-view container">
         <div class="nav-header">
@@ -245,6 +252,7 @@
         <div class="sub-cats-scroll" id="subCatPillMenu"></div>
         <main class="product-grid" id="subCatProductGrid"></main>
     </div>
+
 
     <div class="sticky-cart hidden" id="orderBar" onclick="openCartModal()">
         <div class="sticky-cart-left">
@@ -260,12 +268,14 @@
         <div class="sc-price-pill" id="scTotalPrice">0.00 DH</div>
     </div>
 
+
     <nav class="bottom-nav">
         <div class="nav-item active" id="tab-home" onclick="switchTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Accueil</div>
         <div class="nav-item" id="tab-categories" onclick="switchTab('categories')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Catégories</div>
         <div class="nav-item" id="tab-favoris" onclick="alert('Bientôt disponible !')"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Favoris</div>
         <div class="nav-item" id="tab-profil" onclick="alert('Bientôt disponible !')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Profil</div>
     </nav>
+
 
     <div class="overlay" id="productOverlay" onclick="closeProductModal()"></div>
     <div class="bottom-sheet" id="productModal">
@@ -281,12 +291,29 @@
             <h2>Votre Panier</h2>
             <button class="close-modal-btn" style="position:static;" onclick="closeCartModal()"><svg viewBox="0 0 24 24" style="width:16px;height:16px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
         </div>
+        
         <div class="cart-list-container" id="cartItemsContainer"></div>
-        <div class="promo-code-row"><div style="display:flex; align-items:center; gap:10px;"><svg viewBox="0 0 24 24" style="width:20px; color:#F59E0B;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>Ajouter un code promo</div><svg viewBox="0 0 24 24" style="width:18px; color:var(--text-muted);"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-        <div class="summary-row"><span id="cartModalSubText">Sous-total (0 article)</span><span id="cartModalSubTotal">0 DH</span></div>
-        <div class="summary-row"><span>Livraison</span><span class="free-delivery-badge">Gratuite</span></div>
-        <div class="summary-row total"><span>Total</span><span style="color:var(--primary);" id="cartModalTotal">0 DH</span></div>
-        <button class="btn-large-primary" onclick="triggerWhatsApp()"><svg viewBox="0 0 24 24" style="fill:white; stroke:none; width:22px; height:22px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Commander via WhatsApp</button>
+        
+        <div id="cartSummaryArea">
+            <div class="promo-code-row"><div style="display:flex; align-items:center; gap:10px;"><svg viewBox="0 0 24 24" style="width:20px; color:#F59E0B;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>Ajouter un code promo</div><svg viewBox="0 0 24 24" style="width:18px; color:var(--text-muted);"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+            
+            <div class="summary-row"><span id="cartModalSubText">Sous-total (0 article)</span><span id="cartModalSubTotal" style="color:var(--text-main);">0 DH</span></div>
+            
+            <div class="summary-row" style="align-items: center;">
+                <span>Quartier de livraison</span>
+                <select id="cartNeighborhood" class="form-control" style="width: auto; padding: 6px 12px; font-size: 12px; border-radius: 8px; color:var(--accent); border-color:var(--primary-light); background:var(--primary-light);" onchange="updateCartTotal()">
+                    <option value="0" data-name="Retrait en magasin">Retrait en magasin (0 DH)</option>
+                    <option value="15" data-name="Guéliz" selected>Guéliz (15 DH)</option>
+                    <option value="15" data-name="Daoudiate">Daoudiate (15 DH)</option>
+                    <option value="20" data-name="Médina">Médina (20 DH)</option>
+                    <option value="25" data-name="Massira">Massira (25 DH)</option>
+                    <option value="30" data-name="Targa">Targa (30 DH)</option>
+                </select>
+            </div>
+
+            <div class="summary-row total"><span>Total</span><span style="color:var(--primary);" id="cartModalTotal">0 DH</span></div>
+            <button class="btn-large-primary" onclick="triggerWhatsApp()"><svg viewBox="0 0 24 24" style="fill:white; stroke:none; width:22px; height:22px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Commander via WhatsApp</button>
+        </div>
     </div>
 
     <script type="module">
@@ -314,7 +341,6 @@
         let currentModalQty = 1;
         let currentVariantObj = null;
 
-        // --- HARDCODED HERO CATEGORIES (Matching the Design) ---
         const HERO_CATEGORIES = [
             { id: "Fournitures scolaires", title: "Fournitures scolaires", desc: "Tout pour l'école", colorClass: "theme-blue", emoji: "🎒" },
             { id: "Bureau & Impression", title: "Bureau & Impression", desc: "Impression, toners et papeterie", colorClass: "theme-gray", emoji: "🖨️" },
@@ -331,7 +357,6 @@
             if(n.includes('blanc')) return '#FFFFFF'; return null;
         }
 
-        // --- SPA TAB SWITCHING ---
         window.switchTab = (tabId) => {
             document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -341,12 +366,13 @@
             window.scrollTo(0,0);
         };
 
-        // --- CATEGORY TO SUB-CATEGORY LOGIC ---
         window.openCategory = (catName) => {
             activeMainCategory = catName;
             document.getElementById('subCatTitle').innerText = catName;
+            
             const catData = globalCategoriesData.find(c => c.name === catName);
             let pillHTML = `<div class="sub-cat-pill active" id="pill-Tous" onclick="window.filterSubCategory('Tous')">Tous</div>`;
+            
             if(catData && catData.subcategories) {
                 catData.subcategories.forEach(sub => {
                     const safeId = sub.replace(/\s+/g, '-'); 
@@ -364,12 +390,12 @@
             const safeId = subCatName === 'Tous' ? 'Tous' : subCatName.replace(/\s+/g, '-');
             const pill = document.getElementById(`pill-${safeId}`);
             if(pill) pill.classList.add('active');
+
             let filtered = allProducts.filter(p => p.category === activeMainCategory);
             if(subCatName !== 'Tous') { filtered = filtered.filter(p => p.subCategory === subCatName); }
             renderProductGrid(filtered, 'subCatProductGrid');
         };
 
-        // --- DATA LOADING ---
         onSnapshot(collection(db, "categories"), snap => {
             globalCategoriesData = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         });
@@ -387,7 +413,6 @@
             });
             document.getElementById('homeQuickCats').innerHTML = circlesHTML;
 
-            // Sort logic: Featured first, then newest
             let sortedProducts = [...allProducts].sort((a,b) => {
                 if(a.featured && !b.featured) return -1;
                 if(!a.featured && b.featured) return 1;
@@ -417,16 +442,11 @@
                 let img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:bold; color:var(--primary);">${p.name.split(' ')[0]}</span>`;
                 let stockHTML = p.stock > 0 ? `<div class="stock-indicator"><div class="stock-dot"></div> En stock</div>` : `<div class="stock-indicator" style="color:var(--danger);"><div class="stock-dot" style="background:var(--danger);"></div> Rupture</div>`;
                 
-                // Promo Engine Logic
                 const sellP = parseFloat(p.sellPrice) || 0;
                 const promoP = parseFloat(p.promoPrice) || 0;
                 let displayPriceHTML = `${sellP.toFixed(2)} DH`;
-                
-                if(promoP > 0 && promoP < sellP) {
-                    displayPriceHTML = `<span class="old-price">${sellP.toFixed(2)} DH</span> ${promoP.toFixed(2)} DH`;
-                }
+                if(promoP > 0 && promoP < sellP) { displayPriceHTML = `<span class="old-price">${sellP.toFixed(2)} DH</span> ${promoP.toFixed(2)} DH`; }
 
-                // Vedette Engine Logic
                 const vedetteHTML = p.featured ? `<div class="badge-vedette">⭐ Vedette</div>` : '';
 
                 return `
@@ -454,33 +474,22 @@
             const product = allProducts.find(p => p.id === id);
             if (!product || product.stock <= 0) return;
             
-            currentModalProduct = product;
-            currentModalQty = 1;
-            currentVariantObj = null;
+            currentModalProduct = product; currentModalQty = 1; currentVariantObj = null;
 
-            // Handle Prices
             const sellP = parseFloat(product.sellPrice) || 0;
             const promoP = parseFloat(product.promoPrice) || 0;
             const activePrice = (promoP > 0 && promoP < sellP) ? promoP : sellP;
             
             let priceAreaHTML = `<div class="price" id="modalMainPrice">${activePrice.toFixed(2)} DH</div>`;
-            if(promoP > 0 && promoP < sellP) {
-                priceAreaHTML = `<div class="price-area"><span class="old-price">${sellP.toFixed(2)} DH</span><div class="price" id="modalMainPrice">${activePrice.toFixed(2)} DH</div></div>`;
-            }
+            if(promoP > 0 && promoP < sellP) { priceAreaHTML = `<div class="price-area"><span class="old-price">${sellP.toFixed(2)} DH</span><div class="price" id="modalMainPrice">${activePrice.toFixed(2)} DH</div></div>`; }
 
-            // Handle Tags
             let tagsHTML = '';
-            if(product.tags && product.tags.length > 0) {
-                tagsHTML = `<div class="tag-pill-container">${product.tags.map(t => `<span class="store-tag">${t}</span>`).join('')}</div>`;
-            }
+            if(product.tags && product.tags.length > 0) { tagsHTML = `<div class="tag-pill-container">${product.tags.map(t => `<span class="store-tag">${t}</span>`).join('')}</div>`; }
 
-            // Handle Variants (Simplified: They share the main product price)
             let variantsHTML = '';
             if(product.variants && product.variants.length > 0) {
-                // Pre-select first variant that has stock
                 currentVariantObj = product.variants.find(v => v.stock > 0) || product.variants[0];
                 const activeIndex = product.variants.indexOf(currentVariantObj);
-
                 const firstVarHex = getColorHex(product.variants[0].name);
                 const isColorType = firstVarHex !== null;
 
@@ -489,150 +498,86 @@
                         <span class="section-label">Couleur</span>
                         <div style="display:flex; margin-bottom:25px; overflow-x:auto; padding-bottom:5px;">
                             ${product.variants.map((v, i) => {
-                                const hex = getColorHex(v.name) || '#CBD5E1';
-                                const outOfStockCls = v.stock <= 0 ? 'out-of-stock' : '';
-                                const activeCls = i === activeIndex ? 'active' : '';
-                                return `
-                                <div class="color-swatch-wrapper ${activeCls} ${outOfStockCls}" onclick="window.selectVariant(${i})">
-                                    <div class="color-swatch ${activeCls}"><div class="color-inner" style="background:${hex};"></div><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
-                                    <span class="color-name">${v.name}</span>
-                                </div>`;
+                                const hex = getColorHex(v.name) || '#CBD5E1'; const outOfStockCls = v.stock <= 0 ? 'out-of-stock' : ''; const activeCls = i === activeIndex ? 'active' : '';
+                                return `<div class="color-swatch-wrapper ${activeCls} ${outOfStockCls}" onclick="window.selectVariant(${i})"><div class="color-swatch ${activeCls}"><div class="color-inner" style="background:${hex};"></div><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div><span class="color-name">${v.name}</span></div>`;
                             }).join('')}
-                        </div>
-                    `;
+                        </div>`;
                 } else {
                     variantsHTML = `
                         <span class="section-label">Option</span>
                         <div class="variant-grid">
                             ${product.variants.map((v, i) => {
-                                const outOfStockCls = v.stock <= 0 ? 'out-of-stock' : '';
-                                const activeCls = i === activeIndex ? 'active' : '';
-                                return `
-                                <div class="variant-box ${activeCls} ${outOfStockCls}" onclick="window.selectVariant(${i})">
-                                    <div class="v-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                                    <span>${v.name}</span>
-                                </div>`;
+                                const outOfStockCls = v.stock <= 0 ? 'out-of-stock' : ''; const activeCls = i === activeIndex ? 'active' : '';
+                                return `<div class="variant-box ${activeCls} ${outOfStockCls}" onclick="window.selectVariant(${i})"><div class="v-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span>${v.name}</span></div>`;
                             }).join('')}
-                        </div>
-                    `;
+                        </div>`;
                 }
             }
 
-            // Handle Description
             let descHTML = '';
-            if(product.description && product.description.trim() !== '') {
-                descHTML = `<div class="product-desc-box">${product.description}</div>`;
-            }
-
+            if(product.description && product.description.trim() !== '') { descHTML = `<div class="product-desc-box">${product.description}</div>`; }
             let img = product.imageUrl ? `<img src="${product.imageUrl}">` : `<span>Img</span>`;
             const vedetteHTML = product.featured ? `<div class="badge-vedette" style="top: -10px; left:-10px;">⭐ Vedette</div>` : '';
 
             document.getElementById('productModalContent').innerHTML = `
                 <div class="modal-product-top">
                     <div class="modal-img-box">${vedetteHTML}${img}</div>
-                    <div class="modal-info-stack">
-                        <h2>${product.name}</h2>
-                        ${priceAreaHTML}
-                        <div class="stock-badge-pill"><div class="stock-dot"></div> Disponible (Stock: <span id="modalStockLimit">${currentVariantObj ? currentVariantObj.stock : product.stock}</span>)</div>
-                        ${tagsHTML}
-                    </div>
+                    <div class="modal-info-stack"><h2>${product.name}</h2>${priceAreaHTML}<div class="stock-badge-pill"><div class="stock-dot"></div> Disponible (Stock: <span id="modalStockLimit">${currentVariantObj ? currentVariantObj.stock : product.stock}</span>)</div>${tagsHTML}</div>
                 </div>
-
                 ${descHTML}
                 ${variantsHTML}
-
                 <div class="qty-row-ui">
                     <span class="section-label" style="margin:0;">Quantité</span>
-                    <div class="qty-controls-pill">
-                        <button class="qty-btn" onclick="window.changeModalQty(-1)">-</button>
-                        <div class="qty-number" id="modalQtyDisplay">1</div>
-                        <button class="qty-btn" onclick="window.changeModalQty(1)">+</button>
-                    </div>
+                    <div class="qty-controls-pill"><button class="qty-btn" onclick="window.changeModalQty(-1)">-</button><div class="qty-number" id="modalQtyDisplay">1</div><button class="qty-btn" onclick="window.changeModalQty(1)">+</button></div>
                 </div>
-
-                <button class="btn-large-primary" onclick="window.confirmAddToCart()">
-                    <svg viewBox="0 0 24 24" style="fill:white; stroke:white; width:22px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                    Ajouter au panier • <span id="modalBtnTotal">${activePrice.toFixed(2)} DH</span>
-                </button>
+                <button class="btn-large-primary" onclick="window.confirmAddToCart()"><svg viewBox="0 0 24 24" style="fill:white; stroke:white; width:22px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> Ajouter au panier • <span id="modalBtnTotal">${activePrice.toFixed(2)} DH</span></button>
             `;
-
             document.body.classList.add('no-scroll');
             document.getElementById('productOverlay').classList.add('active');
             document.getElementById('productModal').classList.add('active');
         };
 
         window.selectVariant = (index) => {
-            const v = currentModalProduct.variants[index];
-            if(v.stock <= 0) return; // Prevent clicking out-of-stock variants
+            const v = currentModalProduct.variants[index]; if(v.stock <= 0) return; 
 
             document.querySelectorAll('.variant-box').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.color-swatch-wrapper').forEach(w => {
-                w.classList.remove('active'); w.querySelector('.color-swatch').classList.remove('active');
-            });
+            document.querySelectorAll('.color-swatch-wrapper').forEach(w => { w.classList.remove('active'); w.querySelector('.color-swatch').classList.remove('active'); });
             
-            const squares = document.querySelectorAll('.variant-box');
-            if(squares.length > 0) squares[index].classList.add('active');
+            const squares = document.querySelectorAll('.variant-box'); if(squares.length > 0) squares[index].classList.add('active');
+            const circles = document.querySelectorAll('.color-swatch-wrapper'); if(circles.length > 0) { circles[index].classList.add('active'); circles[index].querySelector('.color-swatch').classList.add('active'); }
             
-            const circles = document.querySelectorAll('.color-swatch-wrapper');
-            if(circles.length > 0) {
-                circles[index].classList.add('active'); circles[index].querySelector('.color-swatch').classList.add('active');
-            }
-            
-            currentVariantObj = v;
-            
-            // Reset Qty to 1 to be safe
-            currentModalQty = 1;
-            document.getElementById('modalQtyDisplay').innerText = currentModalQty;
-            document.getElementById('modalStockLimit').innerText = v.stock;
+            currentVariantObj = v; currentModalQty = 1;
+            document.getElementById('modalQtyDisplay').innerText = currentModalQty; document.getElementById('modalStockLimit').innerText = v.stock;
             updateModalPrices();
         };
 
         window.changeModalQty = (change) => {
-            const maxStock = currentVariantObj ? currentVariantObj.stock : currentModalProduct.stock;
-            const newQty = currentModalQty + change;
-            if(newQty >= 1 && newQty <= maxStock) {
-                currentModalQty = newQty;
-                document.getElementById('modalQtyDisplay').innerText = currentModalQty;
-                updateModalPrices();
-            }
+            const maxStock = currentVariantObj ? currentVariantObj.stock : currentModalProduct.stock; const newQty = currentModalQty + change;
+            if(newQty >= 1 && newQty <= maxStock) { currentModalQty = newQty; document.getElementById('modalQtyDisplay').innerText = currentModalQty; updateModalPrices(); }
         };
 
         function updateModalPrices() {
-            const sellP = parseFloat(currentModalProduct.sellPrice) || 0;
-            const promoP = parseFloat(currentModalProduct.promoPrice) || 0;
+            const sellP = parseFloat(currentModalProduct.sellPrice) || 0; const promoP = parseFloat(currentModalProduct.promoPrice) || 0;
             const activePrice = (promoP > 0 && promoP < sellP) ? promoP : sellP;
-            
             const total = activePrice * currentModalQty;
             document.getElementById('modalBtnTotal').innerText = `${total.toFixed(2)} DH`;
         }
 
-        window.closeProductModal = () => { 
-            document.body.classList.remove('no-scroll');
-            document.getElementById('productOverlay').classList.remove('active'); 
-            document.getElementById('productModal').classList.remove('active'); 
-        };
+        window.closeProductModal = () => { document.body.classList.remove('no-scroll'); document.getElementById('productOverlay').classList.remove('active'); document.getElementById('productModal').classList.remove('active'); };
 
         window.confirmAddToCart = () => {
-            const sellP = parseFloat(currentModalProduct.sellPrice) || 0;
-            const promoP = parseFloat(currentModalProduct.promoPrice) || 0;
+            const sellP = parseFloat(currentModalProduct.sellPrice) || 0; const promoP = parseFloat(currentModalProduct.promoPrice) || 0;
             const priceToUse = (promoP > 0 && promoP < sellP) ? promoP : sellP;
-            
-            const variantNameToUse = currentVariantObj ? currentVariantObj.name : null;
-            const maxStock = currentVariantObj ? currentVariantObj.stock : currentModalProduct.stock;
+            const variantNameToUse = currentVariantObj ? currentVariantObj.name : null; const maxStock = currentVariantObj ? currentVariantObj.stock : currentModalProduct.stock;
 
             const existingIndex = cart.findIndex(c => c.product.id === currentModalProduct.id && c.variantName === variantNameToUse);
-            if(existingIndex > -1) {
-                const newTotalQty = cart[existingIndex].qty + currentModalQty;
-                cart[existingIndex].qty = newTotalQty > maxStock ? maxStock : newTotalQty;
-            } else {
-                cart.push({ product: currentModalProduct, qty: currentModalQty, unitPrice: priceToUse, variantName: variantNameToUse });
-            }
+            if(existingIndex > -1) { const newTotalQty = cart[existingIndex].qty + currentModalQty; cart[existingIndex].qty = newTotalQty > maxStock ? maxStock : newTotalQty; } 
+            else { cart.push({ product: currentModalProduct, qty: currentModalQty, unitPrice: priceToUse, variantName: variantNameToUse }); }
             updateCartUI(); closeProductModal();
         };
 
         // --- CART LOGIC ---
         window.openCartModal = () => {
-            if(cart.length === 0) return;
             renderCartModalList();
             document.body.classList.add('no-scroll');
             document.getElementById('cartOverlay').classList.add('active'); 
@@ -640,62 +585,57 @@
         };
 
         function renderCartModalList() {
+            if(cart.length === 0) {
+                document.getElementById('cartItemsContainer').innerHTML = `
+                    <div style="text-align:center; padding: 40px 20px;">
+                        <svg viewBox="0 0 24 24" style="width:48px; height:48px; color:var(--text-muted); margin-bottom:16px; opacity:0.5;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        <h3 style="font-size:16px; font-weight:800; color:var(--text-main); margin-bottom:8px;">Votre panier est vide</h3>
+                        <p style="font-size:13px; color:var(--text-muted); margin-bottom:24px;">Il semble que vous n'ayez pas encore ajouté d'articles.</p>
+                        <button class="btn-outline" style="width:100%; border-color:var(--primary); color:var(--primary);" onclick="closeCartModal()">Retour à la boutique</button>
+                    </div>`;
+                document.getElementById('cartSummaryArea').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('cartSummaryArea').style.display = 'block';
+
             document.getElementById('cartItemsContainer').innerHTML = cart.map((item, index) => {
-                let img = item.product.imageUrl ? `<img src="${item.product.imageUrl}">` : '';
-                let vTag = item.variantName ? `<span class="variant-tag-blue">${item.variantName}</span>` : '';
+                let img = item.product.imageUrl ? `<img src="${item.product.imageUrl}">` : ''; let vTag = item.variantName ? `<span class="variant-tag-blue">${item.variantName}</span>` : '';
                 return `
                     <div class="cart-item-card">
                         <div class="cart-item-img">${img}</div>
-                        <div class="cart-item-center">
-                            <h4>${item.product.name}</h4>
-                            ${vTag}
-                            <div class="cart-item-price">${item.unitPrice.toFixed(2)} DH</div>
-                        </div>
+                        <div class="cart-item-center"><h4>${item.product.name}</h4>${vTag}<div class="cart-item-price">${item.unitPrice.toFixed(2)} DH</div></div>
                         <div class="cart-item-right">
-                            <button class="btn-trash" onclick="window.removeFromCart(${index})">
-                                <svg viewBox="0 0 24 24" style="width:16px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                            </button>
-                            <div class="qty-controls-small">
-                                <button onclick="window.changeCartQty(${index}, -1)">-</button>
-                                <span>${item.qty}</span>
-                                <button onclick="window.changeCartQty(${index}, 1)">+</button>
-                            </div>
+                            <button class="btn-trash" onclick="window.removeFromCart(${index})"><svg viewBox="0 0 24 24" style="width:16px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+                            <div class="qty-controls-small"><button onclick="window.changeCartQty(${index}, -1)">-</button><span>${item.qty}</span><button onclick="window.changeCartQty(${index}, 1)">+</button></div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             }).join('');
 
-            const total = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
+            window.updateCartTotal(); // Recalculate totals with neighborhood
+        }
+
+        window.updateCartTotal = () => {
+            const subTotal = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
+            const deliveryFee = parseFloat(document.getElementById('cartNeighborhood').value) || 0;
+            const total = subTotal + deliveryFee;
             const itemsCount = cart.reduce((sum, item) => sum + item.qty, 0);
             
             document.getElementById('cartModalSubText').innerText = `Sous-total (${itemsCount} article${itemsCount>1?'s':''})`;
-            document.getElementById('cartModalSubTotal').innerText = total.toFixed(2) + ' DH';
+            document.getElementById('cartModalSubTotal').innerText = subTotal.toFixed(2) + ' DH';
             document.getElementById('cartModalTotal').innerText = total.toFixed(2) + ' DH';
-        }
+        };
 
         window.changeCartQty = (index, delta) => {
             const item = cart[index];
-            
-            // Re-find the correct stock limit (from variant or main product)
             let maxStock = item.product.stock;
-            if(item.variantName && item.product.variants) {
-                const v = item.product.variants.find(x => x.name === item.variantName);
-                if(v) maxStock = v.stock;
-            }
-
+            if(item.variantName && item.product.variants) { const v = item.product.variants.find(x => x.name === item.variantName); if(v) maxStock = v.stock; }
             const newQty = item.qty + delta;
-            if(newQty >= 1 && newQty <= maxStock) {
-                item.qty = newQty; updateCartUI(); renderCartModalList(); 
-            }
+            if(newQty >= 1 && newQty <= maxStock) { item.qty = newQty; updateCartUI(); renderCartModalList(); }
         };
 
-        window.closeCartModal = () => { 
-            document.body.classList.remove('no-scroll');
-            document.getElementById('cartOverlay').classList.remove('active'); 
-            document.getElementById('cartModal').classList.remove('active'); 
-        };
-        
-        window.removeFromCart = (index) => { cart.splice(index, 1); updateCartUI(); if(cart.length === 0) closeCartModal(); else renderCartModalList(); };
+        window.closeCartModal = () => { document.body.classList.remove('no-scroll'); document.getElementById('cartOverlay').classList.remove('active'); document.getElementById('cartModal').classList.remove('active'); };
+        window.removeFromCart = (index) => { cart.splice(index, 1); updateCartUI(); renderCartModalList(); };
 
         function updateCartUI() {
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -710,15 +650,20 @@
             if(totalItems > 0) bar.classList.remove('hidden'); else bar.classList.add('hidden');
         }
 
-        // --- AUTOMATED FIREBASE ORDER SYNC ---
+        // --- AUTOMATED FIREBASE ORDER SYNC & WHATSAPP ---
         window.triggerWhatsApp = async () => {
             if(cart.length === 0) return;
 
             const customerName = window.prompt("Veuillez entrer votre nom pour finaliser la commande :");
             if(!customerName || customerName.trim() === "") return;
 
-            const total = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
+            const subTotal = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            
+            const neighborhoodSelect = document.getElementById('cartNeighborhood');
+            const deliveryFee = parseFloat(neighborhoodSelect.value) || 0;
+            const neighborhoodName = neighborhoodSelect.options[neighborhoodSelect.selectedIndex].getAttribute('data-name');
+            const total = subTotal + deliveryFee;
 
             try {
                 await addDoc(collection(db, "orders"), {
@@ -726,18 +671,23 @@
                     cart: cart, 
                     totalPrice: total,
                     totalItems: totalItems,
+                    deliveryFee: deliveryFee,
+                    neighborhood: neighborhoodName,
                     status: "En attente",
                     timestamp: new Date().toISOString()
                 });
             } catch (error) { console.error("Error saving order:", error); alert("Une erreur est survenue."); return; }
 
             const phone = "212600000000"; // ⚠️ REPLACE WITH REAL NUMBER
-            let msg = `📦 *Nouvelle commande Lascoburo*\n👤 Client: ${customerName}\n\n`;
+            let msg = `📦 *Nouvelle commande Lascoburo*\n👤 Client: ${customerName}\n🛵 Quartier: ${neighborhoodName}\n\n`;
             cart.forEach(item => {
                 const vText = item.variantName ? ` (${item.variantName})` : '';
                 msg += `• ${item.product.name}${vText} (x${item.qty}) - ${(item.unitPrice * item.qty).toFixed(2)} DH\n`;
             });
+            msg += `\nSous-total : ${subTotal.toFixed(2)} DH`;
+            if (deliveryFee > 0) msg += `\nLivraison : ${deliveryFee.toFixed(2)} DH`;
             msg += `\n💰 *Total à payer : ${total.toFixed(2)} DH*`;
+            msg += `\n\n📍 _Merci de nous envoyer votre position (Localisation) ou votre adresse exacte pour la livraison._`;
             
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
             cart = []; updateCartUI(); closeCartModal();
