@@ -3,14 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lascoburo | Boutique</title>
+    <meta name="theme-color" content="#1E3A8A">
+    <title>buro. | Bureau & École</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         /* =========================================
-           VARIABLES & RESET
+           VARIABLES & RESET (BURO. BRANDING)
         ========================================= */
-        :root { --primary: #1E3A8A; --primary-light: #EFF6FF; --accent: #2563EB; --success: #10B981; --danger: #EF4444; --warning: #F59E0B; --warning-light: #FEF3C7; --bg: #F8FAFC; --surface: #FFFFFF; --text-main: #0F172A; --text-muted: #64748B; --border: #E2E8F0; --shadow-sm: 0 4px 10px rgba(0,0,0,0.04); --shadow-nav: 0 -4px 20px rgba(0,0,0,0.06); --radius-pill: 50px; }
+        :root { 
+            --primary: #1E3A8A; /* Deep Navy Blue */
+            --primary-light: #EFF6FF; 
+            --accent: #FBBF24; /* Highlighter Yellow */
+            --accent-text: #1E3A8A; /* Text on yellow buttons */
+            --success: #10B981; 
+            --danger: #EF4444; 
+            --warning: #F59E0B; 
+            --warning-light: #FEF3C7; 
+            --bg: #F8FAFC; 
+            --surface: #FFFFFF; 
+            --text-main: #0F172A; 
+            --text-muted: #64748B; 
+            --border: #E2E8F0; 
+            --shadow-sm: 0 4px 10px rgba(0,0,0,0.04); 
+            --shadow-nav: 0 -4px 20px rgba(0,0,0,0.06); 
+            --radius-pill: 50px; 
+        }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-main); padding-bottom: 160px; overflow-x: hidden; }
         body.no-scroll { overflow: hidden; height: 100vh; }
@@ -24,12 +42,12 @@
 
         /* HEADER & SEARCH */
         .app-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
-        .brand h1 { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
-        .brand span { color: var(--text-main); }
-        .brand p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+        .brand h1 { font-size: 32px; font-weight: 800; color: var(--primary); letter-spacing: -1.5px; text-transform: lowercase; }
+        .brand span { color: var(--accent); }
+        .brand p { font-size: 12px; color: var(--text-muted); margin-top: 0px; font-weight: 500;}
         .icon-btn-top { position: relative; background: var(--primary); width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; box-shadow: var(--shadow-sm); transition: 0.2s;}
         .icon-btn-top:active { transform: scale(0.9); }
-        .icon-btn-top .badge { position: absolute; top: -6px; right: -6px; background: white; color: var(--primary); font-size: 11px; font-weight: 800; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .icon-btn-top .badge { position: absolute; top: -6px; right: -6px; background: var(--accent); color: var(--accent-text); font-size: 11px; font-weight: 800; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .search-wrapper { position: relative; margin-bottom: 24px; }
         .search-wrapper input { width: 100%; border: 1px solid var(--border); padding: 16px 20px 16px 50px; border-radius: var(--radius-pill); font-size: 15px; font-family: inherit; outline: none; background: white; box-shadow: var(--shadow-sm);}
         .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); width: 20px; height: 20px; }
@@ -39,7 +57,7 @@
         .quick-cats::-webkit-scrollbar { display: none; }
         .q-cat-item { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; min-width: 65px;}
         .q-cat-circle { width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border); font-size: 24px; transition: 0.2s;}
-        .q-cat-item:active .q-cat-circle { background: var(--primary-light); transform: scale(0.95); border-color: var(--accent);}
+        .q-cat-item:active .q-cat-circle { background: var(--primary-light); transform: scale(0.95); border-color: var(--primary);}
         .q-cat-item span { font-size: 11px; font-weight: 700; color: var(--text-muted); text-align: center; line-height: 1.2;}
 
         /* BANNER */
@@ -58,7 +76,10 @@
         .product-card { background: white; border-radius: 20px; padding: 12px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s; border: 1px solid var(--border); position: relative; overflow: hidden;}
         .product-card:active { transform: scale(0.97); }
         .product-img-box { background: var(--bg); border-radius: 16px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; overflow: hidden; padding:10px;}
-        .product-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+        /* LAZY LOADING FADE-IN */
+        .product-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; opacity: 0; animation: fadeInImg 0.5s forwards; }
+        @keyframes fadeInImg { to { opacity: 1; } }
+        
         .product-info h3 { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
         .product-info p { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
         .product-footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; }
@@ -99,9 +120,7 @@
         .sub-cat-pill { padding: 8px 16px; background: white; border: 1px solid var(--border); border-radius: 50px; font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: 0.2s; box-shadow: var(--shadow-sm); }
         .sub-cat-pill.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        /* =========================================
-           MANUELS (TEXTBOOKS) SPECIFIC STYLES
-        ========================================= */
+        /* MANUELS (TEXTBOOKS) */
         .filter-row { display: flex; gap: 8px; margin-bottom: 24px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none;}
         .filter-row::-webkit-scrollbar { display: none; }
         .filter-select { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-weight: 600; color: var(--text-main); outline: none; appearance: none; padding-right: 30px; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2364748B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 10px center; background-size: 14px; flex-shrink: 0;}
@@ -111,12 +130,12 @@
         .hb-icon { font-size: 32px; background: white; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); flex-shrink: 0;}
         .hb-text h4 { font-size: 14px; font-weight: 800; color: var(--text-main); margin-bottom: 4px;}
         .hb-text p { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; line-height: 1.3;}
-        .hb-link { font-size: 12px; font-weight: 800; color: var(--accent); }
+        .hb-link { font-size: 12px; font-weight: 800; color: var(--primary); }
 
         .manuel-list { display: flex; flex-direction: column; gap: 16px; }
         .manuel-card { background: white; border-radius: 20px; padding: 16px; display: flex; gap: 16px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); cursor: pointer; position: relative;}
         .manuel-img { width: 80px; height: 100px; background: var(--bg); border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 5px; flex-shrink: 0; overflow: hidden;}
-        .manuel-img img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+        .manuel-img img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; opacity: 0; animation: fadeInImg 0.5s forwards;}
         .manuel-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .manuel-info h3 { font-size: 15px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; line-height: 1.2; padding-right: 70px;}
         .manuel-meta { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; font-weight: 500;}
@@ -131,7 +150,7 @@
         /* BOTTOM NAV */
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 12px 20px 24px 20px; z-index: 80; box-shadow: var(--shadow-nav); max-width: 600px; margin: 0 auto;}
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 6px; color: #94A3B8; text-decoration: none; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.2s;}
-        .nav-item.active { color: var(--accent); }
+        .nav-item.active { color: var(--primary); }
         .nav-item svg { width: 24px; height: 24px; stroke-width: 2; transition: 0.2s;}
         .nav-item.active svg { fill: var(--primary-light); stroke-width: 2.5; }
 
@@ -140,7 +159,7 @@
         .sticky-cart.hidden { transform: translateY(250%); opacity: 0; pointer-events: none; }
         .sticky-cart-left { display: flex; align-items: center; gap: 14px; }
         .sc-icon-box { background: rgba(255, 255, 255, 0.15); width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: white; position: relative; flex-shrink: 0; }
-        .sc-icon-box .badge { position: absolute; top: -6px; right: -6px; background: white; color: var(--primary); width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
+        .sc-icon-box .badge { position: absolute; top: -6px; right: -6px; background: var(--accent); color: var(--accent-text); width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
         .sc-text-stack { display: flex; flex-direction: column; gap: 2px;}
         .sc-title { font-weight: 800; font-size: 16px; color: white; }
         .sc-subtitle { font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 500; }
@@ -166,34 +185,34 @@
         .stock-badge-pill { display: inline-flex; align-items: center; background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; gap: 6px; width: fit-content; margin-top: 6px;}
         
         .tag-pill-container { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;}
-        .store-tag { background: var(--primary-light); color: var(--accent); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; border: 1px solid #C7D2FE;}
+        .store-tag { background: var(--primary-light); color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; border: 1px solid #C7D2FE;}
 
         .product-desc-box { background: var(--bg); border-radius: 12px; padding: 12px; font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 24px; border: 1px solid var(--border);}
         
         .section-label { font-size: 15px; font-weight: 800; margin-bottom: 12px; display: block; color: var(--text-main);}
         .variant-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
         .variant-box { position: relative; border: 2px solid var(--border); border-radius: 12px; padding: 12px 16px; cursor: pointer; transition: 0.2s; font-weight: 700; font-size: 13px; color: var(--text-muted); text-align: center; flex: 1; min-width: 70px; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        .variant-box.active { border-color: var(--accent); color: var(--accent); background: var(--primary-light); }
+        .variant-box.active { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
         .variant-box.out-of-stock { opacity: 0.5; pointer-events: none; background: var(--bg); text-decoration: line-through;}
-        .v-check { position: absolute; top: -8px; right: -8px; background: var(--accent); color: white; width: 20px; height: 20px; border-radius: 50%; display: none; align-items: center; justify-content: center; border: 2px solid white; }
+        .v-check { position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; width: 20px; height: 20px; border-radius: 50%; display: none; align-items: center; justify-content: center; border: 2px solid white; }
         .v-check svg { width: 12px; height: 12px; stroke-width: 3; }
         .variant-box.active .v-check { display: flex; }
         
         .color-swatch-wrapper { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; margin-right: 15px;}
         .color-swatch-wrapper.out-of-stock { opacity: 0.4; pointer-events: none; }
         .color-swatch { width: 44px; height: 44px; border-radius: 50%; border: 2px solid transparent; padding: 3px; transition: 0.2s; position: relative; }
-        .color-swatch.active { border-color: var(--accent); }
+        .color-swatch.active { border-color: var(--primary); }
         .color-inner { width: 100%; height: 100%; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1);}
-        .color-swatch .check-icon { position: absolute; top: -4px; right: -4px; background: var(--accent); color: white; border-radius: 50%; width: 18px; height: 18px; display: none; align-items: center; justify-content: center; border: 2px solid white;}
+        .color-swatch .check-icon { position: absolute; top: -4px; right: -4px; background: var(--primary); color: white; border-radius: 50%; width: 18px; height: 18px; display: none; align-items: center; justify-content: center; border: 2px solid white;}
         .color-swatch.active .check-icon { display: flex; }
         .color-name { font-size: 12px; font-weight: 700; color: var(--text-muted); }
-        .color-swatch-wrapper.active .color-name { color: var(--accent); }
+        .color-swatch-wrapper.active .color-name { color: var(--primary); }
         
         .qty-row-ui { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
         .qty-controls-pill { display: flex; align-items: center; background: var(--bg); border-radius: 12px; padding: 4px; border: 1px solid var(--border);}
         .qty-btn { width: 36px; height: 36px; background: transparent; border: none; font-size: 20px; font-weight: bold; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center;}
         .qty-number { width: 40px; text-align: center; font-weight: 800; font-size: 16px; color: var(--text-main);}
-        .btn-large-primary { width: 100%; background: var(--success); color: white; border: none; padding: 18px; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.2s;}
+        .btn-large-primary { width: 100%; background: var(--accent); color: var(--accent-text); border: none; padding: 18px; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.2s;}
         .btn-large-primary:active { transform: scale(0.98); }
         .btn-outline { width: 100%; background: white; color: var(--text-main); border: 1px solid var(--border); padding: 16px; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; transition: 0.2s;}
         .btn-outline:active { transform: scale(0.98); }
@@ -204,10 +223,10 @@
         .cart-list-container { max-height: 45vh; overflow-y: auto; margin-bottom: 20px; padding-right: 5px;}
         .cart-item-card { display: flex; padding: 12px; background: white; border: 1px solid var(--border); border-radius: 16px; margin-bottom: 12px; align-items: center; gap: 12px;}
         .cart-item-img { width: 65px; height: 65px; background: var(--bg); border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 5px; flex-shrink: 0;}
-        .cart-item-img img { max-width: 100%; max-height: 100%; mix-blend-mode: multiply; }
+        .cart-item-img img { max-width: 100%; max-height: 100%; mix-blend-mode: multiply; opacity: 0; animation: fadeInImg 0.5s forwards;}
         .cart-item-center { flex: 1; display: flex; flex-direction: column; justify-content: center;}
         .cart-item-center h4 { font-size: 14px; font-weight: 800; margin-bottom: 4px; color: var(--text-main);}
-        .variant-tag-blue { font-size: 11px; background: var(--primary-light); color: var(--accent); padding: 3px 8px; border-radius: 6px; font-weight: 700; display: inline-block; width: fit-content; margin-bottom: 6px;}
+        .variant-tag-blue { font-size: 11px; background: var(--primary-light); color: var(--primary); padding: 3px 8px; border-radius: 6px; font-weight: 700; display: inline-block; width: fit-content; margin-bottom: 6px;}
         .cart-item-price { font-size: 15px; font-weight: 800; color: var(--primary); }
         .cart-item-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px;}
         .btn-trash { background: #FEE2E2; color: var(--danger); border: none; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
@@ -217,7 +236,7 @@
         .promo-code-row { display: flex; justify-content: space-between; align-items: center; padding: 16px; border: 1px solid var(--border); border-radius: 16px; font-weight: 700; font-size: 14px; color: var(--text-main); margin-bottom: 20px;}
         
         .form-control { border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; font-size: 13px; font-family: inherit; outline: none; background: white; font-weight: 600;}
-        .form-control:focus { border-color: var(--accent); }
+        .form-control:focus { border-color: var(--primary); }
 
         .summary-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: var(--text-muted); margin-bottom: 12px; font-weight: 600;}
         .summary-row.total { font-size: 20px; font-weight: 800; color: var(--text-main); margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border); margin-bottom: 20px;}
@@ -225,11 +244,11 @@
 </head>
 <body>
 
-    <div id="view-home" class="app-view active container">
+    <div id="view-home" class="app-view container">
         <header class="app-header">
             <div class="brand">
-                <h1>Lasco<span>buro</span></h1>
-                <p>Tout pour apprendre, créer, réussir.</p>
+                <h1>buro<span>.</span></h1>
+                <p>L'essentiel pour le bureau et l'école.</p>
             </div>
             <div class="icon-btn-top" onclick="openCartModal()">
                 <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
@@ -336,7 +355,7 @@
     </div>
 
     <nav class="bottom-nav">
-        <div class="nav-item active" id="tab-home" onclick="switchTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Accueil</div>
+        <div class="nav-item" id="tab-home" onclick="switchTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Accueil</div>
         <div class="nav-item" id="tab-categories" onclick="switchTab('categories')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Catégories</div>
         
         <div class="nav-item" id="tab-manuels" onclick="switchTab('manuels')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg> Manuels</div>
@@ -362,13 +381,13 @@
         <div class="cart-list-container" id="cartItemsContainer"></div>
         
         <div id="cartSummaryArea">
-            <div class="promo-code-row"><div style="display:flex; align-items:center; gap:10px;"><svg viewBox="0 0 24 24" style="width:20px; color:#F59E0B;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>Ajouter un code promo</div><svg viewBox="0 0 24 24" style="width:18px; color:var(--text-muted);"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+            <div class="promo-code-row"><div style="display:flex; align-items:center; gap:10px;"><svg viewBox="0 0 24 24" style="width:20px; color:var(--accent);"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>Ajouter un code promo</div><svg viewBox="0 0 24 24" style="width:18px; color:var(--text-muted);"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
             
             <div class="summary-row"><span id="cartModalSubText">Sous-total (0 article)</span><span id="cartModalSubTotal" style="color:var(--text-main);">0 DH</span></div>
             
             <div class="summary-row" style="align-items: center;">
                 <span>Quartier de livraison</span>
-                <select id="cartNeighborhood" class="form-control" style="width: auto; padding: 6px 12px; font-size: 12px; border-radius: 8px; color:var(--accent); border-color:var(--primary-light); background:var(--primary-light);" onchange="updateCartTotal()">
+                <select id="cartNeighborhood" class="form-control" style="width: auto; padding: 6px 12px; font-size: 12px; border-radius: 8px; color:var(--primary); border-color:var(--primary-light); background:var(--primary-light);" onchange="updateCartTotal()">
                     <option value="0" data-name="Retrait en magasin">Retrait en magasin (0 DH)</option>
                     <option value="15" data-name="Guéliz" selected>Guéliz (15 DH)</option>
                     <option value="15" data-name="Daoudiate">Daoudiate (15 DH)</option>
@@ -379,7 +398,7 @@
             </div>
 
             <div class="summary-row total"><span>Total</span><span style="color:var(--primary);" id="cartModalTotal">0 DH</span></div>
-            <button class="btn-large-primary" onclick="triggerWhatsApp()"><svg viewBox="0 0 24 24" style="fill:white; stroke:none; width:22px; height:22px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Commander via WhatsApp</button>
+            <button class="btn-large-primary" onclick="triggerWhatsApp()"><svg viewBox="0 0 24 24" style="fill:var(--primary); stroke:none; width:22px; height:22px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Commander via WhatsApp</button>
         </div>
     </div>
 
@@ -418,11 +437,20 @@
 
         function getColorHex(name) {
             const n = name.toLowerCase();
-            if(n.includes('bleu')) return '#2563EB'; if(n.includes('rouge')) return '#EF4444';
+            if(n.includes('bleu')) return '#1E3A8A'; if(n.includes('rouge')) return '#EF4444';
             if(n.includes('noir')) return '#0F172A'; if(n.includes('vert')) return '#10B981';
-            if(n.includes('jaune')) return '#F59E0B'; if(n.includes('rose')) return '#EC4899';
+            if(n.includes('jaune')) return '#FBBF24'; if(n.includes('rose')) return '#EC4899';
             if(n.includes('blanc')) return '#FFFFFF'; return null;
         }
+
+        // --- NEW: SYSTEM STATE MANAGEMENT (FIX REFRESH ISSUE) ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTab = localStorage.getItem('buro_activeTab') || 'home';
+            if (savedTab === 'subcategory') {
+                const savedCat = localStorage.getItem('buro_activeCategory');
+                if(savedCat) { activeMainCategory = savedCat; } else { switchTab('home'); }
+            } else { switchTab(savedTab); }
+        });
 
         window.switchTab = (tabId) => {
             document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
@@ -431,10 +459,15 @@
             const navEl = document.getElementById(`tab-${tabId}`);
             if(navEl) navEl.classList.add('active');
             window.scrollTo(0,0);
+            
+            localStorage.setItem('buro_activeTab', tabId); // Save state
         };
 
         window.openCategory = (catName) => {
             activeMainCategory = catName;
+            localStorage.setItem('buro_activeCategory', catName); // Save category state
+            localStorage.setItem('buro_activeTab', 'subcategory'); // Save tab state
+            
             document.getElementById('subCatTitle').innerText = catName;
             
             const catData = globalCategoriesData.find(c => c.name === catName);
@@ -470,12 +503,12 @@
         onSnapshot(collection(db, "products"), snap => {
             allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             renderHome(); renderCategoriesHub(); 
+            loadManuelFilters(); applyManuelFilters();
             
-            // Re-render textbooks specifically if data changes
-            loadManuelFilters();
-            applyManuelFilters();
-            
-            if(activeMainCategory) { window.filterSubCategory('Tous'); }
+            // Re-render subcategory if user refreshed the page while inside one
+            if(activeMainCategory && localStorage.getItem('buro_activeTab') === 'subcategory') { 
+                window.openCategory(activeMainCategory); 
+            }
         });
 
         function renderHome() {
@@ -511,7 +544,8 @@
             if (products.length === 0) return grid.innerHTML = `<div class="empty-state">Aucun produit.</div>`;
 
             grid.innerHTML = products.map(p => {
-                let img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:bold; color:var(--primary);">${p.name.split(' ')[0]}</span>`;
+                // NEW: Added loading="lazy" for ultra-fast performance
+                let img = p.imageUrl ? `<img src="${p.imageUrl}" loading="lazy" alt="${p.name}">` : `<span style="font-weight:bold; color:var(--primary);">${p.name.split(' ')[0]}</span>`;
                 let stockHTML = p.stock > 0 ? `<div class="stock-indicator"><div class="stock-dot"></div> En stock</div>` : `<div class="stock-indicator" style="color:var(--danger);"><div class="stock-dot" style="background:var(--danger);"></div> Rupture</div>`;
                 
                 const sellP = parseFloat(p.sellPrice) || 0;
@@ -535,16 +569,13 @@
             }).join('');
         }
 
-        // --- NEW: MANUELS SCOLAIRES ENGINE ---
+        // --- MANUELS SCOLAIRES ENGINE ---
         function loadManuelFilters() {
             const textbooks = allProducts.filter(p => p.isTextbook === true);
-            
-            // Extract unique values
             const levels = [...new Set(textbooks.map(p => p.textbookLevel).filter(Boolean))].sort();
             const subjects = [...new Set(textbooks.map(p => p.textbookSubject).filter(Boolean))].sort();
             const publishers = [...new Set(textbooks.map(p => p.textbookPublisher).filter(Boolean))].sort();
 
-            // Populate Dropdowns
             document.getElementById('filterNiveau').innerHTML = '<option value="">Niveau</option>' + levels.map(l => `<option value="${l}">${l}</option>`).join('');
             document.getElementById('filterMatiere').innerHTML = '<option value="">Matière</option>' + subjects.map(s => `<option value="${s}">${s}</option>`).join('');
             document.getElementById('filterEditeur').innerHTML = '<option value="">Éditeur</option>' + publishers.map(e => `<option value="${e}">${e}</option>`).join('');
@@ -575,7 +606,8 @@
             }
 
             container.innerHTML = products.map(p => {
-                let img = p.imageUrl ? `<img src="${p.imageUrl}">` : `<span style="font-weight:bold; color:var(--primary); font-size:10px;">${p.name.substring(0,3)}</span>`;
+                // NEW: Added loading="lazy" here too
+                let img = p.imageUrl ? `<img src="${p.imageUrl}" loading="lazy" alt="${p.name}">` : `<span style="font-weight:bold; color:var(--primary); font-size:10px;">${p.name.substring(0,3)}</span>`;
                 
                 let stockClass = p.stock > 0 ? '' : 'rupture';
                 let stockText = p.stock > 0 ? 'Disponible' : 'Rupture';
@@ -607,8 +639,8 @@
         }
 
         window.requestManuelWhatsApp = () => {
-            const phone = "212600000000"; // ⚠️ REPLACE WITH REAL NUMBER
-            const msg = "Bonjour Lascoburo, je cherche un manuel scolaire que je n'ai pas trouvé sur la boutique. Pouvez-vous m'aider ?";
+            const phone = "212600000000"; 
+            const msg = "Bonjour buro., je cherche un manuel scolaire que je n'ai pas trouvé sur la boutique. Pouvez-vous m'aider ?";
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
         };
 
@@ -680,7 +712,7 @@
                     <span class="section-label" style="margin:0;">Quantité</span>
                     <div class="qty-controls-pill"><button class="qty-btn" onclick="window.changeModalQty(-1)">-</button><div class="qty-number" id="modalQtyDisplay">1</div><button class="qty-btn" onclick="window.changeModalQty(1)">+</button></div>
                 </div>
-                <button class="btn-large-primary" onclick="window.confirmAddToCart()"><svg viewBox="0 0 24 24" style="fill:white; stroke:white; width:22px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> Ajouter au panier • <span id="modalBtnTotal">${activePrice.toFixed(2)} DH</span></button>
+                <button class="btn-large-primary" onclick="window.confirmAddToCart()"><svg viewBox="0 0 24 24" style="fill:var(--primary); stroke:none; width:22px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> Ajouter au panier • <span id="modalBtnTotal">${activePrice.toFixed(2)} DH</span></button>
             `;
             document.body.classList.add('no-scroll');
             document.getElementById('productOverlay').classList.add('active');
@@ -829,7 +861,7 @@
             } catch (error) { console.error("Error saving order:", error); alert("Une erreur est survenue."); return; }
 
             const phone = "212600000000"; // ⚠️ REPLACE WITH REAL NUMBER
-            let msg = `📦 *Nouvelle commande Lascoburo*\n👤 Client: ${customerName}\n🛵 Quartier: ${neighborhoodName}\n\n`;
+            let msg = `📦 *Nouvelle commande buro.*\n👤 Client: ${customerName}\n🛵 Quartier: ${neighborhoodName}\n\n`;
             cart.forEach(item => {
                 const vText = item.variantName ? ` (${item.variantName})` : '';
                 msg += `• ${item.product.name}${vText} (x${item.qty}) - ${(item.unitPrice * item.qty).toFixed(2)} DH\n`;
